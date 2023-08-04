@@ -1,0 +1,124 @@
+{
+  "name": "@forward3d/stage_ui",
+  "repository": "https://github.com/forward3d/stage_ui",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "author": "ForwardPMX Developers",
+  "version": "1.41.1",
+  "description": "Stage UI React components",
+  "license": "MIT",
+  "files": [
+    "es"
+  ],
+  "dependencies": {
+    "@monaco-editor/react": "^4.5.1",
+    "antd": "^5.4.2",
+    "chart.js": "^4.3.0",
+    "dayjs": "^1.11.7",
+    "file-saver": "^2.0.5",
+    "html2canvas": "^1.4.1",
+    "humanize-duration": "^3.27.3",
+    "js-cookie": "^3.0.1",
+    "localforage": "^1.10.0",
+    "lodash": "^4.17.20",
+    "parse-link-header": "^2.0.0",
+    "pluralize": "^8.0.0",
+    "prismjs": "^1.29.0",
+    "prop-types": "^15.8.1",
+    "pusher-js": "^8.0.1",
+    "react": "^17.0.2",
+    "react-ace": "^10.1.0",
+    "react-markdown": "^8.0.7",
+    "react-measure": "^2.5.2",
+    "react-split-pane": "^0.1.92",
+    "remark-gfm": "^3.0.1",
+    "sql-formatter": "^12.0.3",
+    "styled-components": "^5.3.6",
+    "whatwg-fetch": "^3.6.2",
+    "zustand": "4.3.8"
+  },
+  "scripts": {
+    "test": "TZ=utc NODE_ENV=test react-scripts test --env=jest-environment-jsdom --testPathIgnorePatterns=src/__tests__/support",
+    "test:debug": "TZ=utc NODE_ENV=test react-scripts --inspect test --runInBand --no-cache --env=jest-environment-jsdom --testPathIgnorePatterns=src/__tests__/support",
+    "prepublishOnly": "yarn run build",
+    "build": "rollup -c",
+    "lint": "eslint ./src --max-warnings 0",
+    "beauty_check": "prettier --check ./src",
+    "prettify": "prettier --write 'src/**/*.{js,jsx,json,css,scss,md}'"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@babel/cli": "7.22.5",
+    "@babel/core": "^7.19.3",
+    "@babel/preset-react": "^7.18.6",
+    "@babel/runtime": "^7.19.0",
+    "@craco/craco": "^7.0.0",
+    "@rollup/plugin-alias": "^5.0.0",
+    "@rollup/plugin-babel": "6.0.3",
+    "@rollup/plugin-commonjs": "25.0.2",
+    "@rollup/plugin-image": "^3.0.2",
+    "@rollup/plugin-node-resolve": "15.1.0",
+    "@testing-library/jest-dom": "5.16.5",
+    "@testing-library/react": "12.1.5",
+    "@testing-library/react-hooks": "8.0.1",
+    "@testing-library/user-event": "14.4.3",
+    "babel-eslint": "^10.1.0",
+    "babel-plugin-prismjs": "^2.0.1",
+    "craco-antd": "^2.0.0",
+    "eslint": "^8.24.0",
+    "eslint-config-prettier": "8.8.0",
+    "eslint-config-react-app": "^7.0.1",
+    "eslint-plugin-fp": "2.3.0",
+    "eslint-plugin-import": "2.27.5",
+    "eslint-plugin-jsx-a11y": "6.7.1",
+    "eslint-plugin-prettier": "4.2.1",
+    "eslint-plugin-react": "7.32.2",
+    "eslint-plugin-react-hooks": "4.6.0",
+    "jest-environment-jsdom": "^29.1.2",
+    "json-server": "^0.17.0",
+    "postcss-normalize": "^10.0.1",
+    "prettier": "2.8.8",
+    "pusher-js-mock": "^0.3.8",
+    "react-dom": "^17.0.2",
+    "react-scripts": "5.0.1",
+    "react-test-renderer": "17.0.2",
+    "rollup": "2.79.1",
+    "rollup-plugin-copy": "^3.4.0",
+    "rollup-plugin-delete": "^2.0.0",
+    "rollup-plugin-filesize": "10.0.0",
+    "rollup-plugin-includepaths": "0.2.4",
+    "rollup-plugin-peer-deps-external": "2.2.4",
+    "rollup-plugin-styles": "^4.0.0",
+    "rollup-plugin-terser": "7.0.2"
+  },
+  "peerDependencies": {
+    "antd": ">=5.0.2",
+    "react": ">=17.0.2"
+  },
+  "engines": {
+    "node": ">=19"
+  },
+  "keywords": [
+    "react-component"
+  ],
+  "jest": {
+    "moduleNameMapper": {
+      "^~su(.*)$": "<rootDir>/src/lib$1",
+      "\\.(s)?css": "identity-obj-proxy",
+      "^antd/es/(.*)$": "antd/lib/$1"
+    },
+    "resetMocks": false
+  }
+}
