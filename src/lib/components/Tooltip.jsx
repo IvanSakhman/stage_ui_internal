@@ -11,7 +11,7 @@ const Tooltip = ({ children, size, overlayStyle: overlayStyleProp, ...otherProps
   }
 
   return (
-    <AntdTooltip destroyTooltipOnHide={{ keepParent: false }} overlayStyle={overlayStyle} {...otherProps}>
+    <AntdTooltip overlayStyle={overlayStyle} {...otherProps}>
       {children}
     </AntdTooltip>
   )
