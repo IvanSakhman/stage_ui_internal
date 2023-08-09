@@ -1,7 +1,7 @@
 /*eslint react-hooks/exhaustive-deps: "off"*/
 import { useEffect, useState } from 'react'
 
-import { string, pusher } from '~su/utilities'
+import { i18n, pusher } from '~su/utilities'
 
 export default ({ triggerGlobalAlert, removeGlobalAlert, setUIStoreProperty, websocketClient }) => ({
   usePusherConnection: () => {
@@ -38,7 +38,7 @@ export default ({ triggerGlobalAlert, removeGlobalAlert, setUIStoreProperty, web
             triggerGlobalAlert(
               {
                 id: 'pusher',
-                message: string.translate('websocket_global_alerts', currentState),
+                message: i18n.t(`websocket_global_alerts.${currentState}`),
                 ...STATE_ALERTS[currentState]
               },
               true

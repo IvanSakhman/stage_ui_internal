@@ -4,11 +4,14 @@ import PropTypes from 'prop-types'
 import { api } from '~su/utilities'
 import { initializeApi } from '~su/actions'
 import { getApiConfig } from '~su/store/root-store'
+import { useTranslation } from '~su/utilities/i18n'
 
 import Table from '../Table'
 import Button from '../Button'
 
 const RequestTable = ({ id, replaceString, collectionName, TableComponent, ...tableProps }) => {
+  const { t } = useTranslation()
+
   const initialState = { isLoading: true, actions: [], isLoaded: false }
   const [state, setState] = useState(initialState)
   const [data, setData] = useState([])
@@ -32,7 +35,7 @@ const RequestTable = ({ id, replaceString, collectionName, TableComponent, ...ta
   }, [id, replaceString, collectionName])
 
   const tableTitle = [
-    tableProps.title || collectionName,
+    t(collectionName, tableProps.title || collectionName),
     <Button.Reload
       key="table-reload"
       iconOnly

@@ -5,7 +5,7 @@
     "registry": "https://npm.pkg.github.com/"
   },
   "author": "ForwardPMX Developers",
-  "version": "1.41.1",
+  "version": "1.43.1",
   "description": "Stage UI React components",
   "license": "MIT",
   "files": [
@@ -19,6 +19,7 @@
     "file-saver": "^2.0.5",
     "html2canvas": "^1.4.1",
     "humanize-duration": "^3.27.3",
+    "i18next": "^23.2.11",
     "js-cookie": "^3.0.1",
     "localforage": "^1.10.0",
     "lodash": "^4.17.20",
@@ -29,6 +30,7 @@
     "pusher-js": "^8.0.1",
     "react": "^17.0.2",
     "react-ace": "^10.1.0",
+    "react-i18next": "^13.0.2",
     "react-markdown": "^8.0.7",
     "react-measure": "^2.5.2",
     "react-split-pane": "^0.1.92",

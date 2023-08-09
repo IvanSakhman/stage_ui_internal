@@ -1,13 +1,14 @@
+import PropTypes from 'prop-types'
 import { SearchOutlined } from '@ant-design/icons'
 
-import Table from '../Table'
+import Card from '../Card'
 import TableSearchBox from './SearchBox'
 import GlobalFilters from './GlobalFilters'
 
 import string from '~su/utilities/string'
 import smartTable from '~su/utilities/smartTable'
 
-const SmartTable = ({ columnsConfig, _applySearch, pagination, globalFiltersOptions, dataKey, ...rest }) => {
+const SmartTable = ({ columnsConfig, pagination, globalFiltersOptions, dataKey = '', ...rest }) => {
   let urlParams = new URLSearchParams(window.location.search)
 
   const columns = smartTable.buildColumns(columnsConfig.columns, urlParams, columnsConfig.filters).map((column) => {
@@ -48,7 +49,7 @@ const SmartTable = ({ columnsConfig, _applySearch, pagination, globalFiltersOpti
 
   const paginationProps = {
     position: ['topRight'],
-    style: { position: 'absolute', right: 16, zIndex: 1 },
+    style: { position: 'absolute', right: 16, top: -60, zIndex: 1 },
     showSizeChanger: false,
     current: pagination.current,
     total: pagination.total_items,
@@ -56,10 +57,11 @@ const SmartTable = ({ columnsConfig, _applySearch, pagination, globalFiltersOpti
   }
 
   return (
-    <Table
+    <Card.Table
+      headStyle={{ fontWeight: 'normal' }}
       columnsConfig={columnsConfig}
       columns={columns}
-      title={
+      title={[
         globalFiltersOptions ? (
           <GlobalFilters
             applyFilters={applyGlobalFilter}
@@ -71,12 +73,26 @@ const SmartTable = ({ columnsConfig, _applySearch, pagination, globalFiltersOpti
         ) : (
           <span style={{ lineHeight: '32px' }}>{string.humanize(dataKey, { titleize: true })}</span>
         )
-      }
+      ]}
       pagination={paginationProps}
       onChange={applyURLSearch}
       {...rest}
     />
   )
+}
+
+SmartTable.propTypes = {
+  columnsConfig: PropTypes.shape({
+    columns: PropTypes.object,
+    filters: PropTypes.object
+  }).isRequired,
+  pagination: PropTypes.shape({
+    current: PropTypes.number,
+    total_items: PropTypes.number,
+    per_page: PropTypes.number
+  }).isRequired,
+  globalFiltersOptions: PropTypes.object,
+  dataKey: PropTypes.string
 }
 
 export default SmartTable

@@ -2,7 +2,7 @@ import dayjs from 'dayjs'
 
 import object from '../object'
 import date from '../date'
-import string from '../string'
+import i18n from '../i18n'
 
 const NORMALIZED_ORDERS = { ascend: 'asc', descend: 'desc' }
 const NORMALIZED_SORTS = {
@@ -18,9 +18,7 @@ const getNormalized = ({ dict, key, invertDict = false }) => {
 export const setUpFilters = (columnKey, urlParams, filters) => {
   const filterKey = `by_${columnKey}`
 
-  const buildFilterOptionLabel = (label) => {
-    return typeof label === 'boolean' ? string.translateBoolean(label, { true: 'Yes', false: 'No' }) : label
-  }
+  const buildFilterOptionLabel = i18n.t
 
   const filtersOptions =
     filters[filterKey]?.map((value) => {

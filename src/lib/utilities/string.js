@@ -43,6 +43,7 @@ const singularize = (string) => {
   return pluralize(string, 1)
 }
 
+// deprecated use i18n
 const COMMON_TRANSLATIONS = {
   popconfirm_delete_title: {
     format: 'Are you sure to delete this format? All associated outputs will be deleted as well.'
@@ -51,7 +52,8 @@ const COMMON_TRANSLATIONS = {
     connecting: 'WebSocket connection is being established.',
     connected: 'WebSocket connection established.',
     failed: 'There is an error with WebSocket connection. Live updates might not work.',
-    unavailable: 'There is an error with WebSocket connection. Live updates might not work.'
+    unavailable: 'There is an error with WebSocket connection. Live updates might not work.',
+    disconected: 'Foo'
   }
 }
 // translate = (collection: string, key: string, fallback?: Function): string
@@ -63,13 +65,14 @@ const translate = (collection, key, fallback = null, translations = {}) => {
   return collectionTranslations[key] || (fallback && fallback(key)) || key
 }
 
+const translateBoolean = (value, translations) => {
+  return translations[value]
+}
+// deprecated use i18n
+
 // https://github.com/ajaxorg/ace/blob/master/lib/ace/lib/lang.js#L137
 const escapeHTML = (string) => {
   return ('' + string).replace(/&/g, '&#38;').replace(/"/g, '&#34;').replace(/'/g, '&#39;').replace(/</g, '&#60;')
-}
-
-const translateBoolean = (value, translations) => {
-  return translations[value]
 }
 
 const replacePlaceholders = (string, record) => {

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import styled from 'styled-components'
 import { Card } from 'antd'
 
@@ -69,13 +70,21 @@ const CardWithTable = styled(Card)`
   }
 `
 
-export default ({ title: titleProp, loading, ...tableProps }) => {
+const CardTable = ({ title: titleProp, loading, headStyle, ...tableProps }) => {
   const title = titleProp[0],
     extra = titleProp.slice(1)
 
   return (
-    <CardWithTable title={title} extra={React.Children.toArray(extra)} loading={loading}>
-      <Table {...tableProps} />
+    <CardWithTable title={loading ? null : title} extra={React.Children.toArray(extra)} headStyle={headStyle}>
+      <Table {...tableProps} loading={loading} />
     </CardWithTable>
   )
 }
+
+CardTable.propTypes = {
+  title: PropTypes.array,
+  loading: PropTypes.bool,
+  headStyle: PropTypes.object
+}
+
+export default CardTable

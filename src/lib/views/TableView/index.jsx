@@ -10,11 +10,11 @@ import setupStore from './store'
 const TableView = ({
   store,
   loadData,
-  pageHeader,
   functionActionHandlers, // legacy, use tableProps
   itemPluralName, // legacy, use tableProps
   COLUMNS, // legacy, use tableProps
   GLOBAL_FILTERS_OPTIONS, // legacy, use tableProps
+  pageHeader = {},
   tableProps = {},
   children
 }) => {
@@ -29,9 +29,13 @@ const TableView = ({
     loadData(window.location.search)
   }, [])
 
+  const { actionsTranslateOptions, ...pageHeaderProps } = pageHeader
   const containerProps = {
     loading: isLoading,
-    header: { ...pageHeader, extra: <ActionButtons actions={viewActions?.page_header} /> }
+    header: {
+      ...pageHeaderProps,
+      extra: <ActionButtons actions={viewActions?.page_header} {...actionsTranslateOptions} />
+    }
   }
 
   // NOTE: backwards compatibility, remove when all places use tableProps

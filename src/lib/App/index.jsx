@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 // actions
 import { useLayoutConfig, useBranding } from '~su/store/root-store'
-import loadConfig from './loadConfig'
+import loadInitialData from './loadInitialData'
 
 // utilities
 import { baseUrl as setBaseUrl } from '~su/utilities'
@@ -24,6 +24,8 @@ import { GlobalStyles } from './index.styled'
 
 const { useWebsocketConnection } = initializeWebsocketHooks()
 
+let _stageUiAppConfig = {}
+
 const StageUiApp = ({ children, initialConfig, context, loadConfigParams = null, themeOverrides = {} }) => {
   const [isInitialised, setIsInitialised] = useState(false)
   useWebsocketConnection()
@@ -35,7 +37,12 @@ const StageUiApp = ({ children, initialConfig, context, loadConfigParams = null,
 
   useEffect(() => {
     setBaseUrl(initialConfig.api.baseUrl)
-    loadConfig({ initialConfig, context, loadConfigParams }).then(() => setIsInitialised(true))
+    loadInitialData({
+      initialConfig,
+      context,
+      loadConfigParams,
+      translationsConfig: _stageUiAppConfig.translations
+    }).then(() => setIsInitialised(true))
   }, [initialConfig, context, loadConfigParams])
 
   const themeToken = { ...theme.token, ...brandingToken, ...themeOverrides.token }
@@ -84,6 +91,10 @@ const provider = (Component) => (props) => {
       <Component {...componentProps} />
     </StageUiApp>
   )
+}
+
+StageUiApp.configure = (config) => {
+  _stageUiAppConfig = config
 }
 
 StageUiApp.provider = provider

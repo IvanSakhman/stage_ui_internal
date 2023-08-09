@@ -1,4 +1,7 @@
 import React, { memo } from 'react'
+import PropTypes from 'prop-types'
+
+import { useTranslation, withScopedTranslations } from '~su/utilities/i18n'
 
 import Toolbar from './Toolbar'
 
@@ -15,6 +18,8 @@ const Table = ({
   functionActionHandlers,
   ...rest
 }) => {
+  const { t } = useTranslation()
+
   if (title) {
     if (Array.isArray(title)) {
       title = <Toolbar>{React.Children.toArray(title)}</Toolbar>
@@ -41,7 +46,7 @@ const Table = ({
       rowKey={({ id, key }) => id || key}
       columns={columns.map((column) => {
         const { key } = column
-        column.title ||= buildColumnTitle(columnsConfig?.[key], key)
+        column.title = t(`columns.${key}`, column.title || buildColumnTitle(columnsConfig?.[key], key))
 
         if (actions.table_row) {
           column = extendRenderWithActions(actions.table_row, column, functionActionHandlers)
@@ -55,4 +60,13 @@ const Table = ({
   )
 }
 
-export default memo(Table)
+Table.propTypes = {
+  columns: PropTypes.arrayOf(PropTypes.object),
+  columnsConfig: PropTypes.object,
+  title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  pagination: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+  actions: PropTypes.shape({ table_row: PropTypes.object }),
+  functionActionHandlers: PropTypes.object
+}
+
+export default memo(withScopedTranslations(Table, 'table'))

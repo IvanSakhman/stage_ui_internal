@@ -1,20 +1,16 @@
 import { cloneElement } from 'react'
+import PropTypes from 'prop-types'
 import { Form, Col } from 'antd'
 import { StyledField } from './index.styled'
 import ProField from './Pro'
 
 import string from '~su/utilities/string'
 
-// type Props = {
-//   field: any
-//   index: number | string
-//   extras?: any
-//   disable?: boolean
-//   dynamic?: boolean
-//   className?: string
-// }
+import { useTranslation, withScopedTranslations } from '~su/utilities/i18n'
 
 const Field = ({ field, index, disable = false, dynamic = false, extras = {}, className = '' }) => {
+  const { t } = useTranslation()
+
   const { item } = field
   let { component } = field
 
@@ -53,7 +49,7 @@ const Field = ({ field, index, disable = false, dynamic = false, extras = {}, cl
       key={index}
       name={fieldName}
       fieldKey={fieldKey}
-      label={label === false ? null : label || string.humanize(itemName, { capitalize: true })}
+      label={label === false ? null : t(`${itemName}.label`, label || string.humanize(itemName, { capitalize: true }))}
       className={[className].join(' ')}
       dependencies={fieldDependencies}
       {...rest}
@@ -82,4 +78,29 @@ const Field = ({ field, index, disable = false, dynamic = false, extras = {}, cl
   return fieldComponent
 }
 
-export default Field
+const fieldNamePropType = PropTypes.oneOfType([
+  PropTypes.string,
+  PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])).isRequired
+])
+
+Field.propTypes = {
+  field: PropTypes.shape({
+    item: PropTypes.shape({
+      name: fieldNamePropType,
+      label: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+      dependencies: PropTypes.arrayOf(fieldNamePropType),
+      hideUnless: PropTypes.func,
+      width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+      pro: PropTypes.bool,
+      prefix: PropTypes.string
+    }),
+    component: PropTypes.element
+  }),
+  index: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  extras: PropTypes.shape({}),
+  disable: PropTypes.bool,
+  dynamic: PropTypes.bool,
+  className: PropTypes.string
+}
+
+export default withScopedTranslations(Field, 'field')

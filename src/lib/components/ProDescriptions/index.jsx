@@ -1,13 +1,17 @@
+import PropTypes from 'prop-types'
 import { Descriptions } from 'antd'
 
 import buildItems from './utilities/buildItems'
+import { useTranslation } from '~su/utilities/i18n'
 
-export default ({ columnCount, record, columns, ...props }) => {
-  const renderItem = (item, index) => {
-    const { value, ...itemProps } = item
+const ProDescriptions = ({ columnCount, record, columns, ...props }) => {
+  const { t } = useTranslation()
+
+  const renderItem = (item) => {
+    const { value, key, label, ...itemProps } = item
 
     return (
-      <Descriptions.Item key={index} {...itemProps}>
+      <Descriptions.Item key={key} {...itemProps} label={t(`descriptions.${key}`, label)}>
         {value}
       </Descriptions.Item>
     )
@@ -15,3 +19,11 @@ export default ({ columnCount, record, columns, ...props }) => {
 
   return <Descriptions column={columnCount}>{buildItems(record, columns).map(renderItem)}</Descriptions>
 }
+
+ProDescriptions.propTypes = {
+  columnCount: PropTypes.number,
+  record: PropTypes.object,
+  columns: PropTypes.arrayOf(PropTypes.object)
+}
+
+export default ProDescriptions

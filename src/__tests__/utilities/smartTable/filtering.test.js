@@ -20,7 +20,7 @@ describe('QueriesView filtering utilities', () => {
         ).toEqual(
           expect.objectContaining({
             filters: [
-              { text: 1, value: '1' },
+              { text: '1', value: '1' },
               { text: 'small', value: 'small' },
               { text: 'medium', value: 'medium' },
               { text: 'large', value: 'large' }

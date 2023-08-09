@@ -1,3 +1,29 @@
+v1.43.1
+fix: Card.Table should use Loading spinner instead of Skeleton for better UI.
+
+v1.43.0
+[feature] Added ability to pass actions translate options to page header of the TableView via pageHeader.actionsTranslateOptions property
+
+v1.42.0
+[SC-17] Support I18n - Added basic i18n support with nested scoping.
+
+Uses https://react.i18next.com/
+
+1. 1a422b9 added i18n util
+2. f289ce6 Allow to configure StageUiApp and reworked loadConfig to make it fetch the translations
+3. ae33560 Replaced usage of string.translate with i18n.t for hooks and utils
+4. 00d0057 Use useTranslation hook in ProDescription, RequestTable and Tabs
+5. 9cc1524 Added missing tests for utils/table/buildColumns.buildColumnTitle
+6. 73970f9 Try to find translated field name as label in Field component
+7. fa3bf95 Try to read PageContainer title from i18n
+8. 39d63c8 Try to read table's column name from i18n or fallback to previous mechanisms.
+9. a8e75ad Added PropTypes to touched components
+
+v1.41.2
+fix: SmartTable - replaced Table with Card.Table which moves the GlobalFilters form out of the Table title into the Card wrapper.
+
+This prevents unnecessary updates to GlobalFilters when users interact with the table - hover, click etc
+
 v1.41.1
 fix: App/loadConfig should ignore null loadConfigParams
 

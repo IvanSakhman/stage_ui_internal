@@ -5,6 +5,7 @@ import cookie from './cookie'
 import createClass from './createClass'
 import date from './date'
 import api from './fetchJson'
+import * as i18n from './i18n'
 import keyboardShortcuts from './keyboardShortcuts'
 import localForage from './localForage'
 import newRecord from './newRecord'
@@ -26,6 +27,7 @@ export {
   createClass,
   date,
   api,
+  i18n,
   keyboardShortcuts,
   localForage,
   handleResponseResult,
