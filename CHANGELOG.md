@@ -1,3 +1,6 @@
+v1.44.0
+feat: Allow custom column render in ProDescriptions and added Popover component
+
 v1.43.1
 fix: Card.Table should use Loading spinner instead of Skeleton for better UI.
 

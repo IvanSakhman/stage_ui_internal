@@ -14,7 +14,7 @@ const Table = ({
   columnsConfig = null,
   title,
   pagination = false,
-  actions = [],
+  actions = {},
   functionActionHandlers,
   ...rest
 }) => {

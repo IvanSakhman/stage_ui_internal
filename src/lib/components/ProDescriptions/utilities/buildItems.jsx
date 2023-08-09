@@ -5,7 +5,11 @@ import { buildColumnTitle } from '~su/utilities/table/buildColumns'
 import StateTag from '~su/components/StateTag'
 import TagsList from '~su/components/TagsList'
 
-const renderForValueType = ({ valueType, valueRenderConfig, valueEnum }) => {
+const renderForValueType = ({ valueType, valueRenderConfig, valueEnum, render }) => {
+  if (render) {
+    return render
+  }
+
   const VALUE_TYPE_RENDERER = {
     state: (state) => <StateTag state={state} configuration={valueRenderConfig} />,
     tags: (tags) => <TagsList tags={tags} />,
@@ -13,7 +17,7 @@ const renderForValueType = ({ valueType, valueRenderConfig, valueEnum }) => {
     duration: (duration) => date.formatDuration(duration)
   }
 
-  return (value, record, _index) => {
+  return (value, _record, _index) => {
     if (value === undefined || value === null || (Array.isArray(value) && !value.length)) {
       return EMPTY
     }
@@ -32,7 +36,7 @@ export default (record, columns) => {
   return columns.map((column) => {
     const { key, span, contentStyle, labelStyle } = column
     const label = buildColumnTitle(column, key),
-      value = renderForValueType(column)(object.findNested(record, key))
+      value = renderForValueType(column)(object.findNested(record, key), record)
 
     return { key, span, contentStyle, labelStyle, label, value }
   })

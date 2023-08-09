@@ -1,6 +1,5 @@
 import ButtonGroup from '../ButtonGroup'
 import Button from '../Button'
-import DynamicIcon from '../DynamicIcon'
 
 import { translateResponseAction, filterActionsByCondition } from './utilities'
 

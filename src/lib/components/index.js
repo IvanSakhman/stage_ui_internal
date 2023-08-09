@@ -46,6 +46,7 @@ import Modal from './Modal'
 import MultiCheckboxSelect from './MultiCheckboxSelect'
 import PageContainer from './PageContainer'
 import PanedCard from './PanedCard'
+import Popover from './Popover'
 import ProDescriptions from './ProDescriptions'
 import RequestTable from './RequestTable'
 import ResultsTable from './ResultsTable'
@@ -116,6 +117,7 @@ export {
   MultiCheckboxSelect,
   PageContainer,
   PanedCard,
+  Popover,
   ProDescriptions,
   RequestTable,
   ResultsTable,

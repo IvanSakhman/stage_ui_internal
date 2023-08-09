@@ -12,7 +12,7 @@ import Button from '../Button'
 const RequestTable = ({ id, replaceString, collectionName, TableComponent, ...tableProps }) => {
   const { t } = useTranslation()
 
-  const initialState = { isLoading: true, actions: [], isLoaded: false }
+  const initialState = { isLoading: true, actions: {}, isLoaded: false }
   const [state, setState] = useState(initialState)
   const [data, setData] = useState([])
 
