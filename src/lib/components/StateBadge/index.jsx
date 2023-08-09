@@ -21,7 +21,7 @@ export default ({ state, configuration = {}, size = null, offsetX = -5, offsetY 
 
   const badgeProps = BADGE_PER_STATE[state] || BADGE_PER_STATE.processing
   return (
-    <Tooltip arrowPointAtCenter title={string.humanize(state)} size="small" align={{ offset: [offsetX, offsetY] }}>
+    <Tooltip arrow title={string.humanize(state)} size="small" align={{ offset: [offsetX, offsetY] }}>
       <StyledBadge {...badgeProps} $size={size} />
     </Tooltip>
   )
