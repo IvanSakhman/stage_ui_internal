@@ -117,7 +117,7 @@ const Button = forwardRef(
     }
 
     return (
-      <Tooltip {...tooltip} size="small" destroyTooltipOnHide={true} keepParent={false}>
+      <Tooltip {...tooltip} size="small" destroyTooltipOnHide>
         {btn}
       </Tooltip>
     )

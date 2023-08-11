@@ -1,3 +1,8 @@
+v1.44.2
+[fix][SC-10] [antd: Tooltip] destroyTooltipOnHide no need config keepParent anymore. Used boolean value directly.
+[fix][SC-12] [antd: Tooltip] `arrowPointAtCenter` is deprecated, used `arrow` instead.
+[fix][SC-14] [antd: Select] `dropdownMatchSelectWidth` is deprecated. Used `popupMatchSelectWidth` instead.
+
 v1.44.1
 Use withLoader HOC for Card.Table
 

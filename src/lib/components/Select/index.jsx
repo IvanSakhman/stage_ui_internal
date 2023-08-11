@@ -28,7 +28,7 @@ const Select = ({
   const selectComponent = (
     <AntdSelect
       value={currentValue}
-      dropdownMatchSelectWidth={false}
+      popupMatchSelectWidth={false}
       dropdownStyle={{ zIndex: '6', ...dropdownStyle }}
       options={options}
       {...rest}
