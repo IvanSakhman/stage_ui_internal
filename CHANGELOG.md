@@ -1,3 +1,8 @@
+v1.44.1
+Use withLoader HOC for Card.Table
+
+In certain edge cases the Table needs to be mounted once the data is loaded. One of such cases is using 'expandable.defaultExpandAllRows' - the rows are not expanded when table is mounted without the data.
+
 v1.44.0
 feat: Allow custom column render in ProDescriptions and added Popover component
 
