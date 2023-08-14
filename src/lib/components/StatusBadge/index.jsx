@@ -22,7 +22,7 @@ const StatusBadge = ({ status, tooltip = null, size = null }) => {
 
   const badgeProps = BADGE_PER_STATE[status] || BADGE_PER_STATE.processing
   return (
-    <Tooltip arrowPointAtCenter title={tooltip} size="small" align={{ offset: [-5, 10] }}>
+    <Tooltip arrow={{ pointAtCenter: true }} title={tooltip} size="small" align={{ offset: [-5, 10] }}>
       <StyledBadge {...badgeProps} $size={size} />
     </Tooltip>
   )
