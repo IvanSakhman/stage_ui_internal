@@ -1,3 +1,6 @@
+v1.44.3
+[fix][SC-15] updated antd from ^5.4.2 to ^5.8.3
+
 v1.44.2
 [fix][SC-10] [antd: Tooltip] destroyTooltipOnHide no need config keepParent anymore. Used boolean value directly.
 [fix][SC-12] [antd: Tooltip] `arrowPointAtCenter` is deprecated, used `arrow` instead.
