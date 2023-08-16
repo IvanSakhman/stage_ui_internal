@@ -1,3 +1,4 @@
+import App from './App'
 import ActionButtons from './ActionButtons'
 import AutoComplete from './AutoComplete'
 import Button from './Button'
@@ -69,6 +70,7 @@ import Typography from './Typography'
 import YesNoTag from './YesNoTag'
 
 export {
+  App,
   AutoComplete,
   ActionButtons,
   Button,

@@ -15,7 +15,7 @@ import { useNavigate, initializeWebsocketHooks } from '~su/hooks'
 import theme from '~su/constants/theme'
 
 // providers
-import { ConfigProvider } from 'antd'
+import { ConfigProvider, App } from 'antd'
 import ThemeProvider from './ThemeProvider'
 
 // components
@@ -49,18 +49,20 @@ const StageUiApp = ({ children, initialConfig, context, loadConfigParams = null,
 
   return (
     <ConfigProvider theme={{ token: themeToken }}>
-      <ThemeProvider>
-        <Layout
-          {...layoutConfig}
-          themeOverrides={branding}
-          onSideMenuSelect={({ key }) => navigate(key)}
-          isLoaded={isInitialised}
-        >
-          <GlobalStyles />
-          <RootModal />
-          {children}
-        </Layout>
-      </ThemeProvider>
+      <App>
+        <ThemeProvider>
+          <Layout
+            {...layoutConfig}
+            themeOverrides={branding}
+            onSideMenuSelect={({ key }) => navigate(key)}
+            isLoaded={isInitialised}
+          >
+            <GlobalStyles />
+            <RootModal />
+            {children}
+          </Layout>
+        </ThemeProvider>
+      </App>
     </ConfigProvider>
   )
 }
