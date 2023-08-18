@@ -26,11 +26,11 @@ describe('ProDescriptions buildItems utility', () => {
 
   it('builds description items based on provided columns for a given record', () => {
     expect(buildItems(record, columns)).toEqual([
-      { key: 'name', label: 'Name', value: record.name },
-      { key: 'state', label: 'State', value: record.state },
-      { key: 'created_at', label: 'Created at', value: record.created_at },
-      { key: 'description', label: 'Description', value: record.description },
-      { key: 'new', label: 'New', value: record.new }
+      { key: 'name', label: 'Name', children: record.name },
+      { key: 'state', label: 'State', children: record.state },
+      { key: 'created_at', label: 'Created at', children: record.created_at },
+      { key: 'description', label: 'Description', children: record.description },
+      { key: 'new', label: 'New', children: record.new }
     ])
   })
 
@@ -41,7 +41,7 @@ describe('ProDescriptions buildItems utility', () => {
 
     it(`renders it as ${EMPTY}`, () => {
       expect(buildItems(record, columns)[3]).toEqual(
-        { key: 'description', label: 'Description', value: EMPTY }
+        { key: 'description', label: 'Description', children: EMPTY }
       )
     })
   })
@@ -53,7 +53,7 @@ describe('ProDescriptions buildItems utility', () => {
 
     it(`renders it as ${EMPTY}`, () => {
       expect(buildItems(record, columns)[3]).toEqual(
-        { key: 'description', label: 'Description', value: EMPTY }
+        { key: 'description', label: 'Description', children: EMPTY }
       )
     })
   })
@@ -69,7 +69,7 @@ describe('ProDescriptions buildItems utility', () => {
 
       it(`renders it as ${EMPTY}`, () => {
         expect(buildItems(record, columns)).toEqual(
-          [{ key: 'categories', label: 'Categories', value: EMPTY }]
+          [{ key: 'categories', label: 'Categories', children: EMPTY }]
         )
       })
     })
@@ -83,7 +83,7 @@ describe('ProDescriptions buildItems utility', () => {
 
       it('renders it as StateTag', () => {
         expect(buildItems(record, columns)).toEqual([
-          { key: 'state', label: 'State', value: <StateTag state={record.state} configuration={columns[0].valueRenderConfig} /> }
+          { key: 'state', label: 'State', children: <StateTag state={record.state} configuration={columns[0].valueRenderConfig} /> }
         ])
       })
     })
@@ -95,7 +95,7 @@ describe('ProDescriptions buildItems utility', () => {
 
       it(`renders it as collection of tags`, () => {
         expect(buildItems(record, columns)).toEqual(
-          [{ key: 'tags', label: 'Tags', value:<TagsList tags={record.tags} /> }]
+          [{ key: 'tags', label: 'Tags', children:<TagsList tags={record.tags} /> }]
         )
       })
     })
@@ -113,7 +113,7 @@ describe('ProDescriptions buildItems utility', () => {
 
       it('renders it as formatted date', () => {
         expect(buildItems(record, columns)).toEqual([
-          { key: 'created_at', label: 'Created at', value: 'Fri, 9 Dec 2022, 13:19 GMT' }
+          { key: 'created_at', label: 'Created at', children: 'Fri, 9 Dec 2022, 13:19 GMT' }
         ])
       })
     })
@@ -125,7 +125,7 @@ describe('ProDescriptions buildItems utility', () => {
 
       it('renders it as formatted duration', () => {
         expect(buildItems(record, columns)).toEqual([
-          { key: 'age', label: 'Age', value: '2 hours and 19 minutes' }
+          { key: 'age', label: 'Age', children: '2 hours and 19 minutes' }
         ])
       })
     })
@@ -137,7 +137,7 @@ describe('ProDescriptions buildItems utility', () => {
 
       it('renders value w/o modifying it', () => {
         expect(buildItems(record, columns)).toEqual([
-          { key: 'new', label: 'New', value: record.new }
+          { key: 'new', label: 'New', children: record.new }
         ])
       })
     })
@@ -150,7 +150,7 @@ describe('ProDescriptions buildItems utility', () => {
 
     it('renders it based on the enum', () => {
       expect(buildItems(record, columns)).toEqual([
-        { key: 'new', label: 'New', value: 'Yes' }
+        { key: 'new', label: 'New', children: 'Yes' }
       ])
     })
   })
@@ -166,7 +166,7 @@ describe('ProDescriptions buildItems utility', () => {
 
     it('passes unmodified span, contentStyle and labelStyle', () => {
       expect(buildItems(record, columns)).toEqual([
-        { key: 'name', label: 'Name', span: 4, contentStyle: { color: 'red' }, labelStyle: { color: 'blue' }, value: 'Fake' }
+        { key: 'name', label: 'Name', span: 4, contentStyle: { color: 'red' }, labelStyle: { color: 'blue' }, children: 'Fake' }
       ])
     })
   })
