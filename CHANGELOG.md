@@ -1,3 +1,6 @@
+v1.44.4
+[fix] Module level directives warning
+
 v1.44.3
 [fix][SC-15] updated antd from ^5.4.2 to ^5.8.3
 
