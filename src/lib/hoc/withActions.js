@@ -1,19 +1,5 @@
 import App from '~su/components/App'
 
-// const withActions = (Component, actions) => (props) => {
-//   const { message } = App.useApp()
-//
-//   const extendActions = (actions) => {
-//     let extendedActions = {}
-//     Object.keys(actions).forEach((actionName) => {
-//       extendedActions[actionName] = (originalParams = {}) => actions[actionName]({ ...originalParams, message })
-//     })
-//     return extendedActions
-//   }
-//
-//   return <Component api={extendActions(actions)} {...props} />
-// }
-
 const withActions = (Component, componentActions) => (props) => {
   const { message } = App.useApp()
 
