@@ -50,18 +50,18 @@ const StageUiApp = ({ children, initialConfig, context, loadConfigParams = null,
   return (
     <ConfigProvider theme={{ token: themeToken }}>
       <ThemeProvider>
-      <App>
-        <Layout
-          {...layoutConfig}
-          themeOverrides={branding}
-          onSideMenuSelect={({ key }) => navigate(key)}
-          isLoaded={isInitialised}
-        >
-          <GlobalStyles />
-          <RootModal />
-          {children}
-        </Layout>
-      </App>
+        <App>
+          <Layout
+            {...layoutConfig}
+            themeOverrides={branding}
+            onSideMenuSelect={({ key }) => navigate(key)}
+            isLoaded={isInitialised}
+          >
+            <GlobalStyles />
+            <RootModal />
+            {children}
+          </Layout>
+        </App>
       </ThemeProvider>
     </ConfigProvider>
   )

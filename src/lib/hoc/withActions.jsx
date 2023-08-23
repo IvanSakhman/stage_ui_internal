@@ -1,4 +1,4 @@
-import App from '~su/components/App'
+import { App } from 'antd'
 
 const withActions = (Component, componentActions) => (props) => {
   const { message } = App.useApp()
