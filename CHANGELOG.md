@@ -1,3 +1,13 @@
+v1.46.0
+fix [antd: message] Static function can not consume context like dynamic theme. Used 'App' component instead.
+
+v1.45.0
+feat: Forms improvements
+
+1. allow to pass fields as a function for FieldsList dynamic={true}
+2. Make Select not display the dropdown when mode is 'tags' and there are no enums nor valueEnums - it appears as Tag Input
+3. Added Input.Number.
+
 v1.44.4
 [fix] Module level directives warning
 
