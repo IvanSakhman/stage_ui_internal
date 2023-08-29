@@ -15,7 +15,6 @@ import { handleResponseResult } from './response'
 import smartTable from './smartTable'
 import table from './table/'
 import pusher from './pusher'
-import displayMessage from './displayMessage'
 import string from './string'
 import tree from './tree'
 
@@ -36,7 +35,6 @@ export {
   object,
   smartTable,
   pusher,
-  displayMessage,
   string,
   table,
   tree

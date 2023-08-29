@@ -15,7 +15,7 @@ import { useNavigate, initializeWebsocketHooks } from '~su/hooks'
 import theme from '~su/constants/theme'
 
 // providers
-import { ConfigProvider, App } from 'antd'
+import { ConfigProvider, App, message } from 'antd'
 import ThemeProvider from './ThemeProvider'
 
 // components
@@ -29,6 +29,7 @@ let _stageUiAppConfig = {}
 const StageUiApp = ({ children, initialConfig, context, loadConfigParams = null, themeOverrides = {} }) => {
   const [isInitialised, setIsInitialised] = useState(false)
   useWebsocketConnection()
+  const [messageApi, contextHolder] = message.useMessage()
 
   const navigate = useNavigate()
   const layoutConfig = useLayoutConfig()
@@ -41,7 +42,8 @@ const StageUiApp = ({ children, initialConfig, context, loadConfigParams = null,
       initialConfig,
       context,
       loadConfigParams,
-      translationsConfig: _stageUiAppConfig.translations
+      translationsConfig: _stageUiAppConfig.translations,
+      messageApi
     }).then(() => setIsInitialised(true))
   }, [initialConfig, context, loadConfigParams])
 
@@ -51,6 +53,7 @@ const StageUiApp = ({ children, initialConfig, context, loadConfigParams = null,
     <ConfigProvider theme={{ token: themeToken }}>
       <ThemeProvider>
         <App>
+          {contextHolder}
           <Layout
             {...layoutConfig}
             themeOverrides={branding}

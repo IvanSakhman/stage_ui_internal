@@ -1,6 +1,6 @@
+import { message } from 'antd'
 import { initializeApi } from '~su/actions'
 import api from '~su/utilities/fetchJson'
-import displayMessage from '~su/utilities/displayMessage'
 
 import loadInitialData, { testExports } from '~su/App/loadInitialData'
 
@@ -98,14 +98,14 @@ describe('App/loadInitialData', () => {
     })
 
     beforeEach(() => {
-      displayMessage.error = jest.fn()
+      message.error = jest.fn()
       api.get = jest.fn().mockResolvedValue(configResponse)
     })
 
     it('fetches config from API with context parameter', () => {
       const spy = jest.spyOn(api, 'get')
 
-      loadConfig(apiActions, requestParams, initialConfig.api.baseUrl)
+      loadConfig(apiActions, requestParams, initialConfig.api.baseUrl, message)
 
       expect(spy).toHaveBeenCalledWith('/config?context=test_context', {})
 
@@ -113,13 +113,13 @@ describe('App/loadInitialData', () => {
     })
 
     it('inits the store', async () => {
-      await loadConfig(apiActions, requestParams, initialConfig.api.baseUrl)
+      await loadConfig(apiActions, requestParams, initialConfig.api.baseUrl, message)
 
-      expect(init).toHaveBeenCalledWith(configResponse.data, 'baseUrl')
+      expect(init).toHaveBeenCalledWith(configResponse.data, 'baseUrl', message)
     })
 
     it('returns a promise', async () => {
-      await expect(loadConfig(apiActions, requestParams, initialConfig.api.baseUrl)).resolves.not.toThrow()
+      await expect(loadConfig(apiActions, requestParams, initialConfig.api.baseUrl, message)).resolves.not.toThrow()
     })
 
     describe('when there is error', () => {
@@ -135,12 +135,12 @@ describe('App/loadInitialData', () => {
         try {
           await loadConfig(apiActions, requestParams, initialConfig.api.baseUrl)
         } catch {
-          expect(displayMessage.error).toBeCalledWith(configResponse.message)
+          expect(message.error).toBeCalledWith(configResponse.message)
         }
       })
 
       it('throws an error', async () => {
-        await expect(loadConfig(apiActions, requestParams, initialConfig.api.baseUrl)).rejects.toThrow(
+        await expect(loadConfig(apiActions, requestParams, initialConfig.api.baseUrl, message)).rejects.toThrow(
           configResponse.message
         )
       })
@@ -163,7 +163,7 @@ describe('App/loadInitialData', () => {
     })
 
     beforeEach(() => {
-      displayMessage.error = jest.fn()
+      message.error = jest.fn()
       api.get = jest.fn().mockResolvedValue(translationsResponse)
     })
 
@@ -219,7 +219,7 @@ describe('App/loadInitialData', () => {
           try {
             await loadTranslations(apiActions, requestParams, translationsConfig)
           } catch {
-            expect(displayMessage.error).toBeCalledWith(translationsResponse.message)
+            expect(message.error).toBeCalledWith(translationsResponse.message)
           }
         })
 
@@ -238,7 +238,7 @@ describe('App/loadInitialData', () => {
 
       const apiSpy = jest.spyOn(api, 'get')
 
-      await loadInitialData({ initialConfig, context: 'test_context', translationsConfig: { namespace: 'test' } })
+      await loadInitialData({ initialConfig, context: 'test_context', translationsConfig: { namespace: 'test' }, messageApi: message })
 
       expect(apiSpy).toHaveBeenCalledTimes(2)
 

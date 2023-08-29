@@ -24,8 +24,8 @@ const buildRequestParams = (path, context, loadConfigParams) => {
   }
 }
 
-const loadConfig = (apiActions, requestParams, baseUrl) => {
-  return apiActions('config', { setData: (data) => init(data, baseUrl) }).loadCollection(requestParams)
+const loadConfig = (apiActions, requestParams, baseUrl, messageApi) => {
+  return apiActions('config', { setData: (data) => init(data, baseUrl, messageApi) }).loadCollection(requestParams)
 }
 
 const loadTranslations = (apiActions, requestParams, translationsConfig) => {
@@ -38,13 +38,13 @@ const loadTranslations = (apiActions, requestParams, translationsConfig) => {
   }).loadCollection(requestParams)
 }
 
-export default ({ initialConfig, context, loadConfigParams, translationsConfig }) => {
+export default ({ initialConfig, context, loadConfigParams, translationsConfig, messageApi }) => {
   const apiActions = initializeApi(api)()
   let { baseUrl, config_path, translations_path } = initialConfig.api
 
-  return loadConfig(apiActions, buildRequestParams(config_path, context, loadConfigParams), baseUrl).then(() => {
-    return loadTranslations(apiActions, buildRequestParams(translations_path, context), translationsConfig)
-  })
+  return loadConfig(apiActions, buildRequestParams(config_path, context, loadConfigParams), baseUrl, messageApi).then(
+    () => loadTranslations(apiActions, buildRequestParams(translations_path, context), translationsConfig)
+  )
 }
 
 let testExports = {}
