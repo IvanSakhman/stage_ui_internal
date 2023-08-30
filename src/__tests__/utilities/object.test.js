@@ -1,6 +1,6 @@
 import objectUtilities from '~su/utilities/object';
 
-const { invert, compact, isEmpty, findNested, flattenObject } = objectUtilities
+const { invert, compact, isEmpty, isObject, findNested, flattenObject } = objectUtilities
 
 describe('Object Utilities', () => {
   describe('invert', () => {
@@ -75,6 +75,43 @@ describe('Object Utilities', () => {
         expect(isEmpty({ a: 1, b: 2, c: 'test' })).toEqual(false)
       })
     })
+  })
+
+  describe('isObject', () => {
+    describe('when value is null or undefined', () => {
+      it('returns false', () => {
+        expect(isObject(null)).toEqual(false)
+        expect(isObject(undefined)).toEqual(false)
+      })
+    })
+
+    describe('when value is function', () => {
+      it('returns false', () => {
+        expect(isObject(() => null)).toEqual(false)
+      })
+    })
+
+    describe('when value is string or number', () => {
+      it('returns false', () => {
+        expect(isObject('test')).toEqual(false)
+        expect(isObject(1)).toEqual(false)
+      })
+    })
+
+    describe('when value is an array', () => {
+      it('returns false', () => {
+        expect(isObject([])).toEqual(false)
+        expect(isObject([1, 2, 3])).toEqual(false)
+      })
+    })
+
+    describe('when value is object', () => {
+      it('returns true', () => {
+        expect(isObject({})).toEqual(true)
+        expect(isObject({ a: 1, b: 2, c: 'test' })).toEqual(true)
+      })
+    })
+
   })
 
   describe('findNested', () => {
