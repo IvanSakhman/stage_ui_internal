@@ -1,13 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import styled from 'styled-components'
-import { Card } from 'antd'
-
-import { withLoader } from '~su/hoc'
+import Card from '../Base'
 
 import Table from '../../Table'
 
-const CardWithTable = styled(Card)`
+const CardStyledWithTable = styled(Card)`
   > .ant-card-body {
     padding: ${(props) => (props.loading ? 'default' : '0')};
 
@@ -76,21 +74,10 @@ const CardTable = ({ title: titleProp, loading, headStyle, ...tableProps }) => {
   const title = titleProp[0],
     extra = titleProp.slice(1)
 
-  const ExtendedCardWithTable = withLoader(CardWithTable, {
-    embeddedMode: true,
-    preventLoadingFlagsPassing: true,
-    loadingBlock: { size: 'small', showTip: false }
-  })
-
   return (
-    <ExtendedCardWithTable
-      title={title}
-      extra={React.Children.toArray(extra)}
-      headStyle={headStyle}
-      isLoaded={!loading}
-    >
+    <CardStyledWithTable title={title} extra={React.Children.toArray(extra)} headStyle={headStyle} isLoaded={!loading}>
       <Table {...tableProps} />
-    </ExtendedCardWithTable>
+    </CardStyledWithTable>
   )
 }
 

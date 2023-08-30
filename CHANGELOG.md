@@ -1,3 +1,16 @@
+v1.47.0
+feat: Added array and object utilities + make all Card(s) use withLoader HOC.
+
+1. array utilities
+  - groupItemsBy => takes the array of objects and key by which it should group the data as arguments,
+    returns an object of grouped items
+  - insert => takes the array, item to insert and position at which the item should be inserted,
+    returns modified array
+2. object utilities
+  - isObject => checks if value is an object with properties (ie { test: true })
+3. Card component
+  - extended it with withLoader hook => this way the Card.Table does not require it and all Cards have the same loader
+
 v1.46.0
 fix [antd: message] Static function can not consume context like dynamic theme. Used 'App' component instead.
 
