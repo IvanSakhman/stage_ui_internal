@@ -8,6 +8,7 @@ import api from './fetchJson'
 import * as i18n from './i18n'
 import keyboardShortcuts from './keyboardShortcuts'
 import localForage from './localForage'
+import message from './message'
 import newRecord from './newRecord'
 import number from './number'
 import object from './object'
@@ -29,6 +30,7 @@ export {
   i18n,
   keyboardShortcuts,
   localForage,
+  message,
   handleResponseResult,
   newRecord,
   number,

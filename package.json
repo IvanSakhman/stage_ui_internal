@@ -47,7 +47,7 @@
     "build": "rollup -c",
     "lint": "eslint ./src --max-warnings 0",
     "beauty_check": "prettier --check ./src",
-    "prettify": "prettier --write 'src/**/*.{js,jsx,json,css,scss,md}'"
+    "prettify": "prettier --write \"src/**/*.{js,jsx,json,css,scss,md}\""
   },
   "browserslist": {
     "production": [

@@ -6,7 +6,7 @@ import { useLayoutConfig, useBranding } from '~su/store/root-store'
 import loadInitialData from './loadInitialData'
 
 // utilities
-import { baseUrl as setBaseUrl } from '~su/utilities'
+import { baseUrl as setBaseUrl, message } from '~su/utilities'
 
 // hooks
 import { useNavigate, initializeWebsocketHooks } from '~su/hooks'
@@ -15,7 +15,7 @@ import { useNavigate, initializeWebsocketHooks } from '~su/hooks'
 import theme from '~su/constants/theme'
 
 // providers
-import { ConfigProvider, App, message } from 'antd'
+import { ConfigProvider, App } from 'antd'
 import ThemeProvider from './ThemeProvider'
 
 // components
@@ -38,13 +38,15 @@ const StageUiApp = ({ children, initialConfig, context, loadConfigParams = null,
 
   useEffect(() => {
     setBaseUrl(initialConfig.api.baseUrl)
-    loadInitialData({
-      initialConfig,
-      context,
-      loadConfigParams,
-      translationsConfig: _stageUiAppConfig.translations,
+    loadInitialData(
+      {
+        initialConfig,
+        context,
+        loadConfigParams,
+        translationsConfig: _stageUiAppConfig.translations
+      },
       messageApi
-    }).then(() => setIsInitialised(true))
+    ).then(() => setIsInitialised(true))
   }, [initialConfig, context, loadConfigParams])
 
   const themeToken = { ...theme.token, ...brandingToken, ...themeOverrides.token }

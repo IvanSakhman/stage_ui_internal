@@ -1,12 +1,10 @@
-import { message } from 'antd'
-
-const write = (newClip) => {
+const write = (newClip, messageApi) => {
   navigator.clipboard.writeText(JSON.stringify(newClip)).then(
     () => {
-      message.success('Copied!')
+      messageApi.success('Copied!')
     },
     () => {
-      message.error('Copying has failed.')
+      messageApi.error('Copying has failed.')
     }
   )
 }

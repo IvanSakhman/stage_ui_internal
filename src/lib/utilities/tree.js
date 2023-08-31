@@ -1,5 +1,3 @@
-import { message } from 'antd'
-
 class UpdateNodeError extends Error {}
 
 const findNode = (collection, identifier, identifyBy = 'id') => {
@@ -22,12 +20,12 @@ const findNode = (collection, identifier, identifyBy = 'id') => {
   return current
 }
 
-const tryUpdateNode = (...updatePayload) => {
+const tryUpdateNode = (messageApi, ...updatePayload) => {
   try {
     return updateNode(...updatePayload)
   } catch (e) {
     if (e instanceof UpdateNodeError) {
-      message.error(e.message)
+      messageApi.error(e.message)
       return
     }
 

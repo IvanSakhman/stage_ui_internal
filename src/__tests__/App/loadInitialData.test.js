@@ -1,8 +1,16 @@
-import { message } from 'antd'
 import { initializeApi } from '~su/actions'
 import api from '~su/utilities/fetchJson'
 
 import loadInitialData, { testExports } from '~su/App/loadInitialData'
+
+const message = {
+  open: jest.fn(),
+  success: jest.fn(),
+  error: jest.fn(),
+  info: jest.fn(),
+  warning: jest.fn(),
+  loading: jest.fn()
+}
 
 jest.mock('~su/store/actions', () => ({
   init: jest.fn()
@@ -85,7 +93,7 @@ describe('App/loadInitialData', () => {
   describe('loadConfig', () => {
     const { loadConfig, buildRequestParams } = testExports
     let configResponse = null
-    const apiActions = initializeApi(api)()
+    const apiActions = initializeApi(api, message)()
     const requestParams = buildRequestParams('/config', 'test_context')
 
     beforeAll(() => {
@@ -133,7 +141,7 @@ describe('App/loadInitialData', () => {
 
       it('shows the error message', async () => {
         try {
-          await loadConfig(apiActions, requestParams, initialConfig.api.baseUrl)
+          await loadConfig(apiActions, requestParams, initialConfig.api.baseUrl, message)
         } catch {
           expect(message.error).toBeCalledWith(configResponse.message)
         }
@@ -150,7 +158,7 @@ describe('App/loadInitialData', () => {
   describe('loadTranslations', () => {
     const { loadTranslations, buildRequestParams } = testExports
     let translationsResponse = null
-    const apiActions = initializeApi(api)()
+    const apiActions = initializeApi(api, message)()
     const requestParams = buildRequestParams('/translations', 'test_context')
 
     beforeAll(() => {
@@ -238,7 +246,7 @@ describe('App/loadInitialData', () => {
 
       const apiSpy = jest.spyOn(api, 'get')
 
-      await loadInitialData({ initialConfig, context: 'test_context', translationsConfig: { namespace: 'test' }, messageApi: message })
+      await loadInitialData({ initialConfig, context: 'test_context', translationsConfig: { namespace: 'test' }}, message)
 
       expect(apiSpy).toHaveBeenCalledTimes(2)
 

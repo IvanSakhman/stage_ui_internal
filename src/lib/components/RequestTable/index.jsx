@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
-import { api } from '~su/utilities'
+import { api, message } from '~su/utilities'
 import { initializeApi } from '~su/actions'
 import { getApiConfig } from '~su/store/root-store'
 import { useTranslation } from '~su/utilities/i18n'
@@ -11,6 +11,7 @@ import Button from '../Button'
 
 const RequestTable = ({ id, replaceString, collectionName, TableComponent, ...tableProps }) => {
   const { t } = useTranslation()
+  const [messageApi, contextHolder] = message.useMessage()
 
   const initialState = { isLoading: true, actions: {}, isLoaded: false }
   const [state, setState] = useState(initialState)
@@ -22,7 +23,7 @@ const RequestTable = ({ id, replaceString, collectionName, TableComponent, ...ta
     })
   }
 
-  const apiActions = initializeApi(api)(getApiConfig)
+  const apiActions = initializeApi(api, messageApi)(getApiConfig)
   const { loadCollection } = apiActions(collectionName, { setState: updateState, setData })
 
   useEffect(() => {
@@ -47,7 +48,16 @@ const RequestTable = ({ id, replaceString, collectionName, TableComponent, ...ta
   const Component = TableComponent || Table
 
   return (
-    <Component dataSource={data} loading={state.isLoading} actions={state.actions} {...tableProps} title={tableTitle} />
+    <>
+      {contextHolder}
+      <Component
+        dataSource={data}
+        loading={state.isLoading}
+        actions={state.actions}
+        {...tableProps}
+        title={tableTitle}
+      />
+    </>
   )
 }
 

@@ -38,8 +38,8 @@ const loadTranslations = (apiActions, requestParams, translationsConfig) => {
   }).loadCollection(requestParams)
 }
 
-export default ({ initialConfig, context, loadConfigParams, translationsConfig, messageApi }) => {
-  const apiActions = initializeApi(api)()
+export default ({ initialConfig, context, loadConfigParams, translationsConfig }, messageApi) => {
+  const apiActions = initializeApi(api, messageApi)()
   let { baseUrl, config_path, translations_path } = initialConfig.api
 
   return loadConfig(apiActions, buildRequestParams(config_path, context, loadConfigParams), baseUrl, messageApi).then(

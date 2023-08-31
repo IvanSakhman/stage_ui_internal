@@ -1,9 +1,8 @@
-import { message } from 'antd'
 import string from '~su/utilities/string'
 
 const { capitalize, pluralize } = string
 
-export default (store, itemName = '', normalizeForUI = null) => {
+export default (store, itemName = '', normalizeForUI = null, messageApi) => {
   const collectionName = pluralize(itemName)
 
   const setItem = (itemValues, newRecord, showMessage = true) => {
@@ -26,7 +25,7 @@ export default (store, itemName = '', normalizeForUI = null) => {
       store.setState({ [collectionName]: updatedCollection })
       messageCopy = `${capitalize(itemName)} updated`
     }
-    showMessage && message.success(messageCopy)
+    showMessage && messageApi && messageApi.success(messageCopy)
   }
 
   // removeItem = (item: object, callback?: Function)
