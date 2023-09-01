@@ -1,16 +1,8 @@
+import message from 'mocks/messageMock'
 import { initializeApi } from '~su/actions'
 import api from '~su/utilities/fetchJson'
 
 import loadInitialData, { testExports } from '~su/App/loadInitialData'
-
-const message = {
-  open: jest.fn(),
-  success: jest.fn(),
-  error: jest.fn(),
-  info: jest.fn(),
-  warning: jest.fn(),
-  loading: jest.fn()
-}
 
 jest.mock('~su/store/actions', () => ({
   init: jest.fn()

@@ -1,13 +1,5 @@
+import message from 'mocks/messageMock'
 import TableAsChartUtils from '~su/components/Chart/tableAsChartUtils'
-
-const message = {
-  open: jest.fn(),
-  success: jest.fn(),
-  error: jest.fn(),
-  info: jest.fn(),
-  warning: jest.fn(),
-  loading: jest.fn()
-}
 
 describe('TableAsChart utilities', () => {
   const grouped = {

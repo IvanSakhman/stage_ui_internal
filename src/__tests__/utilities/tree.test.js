@@ -1,15 +1,7 @@
+import message from 'mocks/messageMock'
 import treeUtilities from '~su/utilities/tree';
 
 const { findNode, tryUpdateNode, updateNode, deleteNode } = treeUtilities
-
-const message = {
-  open: jest.fn(),
-  success: jest.fn(),
-  error: jest.fn(),
-  info: jest.fn(),
-  warning: jest.fn(),
-  loading: jest.fn()
-}
 
 const collection = [
   { name: "top_level_1", key: "tl1" },

@@ -1,13 +1,5 @@
+import message from 'mocks/messageMock'
 import clipboard from '~su/utilities/clipboard'
-
-const message = {
-  open: jest.fn(),
-  success: jest.fn(),
-  error: jest.fn(),
-  info: jest.fn(),
-  warning: jest.fn(),
-  loading: jest.fn()
-}
 
 describe('Cliboard utilities', () => {
   const originalClipboard = { ...global.navigator.clipboard }

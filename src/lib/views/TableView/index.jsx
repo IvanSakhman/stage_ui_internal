@@ -6,6 +6,7 @@ import SmartTable from '~su/components/SmartTable'
 
 import setupActions from './actions'
 import setupStore from './store'
+import useTableViewSetup from './hooks'
 
 const TableView = ({
   store,
@@ -70,5 +71,6 @@ const TableView = ({
 
 TableView.setupActions = setupActions
 TableView.setupStore = setupStore
+TableView.useTableViewSetup = useTableViewSetup
 
 export default TableView
