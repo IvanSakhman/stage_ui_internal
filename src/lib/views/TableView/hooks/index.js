@@ -3,15 +3,24 @@ import { useMemo } from 'react'
 import setupActions from '../actions'
 import setupStore from '../store'
 
-const useTableViewSetup = ({ itemName, itemPluralName, collectionApiPath, messageApi, apiPlaceholders = null }) => {
+const useTableViewSetup = ({
+  itemName,
+  itemPluralName,
+  isPaginated = true,
+  isFilterable = true,
+  additionalFields = { actions: {} },
+  collectionApiPath,
+  apiPlaceholders,
+  messageApi
+}) => {
   const store = useMemo(
     () =>
       setupStore({
         itemName,
         itemPluralName,
-        isPaginated: true,
-        isFilterable: true,
-        additionalFields: { actions: {} }
+        isPaginated,
+        isFilterable,
+        additionalFields
       }),
     []
   )
