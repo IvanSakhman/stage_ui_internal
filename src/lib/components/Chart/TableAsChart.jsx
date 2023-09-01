@@ -1,6 +1,8 @@
 import { useRef, forwardRef, useImperativeHandle } from 'react'
 import html2canvas from 'html2canvas'
 
+import { message } from '~su/utilities'
+
 import Table from '../Table'
 
 import TableAsChartUtils from './tableAsChartUtils'
@@ -17,9 +19,10 @@ import TableAsChartUtils from './tableAsChartUtils'
 const TableAsChart = forwardRef((props, ref) => {
   const { _id, _height, ...chartProps } = props
   const tableContainer = useRef(null)
+  const [messageApi, contextHolder] = message.useMessage()
 
   const chartConfiguration = JSON.parse(JSON.stringify(chartProps))
-  const tableAsChartUtils = new TableAsChartUtils(chartConfiguration.data)
+  const tableAsChartUtils = new TableAsChartUtils(chartConfiguration.data, messageApi)
 
   useImperativeHandle(
     ref,
@@ -31,6 +34,7 @@ const TableAsChart = forwardRef((props, ref) => {
 
   return (
     <div ref={tableContainer} style={{ overflow: 'scroll', maxHeight: '100%', maxWidth: '100%' }}>
+      {contextHolder}
       <Table
         columns={tableAsChartUtils.columnsFromData()}
         dataSource={tableAsChartUtils.rowsFromData().map((row, index) => ({ ...row, key: index }))}

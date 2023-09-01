@@ -113,7 +113,14 @@ describe('ProDescriptions buildItems utility', () => {
 
       it('renders it as formatted date', () => {
         expect(buildItems(record, columns)).toEqual([
-          { key: 'created_at', label: 'Created at', value: 'Fri, 9 Dec 2022, 13:19 GMT' }
+          {
+            key: 'created_at',
+            span: undefined,
+            contentStyle: undefined,
+            labelStyle: undefined,
+            label: 'Created at',
+            value: 'Fri, 9 Dec 2022, 13:19 UTC'
+          }
         ])
       })
     })

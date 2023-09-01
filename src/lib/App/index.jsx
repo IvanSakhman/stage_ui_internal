@@ -6,7 +6,7 @@ import { useLayoutConfig, useBranding } from '~su/store/root-store'
 import loadInitialData from './loadInitialData'
 
 // utilities
-import { baseUrl as setBaseUrl } from '~su/utilities'
+import { baseUrl as setBaseUrl, message } from '~su/utilities'
 
 // hooks
 import { useNavigate, initializeWebsocketHooks } from '~su/hooks'
@@ -29,6 +29,7 @@ let _stageUiAppConfig = {}
 const StageUiApp = ({ children, initialConfig, context, loadConfigParams = null, themeOverrides = {} }) => {
   const [isInitialised, setIsInitialised] = useState(false)
   useWebsocketConnection()
+  const [messageApi, contextHolder] = message.useMessage()
 
   const navigate = useNavigate()
   const layoutConfig = useLayoutConfig()
@@ -37,12 +38,15 @@ const StageUiApp = ({ children, initialConfig, context, loadConfigParams = null,
 
   useEffect(() => {
     setBaseUrl(initialConfig.api.baseUrl)
-    loadInitialData({
-      initialConfig,
-      context,
-      loadConfigParams,
-      translationsConfig: _stageUiAppConfig.translations
-    }).then(() => setIsInitialised(true))
+    loadInitialData(
+      {
+        initialConfig,
+        context,
+        loadConfigParams,
+        translationsConfig: _stageUiAppConfig.translations
+      },
+      messageApi
+    ).then(() => setIsInitialised(true))
   }, [initialConfig, context, loadConfigParams])
 
   const themeToken = { ...theme.token, ...brandingToken, ...themeOverrides.token }
@@ -51,6 +55,7 @@ const StageUiApp = ({ children, initialConfig, context, loadConfigParams = null,
     <ConfigProvider theme={{ token: themeToken }}>
       <ThemeProvider>
         <App>
+          {contextHolder}
           <Layout
             {...layoutConfig}
             themeOverrides={branding}

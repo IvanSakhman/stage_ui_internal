@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
-import { Input, message } from 'antd'
+import { Input } from 'antd'
 
 import { PlusOutlined } from '@ant-design/icons'
 
 import IconButton from '~su/components/IconButton'
-import tree from '~su/utilities/tree'
+import { tree, message } from '~su/utilities'
 
 import Tree from '../index'
 import FormInDrawer from './FormInDrawer'
@@ -21,6 +21,7 @@ const EditableTree = (props) => {
   const [editNodeDrawer, setEditNodeDrawer] = useState({ visible: false })
   const [addFailed, setAddFailed] = useState(false)
   const [searchComponentValue, setSearchComponentValue] = useState(null)
+  const [messageApi, contextHolder] = message.useMessage()
 
   const { editable: formProps, data } = props
 
@@ -39,7 +40,7 @@ const EditableTree = (props) => {
   const onNewAdded = (_ev) => {
     const value = searchComponentValue
     if (!value) {
-      message.error({ content: 'You need to provide the name for new node', duration: 2.5 })
+      messageApi.error({ content: 'You need to provide the name for new node', duration: 2.5 })
       setAddFailed(true)
       return
     }
@@ -74,6 +75,7 @@ const EditableTree = (props) => {
 
   return (
     <div>
+      {contextHolder}
       <Tree titleRender={titleComponent} data={data} searchComponent={searchComponent} {...props} />
 
       {editNodeDrawer.visible ? (

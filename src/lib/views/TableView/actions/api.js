@@ -5,8 +5,11 @@ import { buildFilters } from '../utilities/buildFilters'
 
 import { getApiConfig } from '~su/store/root-store'
 
-const setupApiActions = ({ setState, setData, itemName, itemPluralName, collectionApiPath, apiPlaceholders = {} }) => {
-  const apiActions = initializeApi(api)(getApiConfig)
+const setupApiActions = (
+  { setState, setData, itemName, itemPluralName, collectionApiPath, apiPlaceholders = {} },
+  messageApi
+) => {
+  const apiActions = initializeApi(api, messageApi)(getApiConfig)
 
   const { loadCollection } = apiActions(itemName, {
     setState,

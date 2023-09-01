@@ -1,4 +1,4 @@
-import { message } from 'antd';
+import message from 'mocks/messageMock'
 import treeUtilities from '~su/utilities/tree';
 
 const { findNode, tryUpdateNode, updateNode, deleteNode } = treeUtilities
@@ -56,7 +56,7 @@ describe('Tree Utilities', () => {
     it('updates a node', () => {
       expect(findNode(collection, 'tl3', 'key')).toEqual({ name: "top_level_3", key: "tl3" })
 
-      const updatedCollection = tryUpdateNode(collection, 'tl3', 'key', { value: 'tl3_value' }, () => true)
+      const updatedCollection = tryUpdateNode(message, collection, 'tl3', 'key', { value: 'tl3_value' }, () => true)
 
       expect(findNode(updatedCollection, 'tl3', 'key')).toEqual(
         { name: "top_level_3", key: "tl3", value: 'tl3_value' }
@@ -66,7 +66,7 @@ describe('Tree Utilities', () => {
     describe('updating node threw an error', () => {
       describe('error is custom UpdateNodeError', () => {
         it('catches it and triggers a message.error', () => {
-          tryUpdateNode(collection, 'tl3', 'key', { value: 'tl3_value' }, () => 'fake error message')
+          tryUpdateNode(message, collection, 'tl3', 'key', { value: 'tl3_value' }, () => 'fake error message')
 
           expect(message.error).toBeCalledWith('Could not update node: fake error message')
         })
@@ -74,7 +74,7 @@ describe('Tree Utilities', () => {
 
       describe('error is not custom UpdateNodeError', () => {
         it('rethrows it', () => {
-          expect(() => tryUpdateNode(...collection)).toThrow(TypeError)
+          expect(() => tryUpdateNode(message, ...collection)).toThrow(TypeError)
         })
       })
     })

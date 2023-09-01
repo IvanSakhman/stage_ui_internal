@@ -8,6 +8,7 @@ import api from './fetchJson'
 import * as i18n from './i18n'
 import keyboardShortcuts from './keyboardShortcuts'
 import localForage from './localForage'
+import message from './message'
 import newRecord from './newRecord'
 import number from './number'
 import object from './object'
@@ -15,7 +16,6 @@ import { handleResponseResult } from './response'
 import smartTable from './smartTable'
 import table from './table/'
 import pusher from './pusher'
-import displayMessage from './displayMessage'
 import string from './string'
 import tree from './tree'
 
@@ -30,13 +30,13 @@ export {
   i18n,
   keyboardShortcuts,
   localForage,
+  message,
   handleResponseResult,
   newRecord,
   number,
   object,
   smartTable,
   pusher,
-  displayMessage,
   string,
   table,
   tree
