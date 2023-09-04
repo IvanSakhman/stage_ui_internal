@@ -11,7 +11,7 @@ const useTableViewSetup = ({
   additionalFields = { actions: {} },
   collectionApiPath,
   apiPlaceholders,
-  messageApi
+  message
 }) => {
   const store = useMemo(
     () =>
@@ -35,7 +35,7 @@ const useTableViewSetup = ({
       collectionApiPath,
       apiPlaceholders
     },
-    messageApi
+    message
   )
 
   return { store, loadData }
