@@ -120,7 +120,7 @@
       "^~su(.*)$": "<rootDir>/src/lib$1",
       "\\.(s)?css": "identity-obj-proxy",
       "^antd/es/(.*)$": "antd/lib/$1",
-      "^mocks/(.*)": "<rootDir>/src/__mocks__/$1"
+      "^~mocks(.*)$": "<rootDir>/src/__mocks__/$1"
     },
     "resetMocks": false
   }
