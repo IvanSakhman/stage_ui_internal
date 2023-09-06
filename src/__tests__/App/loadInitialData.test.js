@@ -1,4 +1,4 @@
-import message from 'mocks/messageMock'
+import { message } from '~mocks/appHooks'
 import { initializeApi } from '~su/actions'
 import api from '~su/utilities/fetchJson'
 

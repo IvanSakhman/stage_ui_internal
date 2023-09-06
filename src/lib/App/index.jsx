@@ -106,6 +106,4 @@ StageUiApp.configure = (config) => {
 
 StageUiApp.provider = provider
 
-StageUiApp.useApp = App.useApp
-
 export default StageUiApp

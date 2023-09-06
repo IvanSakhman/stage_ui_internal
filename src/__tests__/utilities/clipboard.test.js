@@ -1,4 +1,4 @@
-import message from 'mocks/messageMock'
+import { message } from '~mocks/appHooks'
 import clipboard from '~su/utilities/clipboard'
 
 describe('Cliboard utilities', () => {
