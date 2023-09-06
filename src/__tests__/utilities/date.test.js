@@ -84,7 +84,7 @@ describe('Date Utilities', () => {
       })
 
       it('formats the date w/ users localisation', () => {
-        expect(format('2020-12-14T17:56:15.786Z')).toEqual('Mon, 14 Dec 2020, 17:56 UTC')
+        expect(format('2020-12-14T17:56:15.786Z')).toEqual('Mon, 14 Dec 2020, 17:56 GMT')
       })
     })
   })
@@ -105,7 +105,7 @@ describe('Date Utilities', () => {
       })
 
       it('formats the date w/ users localisation', () => {
-        expect(detailedFormat('2020-12-14T17:56:15.786Z')).toEqual('14 Dec 2020, 17:56:15.786 UTC')
+        expect(detailedFormat('2020-12-14T17:56:15.786Z')).toEqual('14 Dec 2020, 17:56:15.786 GMT')
       })
 
       describe('w/ timeZone specified', () => {

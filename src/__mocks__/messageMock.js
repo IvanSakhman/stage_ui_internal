@@ -1,3 +1,5 @@
+import { jest } from '@jest/globals'
+
 const message = {
   open: jest.fn(),
   success: jest.fn(),

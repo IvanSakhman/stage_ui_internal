@@ -5,7 +5,7 @@
     "registry": "https://npm.pkg.github.com/"
   },
   "author": "ForwardPMX Developers",
-  "version": "1.47.0",
+  "version": "1.48.0",
   "description": "Stage UI React components",
   "license": "MIT",
   "files": [
@@ -47,7 +47,7 @@
     "build": "rollup -c",
     "lint": "eslint ./src --max-warnings 0",
     "beauty_check": "prettier --check ./src",
-    "prettify": "prettier --write \"src/**/*.{js,jsx,json,css,scss,md}\""
+    "prettify": "prettier --write 'src/**/*.{js,jsx,json,css,scss,md}'"
   },
   "browserslist": {
     "production": [
