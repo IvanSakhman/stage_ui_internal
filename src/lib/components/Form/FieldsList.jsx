@@ -66,7 +66,7 @@ const FieldsList = ({
           <AntdForm.Item>
             <Button
               type="dashed"
-              onClick={() => add(fieldsInitialValues)}
+              onClick={() => (onAdd ? onAdd(add) : add(fieldsInitialValues))}
               block
               icon={<PlusOutlined />}
               disabled={disable}
@@ -118,7 +118,8 @@ FieldsList.propTypes = {
   showTitle: PropTypes.bool,
   separateItems: PropTypes.bool,
   rules: PropTypes.array,
-  className: PropTypes.string
+  className: PropTypes.string,
+  onAdd: PropTypes.func
 }
 
 export default FieldsList

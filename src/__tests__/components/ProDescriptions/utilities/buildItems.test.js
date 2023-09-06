@@ -119,7 +119,7 @@ describe('ProDescriptions buildItems utility', () => {
             contentStyle: undefined,
             labelStyle: undefined,
             label: 'Created at',
-            value: 'Fri, 9 Dec 2022, 13:19 UTC'
+            value: 'Fri, 9 Dec 2022, 13:19 GMT'
           }
         ])
       })
