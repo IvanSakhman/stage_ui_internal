@@ -1,7 +1,7 @@
-import { App } from 'antd'
+import { useMessage } from '~su/hooks'
 
 const withActions = (Component, componentActions) => (props) => {
-  const { message } = App.useApp()
+  const message = useMessage()
 
   let extendedActions = {}
 
