@@ -1,4 +1,4 @@
-import message from 'mocks/messageMock'
+import { message } from '~mocks/appHooks'
 import TableAsChartUtils from '~su/components/Chart/tableAsChartUtils'
 
 describe('TableAsChart utilities', () => {

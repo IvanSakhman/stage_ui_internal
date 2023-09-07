@@ -1,4 +1,4 @@
-import message from 'mocks/messageMock'
+import { message } from '~mocks/appHooks'
 import treeUtilities from '~su/utilities/tree';
 
 const { findNode, tryUpdateNode, updateNode, deleteNode } = treeUtilities

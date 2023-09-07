@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import { App } from 'antd'
 
 import { api } from '~su/utilities'
 import { initializeApi } from '~su/actions'
 import { getApiConfig } from '~su/store/root-store'
 import { useTranslation } from '~su/utilities/i18n'
+import { useMessage } from '~su/hooks'
 
 import Table from '../Table'
 import Button from '../Button'
 
 const RequestTable = ({ id, replaceString, collectionName, TableComponent, ...tableProps }) => {
   const { t } = useTranslation()
-  const { message } = App.useApp()
+  const message = useMessage()
 
   const initialState = { isLoading: true, actions: {}, isLoaded: false }
   const [state, setState] = useState(initialState)

@@ -1,6 +1,7 @@
 import { useRef, forwardRef, useImperativeHandle } from 'react'
 import html2canvas from 'html2canvas'
-import { App } from 'antd'
+
+import { useMessage } from '~su/hooks'
 
 import Table from '../Table'
 
@@ -18,7 +19,7 @@ import TableAsChartUtils from './tableAsChartUtils'
 const TableAsChart = forwardRef((props, ref) => {
   const { _id, _height, ...chartProps } = props
   const tableContainer = useRef(null)
-  const { message } = App.useApp()
+  const message = useMessage()
 
   const chartConfiguration = JSON.parse(JSON.stringify(chartProps))
   const tableAsChartUtils = new TableAsChartUtils(chartConfiguration.data, message)

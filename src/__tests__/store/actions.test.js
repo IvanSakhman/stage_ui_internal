@@ -1,4 +1,4 @@
-import message from 'mocks/messageMock'
+import { message } from '~mocks/appHooks'
 import { useConfigStore, useUIStore } from '~su/store/root-store'
 import * as actions from '~su/store/actions'
 
