@@ -1,3 +1,12 @@
+v1.49.0
+fix [antd: message]
+- Updated message component
+- Used App component
+- added useTableViewSetup hoc
+
+v1.48.0
+feat: Make FieldsList accept onAdd dynamic fields handler and export Modal.useModal
+
 v1.47.0
 feat: Added array and object utilities + make all Card(s) use withLoader HOC.
 

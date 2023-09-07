@@ -22,7 +22,7 @@ const useTableViewSetup = ({
         isFilterable,
         additionalFields
       }),
-    []
+    [additionalFields, isFilterable, isPaginated, itemName, itemPluralName]
   )
 
   const { useDataStore } = store
