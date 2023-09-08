@@ -1,3 +1,8 @@
+v1.49.1
+fix: Moved 'ExtendedCard = withLoader(AntdCard' out of Card component
+
+Such things should never be in the component function, it can get updated and it gets reset.
+
 v1.49.0
 fix [antd: message]
 - Updated message component
