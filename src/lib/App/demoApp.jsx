@@ -22,23 +22,35 @@ import ThemeProvider from './ThemeProvider'
 import { Layout, RootModal } from '~su/components'
 import { GlobalStyles } from './index.styled'
 
-import DemoStageUiApp from './demoApp'
-
-export { DemoStageUiApp }
-
 const { useWebsocketConnection } = initializeWebsocketHooks()
 
 let _stageUiAppConfig = {}
 
-const StageUiApp = ({ children, initialConfig, context, loadConfigParams = null, themeOverrides = {} }) => {
+const DemoStageUiApp = ({
+  children,
+  initialConfig,
+  context,
+  loadConfigParams = null,
+  themeOverrides = {},
+  brandingData = {},
+  navItems = [],
+  isLayoutPresent = true
+}) => {
   const [isInitialised, setIsInitialised] = useState(false)
   useWebsocketConnection()
   const [messageApi, contextHolder] = message.useMessage()
 
   const navigate = useNavigate()
-  const layoutConfig = useLayoutConfig()
-  const branding = useBranding()
+  const layoutConfigDefault = useLayoutConfig()
+  const brandingDefault = useBranding()
+
+  const branding = { ...brandingDefault, ...brandingData }
   const brandingToken = branding?.token || {}
+
+  const layoutConfig = {
+    ...layoutConfigDefault,
+    sidebarItems: layoutConfigDefault?.sidebarItems?.concat(navItems)
+  }
 
   useEffect(() => {
     setBaseUrl(initialConfig.api.baseUrl)
@@ -60,23 +72,31 @@ const StageUiApp = ({ children, initialConfig, context, loadConfigParams = null,
       <ThemeProvider>
         <App>
           {contextHolder}
-          <Layout
-            {...layoutConfig}
-            themeOverrides={branding}
-            onSideMenuSelect={({ key }) => navigate(key)}
-            isLoaded={isInitialised}
-          >
-            <GlobalStyles />
-            <RootModal />
-            {children}
-          </Layout>
+          {isLayoutPresent ? (
+            <Layout
+              {...layoutConfig}
+              themeOverrides={branding}
+              onSideMenuSelect={({ key }) => navigate(key)}
+              isLoaded={isInitialised}
+            >
+              <GlobalStyles />
+              <RootModal />
+              {children}
+            </Layout>
+          ) : (
+            <>
+              <GlobalStyles />
+              <RootModal />
+              {children}
+            </>
+          )}
         </App>
       </ThemeProvider>
     </ConfigProvider>
   )
 }
 
-StageUiApp.propTypes = {
+DemoStageUiApp.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
   initialConfig: PropTypes.shape({
     api: PropTypes.shape({
@@ -86,28 +106,43 @@ StageUiApp.propTypes = {
   }).isRequired,
   context: PropTypes.string.isRequired,
   loadConfigParams: PropTypes.object,
-  themeOverrides: PropTypes.object
+  themeOverrides: PropTypes.object,
+  brandingData: PropTypes.object,
+  navItems: PropTypes.array,
+  isLayoutPresent: PropTypes.bool
 }
 
 const provider = (Component) => (props) => {
   // eslint-disable-next-line react/prop-types
-  const { config, context, loadConfigParams, themeOverrides, ...componentProps } = props
+  const {
+    config,
+    context,
+    loadConfigParams,
+    themeOverrides,
+    brandingData,
+    navItems,
+    isLayoutPresent,
+    ...componentProps
+  } = props
   return (
-    <StageUiApp
+    <DemoStageUiApp
       initialConfig={config}
       context={context}
       loadConfigParams={loadConfigParams}
       themeOverrides={themeOverrides}
+      brandingData={brandingData}
+      navItems={navItems}
+      isLayoutPresent={isLayoutPresent}
     >
       <Component {...componentProps} />
-    </StageUiApp>
+    </DemoStageUiApp>
   )
 }
 
-StageUiApp.configure = (config) => {
+DemoStageUiApp.configure = (config) => {
   _stageUiAppConfig = config
 }
 
-StageUiApp.provider = provider
+DemoStageUiApp.provider = provider
 
-export default StageUiApp
+export default DemoStageUiApp
