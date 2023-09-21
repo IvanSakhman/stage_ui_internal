@@ -1,3 +1,14 @@
+v1.49.4
+fix: Make usePusherNotify use final received initial value.
+
+It was set to use the first received initial value, however when used deep down the components tree, that value was not always the correct one. Replicated behaviour of usePusherCreateItem and usePusherEditItem
+
+v1.49.3
+[fix] Disabled forwardRef support for withScopedTranslations HOC due to failed CI
+
+v1.49.2
+Added support for forwardRef wrapped components to withScopedTranslations HOC
+
 v1.49.1
 fix: Moved 'ExtendedCard = withLoader(AntdCard' out of Card component
 
