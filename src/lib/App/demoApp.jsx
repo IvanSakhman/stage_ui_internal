@@ -34,7 +34,8 @@ const DemoStageUiApp = ({
   themeOverrides = {},
   brandingData = {},
   navItems = [],
-  isLayoutPresent = true
+  isLayoutPresent = true,
+  isLoaded
 }) => {
   const [isInitialised, setIsInitialised] = useState(false)
   useWebsocketConnection()
@@ -67,7 +68,7 @@ const DemoStageUiApp = ({
 
   const themeToken = { ...theme.token, ...brandingToken, ...themeOverrides.token }
 
-  return (
+  return isLoaded ? (
     <ConfigProvider theme={{ token: themeToken }}>
       <ThemeProvider>
         <App>
@@ -93,7 +94,7 @@ const DemoStageUiApp = ({
         </App>
       </ThemeProvider>
     </ConfigProvider>
-  )
+  ) : null
 }
 
 DemoStageUiApp.propTypes = {
@@ -122,6 +123,7 @@ const provider = (Component) => (props) => {
     brandingData,
     navItems,
     isLayoutPresent,
+    isLoaded,
     ...componentProps
   } = props
   return (
@@ -133,6 +135,7 @@ const provider = (Component) => (props) => {
       brandingData={brandingData}
       navItems={navItems}
       isLayoutPresent={isLayoutPresent}
+      isLoaded={isLoaded}
     >
       <Component {...componentProps} />
     </DemoStageUiApp>
