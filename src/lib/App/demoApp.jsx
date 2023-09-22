@@ -50,7 +50,7 @@ const DemoStageUiApp = ({
 
   const layoutConfig = {
     ...layoutConfigDefault,
-    sidebarItems: layoutConfigDefault?.sidebarItems?.concat(navItems)
+    sidebarItems: navItems
   }
 
   useEffect(() => {
