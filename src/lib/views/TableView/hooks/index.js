@@ -22,7 +22,7 @@ const useTableViewSetup = ({
         isFilterable,
         additionalFields
       }),
-    []
+    [] // eslint-disable-line react-hooks/exhaustive-deps
   )
 
   const { useDataStore } = store
