@@ -15,7 +15,7 @@ import { useNavigate, initializeWebsocketHooks } from '~su/hooks'
 import theme from '~su/constants/theme'
 
 // providers
-import { ConfigProvider } from 'antd'
+import { ConfigProvider, App, message } from 'antd'
 import ThemeProvider from './ThemeProvider'
 
 // components
@@ -29,6 +29,7 @@ let _stageUiAppConfig = {}
 const StageUiApp = ({ children, initialConfig, context, loadConfigParams = null, themeOverrides = {} }) => {
   const [isInitialised, setIsInitialised] = useState(false)
   useWebsocketConnection()
+  const [messageApi, contextHolder] = message.useMessage()
 
   const navigate = useNavigate()
   const layoutConfig = useLayoutConfig()
@@ -37,12 +38,15 @@ const StageUiApp = ({ children, initialConfig, context, loadConfigParams = null,
 
   useEffect(() => {
     setBaseUrl(initialConfig.api.baseUrl)
-    loadInitialData({
-      initialConfig,
-      context,
-      loadConfigParams,
-      translationsConfig: _stageUiAppConfig.translations
-    }).then(() => setIsInitialised(true))
+    loadInitialData(
+      {
+        initialConfig,
+        context,
+        loadConfigParams,
+        translationsConfig: _stageUiAppConfig.translations
+      },
+      messageApi
+    ).then(() => setIsInitialised(true))
   }, [initialConfig, context, loadConfigParams])
 
   const themeToken = { ...theme.token, ...brandingToken, ...themeOverrides.token }
@@ -50,16 +54,19 @@ const StageUiApp = ({ children, initialConfig, context, loadConfigParams = null,
   return (
     <ConfigProvider theme={{ token: themeToken }}>
       <ThemeProvider>
-        <Layout
-          {...layoutConfig}
-          themeOverrides={branding}
-          onSideMenuSelect={({ key }) => navigate(key)}
-          isLoaded={isInitialised}
-        >
-          <GlobalStyles />
-          <RootModal />
-          {children}
-        </Layout>
+        <App>
+          {contextHolder}
+          <Layout
+            {...layoutConfig}
+            themeOverrides={branding}
+            onSideMenuSelect={({ key }) => navigate(key)}
+            isLoaded={isInitialised}
+          >
+            <GlobalStyles />
+            <RootModal />
+            {children}
+          </Layout>
+        </App>
       </ThemeProvider>
     </ConfigProvider>
   )

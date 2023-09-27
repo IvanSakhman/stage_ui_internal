@@ -1,5 +1,5 @@
+import { message } from '~mocks/appHooks'
 import clipboard from '~su/utilities/clipboard'
-import { message } from 'antd'
 
 describe('Cliboard utilities', () => {
   const originalClipboard = { ...global.navigator.clipboard }
@@ -28,7 +28,7 @@ describe('Cliboard utilities', () => {
 
   describe('write', () => {
     it('writes to clipboard as JSON', async () => {
-      await clipboard.write('string')
+      await clipboard.write('string', message)
 
       expect(navigator.clipboard.writeText).toBeCalledTimes(1)
       expect(navigator.clipboard.writeText).toHaveBeenCalledWith(JSON.stringify('string'))
@@ -36,7 +36,7 @@ describe('Cliboard utilities', () => {
 
     describe('when success', () => {
       it('shows a success message', async () => {
-        await clipboard.write('test')
+        await clipboard.write('test', message)
         expect(message.success).toBeCalledWith('Copied!')
       })
     })
@@ -45,7 +45,7 @@ describe('Cliboard utilities', () => {
       it('shows a fail message', async () => {
         fail = true
 
-        await clipboard.write('test')
+        await clipboard.write('test', message)
         expect(message.error).toBeCalledWith('Copying has failed.')
       })
     })
@@ -53,7 +53,7 @@ describe('Cliboard utilities', () => {
 
   describe('read', () => {
     it('reads the clipboard', async () => {
-      clipboard.write({ test: 'true' })
+      clipboard.write({ test: 'true' }, message)
       clipboard.read().then((value) => {
         expect(JSON.parse(value)).toEqual({ test: 'true' })
       })
@@ -63,7 +63,7 @@ describe('Cliboard utilities', () => {
 
   describe('readIf', () => {
     it('reads the clipboard but returns the value only if it matches the regexp', async () => {
-      clipboard.write({ test: 'true' })
+      clipboard.write({ test: 'true' }, message)
       clipboard.readIf(/test/).then((value) => {
         expect(JSON.parse(value)).toEqual({ test: 'true' })
       })

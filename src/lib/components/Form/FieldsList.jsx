@@ -1,4 +1,5 @@
 import { Fragment } from 'react'
+import PropTypes from 'prop-types'
 import { Form as AntdForm, Button, Row, Divider } from 'antd'
 import { MinusCircleOutlined, PlusOutlined } from '@ant-design/icons'
 
@@ -15,7 +16,7 @@ import string from '~su/utilities/string'
 // }
 
 const FieldsList = ({
-  fields,
+  fields: fieldsConfig,
   fieldsInitialValues,
   disable = false,
   name = null,
@@ -24,9 +25,12 @@ const FieldsList = ({
   showTitle = false,
   separateItems = false,
   rules = [],
-  className
+  className,
+  onAdd
 }) => {
-  const renderFields = (formFields, { _add, _remove }, extras = {}) => {
+  const renderFields = (_formFields, _controlActions, extras = {}) => {
+    const fields = dynamic && typeof fieldsConfig === 'function' ? fieldsConfig(extras) : fieldsConfig
+
     return fields.map((field, index) => {
       return (
         <Field
@@ -62,7 +66,7 @@ const FieldsList = ({
           <AntdForm.Item>
             <Button
               type="dashed"
-              onClick={() => add(fieldsInitialValues)}
+              onClick={() => (onAdd ? onAdd(add) : add(fieldsInitialValues))}
               block
               icon={<PlusOutlined />}
               disabled={disable}
@@ -92,6 +96,30 @@ const FieldsList = ({
       </Wrapper>
     </>
   )
+}
+
+FieldsList.propTypes = {
+  fields: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        item: PropTypes.shape({ disable: PropTypes.bool })
+      })
+    )
+  ]).isRequired,
+  fieldsInitialValues: PropTypes.object,
+  disable: PropTypes.bool,
+  name: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]),
+  dynamic: PropTypes.bool,
+  actions: PropTypes.shape({
+    isAddAllowed: PropTypes.bool,
+    isRemoveAllowed: PropTypes.bool
+  }),
+  showTitle: PropTypes.bool,
+  separateItems: PropTypes.bool,
+  rules: PropTypes.array,
+  className: PropTypes.string,
+  onAdd: PropTypes.func
 }
 
 export default FieldsList

@@ -1,13 +1,10 @@
+import { message } from '~mocks/appHooks'
 import { useConfigStore, useUIStore } from '~su/store/root-store'
 import * as actions from '~su/store/actions'
 
 jest.mock('~su/clients/websocketClient', () => jest.fn())
 
 import websocketClient from '~su/clients/websocketClient'
-
-jest.mock('~su/utilities/displayMessage', () => jest.fn())
-
-import displayMessage from '~su/utilities/displayMessage'
 
 describe('Root Actions', () => {
   describe('init', () => {
@@ -19,7 +16,7 @@ describe('Root Actions', () => {
         }
       })
 
-      await actions.init({ layout: {} }, 'baseUrl')
+      await actions.init({ layout: {} }, 'baseUrl', message)
 
       expect(useConfigStore.getState()).toMatchObject({
         layout: {},
@@ -35,7 +32,7 @@ describe('Root Actions', () => {
       }
 
       it('calls websocketClient', async () => {
-        await actions.init({ websocketClientConfig: mockWebsocketClientConfig })
+        await actions.init({ websocketClientConfig: mockWebsocketClientConfig }, null, message)
 
         expect(websocketClient).toBeCalledWith(mockWebsocketClientConfig)
       })
@@ -44,14 +41,14 @@ describe('Root Actions', () => {
     describe('when errored', () => {
       beforeEach(() => {
         console.error = jest.fn()
-        displayMessage.error = jest.fn()
+        message.error = jest.fn()
       })
 
       it('shows a message', () => {
-        actions.init(null)
+        actions.init(null, null, message)
 
         expect(console.error).toBeCalled()
-        expect(displayMessage.error).toBeCalledWith('Error initializing application')
+        expect(message.error).toBeCalledWith('Error initializing application')
       })
     })
   })

@@ -1,11 +1,9 @@
-import { message } from 'antd'
-
 import newRecord from '~su/utilities/newRecord'
 import string from '~su/utilities/string'
 
 const { singularize, capitalize } = string
 
-export default (api) => (getApiConfig) => {
+export default (api, messageApi) => (getApiConfig) => {
   const getMessageKey = (action, recordType, id) =>
     `${action}-${recordType}-${newRecord.checkIsNew({ id }) ? 'new' : id}`
 
@@ -40,7 +38,7 @@ export default (api) => (getApiConfig) => {
         const { success, errors: _errors, data, message: responseMessage, actions: actions } = response
 
         if (!success) {
-          message.error(responseMessage)
+          messageApi.error(responseMessage)
 
           if (onError) {
             onError(response)
@@ -65,13 +63,13 @@ export default (api) => (getApiConfig) => {
       const messageKey = getMessageKey('saving', recordType, id)
 
       collectionActions.setState('isSaving', true)
-      message.loading({ content: 'Saving...', key: messageKey })
+      messageApi.loading({ content: 'Saving...', key: messageKey })
 
       const handleResponse = ({ success, errors: _errors, data, message: responseMessage, actions: _actions }) => {
         if (!success) {
-          message.error({ content: responseMessage, key: messageKey })
+          messageApi.error({ content: responseMessage, key: messageKey })
         } else {
-          message.destroy(messageKey)
+          messageApi.destroy(messageKey)
           collectionActions.setItem?.(data, isNewRecord)
           onSuccess && onSuccess(data)
         }
@@ -107,17 +105,17 @@ export default (api) => (getApiConfig) => {
       const apiPath = getApiPath({ action: 'update', recordType, id })
       const messageKey = getMessageKey('deleting', recordType, id)
 
-      message.loading({ content: `Deleting ${recordType}`, key: messageKey })
+      messageApi.loading({ content: `Deleting ${recordType}`, key: messageKey })
 
       api
         .delete(apiPath)
         .then(({ success, errors: _errors, data: _data, message: responseMessage, actions: _actions }) => {
           if (!success) {
-            message.error({ content: responseMessage, key: messageKey })
+            messageApi.error({ content: responseMessage, key: messageKey })
             return
           }
 
-          message.success({
+          messageApi.success({
             content: `${capitalize(recordType)} deleted`,
             key: messageKey
           })
