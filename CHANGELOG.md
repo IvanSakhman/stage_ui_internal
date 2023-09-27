@@ -1,3 +1,57 @@
+v1.49.4
+fix: Make usePusherNotify use final received initial value.
+
+It was set to use the first received initial value, however when used deep down the components tree, that value was not always the correct one. Replicated behaviour of usePusherCreateItem and usePusherEditItem
+
+v1.49.3
+[fix] Disabled forwardRef support for withScopedTranslations HOC due to failed CI
+
+v1.49.2
+Added support for forwardRef wrapped components to withScopedTranslations HOC
+
+v1.49.1
+fix: Moved 'ExtendedCard = withLoader(AntdCard' out of Card component
+
+Such things should never be in the component function, it can get updated and it gets reset.
+
+v1.49.0
+fix [antd: message]
+- Updated message component
+- Used App component
+- added useTableViewSetup hoc
+
+v1.48.0
+feat: Make FieldsList accept onAdd dynamic fields handler and export Modal.useModal
+
+v1.47.0
+feat: Added array and object utilities + make all Card(s) use withLoader HOC.
+
+1. array utilities
+  - groupItemsBy => takes the array of objects and key by which it should group the data as arguments,
+    returns an object of grouped items
+  - insert => takes the array, item to insert and position at which the item should be inserted,
+    returns modified array
+2. object utilities
+  - isObject => checks if value is an object with properties (ie { test: true })
+3. Card component
+  - extended it with withLoader hook => this way the Card.Table does not require it and all Cards have the same loader
+
+v1.46.0
+fix [antd: message] Static function can not consume context like dynamic theme. Used 'App' component instead.
+
+v1.45.0
+feat: Forms improvements
+
+1. allow to pass fields as a function for FieldsList dynamic={true}
+2. Make Select not display the dropdown when mode is 'tags' and there are no enums nor valueEnums - it appears as Tag Input
+3. Added Input.Number.
+
+v1.44.4
+[fix] Module level directives warning
+
+v1.44.3
+[fix][SC-15] updated antd from ^5.4.2 to ^5.8.3
+
 v1.44.2
 [fix][SC-10] [antd: Tooltip] destroyTooltipOnHide no need config keepParent anymore. Used boolean value directly.
 [fix][SC-12] [antd: Tooltip] `arrowPointAtCenter` is deprecated, used `arrow` instead.

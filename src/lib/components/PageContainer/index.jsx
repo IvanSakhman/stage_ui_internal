@@ -18,7 +18,7 @@ const PageContainer = ({ loading, children, header = {}, tabs = {}, buildBreadcr
     children = <StyledTabs tabsItems={tabs.tabList} {...tabs.tabProps} />
   }
 
-  const title = t('title', header.title)
+  const title = header.title || t('header.title')
 
   return (
     <>

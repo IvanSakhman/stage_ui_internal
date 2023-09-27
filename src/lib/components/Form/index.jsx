@@ -84,7 +84,7 @@ const Form = forwardRef(
 
     const handleFinish = (values) => {
       setSubmitDisabled(true)
-      onFinish(values, form)
+      onFinish({ values, form })
     }
 
     useEffect(() => {

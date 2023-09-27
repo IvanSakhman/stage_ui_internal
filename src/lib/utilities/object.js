@@ -16,6 +16,14 @@ const isEmpty = (object) => {
   return object.constructor === Object && Object.keys(object).length === 0
 }
 
+const isObject = (value) => {
+  if (!value) {
+    return false
+  }
+
+  return typeof value === 'object' && !Array.isArray(value) && typeof value !== 'function'
+}
+
 const findNested = (object, path) => {
   path = Array.isArray(path) ? path : path.split('.')
   return path.reduce((accumulator, currentValue) => accumulator?.[currentValue], object)
@@ -32,4 +40,4 @@ export const flattenObject = (obj) => {
   return Object.fromEntries(flat(obj))
 }
 
-export default { invert, compact, isEmpty, findNested, flattenObject }
+export default { invert, compact, isEmpty, isObject, findNested, flattenObject }

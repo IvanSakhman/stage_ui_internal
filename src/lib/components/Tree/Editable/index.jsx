@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react'
-import { Input, message } from 'antd'
+import { Input } from 'antd'
 
 import { PlusOutlined } from '@ant-design/icons'
 
 import IconButton from '~su/components/IconButton'
-import tree from '~su/utilities/tree'
+import { tree } from '~su/utilities'
+import { useMessage } from '~su/hooks'
 
 import Tree from '../index'
 import FormInDrawer from './FormInDrawer'
@@ -21,6 +22,7 @@ const EditableTree = (props) => {
   const [editNodeDrawer, setEditNodeDrawer] = useState({ visible: false })
   const [addFailed, setAddFailed] = useState(false)
   const [searchComponentValue, setSearchComponentValue] = useState(null)
+  const message = useMessage()
 
   const { editable: formProps, data } = props
 

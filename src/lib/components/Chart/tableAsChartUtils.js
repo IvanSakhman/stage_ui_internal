@@ -1,12 +1,12 @@
 import { zip } from 'lodash'
-import { message } from 'antd'
 import array from '~su/utilities/array'
 
 export default class TableAsChartUtils {
   // constructor({ labels, datasets }: { labels: any; datasets: any })
-  constructor({ labels, datasets }) {
+  constructor({ labels, datasets }, messageApi) {
     this.labels = labels
     this.datasets = datasets
+    this.messageApi = messageApi
     this.hasLabeledDatasets = this.withTryCatch(
       () => this.datasets.filter((dataset) => dataset.label).length != 0,
       false
@@ -54,7 +54,7 @@ export default class TableAsChartUtils {
       return func()
     } catch (error) {
       console.error(error)
-      message.error('Could not generate table visualisation.')
+      this.messageApi.error('Could not generate table visualisation.')
       return fallbackValue
     }
   }
