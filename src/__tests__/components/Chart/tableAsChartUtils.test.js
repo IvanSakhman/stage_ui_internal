@@ -1,4 +1,4 @@
-import { message } from 'antd';
+import { message } from '~mocks/appHooks'
 import TableAsChartUtils from '~su/components/Chart/tableAsChartUtils'
 
 describe('TableAsChart utilities', () => {
@@ -40,7 +40,7 @@ describe('TableAsChart utilities', () => {
   describe('columnsFromData', () => {
     describe('when datasets have a label', () => {
       it('returns main labels as parents with children', () => {
-        expect(new TableAsChartUtils(grouped).columnsFromData()).toEqual(
+        expect(new TableAsChartUtils(grouped, message).columnsFromData()).toEqual(
           [
             { title: '2019', children: [{ title: 'happiness_score', dataIndex: '2019_happiness_score' }, { title: 'month', dataIndex: '2019_month' }] },
             { title: '2020', children: [{ title: 'happiness_score', dataIndex: '2020_happiness_score' }, { title: 'month', dataIndex: '2020_month' }] },
@@ -52,7 +52,7 @@ describe('TableAsChart utilities', () => {
 
     describe('when datasets does not have a label', () => {
       it('returns main labels', () => {
-        expect(new TableAsChartUtils(notGrouped).columnsFromData()).toEqual(
+        expect(new TableAsChartUtils(notGrouped, message).columnsFromData()).toEqual(
           [
             { title: 'happiness_score', dataIndex: 'happiness_score' },
             { title: 'month', dataIndex: 'month' }
@@ -68,7 +68,7 @@ describe('TableAsChart utilities', () => {
 
       it('triggers a message and returns an empty array', () => {
         const consoleSpy = jest.spyOn(global.console, 'error').mockImplementation(() => {})
-        expect(new TableAsChartUtils(invalid).columnsFromData()).toEqual([])
+        expect(new TableAsChartUtils(invalid, message).columnsFromData()).toEqual([])
 
         expect(consoleSpy).toBeCalledWith(new TypeError('this.datasets.filter is not a function'))
         expect(consoleSpy).toBeCalledWith(new TypeError('this.labels.map is not a function'))
@@ -82,7 +82,7 @@ describe('TableAsChart utilities', () => {
   describe('rowsFromData', () => {
     describe('when datasets have a label', () => {
       it('it collects data per row', () => {
-        expect(new TableAsChartUtils(grouped).rowsFromData()).toEqual(
+        expect(new TableAsChartUtils(grouped, message).rowsFromData()).toEqual(
           [
             { "2019_happiness_score": "100", "2019_month": "Jan", "2020_happiness_score": "20", "2020_month": "Jan", "2021_happiness_score": "12", "2021_month": "Jan" },
             { "2019_happiness_score": "200", "2019_month": "Feb", "2020_happiness_score": "10", "2020_month": "Feb", "2021_happiness_score": undefined, "2021_month": "Feb" },
@@ -94,7 +94,7 @@ describe('TableAsChart utilities', () => {
 
     describe('when datasets does not have a label', () => {
       it('list of objects', () => {
-        expect(new TableAsChartUtils(notGrouped).rowsFromData()).toEqual(
+        expect(new TableAsChartUtils(notGrouped, message).rowsFromData()).toEqual(
           [
             { happiness_score: "100", month: "Jan" },
             { happiness_score: "200", month: "Feb" },
@@ -112,7 +112,7 @@ describe('TableAsChart utilities', () => {
 
       it('triggers a message and returns an empty array', () => {
         const consoleSpy = jest.spyOn(global.console, 'error').mockImplementation(() => {})
-        expect(new TableAsChartUtils(invalid).rowsFromData()).toEqual([])
+        expect(new TableAsChartUtils(invalid, message).rowsFromData()).toEqual([])
 
         expect(consoleSpy).toBeCalledWith(new TypeError('this.datasets.filter is not a function'))
         expect(consoleSpy).toBeCalledWith(new TypeError('this.datasets.map is not a function'))

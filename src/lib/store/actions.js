@@ -3,9 +3,7 @@ import { storeActions } from '~su/actions'
 
 import { websocketClient } from '~su/clients'
 
-import displayMessage from '~su/utilities/displayMessage'
-
-export const init = (configuration, baseUrl) => {
+export const init = (configuration, baseUrl, messageApi) => {
   try {
     const { websocketClientConfig, ...config } = configuration
 
@@ -16,7 +14,7 @@ export const init = (configuration, baseUrl) => {
     useConfigStore.getState().update(config, baseUrl)
   } catch (error) {
     console.error(error)
-    displayMessage.error('Error initializing application')
+    messageApi.error('Error initializing application')
   }
 }
 

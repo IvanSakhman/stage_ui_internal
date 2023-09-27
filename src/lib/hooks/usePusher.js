@@ -126,8 +126,12 @@ export default ({ triggerGlobalAlert, removeGlobalAlert, setUIStoreProperty, web
     return item
   },
   usePusherNotify: (initial, channelName, screenRootId = null) => {
-    const [item, setItem] = useState(initial)
+    const [item, setItem] = useState(null)
     const pusherclient = websocketClient ? websocketClient() : pusher()
+
+    useEffect(() => {
+      setItem(initial)
+    }, [initial])
 
     useEffect(() => {
       if (pusherclient) {
