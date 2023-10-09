@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types'
+
 // constants
 import theme from '~su/constants/theme'
 
@@ -8,7 +10,6 @@ import ThemeProvider from './ThemeProvider'
 // components
 import { RootModal } from '~su/components'
 import { GlobalStyles } from './index.styled'
-import PropTypes from 'prop-types'
 
 const StyleProvider = ({ children, brandingToken }) => {
   const themeToken = { ...theme.token, ...brandingToken }
