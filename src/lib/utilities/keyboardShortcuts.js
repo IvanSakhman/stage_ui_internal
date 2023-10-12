@@ -1,7 +1,9 @@
 import { filter, map, toLower, toString, trim, upperFirst } from 'lodash'
 
-const modKey = /Mac|iPod|iPhone|iPad/.test(navigator.platform) ? 'Cmd' : 'Ctrl'
-const altKey = /Mac|iPod|iPhone|iPad/.test(navigator.platform) ? 'Option' : 'Alt'
+const isMac = typeof window !== 'undefined' && /Mac|iPod|iPhone|iPad/.test(navigator.platform)
+
+const modKey = isMac ? 'Cmd' : 'Ctrl'
+const altKey = isMac ? 'Option' : 'Alt'
 
 const humanReadableShortcut = (shortcut, limit = Infinity) => {
   const modifiers = {

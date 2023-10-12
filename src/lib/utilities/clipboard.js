@@ -1,16 +1,20 @@
+const isBrowser = typeof window !== 'undefined'
+
 const write = (newClip, messageApi) => {
-  navigator.clipboard.writeText(JSON.stringify(newClip)).then(
-    () => {
-      messageApi.success('Copied!')
-    },
-    () => {
-      messageApi.error('Copying has failed.')
-    }
-  )
+  if (isBrowser) {
+    navigator.clipboard.writeText(JSON.stringify(newClip)).then(
+      () => {
+        messageApi.success('Copied!')
+      },
+      () => {
+        messageApi.error('Copying has failed.')
+      }
+    )
+  }
 }
 
 const read = () => {
-  return navigator.clipboard.readText()
+  return isBrowser ? navigator.clipboard.readText() : null
 }
 
 const readIf = (regexp) => {

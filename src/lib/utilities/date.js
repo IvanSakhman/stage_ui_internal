@@ -8,6 +8,8 @@ import dayjs from 'dayjs'
 //   humanizeOptions?: object
 // }
 
+const isBrowser = typeof window !== 'undefined'
+
 const timeBetween = ({ startDate, endDate = null, humanizeOptions = {} }) => {
   if (!endDate) {
     endDate = new Date()
@@ -37,7 +39,7 @@ const formatDuration = (duration, humanizeOptions = {}) => {
 
 // format = (value: string)
 const format = (value) => {
-  if (!value) {
+  if (!value || !isBrowser) {
     return null
   }
 
@@ -53,7 +55,7 @@ const format = (value) => {
 }
 
 const detailedFormat = (value, timeZone = null) => {
-  if (!value) {
+  if (!value || !isBrowser) {
     return null
   }
 

@@ -1,6 +1,10 @@
-export const useLocation = () => window.location
+const isBrowser = typeof window !== 'undefined'
+
+export const useLocation = () => (isBrowser ? window.location : '')
 export const useNavigate = () => {
   return (path) => {
-    window.location.replace(path)
+    if (isBrowser) {
+      window.location.replace(path)
+    }
   }
 }

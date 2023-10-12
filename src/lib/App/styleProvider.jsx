@@ -8,19 +8,44 @@ import { ConfigProvider, App } from 'antd'
 import ThemeProvider from './ThemeProvider'
 
 // components
-import { RootModal } from '~su/components'
+import { RootModal, Layout } from '~su/components'
 import { GlobalStyles } from './index.styled'
 
-const StyleProvider = ({ children, brandingToken }) => {
+const StyleProvider = ({
+  children,
+  brandingToken,
+  sidebarItems,
+  menuProps,
+  onSideMenuSelect,
+  isLayoutPresent = true,
+  isLoaded = false
+}) => {
   const themeToken = { ...theme.token, ...brandingToken }
+
+  const main = (
+    <>
+      <GlobalStyles />
+      <RootModal />
+      {children}
+    </>
+  )
 
   return (
     <ConfigProvider theme={{ token: themeToken }}>
       <ThemeProvider>
         <App>
-          <GlobalStyles />
-          <RootModal />
-          {children}
+          {isLayoutPresent ? (
+            <Layout
+              sidebarItems={sidebarItems}
+              menuProps={menuProps}
+              isLoaded={isLoaded}
+              onSideMenuSelect={onSideMenuSelect}
+            >
+              {main}
+            </Layout>
+          ) : (
+            main
+          )}
         </App>
       </ThemeProvider>
     </ConfigProvider>
@@ -29,7 +54,12 @@ const StyleProvider = ({ children, brandingToken }) => {
 
 StyleProvider.propTypes = {
   children: PropTypes.node.isRequired,
-  brandingToken: PropTypes.object
+  brandingToken: PropTypes.object,
+  sidebarItems: PropTypes.arrayOf(PropTypes.object),
+  menuProps: PropTypes.object,
+  onSideMenuSelect: PropTypes.func.isRequired,
+  isLayoutPresent: PropTypes.bool,
+  isLoaded: PropTypes.bool
 }
 
 export default StyleProvider

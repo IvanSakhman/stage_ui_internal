@@ -6,7 +6,7 @@ import createClass from './createClass'
 import date from './date'
 import api from './fetchJson'
 import * as i18n from './i18n'
-import keyboardShortcuts from './keyboardShortcuts'
+// import keyboardShortcuts from './keyboardShortcuts'
 import localForage from './localForage'
 import newRecord from './newRecord'
 import number from './number'
@@ -27,7 +27,7 @@ export {
   date,
   api,
   i18n,
-  keyboardShortcuts,
+  // keyboardShortcuts,
   localForage,
   handleResponseResult,
   newRecord,

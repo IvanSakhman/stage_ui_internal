@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import { Row, Col } from '~su/components/Grid'
@@ -10,14 +11,16 @@ import UserDropdown from './UserDropdown'
 import { StyledLayoutHeader } from './index.styled'
 
 const StageTopNav = ({ clients, currentClient, systems, currentSystem, helpdeskUrl, themeOverrides }) => {
-  const hostedZone = new URL(window.location).hostname.replace(`${currentSystem}.`, '')
+  const [hostedZone, setHostedZone] = useState('')
+
+  useEffect(() => {
+    setHostedZone(new URL(window.location).hostname.replace(`${currentSystem}.`, ''))
+  }, [])
 
   const renderLeftSide = () => {
     return (
       <Row align="middle" justify="start">
-        <Col span={3}>
-          <HomeButton hostedZone={hostedZone} />
-        </Col>
+        <Col span={3}>{hostedZone && <HomeButton hostedZone={hostedZone} />}</Col>
         <Col span={21}>
           <ClientsDropdown clients={clients} currentClient={currentClient} />
         </Col>
@@ -28,11 +31,9 @@ const StageTopNav = ({ clients, currentClient, systems, currentSystem, helpdeskU
   const renderRightSide = () => {
     return (
       <Row align="middle" justify="end" gutter={8}>
-        <Col span={3}>
-          <UserDropdown hostedZone={hostedZone} helpdeskUrl={helpdeskUrl} />
-        </Col>
+        <Col span={3}>{hostedZone && <UserDropdown hostedZone={hostedZone} helpdeskUrl={helpdeskUrl} />}</Col>
         <Col span={8}>
-          <HomeButton hostedZone={hostedZone} large customLogoUrl={themeOverrides?.logoUrl} />
+          {hostedZone && <HomeButton hostedZone={hostedZone} large customLogoUrl={themeOverrides?.logoUrl} />}
         </Col>
       </Row>
     )
@@ -44,7 +45,7 @@ const StageTopNav = ({ clients, currentClient, systems, currentSystem, helpdeskU
         <Col span={5}>{renderLeftSide()}</Col>
 
         <Col span={14}>
-          <SystemsMenu systems={systems} currentSystem={currentSystem} hostedZone={hostedZone} />
+          {hostedZone && <SystemsMenu systems={systems} currentSystem={currentSystem} hostedZone={hostedZone} />}
         </Col>
 
         <Col span={5}>{renderRightSide()}</Col>

@@ -33,6 +33,8 @@ const findKeys = (
 }
 
 export default (location, sidebarItems) => {
+  if (!location) return { defaultOpenKeys: [], defaultSelectedKey: '' }
+
   const { pathname } = location
 
   return findKeys(pathname, sidebarItems)

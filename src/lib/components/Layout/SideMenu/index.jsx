@@ -1,17 +1,17 @@
 import PropTypes from 'prop-types'
 import { Menu } from 'antd'
 
-import { useLocation } from '~su/hooks'
+// import { useLocation } from '~su/hooks'
 
 import DynamicIcon from '../../DynamicIcon'
 
 import { SideMenuContainer, StyledLink } from './index.styled'
-import getDefaultMenuKeys from './utilities/getDefaultMenuKeys'
+// import getDefaultMenuKeys from './utilities/getDefaultMenuKeys'
 
 const SideMenu = ({ sidebarItems, onSideMenuSelect }) => {
-  const location = useLocation()
-
-  const defaultMenuKeys = getDefaultMenuKeys(location, sidebarItems)
+  // const location = useLocation()
+  //
+  // const defaultMenuKeys = getDefaultMenuKeys(location, sidebarItems)
   const handleMenuItemClick = (e, key) => {
     e.preventDefault()
     e.stopPropagation()
@@ -27,7 +27,7 @@ const SideMenu = ({ sidebarItems, onSideMenuSelect }) => {
         key,
         label: (
           <StyledLink
-            $isSelected={key === defaultMenuKeys.defaultSelectedKey}
+            // $isSelected={key === defaultMenuKeys.defaultSelectedKey}
             onClick={(e) => handleMenuItemClick(e, item.key)}
           >
             {item.label}
@@ -43,8 +43,8 @@ const SideMenu = ({ sidebarItems, onSideMenuSelect }) => {
   return (
     <SideMenuContainer>
       <Menu
-        defaultOpenKeys={defaultMenuKeys.defaultOpenKeys}
-        defaultSelectedKeys={[defaultMenuKeys.defaultSelectedKey]}
+        // defaultOpenKeys={defaultMenuKeys.defaultOpenKeys}
+        // defaultSelectedKeys={[defaultMenuKeys.defaultSelectedKey]}
         theme="dark"
         mode="inline"
         items={sidebarMenuItems}
