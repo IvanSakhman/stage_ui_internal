@@ -8,7 +8,9 @@ import { ConfigProvider, App } from 'antd'
 import ThemeProvider from './ThemeProvider'
 
 // components
-import { RootModal, Layout } from '~su/components'
+import Layout from '~su/components/Layout'
+import RootModal from '~su/components/RootModal'
+
 import { GlobalStyles } from './index.styled'
 
 const StyleProvider = ({
@@ -40,6 +42,7 @@ const StyleProvider = ({
               menuProps={menuProps}
               isLoaded={isLoaded}
               onSideMenuSelect={onSideMenuSelect}
+              themeOverrides={brandingToken}
             >
               {main}
             </Layout>
@@ -57,7 +60,7 @@ StyleProvider.propTypes = {
   brandingToken: PropTypes.object,
   sidebarItems: PropTypes.arrayOf(PropTypes.object),
   menuProps: PropTypes.object,
-  onSideMenuSelect: PropTypes.func.isRequired,
+  onSideMenuSelect: PropTypes.func,
   isLayoutPresent: PropTypes.bool,
   isLoaded: PropTypes.bool
 }
