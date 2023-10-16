@@ -32,10 +32,12 @@ const findKeys = (
   return closestMatch
 }
 
-export default (location, sidebarItems) => {
-  if (!location) return { defaultOpenKeys: [], defaultSelectedKey: '' }
+export default (location, sidebarItems, passedPathname = '') => {
+  if (passedPathname) {
+    return findKeys(passedPathname, sidebarItems)
+  } else if (location) {
+    const { pathname } = location
 
-  const { pathname } = location
-
-  return findKeys(pathname, sidebarItems)
+    return findKeys(pathname, sidebarItems)
+  }
 }

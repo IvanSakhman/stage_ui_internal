@@ -12,14 +12,19 @@ import { StyledContent, StyledLayout } from './index.styled'
 
 const { useToken } = theme
 
-const Layout = ({ menuProps, sidebarItems, children, onSideMenuSelect, themeOverrides = {} }) => {
+const Layout = ({ menuProps, sidebarItems, children, onSideMenuSelect, themeOverrides = {}, pathname }) => {
   const { token: themeToken } = useToken()
 
   return (
     <StyledLayout>
       <TopNav themeOverrides={themeOverrides} {...menuProps} />
       <AntdLayout>
-        <SideMenu sidebarItems={sidebarItems} onSideMenuSelect={onSideMenuSelect} themeToken={themeToken} />
+        <SideMenu
+          sidebarItems={sidebarItems}
+          onSideMenuSelect={onSideMenuSelect}
+          themeToken={themeToken}
+          pathname={pathname}
+        />
         <AntdLayout>
           <GlobalAlert />
           <StyledContent>{children}</StyledContent>
@@ -34,7 +39,8 @@ Layout.propTypes = {
   sidebarItems: SideMenu.propTypes.sidebarItems,
   onSideMenuSelect: SideMenu.propTypes.onSideMenuSelect,
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
-  themeOverrides: PropTypes.object
+  themeOverrides: PropTypes.object,
+  pathname: PropTypes.string
 }
 
 export default withLoader(Layout)

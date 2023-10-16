@@ -20,7 +20,8 @@ const StyleProvider = ({
   menuProps,
   onSideMenuSelect,
   isLayoutPresent = true,
-  isLoaded = false
+  isLoaded = false,
+  pathname
 }) => {
   const themeToken = { ...theme.token, ...brandingToken }
 
@@ -42,7 +43,7 @@ const StyleProvider = ({
               menuProps={menuProps}
               isLoaded={isLoaded}
               onSideMenuSelect={onSideMenuSelect}
-              themeOverrides={brandingToken}
+              pathname={pathname}
             >
               {main}
             </Layout>
@@ -62,7 +63,8 @@ StyleProvider.propTypes = {
   menuProps: PropTypes.object,
   onSideMenuSelect: PropTypes.func,
   isLayoutPresent: PropTypes.bool,
-  isLoaded: PropTypes.bool
+  isLoaded: PropTypes.bool,
+  pathname: PropTypes.string
 }
 
 export default StyleProvider
