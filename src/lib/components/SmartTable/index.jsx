@@ -7,11 +7,10 @@ import GlobalFilters from './GlobalFilters'
 
 import string from '~su/utilities/string'
 import smartTable from '~su/utilities/smartTable'
-
-const isBrowser = typeof window !== 'undefined'
+import isBrowser from '~su/utilities/isBrowser'
 
 const SmartTable = ({ columnsConfig, pagination, globalFiltersOptions, dataKey = '', ...rest }) => {
-  let urlParams = isBrowser ? new URLSearchParams(window.location.search) : null
+  let urlParams = isBrowser() ? new URLSearchParams(window.location.search) : null
 
   const columns = smartTable.buildColumns(columnsConfig.columns, urlParams, columnsConfig.filters).map((column) => {
     if (column.searchable) {

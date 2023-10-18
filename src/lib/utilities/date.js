@@ -2,13 +2,13 @@ import humanizeDuration from 'humanize-duration'
 import object from './object'
 import dayjs from 'dayjs'
 
+import isBrowser from '~su/utilities/isBrowser'
+
 // type TimeBetweenArgs = {
 //   startDate: string
 //   endDate?: string
 //   humanizeOptions?: object
 // }
-
-const isBrowser = typeof window !== 'undefined'
 
 const timeBetween = ({ startDate, endDate = null, humanizeOptions = {} }) => {
   if (!endDate) {
@@ -39,7 +39,7 @@ const formatDuration = (duration, humanizeOptions = {}) => {
 
 // format = (value: string)
 const format = (value) => {
-  if (!value || !isBrowser) {
+  if (!value || !isBrowser()) {
     return null
   }
 
@@ -55,7 +55,7 @@ const format = (value) => {
 }
 
 const detailedFormat = (value, timeZone = null) => {
-  if (!value || !isBrowser) {
+  if (!value || !isBrowser()) {
     return null
   }
 

@@ -1,7 +1,7 @@
-const isBrowser = typeof window !== 'undefined'
+import isBrowser from '~su/utilities/isBrowser'
 
 const write = (newClip, messageApi) => {
-  if (isBrowser) {
+  if (isBrowser()) {
     navigator.clipboard.writeText(JSON.stringify(newClip)).then(
       () => {
         messageApi.success('Copied!')
@@ -14,7 +14,7 @@ const write = (newClip, messageApi) => {
 }
 
 const read = () => {
-  return isBrowser ? navigator.clipboard.readText() : null
+  return isBrowser() ? navigator.clipboard.readText() : null
 }
 
 const readIf = (regexp) => {
