@@ -13,7 +13,7 @@
   ],
   "dependencies": {
     "@monaco-editor/react": "^4.5.1",
-    "ace-builds": "^1.29.0",
+    "ace-builds": "1.15.0",
     "antd": "^5.9.4",
     "chart.js": "^4.3.0",
     "dayjs": "^1.11.7",

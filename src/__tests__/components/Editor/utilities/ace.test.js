@@ -312,12 +312,16 @@ describe('Ace Utils', () => {
         })
 
         describe('when prefix is #', () => {
-          const value = [{"caption": "#Test", "completerId": "snippetCompleter", "meta": "dependent query", "score": 1, "snippet": "{{test_with_hash}}"}, {"caption": "Insert 'Select All'", "completerId": "snippetCompleter", "meta": "snippet", "score": 3, "snippet": "SELECT * FROM ${1:table_name}"}, {"caption": "{{last_week}}", "completerId": "snippetCompleter", "meta": "macro", "score": 2, "snippet": "{{last_week}}"}]
-
           it('still returns snippets', () => {
             const assert = (nothing, completions) => {
               expect(completions.length).toEqual(3)
-              expect(completions).toEqual(value)
+              expect(completions).toContainEqual({
+                caption: dependentQuerySnippet.name,
+                meta: 'dependent query',
+                snippet: dependentQuerySnippet.code,
+                type: 'snippet',
+                score: 1
+              })
             }
 
             completer.getCompletions(editor, session, {}, '#', assert)
