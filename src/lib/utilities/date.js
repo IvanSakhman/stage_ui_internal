@@ -2,7 +2,7 @@ import humanizeDuration from 'humanize-duration'
 import object from './object'
 import dayjs from 'dayjs'
 
-import isBrowser from '~su/utilities/isBrowser'
+import canWorkInBrowser from '~su/utilities/canWorkInBrowser'
 
 // type TimeBetweenArgs = {
 //   startDate: string
@@ -39,7 +39,7 @@ const formatDuration = (duration, humanizeOptions = {}) => {
 
 // format = (value: string)
 const format = (value) => {
-  if (!value || !isBrowser()) {
+  if (!value || !canWorkInBrowser()) {
     return null
   }
 
@@ -55,7 +55,7 @@ const format = (value) => {
 }
 
 const detailedFormat = (value, timeZone = null) => {
-  if (!value || !isBrowser()) {
+  if (!value || !canWorkInBrowser()) {
     return null
   }
 

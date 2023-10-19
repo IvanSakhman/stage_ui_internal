@@ -1,7 +1,7 @@
-import isBrowser from '~su/utilities/isBrowser'
+import canWorkInBrowser from '~su/utilities/canWorkInBrowser'
 
 const write = (newClip, messageApi) => {
-  if (isBrowser()) {
+  if (canWorkInBrowser()) {
     navigator.clipboard.writeText(JSON.stringify(newClip)).then(
       () => {
         messageApi.success('Copied!')
@@ -14,7 +14,7 @@ const write = (newClip, messageApi) => {
 }
 
 const read = () => {
-  return isBrowser() ? navigator.clipboard.readText() : null
+  return canWorkInBrowser() ? navigator.clipboard.readText() : null
 }
 
 const readIf = (regexp) => {
