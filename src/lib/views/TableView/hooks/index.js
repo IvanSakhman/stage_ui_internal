@@ -14,7 +14,7 @@ const useTableViewSetup = ({
   message
 }) => {
   // Added to avoid the execution of the setupStore function on re-renders.
-  // Previously we used the useMemo hook but useRef works better with eslint.
+  // Previously, we used the useMemo hook, but useRef works better with eslint.
   const store = useRef(
     setupStore({
       itemName,
