@@ -1,3 +1,11 @@
-import Editor from './components'
+import React, { lazy, Suspense } from 'react'
 
-export default Editor
+const Editor = lazy(() => import('./components'))
+
+const DynamicEditor = (props) => (
+  <Suspense fallback={null}>
+    <Editor {...props} />
+  </Suspense>
+)
+
+export default DynamicEditor

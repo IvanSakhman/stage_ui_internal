@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useRef } from 'react'
 
 import setupActions from '../actions'
 import setupStore from '../store'
@@ -13,19 +13,19 @@ const useTableViewSetup = ({
   apiPlaceholders,
   message
 }) => {
-  const store = useMemo(
-    () =>
-      setupStore({
-        itemName,
-        itemPluralName,
-        isPaginated,
-        isFilterable,
-        additionalFields
-      }),
-    [additionalFields, isFilterable, isPaginated, itemName, itemPluralName]
+  // Added to avoid the execution of the setupStore function on re-renders.
+  // Previously, we used the useMemo hook, but useRef works better with eslint.
+  const store = useRef(
+    setupStore({
+      itemName,
+      itemPluralName,
+      isPaginated,
+      isFilterable,
+      additionalFields
+    })
   )
 
-  const { useDataStore } = store
+  const { useDataStore } = store.current
 
   const { loadData } = setupActions(
     {
@@ -38,7 +38,7 @@ const useTableViewSetup = ({
     message
   )
 
-  return { store, loadData }
+  return { store: store.current, loadData }
 }
 
 export default useTableViewSetup

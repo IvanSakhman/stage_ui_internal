@@ -1,16 +1,20 @@
+import canWorkInBrowser from '~su/utilities/canWorkInBrowser'
+
 const write = (newClip, messageApi) => {
-  navigator.clipboard.writeText(JSON.stringify(newClip)).then(
-    () => {
-      messageApi.success('Copied!')
-    },
-    () => {
-      messageApi.error('Copying has failed.')
-    }
-  )
+  if (canWorkInBrowser()) {
+    navigator.clipboard.writeText(JSON.stringify(newClip)).then(
+      () => {
+        messageApi.success('Copied!')
+      },
+      () => {
+        messageApi.error('Copying has failed.')
+      }
+    )
+  }
 }
 
 const read = () => {
-  return navigator.clipboard.readText()
+  return canWorkInBrowser() ? navigator.clipboard.readText() : null
 }
 
 const readIf = (regexp) => {

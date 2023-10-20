@@ -1,6 +1,10 @@
-export const useLocation = () => window.location
+import canWorkInBrowser from '~su/utilities/canWorkInBrowser'
+
+export const useLocation = () => (canWorkInBrowser() ? window.location : '')
 export const useNavigate = () => {
   return (path) => {
-    window.location.replace(path)
+    if (canWorkInBrowser()) {
+      window.location.replace(path)
+    }
   }
 }

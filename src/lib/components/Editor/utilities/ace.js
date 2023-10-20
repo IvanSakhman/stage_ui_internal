@@ -16,8 +16,8 @@ import string from '~su/utilities/string'
 import './ace/modes/fp_sql'
 import './ace/modes/fp_xml'
 
-const langTools = ace.acequire('ace/ext/language_tools')
-const snippetsModule = ace.acequire('ace/snippets')
+const langTools = ace.require('ace/ext/language_tools')
+const snippetsModule = ace.require('ace/snippets')
 
 // By default Ace will try to load snippet files for the different modes and fail.
 // We don't need them, so we use these placeholders until we define our own.

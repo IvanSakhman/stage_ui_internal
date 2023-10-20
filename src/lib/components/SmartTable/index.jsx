@@ -7,9 +7,10 @@ import GlobalFilters from './GlobalFilters'
 
 import string from '~su/utilities/string'
 import smartTable from '~su/utilities/smartTable'
+import canWorkInBrowser from '~su/utilities/canWorkInBrowser'
 
 const SmartTable = ({ columnsConfig, pagination, globalFiltersOptions, dataKey = '', ...rest }) => {
-  let urlParams = new URLSearchParams(window.location.search)
+  let urlParams = canWorkInBrowser() ? new URLSearchParams(window.location.search) : null
 
   const columns = smartTable.buildColumns(columnsConfig.columns, urlParams, columnsConfig.filters).map((column) => {
     if (column.searchable) {
@@ -23,19 +24,21 @@ const SmartTable = ({ columnsConfig, pagination, globalFiltersOptions, dataKey =
   })
 
   const applyURLSearch = (pagination, filters, sorter, extra) => {
-    if (extra.action === 'filter') {
-      urlParams = smartTable.applyFilters(urlParams, filters)
-      if (urlParams.toString() === window.location.search.replace('?', '')) {
-        return
+    if (canWorkInBrowser()) {
+      if (extra.action === 'filter') {
+        urlParams = smartTable.applyFilters(urlParams, filters)
+        if (urlParams.toString() === window.location.search.replace('?', '')) {
+          return
+        }
       }
+
+      urlParams = smartTable.applyPagination(urlParams, pagination)
+      urlParams = smartTable.applyFilters(urlParams, filters)
+      urlParams = smartTable.applySorter(urlParams, sorter)
+
+      window.location.hash = dataKey
+      window.location.search = urlParams
     }
-
-    urlParams = smartTable.applyPagination(urlParams, pagination)
-    urlParams = smartTable.applyFilters(urlParams, filters)
-    urlParams = smartTable.applySorter(urlParams, sorter)
-
-    window.location.hash = dataKey
-    window.location.search = urlParams
   }
 
   const applyGlobalFilter = (filters) => {
