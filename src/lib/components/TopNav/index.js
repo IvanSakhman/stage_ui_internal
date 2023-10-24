@@ -15,7 +15,7 @@ const StageTopNav = ({ clients, currentClient, systems, currentSystem, helpdeskU
 
   useEffect(() => {
     setHostedZone(new URL(window.location).hostname.replace(`${currentSystem}.`, ''))
-  }, [])
+  }, [currentSystem])
 
   const renderLeftSide = () => {
     return (

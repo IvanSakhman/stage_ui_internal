@@ -1,3 +1,45 @@
+v1.51.0
+- add styleProvider
+Dependencies - 28/09/23
+1. antd from 5.8.3 to 5.9.4
+2. react from 17.0.2 to 18.2.0
+3. react-i18next from 13.0.2 to 13.2.2
+4. @testing-library/jest-dom from 6.0.0 to 6.1.3
+5. @testing-library/react from 12.1.5 to 14.0.0
+6. react-dom from 17.0.2 to 18.2.0
+7. react-test-renderer from 17.0.2 to 18.2.0
+
+v1.50.0
+Dependencies - 28/09/23
+
+1. 1194935 Bump @babel/runtime from 7.22.5 to 7.22.10 (#234)
+2. a902e05 Bump @babel/core from 7.22.5 to 7.22.10 (#236)
+3. 2e76ad8 Bump @babel/cli from 7.22.5 to 7.22.10 (#232)
+4. 40754ca Bump eslint-config-prettier from 8.8.0 to 9.0.0 (#231)
+5. a9ca8c6 Bump jest-environment-jsdom from 29.5.0 to 29.6.2 (#226)
+6. 35a1d18 Bump eslint-plugin-react from 7.32.2 to 7.33.1 (#223)
+7. fd054de Bump eslint-plugin-import from 2.27.5 to 2.28.0 (#224)
+8. 76e087d Bump pusher-js from 8.2.0 to 8.3.0 (#213)
+9. 8a31f9 Bump word-wrap from 1.2.3 to 1.2.4 (#209)
+10. 0ab4532 Bump chart.js from 4.3.0 to 4.3.3 (#233)
+11. 8b2d87c Bump zustand from 4.3.8 to 4.4.1 (#229)
+12. aa020a2 Bump dayjs from 1.11.8 to 1.11.9 (#184)
+13. fff7d7c Bump humanize-duration from 3.28.0 to 3.29.0 (#197)
+14. 7338b5a Bump @testing-library/jest-dom from 5.16.5 to 6.0.0 (#244)
+15. f9b744b Bump eslint from 8.43.0 to 8.47.0 (#245)
+16. a011447 Bump whatwg-fetch from 3.6.2 to 3.6.17 (#212)
+17. 20b9a2e Bump tough-cookie from 4.1.2 to 4.1.3 (#189)
+18. 1d38876 Bump @rollup/plugin-commonjs from 25.0.2 to 25.0.4 (#242)
+19. 793fef7 Bump styled-components from 5.3.11 to 6.0.7 (#235)
+20. 0975724 Bump prettier from 2.8.8 to 3.0.2 (#246)
+21. 0f0d7b3 Bump semver from 5.7.1 to 5.7.2 (#249)
+22. f4ff233 Bump sql-formatter from 12.2.3 to 13.0.0 (#278)
+23. 4ce98ab Bump antd from 5.6.3 to 5.9.4 (#304)
+24. 51a7b05 Bump @adobe/css-tools from 4.0.1 to 4.3.1 (#269)
+    
+v1.49.5
+fix: store dependencies in the TableView hook 
+
 v1.49.4
 fix: Make usePusherNotify use final received initial value.
 
