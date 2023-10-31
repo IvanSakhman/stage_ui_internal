@@ -21,7 +21,8 @@ const StyleProvider = ({
   onSideMenuSelect,
   isLayoutPresent = true,
   isLoaded = false,
-  pathname
+  pathname,
+  topNavLogo
 }) => {
   const themeToken = { ...theme.token, ...brandingToken }
 
@@ -44,6 +45,7 @@ const StyleProvider = ({
               isLoaded={isLoaded}
               onSideMenuSelect={onSideMenuSelect}
               pathname={pathname}
+              themeOverrides={topNavLogo}
             >
               {main}
             </Layout>
@@ -64,7 +66,8 @@ StyleProvider.propTypes = {
   onSideMenuSelect: PropTypes.func,
   isLayoutPresent: PropTypes.bool,
   isLoaded: PropTypes.bool,
-  pathname: PropTypes.string
+  pathname: PropTypes.string,
+  topNavLogo: PropTypes.object
 }
 
 export default StyleProvider
