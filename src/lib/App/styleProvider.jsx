@@ -25,6 +25,12 @@ const StyleProvider = ({
   topNavLogo
 }) => {
   const themeToken = { ...theme.token, ...brandingToken }
+  const components = {
+    Menu: {
+      itemHoverColor: themeToken.sideMenuItemActive,
+      darkItemHoverColor: themeToken.sideMenuItemActive
+    }
+  }
 
   const main = (
     <>
@@ -35,7 +41,7 @@ const StyleProvider = ({
   )
 
   return (
-    <ConfigProvider theme={{ token: themeToken }}>
+    <ConfigProvider theme={{ token: themeToken, components }}>
       <ThemeProvider>
         <App>
           {isLayoutPresent ? (
