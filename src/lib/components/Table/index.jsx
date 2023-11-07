@@ -46,7 +46,7 @@ const Table = ({
       rowKey={({ id, key }) => id || key}
       columns={columns.map((column) => {
         const { key } = column
-        column.title = t(`columns.${key}`, column.title || buildColumnTitle(columnsConfig?.[key], key))
+        column.title ||= t(`columns.${key}`, column.title || buildColumnTitle(columnsConfig?.[key], key))
 
         if (actions.table_row) {
           column = extendRenderWithActions(actions.table_row, column, functionActionHandlers)

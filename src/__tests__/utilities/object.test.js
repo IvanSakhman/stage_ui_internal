@@ -1,6 +1,6 @@
 import objectUtilities from '~su/utilities/object';
 
-const { invert, compact, isEmpty, isObject, findNested, flattenObject } = objectUtilities
+const { invert, compact, isEmpty, isObject, findNested, flattenObject, pick, omit } = objectUtilities
 
 describe('Object Utilities', () => {
   describe('invert', () => {
@@ -128,4 +128,33 @@ describe('Object Utilities', () => {
       expect(findNested(obj, 'a.b.c')).toEqual('foo')
     })
   })
-});
+
+  describe('pick', () => {
+    const object = { a: 1, b: 2, c: 3 }
+
+    it('returns object keys that are included in the list', () => {
+      expect(pick(object, ['a', 'c'])).toEqual({ a: 1, c: 3 })
+    })
+
+    describe('when list contains a key that is missing in object', () => {
+      it('ignores it', () => {
+        expect(pick(object, ['b', 'd'])).toEqual({ b: 2 })
+      })
+    })
+  })
+
+  describe('omit', () => {
+    const object = { a: 1, b: 2, c: 3 }
+
+    it('returns object keys that are not included in the list', () => {
+
+      expect(omit(object, ['a', 'c'])).toEqual({ b: 2 })
+    })
+
+    describe('when list contains a key that is missing in object', () => {
+      it('ignores it', () => {
+        expect(omit(object, ['b', 'd'])).toEqual({ a: 1, c: 3 })
+      })
+    })
+  })
+})
