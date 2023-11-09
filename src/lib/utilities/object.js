@@ -40,4 +40,16 @@ export const flattenObject = (obj) => {
   return Object.fromEntries(flat(obj))
 }
 
-export default { invert, compact, isEmpty, isObject, findNested, flattenObject }
+const pick = (object, keys) => {
+  return Object.fromEntries(keys.filter((key) => key in object).map((key) => [key, object[key]]))
+}
+
+const omit = (object, keys) => {
+  return Object.fromEntries(
+    Object.keys(object)
+      .filter((key) => !keys.includes(key))
+      .map((key) => [key, object[key]])
+  )
+}
+
+export default { invert, compact, isEmpty, isObject, findNested, flattenObject, pick, omit }

@@ -161,3 +161,11 @@ const continuedSnippet = (snippetName, editor) => {
     _continuityContext = editor.createContextKey('continuedSnippet', snippetName)
   }
 }
+
+let testExports = {}
+// eslint-disable-next-line no-undef
+if (process.env.NODE_ENV == 'test') {
+  testExports = { continuedSnippet }
+}
+
+export { testExports }

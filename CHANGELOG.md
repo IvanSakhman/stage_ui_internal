@@ -1,3 +1,22 @@
+v1.52.2
+[chore] Added missing tests for MarkdownEditor utilities.
+
+They were skipped in https://github.com/forward3d/stage_ui/pull/179
+
+v1.52.1
+- fix style provider for nextjs
+
+v1.52.0
+[feat] Added Cascader and extended object utils
+
+1. Cascader - https://ant.design/components/cascader
+2. object utils
+  - pick
+  - omit
+
+v1.51.1
+[Table] - Do not force translate column.title
+
 v1.51.0
 - add styleProvider
 Dependencies - 28/09/23
@@ -36,9 +55,9 @@ Dependencies - 28/09/23
 22. f4ff233 Bump sql-formatter from 12.2.3 to 13.0.0 (#278)
 23. 4ce98ab Bump antd from 5.6.3 to 5.9.4 (#304)
 24. 51a7b05 Bump @adobe/css-tools from 4.0.1 to 4.3.1 (#269)
-    
+
 v1.49.5
-fix: store dependencies in the TableView hook 
+fix: store dependencies in the TableView hook
 
 v1.49.4
 fix: Make usePusherNotify use final received initial value.

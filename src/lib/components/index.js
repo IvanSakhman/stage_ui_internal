@@ -2,6 +2,7 @@ import ActionButtons from './ActionButtons'
 import AutoComplete from './AutoComplete'
 import Button from './Button'
 import Card from './Card'
+import Cascader from './Cascader'
 import Chart from './Chart'
 import Checkbox from './Checkbox'
 import Collapse from './Collapse'
@@ -73,6 +74,7 @@ export {
   ActionButtons,
   Button,
   Card,
+  Cascader,
   Chart,
   Checkbox,
   Collapse,
