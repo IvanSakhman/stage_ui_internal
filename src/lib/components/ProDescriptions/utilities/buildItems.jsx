@@ -36,8 +36,8 @@ export default (record, columns) => {
   return columns.map((column) => {
     const { key, span, contentStyle, labelStyle } = column
     const label = buildColumnTitle(column, key),
-      value = renderForValueType(column)(object.findNested(record, key), record)
+      children = renderForValueType(column)(object.findNested(record, key), record)
 
-    return { key, span, contentStyle, labelStyle, label, value }
+    return { key, span, contentStyle, labelStyle, label, children }
   })
 }

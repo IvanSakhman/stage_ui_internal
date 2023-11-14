@@ -7,17 +7,12 @@ import { useTranslation } from '~su/utilities/i18n'
 const ProDescriptions = ({ columnCount, record, columns, ...props }) => {
   const { t } = useTranslation()
 
-  const renderItem = (item) => {
-    const { value, key, label, ...itemProps } = item
+  const items = buildItems(record, columns).map((item) => ({
+    ...item,
+    label: t(`descriptions.${item.key}`, item.label)
+  }))
 
-    return (
-      <Descriptions.Item key={key} {...itemProps} label={t(`descriptions.${key}`, label)}>
-        {value}
-      </Descriptions.Item>
-    )
-  }
-
-  return <Descriptions column={columnCount}>{buildItems(record, columns).map(renderItem)}</Descriptions>
+  return <Descriptions column={columnCount} items={items} />
 }
 
 ProDescriptions.propTypes = {

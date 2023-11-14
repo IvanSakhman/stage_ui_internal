@@ -1,3 +1,6 @@
+v1.52.3
+fix: ProDescription component key error: updated component according to antd Descriptions documentation
+
 v1.52.2
 [chore] Added missing tests for MarkdownEditor utilities.
 
