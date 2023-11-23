@@ -1,18 +1,15 @@
 import { useState } from 'react'
+import PropTypes from 'prop-types'
 import { AutoComplete as AntdAutoComplete } from 'antd'
+import { object } from '~su/utilities'
 
-const AutoComplete = ({ options, error, className, ...rest }) => {
-  const classNames = []
+import { enumsToValueEnum, buildOptions } from './Select/utilities'
 
-  if (error) {
-    classNames.push('ant-form-item-has-error')
-  }
+const AutoComplete = ({ options, enums = [], valueEnum = null, allLabel = null, ...rest }) => {
+  const defaultOptions = buildOptions(enumsToValueEnum(enums, allLabel, valueEnum), options).map((option) => {
+    return object.isObject(option) ? option : { label: option, value: option }
+  })
 
-  if (className) {
-    classNames.push(className)
-  }
-
-  const defaultOptions = options.map((value) => ({ value }))
   const [filteredOptions, setFilteredOptions] = useState(defaultOptions)
 
   const handleChange = (text) => {
@@ -22,6 +19,18 @@ const AutoComplete = ({ options, error, className, ...rest }) => {
   }
 
   return <AntdAutoComplete options={filteredOptions} onSearch={handleChange} {...rest} />
+}
+
+const enumsType = PropTypes.arrayOf(PropTypes.string)
+
+AutoComplete.propTypes = {
+  options: PropTypes.oneOfType([
+    enumsType,
+    PropTypes.shape({ label: PropTypes.string.isRequired, value: PropTypes.string.isRequired })
+  ]),
+  enums: enumsType,
+  valueEnum: PropTypes.arrayOf(PropTypes.array),
+  allLabel: PropTypes.string
 }
 
 export default AutoComplete

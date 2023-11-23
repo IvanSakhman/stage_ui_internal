@@ -1,3 +1,9 @@
+v1.53.0
+[feat] Made AutoComplete smarter.
+
+It can now accept enums and/or valueEnum and convert them into options (similar behaviour to Select).
+Using AutoComplete instead Select allows users to input their own value as well as select one from the dropdown.
+
 v1.52.3
 fix: ProDescription component key error: updated component according to antd Descriptions documentation
 

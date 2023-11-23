@@ -2,11 +2,7 @@ import { memo } from 'react'
 import PropTypes from 'prop-types'
 import { Select as AntdSelect, Space } from 'antd'
 
-// type Props = {
-//   currentValue?: string
-//   dropdownStyle?: object
-//   prefix?: Node | string
-// }
+import { enumsToValueEnum, buildOptions } from './utilities'
 
 const Select = ({
   currentValue,
@@ -19,9 +15,7 @@ const Select = ({
   fixParentNode,
   ...rest
 }) => {
-  valueEnum ||= enums.map((value) => [value === -1 ? allLabel : value, value])
-
-  const options = valueEnum.map((value) => ({ label: value[0], value: value[1] }))
+  const options = buildOptions(enumsToValueEnum(enums, allLabel, valueEnum))
 
   if (options.length === 0 && mode === 'tags') {
     // make it appear as pure input w/o dropdown when is tags w/o options
