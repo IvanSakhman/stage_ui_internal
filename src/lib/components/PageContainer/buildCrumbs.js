@@ -2,12 +2,14 @@ import { HomeOutlined } from '@ant-design/icons'
 import { useLocation } from '~su/hooks'
 import { string } from '~su/utilities'
 
-export default (headerTitle, buildBreadcrumbNames) => {
+export default (headerTitle, buildBreadcrumbNames, pathname = '') => {
   const location = useLocation()
   const homeCrumb = { href: '/', title: <HomeOutlined /> }
 
+  const currentPathname = pathname || location.pathname
+
   // split location by /, reject first and last items and build rest into crumbs
-  const splitPathname = location.pathname.split('/')
+  const splitPathname = currentPathname.split('/')
   const crumbsTree = splitPathname.slice(1, -1).map((parentPath, index) => {
     const breadcrumbName = string.humanize(parentPath, { titleize: true })
 
