@@ -14,7 +14,7 @@ const SmartTable = ({
   pagination,
   globalFiltersOptions,
   dataKey = '',
-  isURLSearchPresent = true,
+  shouldApplyURLSearch = true,
   ...rest
 }) => {
   let urlParams = canWorkInBrowser() ? new URLSearchParams(window.location.search) : null
@@ -67,7 +67,7 @@ const SmartTable = ({
   }
 
   const optionalProps = {
-    ...(isURLSearchPresent && {
+    ...(shouldApplyURLSearch && {
       onChange: applyURLSearch
     })
   }
@@ -109,7 +109,7 @@ SmartTable.propTypes = {
   }).isRequired,
   globalFiltersOptions: PropTypes.object,
   dataKey: PropTypes.string,
-  isURLSearchPresent: PropTypes.bool
+  shouldApplyURLSearch: PropTypes.bool
 }
 
 export default SmartTable
