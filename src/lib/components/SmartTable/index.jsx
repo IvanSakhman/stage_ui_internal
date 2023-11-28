@@ -9,7 +9,14 @@ import string from '~su/utilities/string'
 import smartTable from '~su/utilities/smartTable'
 import canWorkInBrowser from '~su/utilities/canWorkInBrowser'
 
-const SmartTable = ({ columnsConfig, pagination, globalFiltersOptions, dataKey = '', ...rest }) => {
+const SmartTable = ({
+  columnsConfig,
+  pagination,
+  globalFiltersOptions,
+  dataKey = '',
+  shouldApplyURLSearch = true,
+  ...rest
+}) => {
   let urlParams = canWorkInBrowser() ? new URLSearchParams(window.location.search) : null
 
   const columns = smartTable.buildColumns(columnsConfig.columns, urlParams, columnsConfig.filters).map((column) => {
@@ -59,6 +66,12 @@ const SmartTable = ({ columnsConfig, pagination, globalFiltersOptions, dataKey =
     pageSize: pagination.per_page
   }
 
+  const optionalProps = {
+    ...(shouldApplyURLSearch && {
+      onChange: applyURLSearch
+    })
+  }
+
   return (
     <Card.Table
       headStyle={{ fontWeight: 'normal' }}
@@ -78,7 +91,7 @@ const SmartTable = ({ columnsConfig, pagination, globalFiltersOptions, dataKey =
         )
       ]}
       pagination={paginationProps}
-      onChange={applyURLSearch}
+      {...optionalProps}
       {...rest}
     />
   )
@@ -95,7 +108,8 @@ SmartTable.propTypes = {
     per_page: PropTypes.number
   }).isRequired,
   globalFiltersOptions: PropTypes.object,
-  dataKey: PropTypes.string
+  dataKey: PropTypes.string,
+  shouldApplyURLSearch: PropTypes.bool
 }
 
 export default SmartTable

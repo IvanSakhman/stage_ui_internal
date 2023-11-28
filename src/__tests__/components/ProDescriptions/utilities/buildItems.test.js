@@ -3,6 +3,7 @@ import buildItems from '~su/components/ProDescriptions/utilities/buildItems'
 import { EMPTY } from '~su/constants'
 import StateTag from '~su/components/StateTag'
 import TagsList from '~su/components/TagsList'
+import Score from '~su/components/Score'
 
 describe('ProDescriptions buildItems utility', () => {
   const record = {
@@ -13,7 +14,10 @@ describe('ProDescriptions buildItems utility', () => {
     new: true,
     age: 2**23,
     tags: ['pro', 'dev'],
-    categories: []
+    categories: [],
+    code: {
+      score: 'intermediate'
+    }
   }
 
   const columns = [
@@ -136,6 +140,19 @@ describe('ProDescriptions buildItems utility', () => {
         ])
       })
     })
+
+    describe('score', () => {
+      const columns = [
+        { key: 'code.score', valueType: 'score', valueRenderConfig: ['good', 'intermediate', 'bad'] }
+      ]
+
+      it('renders Score component', () => {
+        expect(buildItems(record, columns)[0]).toHaveProperty(
+          'children', <Score score={record.code.score} availableScoresList={columns[0].valueRenderConfig} />
+        )
+      })
+    })
+
 
     describe('when valueType is not supported', () => {
       const columns = [

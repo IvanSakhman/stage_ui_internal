@@ -51,6 +51,7 @@ import Popover from './Popover'
 import ProDescriptions from './ProDescriptions'
 import RequestTable from './RequestTable'
 import ResultsTable from './ResultsTable'
+import Score from './Score'
 import Space from './Space'
 import Spacer from './Spacer'
 import StateBadge from './StateBadge'
@@ -88,6 +89,7 @@ export {
   GlobalAlert,
   Field,
   FieldsList,
+  Score,
   Select,
   SmartTable,
   GlobalFilters,

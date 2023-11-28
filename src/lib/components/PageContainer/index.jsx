@@ -7,7 +7,7 @@ import { StyledTabs, Header, Title } from './index.styled'
 
 import { useTranslation } from '~su/utilities/i18n'
 
-const PageContainer = ({ loading, children, header = {}, tabs = {}, buildBreadcrumbNames = null }) => {
+const PageContainer = ({ loading, children, header = {}, tabs = {}, buildBreadcrumbNames = null, pathname = '' }) => {
   const { t } = useTranslation()
 
   if (tabs.tabList) {
@@ -23,7 +23,7 @@ const PageContainer = ({ loading, children, header = {}, tabs = {}, buildBreadcr
   return (
     <>
       <Header>
-        <Breadcrumb items={buildCrumbs(title, buildBreadcrumbNames)} className="ant-page-header-breadcrumb" />
+        <Breadcrumb items={buildCrumbs(title, buildBreadcrumbNames, pathname)} className="ant-page-header-breadcrumb" />
         <Row justify="space-between">
           <Title level={4}>{title}</Title>
           {header.extra}
@@ -46,7 +46,8 @@ PageContainer.propTypes = {
     tabList: PropTypes.arrayOf(PropTypes.object),
     tabProps: PropTypes.object
   }),
-  buildBreadcrumbNames: PropTypes.func
+  buildBreadcrumbNames: PropTypes.func,
+  pathname: PropTypes.string
 }
 
 export default PageContainer
