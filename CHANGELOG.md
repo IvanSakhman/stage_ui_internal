@@ -1,3 +1,34 @@
+v1.55.5
+[feat] Moved GlobalFilters out of SmartTable
+
+Additionally:
+- added default Input component to GlobalFilters
+
+
+v1.55.4
+[chore] Moved pagination normalisation to the components that actually need it.
+
+The normalisation/translation is needed because our pagination object contains total_items and per_page keys while antd's components (Table and List) need total and pageSize respectively.
+
+There is no real need to do the normalisation in DataView nor in SmartTable, hence it was moved to the "end of the chain".
+
+v1.55.3
+[feat] Allow to use DataView w/o PageContainer
+
+DataView might be useful as a nested component.
+Passing "pageHeader = false" will not mount PageContainer.
+
+v1.55.2
+[feat] feat: Added Typography.UpperCaseText
+
+v1.55.1
+[feat] feat: Add translations support to List
+
+v1.55.0
+[feat] Introduced DataView as a replacement for TableView.
+
+This allows to use all the utilities needed to load and filter the data w/o limiting it to a Table.
+
 v1.54.0
 [feat] Add Score component.
 

@@ -3,10 +3,11 @@ import { Form, Select, DatePicker, Switch, Checkbox, Segmented } from 'antd'
 import styled from 'styled-components'
 import Button from '~su/components/Button'
 import FieldsList from '~su/components/Form/FieldsList'
+import Input from '~su/components/Input'
 
 import { string } from '~su/utilities'
 
-import { setUpFilters } from '~su/utilities/smartTable/filtering'
+import { setUpFilters } from '~su/utilities/filtering'
 const booleanTypes = ['switch', 'checkbox']
 const arrayTypes = ['multi_select']
 
@@ -96,6 +97,10 @@ const GlobalFilters = ({ applyFilters, filters, urlParams, globalFiltersOptions,
       }
       case 'segmented': {
         component = SegmentedFilterComponent(filterProperties)
+        break
+      }
+      default: {
+        component = <Input allowClear />
         break
       }
     }

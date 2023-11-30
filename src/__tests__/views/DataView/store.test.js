@@ -1,7 +1,7 @@
-import setupStore from '~su/views/TableView/store'
+import setupStore from '~su/views/DataView/store'
 import { renderHook } from '@testing-library/react-hooks'
 
-describe('TableView store', () => {
+describe('DataView store', () => {
   it('returns a function', () => {
     expect(typeof setupStore).toEqual('function')
   })

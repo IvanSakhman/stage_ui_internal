@@ -19,8 +19,7 @@ import ResponseResult from './ResponseResult'
 import RootModal from './RootModal'
 import Select from './Select'
 import Skeleton from './Skeleton'
-import SmartTable from './SmartTable'
-import GlobalFilters from './SmartTable/GlobalFilters'
+import GlobalFilters from './GlobalFilters'
 import SplitPane from './SplitPane'
 import StatusBadge from './StatusBadge'
 import StepForm from './StepForm'
@@ -41,6 +40,7 @@ import Empty from './Empty'
 import IconButton from './IconButton'
 import Input from './Input'
 import Layout from './Layout'
+import List from './List'
 import MarkdownEditor from './MarkdownEditor'
 import Menu from './Menu'
 import Modal from './Modal'
@@ -91,7 +91,6 @@ export {
   FieldsList,
   Score,
   Select,
-  SmartTable,
   GlobalFilters,
   SplitPane,
   StatusBadge,
@@ -115,6 +114,7 @@ export {
   IconButton,
   Input,
   Layout,
+  List,
   MarkdownEditor,
   Menu,
   Modal,

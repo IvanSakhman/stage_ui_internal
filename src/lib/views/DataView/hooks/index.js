@@ -3,7 +3,7 @@ import { useRef } from 'react'
 import setupActions from '../actions'
 import setupStore from '../store'
 
-const useTableViewSetup = ({
+const useDataViewSetup = ({
   itemName,
   itemPluralName,
   isPaginated = true,
@@ -41,4 +41,4 @@ const useTableViewSetup = ({
   return { store: store.current, loadData }
 }
 
-export default useTableViewSetup
+export default useDataViewSetup

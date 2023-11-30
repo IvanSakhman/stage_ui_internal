@@ -1,4 +1,4 @@
-import { buildFilters } from '~su/views/TableView/utilities/buildFilters'
+import { buildFilters } from '~su/views/DataView/utilities/buildFilters'
 
 describe('buildFilters', () => {
   it('builds the filters', () => {

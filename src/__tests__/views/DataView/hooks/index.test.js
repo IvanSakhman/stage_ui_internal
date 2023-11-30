@@ -1,8 +1,8 @@
 import { renderHook } from '@testing-library/react-hooks'
-import useTableViewSetup from '~su/views/TableView/hooks'
+import useDataViewSetup from '~su/views/DataView/hooks'
 import { message } from '~mocks/appHooks'
 
-describe('useTableViewSetup hook', () => {
+describe('useDataViewSetup hook', () => {
   const itemName = 'item'
   const itemPluralName = 'items'
   const isPaginated = true
@@ -12,7 +12,7 @@ describe('useTableViewSetup hook', () => {
 
   const props = { itemName, itemPluralName, isPaginated, isFilterable, additionalFields, collectionApiPath, message }
 
-  const { result } = renderHook(() => useTableViewSetup(props))
+  const { result } = renderHook(() => useDataViewSetup(props))
   const { store, loadData } = result.current
 
   describe('setupStore', () => {

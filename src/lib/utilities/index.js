@@ -12,7 +12,6 @@ import newRecord from './newRecord'
 import number from './number'
 import object from './object'
 import { handleResponseResult } from './response'
-import smartTable from './smartTable'
 import table from './table/'
 import pusher from './pusher'
 import string from './string'
@@ -33,7 +32,6 @@ export {
   newRecord,
   number,
   object,
-  smartTable,
   pusher,
   string,
   table,

@@ -1,4 +1,4 @@
-import buildColumns from '~su/utilities/smartTable/buildColumns'
+import { buildColumns } from '~su/components/SmartTable/utilities'
 
 const columnsConfig = {
   title: {

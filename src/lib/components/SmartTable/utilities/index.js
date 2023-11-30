@@ -1,4 +1,4 @@
-import { setUpFilters, readAppliedSorter } from './filtering'
+import { setUpFilters, readAppliedSorter } from '~su/utilities/filtering'
 
 const columnFilterProperties = (columnKey, urlParams, filters) => {
   return {
@@ -14,7 +14,7 @@ const columnSortProperties = (columnKey, urlParams) => {
   }
 }
 
-const buildColumns = (columnsConfig, urlParams = new URLSearchParams(), filters = []) => {
+export const buildColumns = (columnsConfig, urlParams = new URLSearchParams(), filters = []) => {
   let columns = []
 
   for (const [key, properties] of Object.entries(columnsConfig)) {
@@ -44,5 +44,3 @@ const buildColumns = (columnsConfig, urlParams = new URLSearchParams(), filters 
 
   return columns
 }
-
-export default buildColumns

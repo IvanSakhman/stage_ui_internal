@@ -1,8 +1,8 @@
 import dayjs from 'dayjs'
 
-import object from '../object'
-import date from '../date'
-import i18n from '../i18n'
+import object from './object'
+import date from './date'
+import i18n from './i18n'
 
 const NORMALIZED_ORDERS = { ascend: 'asc', descend: 'desc' }
 const NORMALIZED_SORTS = {

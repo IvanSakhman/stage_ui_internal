@@ -1,9 +1,9 @@
-import {render, screen, getNodeText, within } from '@testing-library/react'
+import { render, screen, getNodeText } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
 import '../../support/matchMedia.mock'
 
-import GlobalFilters from '~su/components/SmartTable/GlobalFilters'
+import GlobalFilters from '~su/components/GlobalFilters'
 
 // functions mock
 const applyFilters = jest.fn()

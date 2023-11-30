@@ -1,13 +1,7 @@
-import {
-  setUpFilters,
-  readAppliedSorter,
-  applyPagination,
-  applyFilters,
-  applySorter
-} from '~su/utilities/smartTable/filtering'
+import { setUpFilters, readAppliedSorter, applyPagination, applyFilters, applySorter } from '~su/utilities/filtering'
 import dayjs from 'dayjs'
 
-describe('QueriesView filtering utilities', () => {
+describe('filtering utilities', () => {
   describe('to display', () => {
     describe('setUpFilters', () => {
       it('returns a list of filters available for column, mapped to an object', () => {
@@ -31,9 +25,7 @@ describe('QueriesView filtering utilities', () => {
 
       describe('when input filters are empty', () => {
         it('returns an empty array', () => {
-          expect(
-            setUpFilters('size', new URLSearchParams(), {}).filters
-          ).toEqual([])
+          expect(setUpFilters('size', new URLSearchParams(), {}).filters).toEqual([])
         })
       })
 
