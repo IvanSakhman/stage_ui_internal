@@ -1,4 +1,4 @@
-import { COLORS } from '~su/constants'
+import { COLORS } from './index'
 
 const components = {
   Menu: {
