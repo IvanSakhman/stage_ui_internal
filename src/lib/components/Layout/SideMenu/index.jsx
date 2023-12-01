@@ -4,11 +4,12 @@ import { Menu } from 'antd'
 import { useLocation } from '~su/hooks'
 
 import DynamicIcon from '../../DynamicIcon'
+import ModeSwitcher from './ModeSwitcher'
 
 import { SideMenuContainer, StyledLink } from './index.styled'
 import getDefaultMenuKeys from './utilities/getDefaultMenuKeys'
 
-const SideMenu = ({ sidebarItems, onSideMenuSelect, pathname = '' }) => {
+const SideMenu = ({ sidebarItems, onSideMenuSelect, pathname = '', switchOptions }) => {
   const location = useLocation()
 
   const defaultMenuKeys = getDefaultMenuKeys(location, sidebarItems, pathname)
@@ -42,6 +43,7 @@ const SideMenu = ({ sidebarItems, onSideMenuSelect, pathname = '' }) => {
 
   return (
     <SideMenuContainer>
+      {!!switchOptions?.items.length && <ModeSwitcher {...switchOptions} />}
       <Menu
         defaultOpenKeys={defaultMenuKeys?.defaultOpenKeys}
         defaultSelectedKeys={[defaultMenuKeys?.defaultSelectedKey]}
@@ -67,7 +69,8 @@ function recursiveSidebarItems(...args) {
 SideMenu.propTypes = {
   sidebarItems: recursiveSidebarItems,
   onSideMenuSelect: PropTypes.func.isRequired,
-  pathname: PropTypes.string
+  pathname: PropTypes.string,
+  switchOptions: PropTypes.object
 }
 
 export default SideMenu

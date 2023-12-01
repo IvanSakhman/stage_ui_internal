@@ -12,7 +12,15 @@ import { StyledContent, StyledLayout } from './index.styled'
 
 const { useToken } = theme
 
-const Layout = ({ menuProps, sidebarItems, children, onSideMenuSelect, themeOverrides = {}, pathname }) => {
+const Layout = ({
+  menuProps,
+  sidebarItems,
+  children,
+  onSideMenuSelect,
+  themeOverrides = {},
+  pathname,
+  switchOptions
+}) => {
   const { token: themeToken } = useToken()
 
   return (
@@ -24,6 +32,7 @@ const Layout = ({ menuProps, sidebarItems, children, onSideMenuSelect, themeOver
           onSideMenuSelect={onSideMenuSelect}
           themeToken={themeToken}
           pathname={pathname}
+          switchOptions={switchOptions}
         />
         <AntdLayout>
           <GlobalAlert />
@@ -40,7 +49,8 @@ Layout.propTypes = {
   onSideMenuSelect: SideMenu.propTypes.onSideMenuSelect,
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
   themeOverrides: PropTypes.object,
-  pathname: PropTypes.string
+  pathname: PropTypes.string,
+  switchOptions: PropTypes.object
 }
 
 export default withLoader(Layout)

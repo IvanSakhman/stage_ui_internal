@@ -22,13 +22,20 @@ const StyleProvider = ({
   isLayoutPresent = true,
   isLoaded = false,
   pathname,
-  topNavLogo
+  topNavLogo,
+  switchOptions
 }) => {
   const themeToken = { ...theme.token, ...brandingToken }
   const components = {
     Menu: {
       itemHoverColor: themeToken.sideMenuItemActive,
       darkItemHoverColor: themeToken.sideMenuItemActive
+    },
+    Radio: {
+      buttonColor: themeToken.sideMenuItemDefault,
+      buttonBg: themeToken.sideMenuBackground,
+      buttonSolidCheckedBg: themeToken.sideMenuItemActive,
+      buttonSolidCheckedHoverBg: themeToken.sideMenuItemActive
     }
   }
 
@@ -52,6 +59,7 @@ const StyleProvider = ({
               onSideMenuSelect={onSideMenuSelect}
               pathname={pathname}
               themeOverrides={topNavLogo}
+              switchOptions={switchOptions}
             >
               {main}
             </Layout>
@@ -73,7 +81,8 @@ StyleProvider.propTypes = {
   isLayoutPresent: PropTypes.bool,
   isLoaded: PropTypes.bool,
   pathname: PropTypes.string,
-  topNavLogo: PropTypes.object
+  topNavLogo: PropTypes.object,
+  switchOptions: PropTypes.object
 }
 
 export default StyleProvider

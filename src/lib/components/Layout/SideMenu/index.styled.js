@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { Layout } from 'antd'
+import { Layout, Radio } from 'antd'
 
 import Typography from '../../Typography'
 
@@ -27,5 +27,19 @@ export const StyledLink = styled(Typography.Link)`
   color: ${({ $isSelected, theme }) => ($isSelected ? theme.sideMenuItemActive : 'inherit')} !important;
   :hover {
     color: ${({ theme }) => theme.sideMenuItemActive} !important;
+  }
+`
+
+export const RadioGroup = styled(Radio.Group)`
+  &.ant-radio-group-solid .ant-radio-button-wrapper-checked {
+    &::before {
+      background-color: ${({ theme }) => theme.sideMenuItemActive};
+    }
+  }
+`
+
+export const RadioButton = styled(Radio.Button)`
+  &:hover {
+    color: ${({ theme }) => theme.sideMenuItemActive};
   }
 `
