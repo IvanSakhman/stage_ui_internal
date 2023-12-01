@@ -1,3 +1,9 @@
+v1.54.0
+[feat] Add Score component.
+
+v1.53.1
+[fix] Fixed side menu and breadcrumbs
+
 v1.53.0
 [feat] Made AutoComplete smarter.
 
