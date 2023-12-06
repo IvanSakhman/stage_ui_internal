@@ -19,7 +19,7 @@ const Layout = ({
   onSideMenuSelect,
   themeOverrides = {},
   pathname,
-  switchOptions
+  sideMenuChildren
 }) => {
   const { token: themeToken } = useToken()
 
@@ -32,7 +32,7 @@ const Layout = ({
           onSideMenuSelect={onSideMenuSelect}
           themeToken={themeToken}
           pathname={pathname}
-          switchOptions={switchOptions}
+          optionalChildren={sideMenuChildren}
         />
         <AntdLayout>
           <GlobalAlert />
@@ -50,7 +50,7 @@ Layout.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
   themeOverrides: PropTypes.object,
   pathname: PropTypes.string,
-  switchOptions: PropTypes.object
+  sideMenuChildren: PropTypes.node
 }
 
 export default withLoader(Layout)

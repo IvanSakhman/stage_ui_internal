@@ -23,7 +23,7 @@ const StyleProvider = ({
   isLoaded = false,
   pathname,
   topNavLogo,
-  switchOptions
+  sideMenuChildren
 }) => {
   const themeToken = { ...theme.token, ...brandingToken }
   const components = {
@@ -59,7 +59,7 @@ const StyleProvider = ({
               onSideMenuSelect={onSideMenuSelect}
               pathname={pathname}
               themeOverrides={topNavLogo}
-              switchOptions={switchOptions}
+              sideMenuChildren={sideMenuChildren}
             >
               {main}
             </Layout>
@@ -82,7 +82,7 @@ StyleProvider.propTypes = {
   isLoaded: PropTypes.bool,
   pathname: PropTypes.string,
   topNavLogo: PropTypes.object,
-  switchOptions: PropTypes.object
+  sideMenuChildren: PropTypes.node
 }
 
 export default StyleProvider
