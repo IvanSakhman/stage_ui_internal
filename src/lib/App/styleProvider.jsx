@@ -30,12 +30,6 @@ const StyleProvider = ({
     Menu: {
       itemHoverColor: themeToken.sideMenuItemActive,
       darkItemHoverColor: themeToken.sideMenuItemActive
-    },
-    Radio: {
-      buttonColor: themeToken.sideMenuItemDefault,
-      buttonBg: themeToken.sideMenuBackground,
-      buttonSolidCheckedBg: themeToken.sideMenuItemActive,
-      buttonSolidCheckedHoverBg: themeToken.sideMenuItemActive
     }
   }
 
