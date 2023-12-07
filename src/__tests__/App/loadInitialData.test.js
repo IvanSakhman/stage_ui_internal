@@ -10,16 +10,13 @@ jest.mock('~su/store/actions', () => ({
 
 import { init } from '~su/store/actions'
 
-jest.mock('~su/utilities', () => {
+jest.mock('~su/utilities/i18n', () => {
   return {
-    ...jest.requireActual('~su/utilities'),
-    i18n: {
-      addResources: jest.fn()
-    }
+    addResources: jest.fn()
   }
 })
 
-import { i18n } from '~su/utilities'
+import { addResources } from '~su/utilities/i18n'
 
 const initialConfig = {
   api: {
@@ -199,7 +196,7 @@ describe('App/loadInitialData', () => {
       it('saves the i18n resources', async () => {
         await loadTranslations(apiActions, requestParams, translationsConfig)
 
-        expect(i18n.addResources).toHaveBeenCalledWith(translationsResponse.data, translationsConfig.namespace)
+        expect(addResources).toHaveBeenCalledWith(translationsResponse.data, translationsConfig.namespace)
       })
 
       it('returns a promise', async () => {

@@ -2,7 +2,7 @@ import { useState, useEffect, forwardRef, useImperativeHandle } from 'react'
 import { Form as AntdForm, Row, Col } from 'antd'
 import Button from '../Button'
 import ButtonGroup from '../ButtonGroup'
-import { getFormErrors } from '../../utilities/form'
+import formUtils from '~su/utilities/form'
 
 import FieldsList from './FieldsList'
 
@@ -78,7 +78,7 @@ const Form = forwardRef(
 
     form.setErrorsFromResponse = (errors) => {
       if (errors) {
-        form.setFields(getFormErrors(errors))
+        form.setFields(formUtils.getFormErrors(errors))
       }
     }
 

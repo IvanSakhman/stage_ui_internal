@@ -1,0 +1,38 @@
+import { initializeApi } from '~su/actions'
+import { api, string } from '~su/utilities'
+
+import { getApiConfig } from '~su/store/root-store'
+
+const setupApiActions = (
+  { setState, setData, itemName, itemPluralName, collectionApiPath, apiPlaceholders = {} },
+  messageApi
+) => {
+  const apiActions = initializeApi(api, messageApi)(getApiConfig)
+
+  const { loadCollection } = apiActions(itemName, {
+    setState,
+    setData
+  })
+
+  const loadData = (urlSearch = '') => {
+    const apiConfig = getApiConfig()
+
+    // flush the store
+    setData({ [itemPluralName]: [], pagination: {}, filters: {} })
+
+    // construct path
+    const path = string.replacePlaceholders(`${apiConfig[collectionApiPath]}${urlSearch}`, apiPlaceholders)
+
+    const onSuccess = ({ json_schema }) => {
+      setState('filtersSchema', json_schema.properties.filters)
+    }
+
+    loadCollection({ path, onSuccess })
+  }
+
+  return {
+    loadData
+  }
+}
+
+export default setupApiActions

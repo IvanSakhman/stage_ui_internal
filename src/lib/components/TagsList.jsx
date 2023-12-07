@@ -1,4 +1,4 @@
-import { number } from '~su/utilities'
+import number from '~su/utilities/number'
 
 import Tag from './Tag'
 import Space from './Space'

@@ -1,43 +1,15 @@
-import { useEffect } from 'react'
-
-import ActionButtons from '~su/components/ActionButtons'
-import PageContainer from '~su/components/PageContainer'
-import SmartTable from '~su/components/SmartTable'
-
-import setupActions from './actions'
-import setupStore from './store'
-import useTableViewSetup from './hooks'
+import DataView from '../DataView'
 
 const TableView = ({
-  store,
-  loadData,
   functionActionHandlers, // legacy, use tableProps
   itemPluralName, // legacy, use tableProps
   COLUMNS, // legacy, use tableProps
   GLOBAL_FILTERS_OPTIONS, // legacy, use tableProps
-  pageHeader = {},
   tableProps = {},
-  children
+  ...rest
 }) => {
-  const { useData, useDataStates, usePagination, useFilters, useViewActions } = store
-  const entries = useData()
-  const { isLoading } = useDataStates()
-  const pagination = usePagination()
-  const filters = useFilters()
-  const viewActions = useViewActions()
-
-  useEffect(() => {
-    loadData(window.location.search)
-  }, [])
-
-  const { actionsTranslateOptions, ...pageHeaderProps } = pageHeader
-  const containerProps = {
-    loading: isLoading,
-    header: {
-      ...pageHeaderProps,
-      extra: <ActionButtons actions={viewActions?.page_header} {...actionsTranslateOptions} />
-    }
-  }
+  // NOTE: TableView is deprecated. Use DataView instead.
+  console.warn('[DEPRECATED] v1.54.0: TableView is deprecated. Use DataView instead.')
 
   // NOTE: backwards compatibility, remove when all places use tableProps
   tableProps = {
@@ -49,28 +21,11 @@ const TableView = ({
   }
   // NOTE: backwards compatibility, remove when all places use tableProps
 
-  return (
-    <PageContainer {...containerProps}>
-      {children}
-      <SmartTable
-        dataSource={entries}
-        pagination={pagination}
-        bordered
-        loading={isLoading}
-        actions={viewActions}
-        scroll={{ x: 'max-content' }}
-        {...tableProps}
-        columnsConfig={{
-          ...tableProps.columnsConfig,
-          filters
-        }}
-      />
-    </PageContainer>
-  )
+  return <DataView dataDisplayComponentProps={tableProps} {...rest} />
 }
 
-TableView.setupActions = setupActions
-TableView.setupStore = setupStore
-TableView.useTableViewSetup = useTableViewSetup
+TableView.setupActions = DataView.setupActions
+TableView.setupStore = DataView.setupStore
+TableView.useTableViewSetup = DataView.useDataViewSetup
 
 export default TableView

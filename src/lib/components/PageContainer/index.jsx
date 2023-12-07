@@ -25,7 +25,7 @@ const PageContainer = ({ loading, children, header = {}, tabs = {}, buildBreadcr
       <Header>
         <Breadcrumb items={buildCrumbs(title, buildBreadcrumbNames, pathname)} className="ant-page-header-breadcrumb" />
         <Row justify="space-between">
-          <Title level={4}>{title}</Title>
+          {title ? <Title level={4}>{title}</Title> : null}
           {header.extra}
         </Row>
         <Skeleton loading={loading}>{header.content}</Skeleton>
