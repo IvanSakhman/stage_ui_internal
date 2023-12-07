@@ -5,7 +5,7 @@
     "registry": "https://npm.pkg.github.com/"
   },
   "author": "ForwardPMX Developers",
-  "version": "1.60.0",
+  "version": "1.60.1",
   "description": "Stage UI React components",
   "license": "MIT",
   "files": [

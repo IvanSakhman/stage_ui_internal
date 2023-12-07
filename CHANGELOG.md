@@ -1,3 +1,6 @@
+v1.60.1
+[fix] Allowed to add a different color for ClientsDropdown in TopNav
+
 v1.60.0
 [feat] Added new component CompanyLogo
 
