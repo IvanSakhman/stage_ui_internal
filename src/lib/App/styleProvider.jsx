@@ -28,8 +28,7 @@ const StyleProvider = ({
   const components = {
     Menu: {
       itemHoverColor: themeToken.sideMenuItemActive,
-      darkItemHoverColor: themeToken.sideMenuItemActive,
-      itemDisabledColor: themeToken.sideMenuItemDefault
+      darkItemHoverColor: themeToken.sideMenuItemActive
     }
   }
 
