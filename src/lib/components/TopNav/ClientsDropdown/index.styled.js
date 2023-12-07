@@ -22,8 +22,6 @@ export const StyledClientsMenu = styled(Menu)`
   }
 
   .ant-menu-submenu-disabled {
-    color: ${COLORS.white} !important;
-
     .ant-menu-submenu-title {
       cursor: default;
     }
