@@ -70,6 +70,7 @@ import Tooltip from './Tooltip'
 import Typography from './Typography'
 import YesNoTag from './YesNoTag'
 import CompanyLogo from './CompanyLogo'
+import SmartDataDisplay from './SmartDataDisplay'
 
 export {
   AutoComplete,
@@ -144,5 +145,6 @@ export {
   Tooltip,
   Typography,
   YesNoTag,
-  CompanyLogo
+  CompanyLogo,
+  SmartDataDisplay
 }
