@@ -1,3 +1,20 @@
+v1.61.1
+[fix] hide broken links if currentSystem is undefined
+
+v1.61.0
+[feat&fix] Support order field in GlobalFilters + fixes.
+
+Adds support for Order/Sorting in dynamically built GlobalFilters.
+
+Fixes & Improvements:
+  - Do not mount GlobalFilters until filters schema properties are available
+  - Do not set default placeholder for GlobalFilter fields, but be able to read it from translations
+  - Reworked applySorter util - it now expects a string with sortable column and direction
+  - Adjusted how filters, pagination and sorter are applied in SmartTable
+  - Do not apply filters nor sorter when paginating
+  - Reset pagination to page 1 when filtering and/or sorting
+
+
 v1.60.1
 [fix] Allowed to add a different color for ClientsDropdown in TopNav
 

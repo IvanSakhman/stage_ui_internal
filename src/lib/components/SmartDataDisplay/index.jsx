@@ -42,23 +42,23 @@ const SmartDataDisplay = ({
 
   const applyURLSearch = (pagination, filters, sorter, extra) => {
     if (canWorkInBrowser()) {
-      if (extra.action === 'filter') {
+      if (extra.action !== 'paginate') {
         urlParams = applyFilters(urlParams, filters)
-        if (urlParams.toString() === window.location.search.replace('?', '')) {
-          return
-        }
+        urlParams = applySorter(urlParams, sorter)
       }
 
       urlParams = applyPagination(urlParams, pagination)
-      urlParams = applyFilters(urlParams, filters)
-      urlParams = applySorter(urlParams, sorter)
+
+      if (urlParams.toString() === window.location.search.replace('?', '')) {
+        return
+      }
 
       window.location.hash = dataKey
       window.location.search = urlParams
     }
   }
 
-  const applyGlobalFilter = (filters, sorter = {}) => {
+  const applyGlobalFilter = (filters, sorter) => {
     applyURLSearch({ current: 1 }, filters, sorter, { action: 'filter' })
   }
 

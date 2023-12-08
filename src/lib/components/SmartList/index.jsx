@@ -5,7 +5,7 @@ import List from '../List'
 
 const SmartList = ({ title, onChange, pagination, ...listProps }) => {
   const applyPagination = (page) => {
-    return onChange({ current: page }, {}, {}, { action: 'paginate' })
+    return onChange({ current: page }, {}, undefined, { action: 'paginate' })
   }
 
   pagination = {

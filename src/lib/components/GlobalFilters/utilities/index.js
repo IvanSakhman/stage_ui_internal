@@ -1,4 +1,3 @@
-import array from '~su/utilities/array'
 import object from '~su/utilities/object'
 
 export const pickAndReorderFilters = (filtersProperties, displayableFilters) =>
@@ -18,11 +17,13 @@ export const readAppliedFilters = (filtersProperties, urlParams) => {
   )
 }
 
-export const normalizeValuesForSubmit = ({ order, ...values }) => {
-  const sorter = order ? Object.fromEntries(array.zip(['columnKey', 'order'], order.split(':'))) : {}
+export const normalizeValuesForSubmit = (values) => {
+  const { order, ...filters } = values
+
+  const sorter = Object.hasOwn(values, 'order') && !order ? ':' : order
 
   const normalizedValues = Object.fromEntries(
-    Object.entries(values).map(([filterName, filterValue]) => {
+    Object.entries(filters).map(([filterName, filterValue]) => {
       return [filterName.replace('by_', ''), filterValue]
     })
   )
@@ -34,7 +35,7 @@ export const buildFieldsConfig = (filtersProperties) => {
   return Object.fromEntries(
     Object.keys(filtersProperties).map((filterName) => {
       const { enum: enums, type } = filtersProperties[filterName]
-      let componentProps = { placeholder: 'All' }
+      let componentProps = {}
 
       if (['string', 'integer'].includes(type)) {
         componentProps = { allowClear: true, ...componentProps }

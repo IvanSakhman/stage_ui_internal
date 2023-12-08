@@ -40,7 +40,7 @@ const buildFieldConfig = (
   conditionalRules,
   extraConfig = {},
   namePrefix = null,
-  translations = {}
+  { placeholder, ...translations } = {}
 ) => {
   const { item: itemExtraConfig, component: Component, componentProps = {} } = extraConfig
 
@@ -56,7 +56,7 @@ const buildFieldConfig = (
       ...translations,
       ...(itemExtraConfig || {})
     },
-    component: Component ? <Component /> : buildComponent(properties, componentProps)
+    component: Component ? <Component /> : buildComponent(properties, { placeholder, ...componentProps })
   }
 }
 

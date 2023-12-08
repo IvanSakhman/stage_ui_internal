@@ -14,13 +14,19 @@ const StageTopNav = ({ clients, currentClient, systems, currentSystem, helpdeskU
   const [hostedZone, setHostedZone] = useState('')
 
   useEffect(() => {
-    setHostedZone(new URL(window.location).hostname.replace(`${currentSystem}.`, ''))
+    if (currentSystem) {
+      setHostedZone(new URL(window.location).hostname.replace(`${currentSystem}.`, ''))
+    }
   }, [currentSystem])
 
   const renderLeftSide = () => {
     return (
       <Row align="middle" justify="start">
-        <Col span={3}>{hostedZone && <HomeButton hostedZone={hostedZone} />}</Col>
+        {hostedZone && (
+          <Col span={3}>
+            <HomeButton hostedZone={hostedZone} />
+          </Col>
+        )}
         <Col span={21}>
           <ClientsDropdown clients={clients} currentClient={currentClient} />
         </Col>
@@ -31,9 +37,11 @@ const StageTopNav = ({ clients, currentClient, systems, currentSystem, helpdeskU
   const renderRightSide = () => {
     return (
       <Row align="middle" justify="end" gutter={8}>
-        <Col span={3}>{hostedZone && <UserDropdown hostedZone={hostedZone} helpdeskUrl={helpdeskUrl} />}</Col>
+        <Col span={3}>
+          <UserDropdown hostedZone={hostedZone} helpdeskUrl={helpdeskUrl} />
+        </Col>
         <Col span={8}>
-          {hostedZone && <HomeButton hostedZone={hostedZone} large customLogoUrl={themeOverrides?.logoUrl} />}
+          <HomeButton hostedZone={hostedZone} large customLogoUrl={themeOverrides?.logoUrl} />
         </Col>
       </Row>
     )
@@ -44,11 +52,13 @@ const StageTopNav = ({ clients, currentClient, systems, currentSystem, helpdeskU
       <Row align="middle">
         <Col span={5}>{renderLeftSide()}</Col>
 
-        <Col span={14}>
-          {hostedZone && <SystemsMenu systems={systems} currentSystem={currentSystem} hostedZone={hostedZone} />}
-        </Col>
+        {hostedZone && (
+          <Col span={14}>
+            <SystemsMenu systems={systems} currentSystem={currentSystem} hostedZone={hostedZone} />
+          </Col>
+        )}
 
-        <Col span={5}>{renderRightSide()}</Col>
+        {hostedZone && <Col span={5}>{renderRightSide()}</Col>}
       </Row>
     </StyledLayoutHeader>
   )

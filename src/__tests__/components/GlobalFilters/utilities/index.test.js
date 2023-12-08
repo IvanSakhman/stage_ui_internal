@@ -98,13 +98,13 @@ describe('GlobalFilters utilities', () => {
   })
 
   describe('normalizeValuesForSubmit', () => {
-    describe('without order submitted', () => {
+    describe('without order property submitted', () => {
       const submittedValues = {
         by_string_filter: 'foo',
         by_array_filter_with_value_enum: 'value_one'
       }
 
-      it('returns normalizedValues and empty sorter object', () => {
+      it('returns normalizedValues and undefined sorter', () => {
         const { normalizedValues, sorter } = normalizeValuesForSubmit(submittedValues)
 
         expect(normalizedValues).toEqual({
@@ -112,10 +112,29 @@ describe('GlobalFilters utilities', () => {
           array_filter_with_value_enum: 'value_one'
         })
 
-        expect(sorter).toEqual({})
+        expect(sorter).toEqual(undefined)
       })
-
     })
+
+    describe('with empty order property submitted', () => {
+      const submittedValues = {
+        by_string_filter: 'foo',
+        by_array_filter_with_value_enum: 'value_one',
+        order: undefined
+      }
+
+      it('returns normalizedValues and empty sorter', () => {
+        const { normalizedValues, sorter } = normalizeValuesForSubmit(submittedValues)
+
+        expect(normalizedValues).toEqual({
+          string_filter: 'foo',
+          array_filter_with_value_enum: 'value_one'
+        })
+
+        expect(sorter).toEqual(':')
+      })
+    })
+
 
     describe('with order submitted', () => {
       const submittedValues = {
@@ -132,7 +151,7 @@ describe('GlobalFilters utilities', () => {
           array_filter_with_value_enum: 'value_one'
         })
 
-        expect(sorter).toEqual({ columnKey: 'created_at', order: 'desc' })
+        expect(sorter).toEqual(submittedValues.order)
       })
     })
   })
@@ -154,7 +173,7 @@ describe('GlobalFilters utilities', () => {
         }),
         by_boolean_filter: expect.objectContaining({
           item: { width: 'auto', hasFeedback: false },
-          componentProps: { placeholder: 'All' }
+          componentProps: {}
         }),
         by_integer_filter: expect.objectContaining({
           item: { width: 'auto', hasFeedback: false }
@@ -169,7 +188,7 @@ describe('GlobalFilters utilities', () => {
       it('adds allowClear: true componentProp', () => {
         expect(buildFieldsConfig(filtersProperties)).toEqual(expect.objectContaining({
           by_string_filter: expect.objectContaining({
-            componentProps: { allowClear: true, placeholder: 'All' }
+            componentProps: { allowClear: true }
           })
         }))
       })
@@ -178,7 +197,7 @@ describe('GlobalFilters utilities', () => {
         it('adds fixParentNode: false componentProp', () => {
           expect(buildFieldsConfig(filtersProperties)).toEqual(expect.objectContaining({
             by_string_filter_with_enum: expect.objectContaining({
-              componentProps: { allowClear: true, fixParentNode: false, placeholder: 'All' }
+              componentProps: { allowClear: true, fixParentNode: false }
             })
           }))
         })
@@ -189,7 +208,7 @@ describe('GlobalFilters utilities', () => {
       it('adds allowClear: true componentProp', () => {
         expect(buildFieldsConfig(filtersProperties)).toEqual(expect.objectContaining({
           by_integer_filter: expect.objectContaining({
-            componentProps: { allowClear: true, placeholder: 'All' }
+            componentProps: { allowClear: true }
           })
         }))
       })
@@ -198,7 +217,7 @@ describe('GlobalFilters utilities', () => {
         it('adds fixParentNode: false componentProp', () => {
           expect(buildFieldsConfig(filtersProperties)).toEqual(expect.objectContaining({
             by_integer_filter_with_enums: expect.objectContaining({
-              componentProps: { allowClear: true, fixParentNode: false, placeholder: 'All' }
+              componentProps: { allowClear: true, fixParentNode: false }
             })
           }))
         })
@@ -209,10 +228,10 @@ describe('GlobalFilters utilities', () => {
       it('adds fixParentNode: false componentProp', () => {
         expect(buildFieldsConfig(filtersProperties)).toEqual(expect.objectContaining({
           by_array_filter_with_enum: expect.objectContaining({
-            componentProps: { fixParentNode: false, placeholder: 'All' }
+            componentProps: { fixParentNode: false }
           }),
           by_array_filter_with_value_enum: expect.objectContaining({
-            componentProps: { fixParentNode: false, placeholder: 'All' }
+            componentProps: { fixParentNode: false }
           })
         }))
       })

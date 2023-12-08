@@ -79,7 +79,7 @@ describe('filtering utilities', () => {
   describe('applySorter', () => {
     it('sets order in urlParams', () => {
       let urlParams = new URLSearchParams()
-      urlParams = applySorter(urlParams, { columnKey: 'quantity', order: 'descend' })
+      urlParams = applySorter(urlParams, 'quantity:descend')
 
       expect(urlParams.get('order')).toEqual('quantity:desc')
     })
@@ -87,29 +87,39 @@ describe('filtering utilities', () => {
     describe('when order column to set needs to be normalized', () => {
       it('sets it with normalized key', () => {
         let urlParams = new URLSearchParams()
-        urlParams = applySorter(urlParams, { columnKey: 'last_editor', order: 'ascend' })
+        urlParams = applySorter(urlParams, 'last_editor:ascend')
 
         expect(urlParams.get('order')).toEqual('sql_versions.author:asc')
       })
     })
 
-    describe('when sorter does not have order property', () => {
+    describe('when sorter does not have order value', () => {
       it('removes order', () => {
         let urlParams = new URLSearchParams('?order=quantity:asc')
 
-        urlParams = applySorter(urlParams, { columnKey: 'quantity', order: null })
+        urlParams = applySorter(urlParams, 'quantity:')
 
         expect(urlParams.get('order')).toEqual(null)
       })
     })
 
-    describe('when sorter object is empty', () => {
+    describe('when sorter is missing values', () => {
+      it('removes order', () => {
+        let urlParams = new URLSearchParams('?order=quantity:asc')
+
+        urlParams = applySorter(urlParams, ':')
+
+        expect(urlParams.get('order')).toEqual(null)
+      })
+    })
+
+    describe('when sorter object is undefined', () => {
       it('does not change the params', () => {
         let urlParams = new URLSearchParams('?order=quantity:asc')
         const setSpy = jest.spyOn(urlParams, 'set'),
           deleteSpy = jest.spyOn(urlParams, 'delete')
 
-        urlParams = applySorter(urlParams, {})
+        urlParams = applySorter(urlParams, undefined)
 
         expect(setSpy).not.toHaveBeenCalled()
         expect(deleteSpy).not.toHaveBeenCalled()

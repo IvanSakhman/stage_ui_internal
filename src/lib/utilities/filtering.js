@@ -40,20 +40,16 @@ export const applyFilters = (urlParams, filters) => {
 }
 
 export const applySorter = (urlParams, sorter) => {
-  if (Object.keys(sorter).length > 0) {
-    sorter.order
-      ? urlParams.set(
-          'order',
-          `${getNormalized({
-            dict: NORMALIZED_SORTS,
-            key: sorter.columnKey
-          })}:${getNormalized({
-            dict: NORMALIZED_ORDERS,
-            key: sorter.order
-          })}`
-        )
-      : urlParams.delete('order')
+  if (!sorter) {
+    return urlParams
   }
+
+  const [columnKey, order] = sorter.split(':')
+
+  const normalizedColumnKey = () => getNormalized({ dict: NORMALIZED_SORTS, key: columnKey })
+  const normalizedOrder = () => getNormalized({ dict: NORMALIZED_ORDERS, key: order })
+
+  order ? urlParams.set('order', `${normalizedColumnKey()}:${normalizedOrder()}`) : urlParams.delete('order')
 
   return urlParams
 }

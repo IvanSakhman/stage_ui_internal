@@ -7,6 +7,7 @@ import FieldsList from '~su/components/Form/FieldsList'
 
 import formUtils from '~su/utilities/form'
 import { useTranslation, withScopedTranslations } from '~su/utilities/i18n'
+import object from '~su/utilities/object'
 
 import { pickAndReorderFilters, readAppliedFilters, normalizeValuesForSubmit, buildFieldsConfig } from './utilities'
 
@@ -19,11 +20,13 @@ const StyledFieldsList = styled(FieldsList)`
 const GlobalFilters = ({ applyFilters, filtersSchema, urlParams, globalFiltersOptions, dataKey }) => {
   const { t } = useTranslation()
 
-  if (!filtersSchema) {
+  if (object.isEmpty(filtersSchema.properties)) {
     return
   }
 
-  const displayableFilters = Object.keys(globalFiltersOptions).map((filterName) => `by_${filterName}`)
+  const displayableFilters = Object.keys(globalFiltersOptions).map((filterName) =>
+    filterName === 'order' ? filterName : `by_${filterName}`
+  )
 
   filtersSchema.properties = pickAndReorderFilters(filtersSchema.properties, displayableFilters)
 
@@ -40,7 +43,9 @@ const GlobalFilters = ({ applyFilters, filtersSchema, urlParams, globalFiltersOp
       onFinish={submitFilters}
       initialValues={readAppliedFilters(filtersSchema.properties, urlParams)}
     >
-      <StyledFieldsList fields={formUtils.buildFields(filtersSchema, buildFieldsConfig(filtersSchema.properties))} />
+      <StyledFieldsList
+        fields={formUtils.buildFields(filtersSchema, buildFieldsConfig(filtersSchema.properties), null, t)}
+      />
       <Form.Item>
         <Button type="primary" htmlType="submit">
           {t('submit', 'Apply')}

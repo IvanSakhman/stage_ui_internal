@@ -7,7 +7,16 @@ import TableSearchBox from './SearchBox'
 import string from '~su/utilities/string'
 import { buildColumns } from './utilities'
 
-const SmartTable = ({ title, columnsConfig, pagination, filtersSchema, urlParams, dataKey = '', ...rest }) => {
+const SmartTable = ({
+  title,
+  columnsConfig,
+  pagination,
+  filtersSchema,
+  urlParams,
+  dataKey = '',
+  onChange,
+  ...rest
+}) => {
   const columns = buildColumns(columnsConfig.columns, urlParams, filtersSchema).map((column) => {
     if (column.searchable) {
       column.filterIcon = (filtered) => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />
@@ -26,6 +35,24 @@ const SmartTable = ({ title, columnsConfig, pagination, filtersSchema, urlParams
     ...pagination
   }
 
+  const handleChange = (pagination, filters, sorter, extra) => {
+    switch (extra.action) {
+      case 'paginate':
+        sorter = undefined
+        break
+      case 'filter':
+        pagination = { current: 1, ...pagination }
+        sorter = undefined
+        break
+      case 'sort':
+        pagination = { current: 1, ...pagination }
+        sorter = [sorter.columnKey, sorter.order].join(':')
+        break
+    }
+
+    return onChange(pagination, filters, sorter, extra)
+  }
+
   return (
     <Card.Table
       headStyle={{ fontWeight: 'normal' }}
@@ -33,6 +60,7 @@ const SmartTable = ({ title, columnsConfig, pagination, filtersSchema, urlParams
       columns={columns}
       title={[title || <span style={{ lineHeight: '32px' }}>{string.humanize(dataKey, { titleize: true })}</span>]}
       pagination={paginationProps}
+      onChange={onChange ? handleChange : null}
       {...rest}
     />
   )
@@ -46,6 +74,7 @@ SmartTable.propTypes = {
   filtersSchema: PropTypes.object,
   pagination: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   dataKey: PropTypes.string,
+  onChange: PropTypes.func,
   urlParams: PropTypes.instanceOf(URLSearchParams)
 }
 
