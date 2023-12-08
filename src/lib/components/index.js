@@ -69,6 +69,7 @@ import ToggledSelect from './ToggledSelect'
 import Tooltip from './Tooltip'
 import Typography from './Typography'
 import YesNoTag from './YesNoTag'
+import RadioGroup from './RadioGroup'
 
 export {
   AutoComplete,
@@ -142,5 +143,6 @@ export {
   ToggledSelect,
   Tooltip,
   Typography,
-  YesNoTag
+  YesNoTag,
+  RadioGroup
 }
