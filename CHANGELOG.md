@@ -1,3 +1,6 @@
+v1.61.2
+[feature] Exported SmartDataDisplay component
+
 v1.61.1
 [fix] hide broken links if currentSystem is undefined
 
