@@ -1,3 +1,20 @@
+v1.62.0
+[feat] Support displaying GlobalFilters in a modal.
+
+Received globalFilterOptions can now specify whether a filter input should be displayed inline (default) or in a modal.
+
+It supports both boolean value as well as array of breakpoints.
+
+Example configurations:
+
+1. `{ filter_one: { modal: true }, filter_two: { inline: true } }`
+2. `{ filter_one: { modal: false }, filter_two: { inline: false } }` - will show filter_one inline and filter_two in a modal
+3. `{ filter_one: { modal: ['xs', 'sm', 'md', 'lg', 'xl'] }, filter_two: { inline: ['xxl'] } }` - will show both filters in modal on screens smaller than xxl, otherwise they will be inline
+
+Additionally, if all filters are set to be displayed in modal then no inline form will be visible and the filters are submitted on the modal. When filters are set to be displayed in modal, then the "Filter" button will not show up.
+
+The change is backwards compatible - inline is a default placement.
+
 v1.61.2
 [feature] Exported SmartDataDisplay component
 

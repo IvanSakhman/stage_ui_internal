@@ -1,7 +1,37 @@
 import object from '~su/utilities/object'
 
+const buildFilterSchema = (displayIn, globalFiltersOptions, filtersSchema) => {
+  const filters = globalFiltersOptions.filter(([_filterName, filterOptions]) => {
+    return filterOptions[displayIn]
+  })
+
+  const properties =
+    globalFiltersOptions.length === 0
+      ? filtersSchema.properties
+      : object.pick(
+          filtersSchema.properties,
+          filters.map(([filterName, _]) => filterName)
+        )
+
+  return { ...filtersSchema, properties }
+}
+
+export const buildFiltersSchemas = (globalFiltersOptions, filtersSchema, currentBreakpoints) => {
+  globalFiltersOptions = adjustGlobalFiltersOptions(globalFiltersOptions, currentBreakpoints)
+
+  const inlineFiltersSchema = buildFilterSchema('inline', globalFiltersOptions, filtersSchema)
+
+  if (globalFiltersOptions.length === 0) {
+    return { inlineFiltersSchema, modalFiltersSchema: { ...filtersSchema, properties: [] } }
+  }
+
+  const modalFiltersSchema = buildFilterSchema('modal', globalFiltersOptions, filtersSchema)
+
+  return { inlineFiltersSchema, modalFiltersSchema }
+}
+
 export const pickAndReorderFilters = (filtersProperties, displayableFilters) =>
-  displayableFilters.length === 0 ? filtersProperties : object.pick(filtersProperties, displayableFilters)
+  object.pick(filtersProperties, displayableFilters)
 
 export const readAppliedFilters = (filtersProperties, urlParams) => {
   return Object.fromEntries(
@@ -31,7 +61,7 @@ export const normalizeValuesForSubmit = (values) => {
   return { normalizedValues, sorter }
 }
 
-export const buildFieldsConfig = (filtersProperties) => {
+export const buildFieldsConfig = (filtersProperties, inModal = false) => {
   return Object.fromEntries(
     Object.keys(filtersProperties).map((filterName) => {
       const { enum: enums, type } = filtersProperties[filterName]
@@ -42,7 +72,7 @@ export const buildFieldsConfig = (filtersProperties) => {
       }
 
       if (enums || type === 'array') {
-        componentProps = { fixParentNode: false, ...componentProps }
+        componentProps = { fixParentNode: inModal, ...componentProps }
       }
 
       return [filterName, { item: { width: 'auto', hasFeedback: false }, componentProps }]
@@ -67,4 +97,36 @@ const normalizeReadFilterValue = (type, filterValue) => {
       return filterValue
     }
   }
+}
+
+const adjustGlobalFiltersOptions = (globalFiltersOptions, currentBreakpoints) => {
+  const determineFilterPlacement = ({ inline: inlineOptions, modal: modalOptions }) => {
+    let modal = modalOptions
+    let inline = !modal
+
+    const determineIfInline = (listedBreakpoints, shouldInclude = true) => {
+      return Object.entries(currentBreakpoints).some(([name, isTruthy]) => {
+        return listedBreakpoints.includes(name) === shouldInclude && isTruthy
+      })
+    }
+
+    if (Array.isArray(inlineOptions)) {
+      inline = determineIfInline(inlineOptions, true)
+    }
+
+    if (Array.isArray(modalOptions)) {
+      inline = determineIfInline(modalOptions, false)
+    }
+
+    modal = !inline
+
+    return { inline, modal }
+  }
+
+  return Object.entries(globalFiltersOptions).map(([filterName, filterOptions]) => {
+    filterName = filterName === 'order' ? filterName : `by_${filterName}`
+    filterOptions = { ...filterOptions, ...determineFilterPlacement(filterOptions) }
+
+    return [filterName, filterOptions]
+  })
 }

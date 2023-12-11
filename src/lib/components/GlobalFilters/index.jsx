@@ -1,56 +1,81 @@
 import { Form } from 'antd'
-import styled from 'styled-components'
 import PropTypes from 'prop-types'
 
 import Button from '~su/components/Button'
-import FieldsList from '~su/components/Form/FieldsList'
+import { Grid } from '~su/components/Grid'
 
 import formUtils from '~su/utilities/form'
 import { useTranslation, withScopedTranslations } from '~su/utilities/i18n'
 import object from '~su/utilities/object'
 
-import { pickAndReorderFilters, readAppliedFilters, normalizeValuesForSubmit, buildFieldsConfig } from './utilities'
+import FiltersInModal from './FiltersInModal'
+import { StyledFieldsList } from './index.styled'
 
-const StyledFieldsList = styled(FieldsList)`
-  .ant-form-item-control .ant-select {
-    min-width: 180px;
-  }
-`
+import { buildFiltersSchemas, readAppliedFilters, normalizeValuesForSubmit, buildFieldsConfig } from './utilities'
+
+const { useBreakpoint } = Grid
 
 const GlobalFilters = ({ applyFilters, filtersSchema, urlParams, globalFiltersOptions, dataKey }) => {
   const { t } = useTranslation()
+  const [form] = Form.useForm()
+  const currentBreakpoints = useBreakpoint()
+  const filtersInForm = Form.useWatch([], { form: form, preserve: true })
 
   if (object.isEmpty(filtersSchema.properties)) {
     return
   }
 
-  const displayableFilters = Object.keys(globalFiltersOptions).map((filterName) =>
-    filterName === 'order' ? filterName : `by_${filterName}`
+  const { inlineFiltersSchema, modalFiltersSchema } = buildFiltersSchemas(
+    globalFiltersOptions,
+    filtersSchema,
+    currentBreakpoints
   )
 
-  filtersSchema.properties = pickAndReorderFilters(filtersSchema.properties, displayableFilters)
-
-  const submitFilters = (values) => {
+  const submitFilters = () => {
+    const values = form.getFieldsValue(true)
     const { normalizedValues, sorter } = normalizeValuesForSubmit(values)
 
     applyFilters(normalizedValues, sorter)
   }
 
+  const onlyInModal = object.isEmpty(inlineFiltersSchema.properties)
+
+  const renderInlineFilters = () => {
+    return (
+      <>
+        <StyledFieldsList
+          fields={formUtils.buildFields(
+            inlineFiltersSchema,
+            buildFieldsConfig(inlineFiltersSchema.properties),
+            null,
+            t
+          )}
+        />
+
+        <Form.Item>
+          <Button type="primary" htmlType="submit">
+            {t('submit', 'Apply')}
+          </Button>
+        </Form.Item>
+      </>
+    )
+  }
+
   return (
     <Form
       name={`${dataKey}-global-filters-form`}
-      layout="inline"
       onFinish={submitFilters}
+      form={form}
+      layout="inline"
       initialValues={readAppliedFilters(filtersSchema.properties, urlParams)}
     >
-      <StyledFieldsList
-        fields={formUtils.buildFields(filtersSchema, buildFieldsConfig(filtersSchema.properties), null, t)}
+      <FiltersInModal
+        modalFiltersSchema={modalFiltersSchema}
+        filtersInForm={filtersInForm}
+        onOk={onlyInModal ? form.submit : null}
       />
-      <Form.Item>
-        <Button type="primary" htmlType="submit">
-          {t('submit', 'Apply')}
-        </Button>
-      </Form.Item>
+
+      {onlyInModal ? null : renderInlineFilters()}
     </Form>
   )
 }

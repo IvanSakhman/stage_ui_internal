@@ -1,4 +1,4 @@
-import { pickAndReorderFilters, readAppliedFilters, normalizeValuesForSubmit, buildFieldsConfig } from '~su/components/GlobalFilters/utilities'
+import { buildFiltersSchemas, pickAndReorderFilters, readAppliedFilters, normalizeValuesForSubmit, buildFieldsConfig } from '~su/components/GlobalFilters/utilities'
 
 describe('GlobalFilters utilities', () => {
   const filtersProperties = {
@@ -51,12 +51,287 @@ describe('GlobalFilters utilities', () => {
     }
   }
 
+  const filtersSchema = {
+    type: 'object',
+    properties: filtersProperties,
+    required: []
+  }
+
+  describe('buildFiltersSchemas', () => {
+    describe('when globalFiltersOptions is empty', () => {
+      it('returns all filters in inlineFiltersSchema.properties and empty modalFiltersSchema.properties', () => {
+        expect(buildFiltersSchemas({}, filtersSchema)).toEqual({
+          inlineFiltersSchema: filtersSchema,
+          modalFiltersSchema: { ...filtersSchema, properties: [] }
+        })
+      })
+    })
+
+    describe('when globalFiltersOptions is not empty', () => {
+      describe('when filterOptions are empty', () => {
+        it('returns filter in inlineFiltersSchema.properties', () => {
+          const globalFiltersOptions = {
+            integer_filter: {}
+          }
+
+          expect(buildFiltersSchemas(globalFiltersOptions, filtersSchema)).toEqual({
+            inlineFiltersSchema: {
+              ...filtersSchema,
+              properties: {
+                by_integer_filter: filtersProperties.by_integer_filter
+              }
+            },
+            modalFiltersSchema: {
+              ...filtersSchema,
+              properties: {}
+            }
+          })
+        })
+      })
+
+      describe('when filterOptions specify that filter should be in modal', () => {
+        it('returns filter in modalFiltersSchema.properties', () => {
+          const globalFiltersOptions = {
+            integer_filter: { modal: true }
+          }
+
+          expect(buildFiltersSchemas(globalFiltersOptions, filtersSchema)).toEqual({
+            inlineFiltersSchema: {
+              ...filtersSchema,
+              properties: {}
+            },
+            modalFiltersSchema: {
+              ...filtersSchema,
+              properties: {
+                by_integer_filter: filtersProperties.by_integer_filter
+              }
+            }
+          })
+        })
+      })
+
+      describe('when filterOptions specify that filter should be inline', () => {
+        it('returns filter in inlineFiltersSchema.properties', () => {
+          const globalFiltersOptions = {
+            integer_filter: { inline: true }
+          }
+
+          expect(buildFiltersSchemas(globalFiltersOptions, filtersSchema)).toEqual({
+            inlineFiltersSchema: {
+              ...filtersSchema,
+              properties: {
+                by_integer_filter: filtersProperties.by_integer_filter
+              }
+            },
+            modalFiltersSchema: {
+              ...filtersSchema,
+              properties: {}
+            }
+          })
+        })
+      })
+
+      describe('when filterOptions specify filters location using breakpoints', () => {
+        const itBehavesLikeDisplayingInline = (globalFiltersOptions, currentBreakpoints) => {
+          it('returns filter in inlineFiltersSchema.properties', () => {
+            expect(buildFiltersSchemas(globalFiltersOptions, filtersSchema, currentBreakpoints)).toEqual({
+              inlineFiltersSchema: {
+                ...filtersSchema, properties: { by_integer_filter: filtersProperties.by_integer_filter }
+              },
+              modalFiltersSchema: { ...filtersSchema, properties: {} }
+            })
+          })
+        }
+
+        const itBehavesLikeDisplayingInModal = (globalFiltersOptions, currentBreakpoints) => {
+          it('returns filter in modalFiltersSchema.properties', () => {
+            expect(buildFiltersSchemas(globalFiltersOptions, filtersSchema, currentBreakpoints)).toEqual({
+              inlineFiltersSchema: { ...filtersSchema, properties: {} },
+              modalFiltersSchema: {
+                ...filtersSchema, properties: { by_integer_filter: filtersProperties.by_integer_filter }
+              }
+            })
+          })
+        }
+
+        describe("with inline=['xl', 'xxl']", () => {
+          const globalFiltersOptions = {
+            integer_filter: {
+              inline: ['xl', 'xxl']
+            }
+          }
+
+          describe('when screen is xxl', () => {
+            const currentBreakpoints = {
+              xxl: true, xl: true, lg: true, md: true, sm: true, xs: false,
+            }
+
+            itBehavesLikeDisplayingInline(globalFiltersOptions, currentBreakpoints)
+          })
+
+          describe('when screen is xl', () => {
+            const currentBreakpoints = {
+              xxl: false, xl: true, lg: true, md: true, sm: true, xs: false,
+            }
+
+            itBehavesLikeDisplayingInline(globalFiltersOptions, currentBreakpoints)
+          })
+
+          describe('when screen is lg', () => {
+            const currentBreakpoints = {
+              xxl: false, xl: false, lg: true, md: true, sm: true, xs: false,
+            }
+
+            itBehavesLikeDisplayingInModal(globalFiltersOptions, currentBreakpoints)
+          })
+
+          describe('when screen is md', () => {
+            const currentBreakpoints = {
+              xxl: false, xl: false, lg: false, md: true, sm: true, xs: false,
+            }
+
+            itBehavesLikeDisplayingInModal(globalFiltersOptions, currentBreakpoints)
+          })
+
+          describe('when screen is sm', () => {
+            const currentBreakpoints = {
+              xxl: false, xl: false, lg: false, md: false, sm: true, xs: false,
+            }
+
+            itBehavesLikeDisplayingInModal(globalFiltersOptions, currentBreakpoints)
+          })
+
+          describe('when screen is xs', () => {
+            const currentBreakpoints = {
+              xxl: false, xl: false, lg: false, md: false, sm: false, xs: true,
+            }
+
+            itBehavesLikeDisplayingInModal(globalFiltersOptions, currentBreakpoints)
+          })
+        })
+
+        describe("with modal=['xs', 'sm', 'md', 'lg']", () => {
+          const globalFiltersOptions = {
+            integer_filter: {
+              modal: ['xs', 'sm', 'md', 'lg']
+            }
+          }
+
+          describe('when screen is xxl', () => {
+            const currentBreakpoints = {
+              xxl: true, xl: true, lg: true, md: true, sm: true, xs: false,
+            }
+
+            itBehavesLikeDisplayingInline(globalFiltersOptions, currentBreakpoints)
+          })
+
+          describe('when screen is xl', () => {
+            const currentBreakpoints = {
+              xxl: false, xl: true, lg: true, md: true, sm: true, xs: false,
+            }
+
+            itBehavesLikeDisplayingInline(globalFiltersOptions, currentBreakpoints)
+          })
+
+          describe('when screen is lg', () => {
+            const currentBreakpoints = {
+              xxl: false, xl: false, lg: true, md: true, sm: true, xs: false,
+            }
+
+            itBehavesLikeDisplayingInModal(globalFiltersOptions, currentBreakpoints)
+          })
+
+          describe('when screen is md', () => {
+            const currentBreakpoints = {
+              xxl: false, xl: false, lg: false, md: true, sm: true, xs: false,
+            }
+
+            itBehavesLikeDisplayingInModal(globalFiltersOptions, currentBreakpoints)
+          })
+
+          describe('when screen is sm', () => {
+            const currentBreakpoints = {
+              xxl: false, xl: false, lg: false, md: false, sm: true, xs: false,
+            }
+
+            itBehavesLikeDisplayingInModal(globalFiltersOptions, currentBreakpoints)
+          })
+
+          describe('when screen is xs', () => {
+            const currentBreakpoints = {
+              xxl: false, xl: false, lg: false, md: false, sm: false, xs: true,
+            }
+
+            itBehavesLikeDisplayingInModal(globalFiltersOptions, currentBreakpoints)
+          })
+        })
+
+        describe("with inline=['xxl'] and modal=['xs', 'sm', 'md', 'lg', 'xl]", () => {
+          const globalFiltersOptions = {
+            integer_filter: {
+              inline: ['xxl'],
+              modal: ['xs', 'sm', 'md', 'lg', 'xl']
+            }
+          }
+
+          describe('when screen is xxl', () => {
+            const currentBreakpoints = {
+              xxl: true, xl: true, lg: true, md: true, sm: true, xs: false,
+            }
+
+            itBehavesLikeDisplayingInline(globalFiltersOptions, currentBreakpoints)
+          })
+
+          describe('when screen is xl', () => {
+            const currentBreakpoints = {
+              xxl: false, xl: true, lg: true, md: true, sm: true, xs: false,
+            }
+
+            itBehavesLikeDisplayingInModal(globalFiltersOptions, currentBreakpoints)
+          })
+
+          describe('when screen is lg', () => {
+            const currentBreakpoints = {
+              xxl: false, xl: false, lg: true, md: true, sm: true, xs: false,
+            }
+
+            itBehavesLikeDisplayingInModal(globalFiltersOptions, currentBreakpoints)
+          })
+
+          describe('when screen is md', () => {
+            const currentBreakpoints = {
+              xxl: false, xl: false, lg: false, md: true, sm: true, xs: false,
+            }
+
+            itBehavesLikeDisplayingInModal(globalFiltersOptions, currentBreakpoints)
+          })
+
+          describe('when screen is sm', () => {
+            const currentBreakpoints = {
+              xxl: false, xl: false, lg: false, md: false, sm: true, xs: false,
+            }
+
+            itBehavesLikeDisplayingInModal(globalFiltersOptions, currentBreakpoints)
+          })
+
+          describe('when screen is xs', () => {
+            const currentBreakpoints = {
+              xxl: false, xl: false, lg: false, md: false, sm: false, xs: true,
+            }
+
+            itBehavesLikeDisplayingInModal(globalFiltersOptions, currentBreakpoints)
+          })
+        })
+      })
+    })
+  })
+
   describe('pickAndReorderFilters', () => {
     describe('when displayableFilters is empty', () => {
       const displayableFilters = []
 
-      it('returns unmodified filtersProperties', () => {
-        expect(pickAndReorderFilters(filtersProperties, displayableFilters)).toEqual(filtersProperties)
+      it('returns empty filtersProperties', () => {
+        expect(pickAndReorderFilters(filtersProperties, displayableFilters)).toEqual({})
       })
     })
 
