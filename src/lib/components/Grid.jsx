@@ -1,3 +1,3 @@
-import { Row, Col } from 'antd'
+import { Row, Col, Grid } from 'antd'
 
-export { Row, Col }
+export { Row, Col, Grid }

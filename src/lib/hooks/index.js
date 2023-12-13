@@ -1,7 +1,7 @@
 import initializePusherHooks from './usePusher'
 import initializeWebsocketHooks from './useWebsocket'
 import { useMessage, useModal, useNotification } from './appHooks'
-import { useLocation, useNavigate } from './routingHooks'
+import { useLocation, useSearchParams, useNavigate } from './routingHooks'
 
 export {
   initializePusherHooks,
@@ -10,5 +10,6 @@ export {
   useModal,
   useNotification,
   useLocation,
+  useSearchParams,
   useNavigate
 }

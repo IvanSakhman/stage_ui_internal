@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types'
 import { StyledRadioGroup, RadioButton } from './index.styled'
 
-const RadioGroup = ({ items, defaultValue, handleChange }) => {
+const RadioGroup = ({ items, handleChange, ...rest }) => {
   return (
-    <StyledRadioGroup defaultValue={defaultValue} onChange={handleChange} buttonStyle="solid">
+    <StyledRadioGroup onChange={handleChange} {...rest}>
       {items.map(({ value, label }) => (
         <RadioButton key={value} value={value}>
           {label}

@@ -1,3 +1,133 @@
+v1.62.0
+[feat] Support displaying GlobalFilters in a modal.
+
+Received globalFilterOptions can now specify whether a filter input should be displayed inline (default) or in a modal.
+
+It supports both boolean value as well as array of breakpoints.
+
+Example configurations:
+
+1. `{ filter_one: { modal: true }, filter_two: { inline: true } }`
+2. `{ filter_one: { modal: false }, filter_two: { inline: false } }` - will show filter_one inline and filter_two in a modal
+3. `{ filter_one: { modal: ['xs', 'sm', 'md', 'lg', 'xl'] }, filter_two: { inline: ['xxl'] } }` - will show both filters in modal on screens smaller than xxl, otherwise they will be inline
+
+Additionally, if all filters are set to be displayed in modal then no inline form will be visible and the filters are submitted on the modal. When filters are set to be displayed in modal, then the "Filter" button will not show up.
+
+The change is backwards compatible - inline is a default placement.
+
+v1.61.2
+[feature] Exported SmartDataDisplay component
+
+v1.61.1
+[fix] hide broken links if currentSystem is undefined
+
+v1.61.0
+[feat&fix] Support order field in GlobalFilters + fixes.
+
+Adds support for Order/Sorting in dynamically built GlobalFilters.
+
+Fixes & Improvements:
+  - Do not mount GlobalFilters until filters schema properties are available
+  - Do not set default placeholder for GlobalFilter fields, but be able to read it from translations
+  - Reworked applySorter util - it now expects a string with sortable column and direction
+  - Adjusted how filters, pagination and sorter are applied in SmartTable
+  - Do not apply filters nor sorter when paginating
+  - Reset pagination to page 1 when filtering and/or sorting
+
+
+v1.60.1
+[fix] Allowed to add a different color for ClientsDropdown in TopNav
+
+v1.60.0
+[feat] Added new component CompanyLogo
+
+v1.59.1
+[feat] Improved Tabs styling.
+
+- Moved inline styles to styled-components
+- isHorizontal prop is now deprecated, the flag is calculated based on tabPosition prop ('top' being default)
+
+Additionally:
+- PageContainer will not mount h4 when title is not present
+
+v1.59.0
+[feat] Build GlobalFilters using json_schema.filters
+
+This decouples the GlobalFilters' filtering set up from SmartTable and allows to build the filters using json_schema.
+
+Additionally:
+  - Moved filtering utils needed only for SmartTable to SmartTable utils.
+
+v1.58.0
+[refactor] DataView - Store json_schema.filters.properties as filtersSchema instead of filters.
+
+1. This is a preparation for GlobalFilters refactor into building them using json_schema.
+2. The pre-existing buildFilters is preserved, but moved to filtering utilities. It is still in use for GlobalFilters and SmartTable.
+3. These changes improve json_schema handling in buildFilters utility:
+  - it is now able to read valueEnum and/or enum from definition where type is array and it contains items
+  - it now adds true and false where type is boolean
+4. Improvements described in 3. might be BREAKING if json_schema provided was previously changed in order to support array and boolean types.
+
+v1.57.1
+[feat] Dynamic form building - allow to extend item's component with custom props.
+
+Additionally:
+ - fix import issue in Form component, which could cause circular dependency
+
+v1.57.0
+[feat] Introduced dynamic form fields building utilities.
+
+Moved from BlueprintsUI where it is used to build outputs fields.
+
+v1.56.0
+[feat] Added SmartDataDisplay and SmartList
+
+SmartDataDisplay is essentially a wrapper for SmartTable and SmartList that takes some of the filtering, sorting and paginating handling from DataView and SmartTable.
+
+It provides a single place that is responsible for applying the URL search and allows to de-duplicate the code.
+
+Potentially breaking:
+Due to this, exporting SmartTable as a component no longer makes sense.
+
+v1.55.7
+[fix] Ensure pagination is correctly disabled in Table and List
+
+Bug introduced in v1.55.4
+
+v1.55.6
+[fix] Improve margins for horizontal tabs list in PageContainer.
+
+v1.55.5
+[feat] Moved GlobalFilters out of SmartTable
+
+Additionally:
+- added default Input component to GlobalFilters
+
+
+v1.55.4
+[chore] Moved pagination normalisation to the components that actually need it.
+
+The normalisation/translation is needed because our pagination object contains total_items and per_page keys while antd's components (Table and List) need total and pageSize respectively.
+
+There is no real need to do the normalisation in DataView nor in SmartTable, hence it was moved to the "end of the chain".
+
+v1.55.3
+[feat] Allow to use DataView w/o PageContainer
+
+DataView might be useful as a nested component.
+Passing "pageHeader = false" will not mount PageContainer.
+
+v1.55.2
+[feat] feat: Added Typography.UpperCaseText
+
+v1.55.1
+[feat] feat: Add translations support to List
+
+v1.55.0
+[feat] Introduced DataView as a replacement for TableView.
+
+This allows to use all the utilities needed to load and filter the data w/o limiting it to a Table.
+
 v1.54.0
 [feat] Add Score component.
 

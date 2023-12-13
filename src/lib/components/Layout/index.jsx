@@ -32,8 +32,9 @@ const Layout = ({
           onSideMenuSelect={onSideMenuSelect}
           themeToken={themeToken}
           pathname={pathname}
-          optionalChildren={sideMenuChildren}
-        />
+        >
+          {sideMenuChildren}
+        </SideMenu>
         <AntdLayout>
           <GlobalAlert />
           <StyledContent>{children}</StyledContent>

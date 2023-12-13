@@ -1,5 +1,7 @@
 import { initializeApi } from '~su/actions'
-import { api, i18n, object } from '~su/utilities'
+import api from '~su/utilities/fetchJson'
+import { addResources } from '~su/utilities/i18n'
+import object from '~su/utilities/object'
 import { init } from '~su/store/actions'
 
 const buildRequestParams = (path, context, loadConfigParams) => {
@@ -34,7 +36,7 @@ const loadTranslations = (apiActions, requestParams, translationsConfig) => {
   }
 
   return apiActions('translations', {
-    setData: (data) => i18n.addResources(data, translationsConfig?.namespace)
+    setData: (data) => addResources(data, translationsConfig?.namespace)
   }).loadCollection(requestParams)
 }
 

@@ -21,12 +21,13 @@ export const Title = styled(Typography.Title)`
 
 export const StyledTabs = styled(Tabs)`
   .ant-tabs-nav {
-    min-height: 50vh;
+    min-height: ${({ $isHorizontal }) => ($isHorizontal ? 0 : 50)}vh;
     background: ${COLORS.white};
     border-radius: 6px;
 
     .ant-tabs-nav-list {
-      margin: 8px 0 8px 20px;
+      margin-block: ${({ $isHorizontal }) => ($isHorizontal ? 0 : 8)}px;
+      margin-inline: 20px 0;
     }
   }
 

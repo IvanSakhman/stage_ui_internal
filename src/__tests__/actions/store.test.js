@@ -37,7 +37,7 @@ describe('Common store actions', () => {
         runs: [],
         isLoaded: false,
         isLoading: false,
-        filters: {}
+        filtersSchema: { type: 'object', properties: {}, required: [] }
       })
     })
   })
@@ -86,7 +86,7 @@ describe('Common store actions', () => {
         runs: [],
         isLoaded: false,
         isLoading: false,
-        filters: {},
+        filtersSchema: { type: 'object', properties: {}, required: [] },
         newRun: new Run(),
         isSaving: false
       })

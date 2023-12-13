@@ -54,7 +54,7 @@ const Table = ({
 
         return { key, dataIndex: key, ...column }
       })}
-      pagination={pagination}
+      pagination={pagination ? { ...pagination, total: pagination.total_items, pageSize: pagination.per_page } : false}
       {...rest}
     />
   )
@@ -64,7 +64,14 @@ Table.propTypes = {
   columns: PropTypes.arrayOf(PropTypes.object),
   columnsConfig: PropTypes.object,
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
-  pagination: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
+  pagination: PropTypes.oneOfType([
+    PropTypes.bool,
+    PropTypes.shape({
+      current: PropTypes.number.isRequired,
+      total_items: PropTypes.number.isRequired,
+      per_page: PropTypes.number.isRequired
+    })
+  ]),
   actions: PropTypes.shape({ table_row: PropTypes.object }),
   functionActionHandlers: PropTypes.object
 }

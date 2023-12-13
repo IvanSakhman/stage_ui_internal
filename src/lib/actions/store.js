@@ -103,5 +103,5 @@ const defaultPagination = {
   }
 }
 const defaultFilters = {
-  filters: {}
+  filtersSchema: { type: 'object', properties: {}, required: [] }
 }

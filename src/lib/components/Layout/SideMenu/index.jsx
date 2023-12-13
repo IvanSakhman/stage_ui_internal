@@ -8,7 +8,7 @@ import DynamicIcon from '../../DynamicIcon'
 import { SideMenuContainer, StyledLink } from './index.styled'
 import getDefaultMenuKeys from './utilities/getDefaultMenuKeys'
 
-const SideMenu = ({ sidebarItems, onSideMenuSelect, pathname = '', optionalChildren }) => {
+const SideMenu = ({ sidebarItems, onSideMenuSelect, pathname = '', children }) => {
   const location = useLocation()
 
   const defaultMenuKeys = getDefaultMenuKeys(location, sidebarItems, pathname)
@@ -42,7 +42,7 @@ const SideMenu = ({ sidebarItems, onSideMenuSelect, pathname = '', optionalChild
 
   return (
     <SideMenuContainer>
-      {optionalChildren}
+      {children}
       <Menu
         defaultOpenKeys={defaultMenuKeys?.defaultOpenKeys}
         defaultSelectedKeys={[defaultMenuKeys?.defaultSelectedKey]}
@@ -69,7 +69,7 @@ SideMenu.propTypes = {
   sidebarItems: recursiveSidebarItems,
   onSideMenuSelect: PropTypes.func.isRequired,
   pathname: PropTypes.string,
-  optionalChildren: PropTypes.node
+  children: PropTypes.node
 }
 
 export default SideMenu

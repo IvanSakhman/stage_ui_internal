@@ -3,23 +3,21 @@ import { SearchOutlined } from '@ant-design/icons'
 
 import Card from '../Card'
 import TableSearchBox from './SearchBox'
-import GlobalFilters from './GlobalFilters'
 
 import string from '~su/utilities/string'
-import smartTable from '~su/utilities/smartTable'
-import canWorkInBrowser from '~su/utilities/canWorkInBrowser'
+import { buildColumns } from './utilities'
 
 const SmartTable = ({
+  title,
   columnsConfig,
   pagination,
-  globalFiltersOptions,
+  filtersSchema,
+  urlParams,
   dataKey = '',
-  shouldApplyURLSearch = true,
+  onChange,
   ...rest
 }) => {
-  let urlParams = canWorkInBrowser() ? new URLSearchParams(window.location.search) : null
-
-  const columns = smartTable.buildColumns(columnsConfig.columns, urlParams, columnsConfig.filters).map((column) => {
+  const columns = buildColumns(columnsConfig.columns, urlParams, filtersSchema).map((column) => {
     if (column.searchable) {
       column.filterIcon = (filtered) => <SearchOutlined style={{ color: filtered ? '#1890ff' : undefined }} />
       column.filterDropdown = (filterDropdownProps) => {
@@ -30,46 +28,29 @@ const SmartTable = ({
     return column
   })
 
-  const applyURLSearch = (pagination, filters, sorter, extra) => {
-    if (canWorkInBrowser()) {
-      if (extra.action === 'filter') {
-        urlParams = smartTable.applyFilters(urlParams, filters)
-        if (urlParams.toString() === window.location.search.replace('?', '')) {
-          return
-        }
-      }
-
-      urlParams = smartTable.applyPagination(urlParams, pagination)
-      urlParams = smartTable.applyFilters(urlParams, filters)
-      urlParams = smartTable.applySorter(urlParams, sorter)
-
-      window.location.hash = dataKey
-      window.location.search = urlParams
-    }
-  }
-
-  const applyGlobalFilter = (filters) => {
-    applyURLSearch(
-      { current: 1, total: pagination.total_items, pageSize: pagination.per_page },
-      filters,
-      {},
-      { action: 'filter' }
-    )
-  }
-
   const paginationProps = {
     position: ['topRight'],
     style: { position: 'absolute', right: 16, top: -60, zIndex: 1 },
     showSizeChanger: false,
-    current: pagination.current,
-    total: pagination.total_items,
-    pageSize: pagination.per_page
+    ...pagination
   }
 
-  const optionalProps = {
-    ...(shouldApplyURLSearch && {
-      onChange: applyURLSearch
-    })
+  const handleChange = (pagination, filters, sorter, extra) => {
+    switch (extra.action) {
+      case 'paginate':
+        sorter = undefined
+        break
+      case 'filter':
+        pagination = { current: 1, ...pagination }
+        sorter = undefined
+        break
+      case 'sort':
+        pagination = { current: 1, ...pagination }
+        sorter = [sorter.columnKey, sorter.order].join(':')
+        break
+    }
+
+    return onChange(pagination, filters, sorter, extra)
   }
 
   return (
@@ -77,39 +58,24 @@ const SmartTable = ({
       headStyle={{ fontWeight: 'normal' }}
       columnsConfig={columnsConfig}
       columns={columns}
-      title={[
-        globalFiltersOptions ? (
-          <GlobalFilters
-            applyFilters={applyGlobalFilter}
-            filters={columnsConfig.filters}
-            urlParams={urlParams}
-            globalFiltersOptions={globalFiltersOptions}
-            dataKey={dataKey}
-          />
-        ) : (
-          <span style={{ lineHeight: '32px' }}>{string.humanize(dataKey, { titleize: true })}</span>
-        )
-      ]}
+      title={[title || <span style={{ lineHeight: '32px' }}>{string.humanize(dataKey, { titleize: true })}</span>]}
       pagination={paginationProps}
-      {...optionalProps}
+      onChange={onChange ? handleChange : null}
       {...rest}
     />
   )
 }
 
 SmartTable.propTypes = {
+  title: PropTypes.element,
   columnsConfig: PropTypes.shape({
-    columns: PropTypes.object,
-    filters: PropTypes.object
+    columns: PropTypes.object
   }).isRequired,
-  pagination: PropTypes.shape({
-    current: PropTypes.number,
-    total_items: PropTypes.number,
-    per_page: PropTypes.number
-  }).isRequired,
-  globalFiltersOptions: PropTypes.object,
+  filtersSchema: PropTypes.object,
+  pagination: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   dataKey: PropTypes.string,
-  shouldApplyURLSearch: PropTypes.bool
+  onChange: PropTypes.func,
+  urlParams: PropTypes.instanceOf(URLSearchParams)
 }
 
 export default SmartTable
