@@ -90,7 +90,7 @@ describe('Dynamic Fields componentBuilders', () => {
               enum: ['1', '2'],
               userInputAllowed: true
             })
-          ).toEqual({ component: AutoComplete, props: { enums: ['1', '2'], fixParentNode: true } })
+          ).toEqual({ component: AutoComplete, props: { enums: ['1', '2'] } })
         })
       })
 
@@ -122,8 +122,7 @@ describe('Dynamic Fields componentBuilders', () => {
               valueEnum: [
                 ['One', '1'],
                 ['Two', '2']
-              ],
-              fixParentNode: true
+              ]
             }
           })
         })

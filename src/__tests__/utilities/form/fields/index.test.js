@@ -1,5 +1,5 @@
 import { Input, Select, Switch } from '~su/components'
-import buildFields, { testExports } from '~su/utilities/form/fields'
+import buildFields, { normalizeEmptyToUndef, testExports } from '~su/utilities/form/fields'
 
 describe('Dynamic Fields building', () => {
   describe('buildFields', () => {
@@ -25,7 +25,8 @@ describe('Dynamic Fields building', () => {
             rules: [{ required: false }, { type: 'string' }, expect.any(Function)],
             dependencies: [],
             hasFeedback: true,
-            valuePropName: 'value'
+            valuePropName: 'value',
+            normalize: normalizeEmptyToUndef
           },
           component: <Input />
         },
@@ -67,6 +68,7 @@ describe('Dynamic Fields building', () => {
               dependencies: [],
               hasFeedback: true,
               valuePropName: 'value',
+              normalize: normalizeEmptyToUndef,
               width: 2
             },
             component: <Input />
@@ -101,6 +103,7 @@ describe('Dynamic Fields building', () => {
               dependencies: [],
               hasFeedback: true,
               valuePropName: 'value',
+              normalize: normalizeEmptyToUndef,
               width: 2
             },
             component: <Input allowClear />
@@ -135,7 +138,8 @@ describe('Dynamic Fields building', () => {
               rules: [{ required: false }, { type: 'string' }, expect.any(Function)],
               dependencies: [],
               hasFeedback: true,
-              valuePropName: 'value'
+              valuePropName: 'value',
+              normalize: normalizeEmptyToUndef
             },
             component: <Input />
           },
@@ -168,7 +172,8 @@ describe('Dynamic Fields building', () => {
               rules: [{ required: false }, { type: 'boolean' }, expect.any(Function)],
               dependencies: [],
               hasFeedback: true,
-              valuePropName: 'checked'
+              valuePropName: 'checked',
+              normalize: normalizeEmptyToUndef
             },
             component: <Switch />
           }
@@ -216,7 +221,8 @@ describe('Dynamic Fields building', () => {
                   rules: [{ required: false }, { type: 'boolean' }, expect.any(Function)],
                   dependencies: [],
                   hasFeedback: true,
-                  valuePropName: 'checked'
+                  valuePropName: 'checked',
+                  normalize: normalizeEmptyToUndef
                 },
                 component: <Switch size="small" />
               }
@@ -264,7 +270,8 @@ describe('Dynamic Fields building', () => {
                 rules: [{ required: false }, { type: 'string' }, expect.any(Function)],
                 dependencies: [],
                 hasFeedback: true,
-                valuePropName: 'value'
+                valuePropName: 'value',
+                normalize: normalizeEmptyToUndef
               },
               component: <Input />
             },
@@ -297,7 +304,8 @@ describe('Dynamic Fields building', () => {
                 rules: [{ required: false }, { type: 'boolean' }, expect.any(Function)],
                 dependencies: [],
                 hasFeedback: true,
-                valuePropName: 'checked'
+                valuePropName: 'checked',
+                normalize: normalizeEmptyToUndef
               },
               component: <Switch />
             }

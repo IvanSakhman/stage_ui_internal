@@ -1,3 +1,14 @@
+v1.63.1
+[fix] Fixed SmartTable ignoring pagination parameter and assigning default pagination value, which forced pagination to appear in every table
+
+v1.63.0
+[feat] Dynamic fields - normalize empty string value in field to undefined.
+
+APIs usually differently interpret missing key than an empty value. This has proven to be the case in Blueprints.
+
+Additionally:
+ - do not pass fixParentNode to Autocomplete component.
+
 v1.62.0
 [feat] Support displaying GlobalFilters in a modal.
 
