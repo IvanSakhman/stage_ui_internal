@@ -71,6 +71,7 @@ import Typography from './Typography'
 import YesNoTag from './YesNoTag'
 import CompanyLogo from './CompanyLogo'
 import SmartDataDisplay from './SmartDataDisplay'
+import RadioGroup from './RadioGroup'
 
 export {
   AutoComplete,
@@ -146,5 +147,6 @@ export {
   Typography,
   YesNoTag,
   CompanyLogo,
-  SmartDataDisplay
+  SmartDataDisplay,
+  RadioGroup
 }

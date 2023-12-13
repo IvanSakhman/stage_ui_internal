@@ -22,7 +22,8 @@ const StyleProvider = ({
   isLayoutPresent = true,
   isLoaded = false,
   pathname,
-  topNavLogo
+  topNavLogo,
+  sideMenuChildren
 }) => {
   const themeToken = { ...theme.token, ...brandingToken }
   const components = {
@@ -30,6 +31,12 @@ const StyleProvider = ({
       itemHoverColor: themeToken.sideMenuItemActive,
       darkItemHoverColor: themeToken.sideMenuItemActive,
       itemDisabledColor: themeToken.sideMenuItemDefault
+    },
+    Radio: {
+      buttonColor: themeToken.sideMenuItemDefault,
+      buttonBg: themeToken.sideMenuBackground,
+      buttonSolidCheckedBg: themeToken.sideMenuItemActive,
+      buttonSolidCheckedHoverBg: themeToken.sideMenuItemActive
     }
   }
 
@@ -53,6 +60,7 @@ const StyleProvider = ({
               onSideMenuSelect={onSideMenuSelect}
               pathname={pathname}
               themeOverrides={topNavLogo}
+              sideMenuChildren={sideMenuChildren}
             >
               {main}
             </Layout>
@@ -74,7 +82,8 @@ StyleProvider.propTypes = {
   isLayoutPresent: PropTypes.bool,
   isLoaded: PropTypes.bool,
   pathname: PropTypes.string,
-  topNavLogo: PropTypes.object
+  topNavLogo: PropTypes.object,
+  sideMenuChildren: PropTypes.node
 }
 
 export default StyleProvider
