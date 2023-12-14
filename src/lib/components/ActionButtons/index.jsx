@@ -3,7 +3,7 @@ import Button from '../Button'
 
 import { translateResponseAction, filterActionsByCondition } from './utilities'
 
-const ActionButtons = ({ actions = [], ...translateOptions }) => {
+const ActionButtons = ({ actions = [], valueRender = null, ...translateOptions }) => {
   const filteredActions = filterActionsByCondition(actions, translateOptions.record)
 
   const renderActionButton = (action, index) => {
@@ -17,7 +17,7 @@ const ActionButtons = ({ actions = [], ...translateOptions }) => {
 
     return (
       <Component key={index} {...properties}>
-        {display}
+        {valueRender ? valueRender() : display}
       </Component>
     )
   }

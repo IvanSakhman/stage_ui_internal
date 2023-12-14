@@ -1,3 +1,10 @@
+v1.65.0
+1. Added RadioGroup component
+2. Added ability to pass extra children to SideMenu
+
+v1.64.0
+[feat] Preserve column.render for table columns using ActionButtons
+
 v1.63.1
 [fix] Fixed SmartTable ignoring pagination parameter and assigning default pagination value, which forced pagination to appear in every table
 
