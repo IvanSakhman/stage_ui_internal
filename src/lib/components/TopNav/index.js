@@ -75,8 +75,8 @@ StageTopNav.propTypes = {
     path: PropTypes.string.isRequired
   }),
   currentClient: clientType,
-  systems: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  currentSystem: PropTypes.string.isRequired,
+  systems: PropTypes.arrayOf(PropTypes.string.isRequired),
+  currentSystem: PropTypes.string,
   themeOverrides: PropTypes.shape({
     logoUrl: PropTypes.string
   }),
