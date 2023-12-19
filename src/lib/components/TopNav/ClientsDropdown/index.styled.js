@@ -17,7 +17,7 @@ export const StyledClientsMenu = styled(Menu)`
   .ant-menu-submenu-selected:not(.ant-menu-submenu-open) {
     &,
     & * {
-      color: ${COLORS.white};
+      color: ${({ theme }) => theme.sideMenuItemDefault};
     }
   }
 

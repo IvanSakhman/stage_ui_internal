@@ -47,7 +47,6 @@ const SideMenu = ({ sidebarItems, onSideMenuSelect, pathname = '', children }) =
         defaultOpenKeys={defaultMenuKeys?.defaultOpenKeys}
         defaultSelectedKeys={[defaultMenuKeys?.defaultSelectedKey]}
         selectedKeys={[defaultMenuKeys?.defaultSelectedKey]}
-        theme="dark"
         mode="inline"
         items={sidebarMenuItems}
         onSelect={onSideMenuSelect}
