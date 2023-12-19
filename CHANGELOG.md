@@ -1,3 +1,31 @@
+v1.69.0
+[feat] Components improvements and additions
+
+1. Added Flex, Steps and Timeline from antd
+2. StageUI now exports LoadingBlock component
+3. LoadingBlock now accepts tip property.
+4. Fixes Popover's propTypes
+5. ProDescriptions now pass remaining props to antd's Description
+6. Tag now accepts size prop, which allows to display tags of different sizes (large and default supported atm)
+7. TagsList now accepts tagSize prop, which is passed to Tag
+
+v1.68.0
+[feat] Extended date utils functionality
+
+1. timeBetween now accepts relative param, which when true, uses i18n to appropriate wording
+2. formatDuration now uses i18n to find the conjuction param value
+3. formatDuration now passes language and fallback languages to humanizeDuration
+
+v1.67.0
+[feat] Extended dynamic fields functionality
+
+1. Set showSearch=true as default for Select when field type is string
+2. Pass the 'hint' property from json schema to field.item
+3. Added 'whitespace: true' rule when field type is 'string' and 'minLength' property exists
+
+v1.66.0
+[feat] SmartList and SmartTable now accept and display extraDataDisplay prop.
+
 v1.65.0
 1. Added RadioGroup component
 2. Added ability to pass extra children to SideMenu

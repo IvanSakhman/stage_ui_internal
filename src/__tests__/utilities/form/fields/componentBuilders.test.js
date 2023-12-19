@@ -95,12 +95,12 @@ describe('Dynamic Fields componentBuilders', () => {
       })
 
       describe('without userInputAllowed', () => {
-        it('returns a Select', () => {
+        it('returns a searchable Select', () => {
           expect(
             buildComponentForString({
               enum: ['1', '2']
             })
-          ).toEqual({ component: Select, props: { enums: ['1', '2'], fixParentNode: true } })
+          ).toEqual({ component: Select, props: { enums: ['1', '2'], fixParentNode: true, showSearch: true } })
         })
       })
     })
@@ -129,7 +129,7 @@ describe('Dynamic Fields componentBuilders', () => {
       })
 
       describe('without userInputAllowed', () => {
-        it('returns a Select', () => {
+        it('returns a searchable Select', () => {
           expect(
             buildComponentForString({
               valueEnum: [
@@ -144,7 +144,8 @@ describe('Dynamic Fields componentBuilders', () => {
                 ['One', '1'],
                 ['Two', '2']
               ],
-              fixParentNode: true
+              fixParentNode: true,
+              showSearch: true
             }
           })
         })

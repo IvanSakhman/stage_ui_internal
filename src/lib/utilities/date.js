@@ -1,16 +1,19 @@
 import humanizeDuration from 'humanize-duration'
-import object from './object'
 import dayjs from 'dayjs'
+
+import object from './object'
+import i18n from './i18n'
 
 import canWorkInBrowser from '~su/utilities/canWorkInBrowser'
 
 // type TimeBetweenArgs = {
 //   startDate: string
 //   endDate?: string
-//   humanizeOptions?: object
+//   humanizeOptions?: object,
+//   relative?: bool
 // }
 
-const timeBetween = ({ startDate, endDate = null, humanizeOptions = {} }) => {
+const timeBetween = ({ startDate, endDate = null, humanizeOptions = {}, relative = false }) => {
   if (!endDate) {
     endDate = new Date()
   }
@@ -21,18 +24,26 @@ const timeBetween = ({ startDate, endDate = null, humanizeOptions = {} }) => {
     return 0
   }
 
-  return formatDuration(diff, {
+  const formatted = formatDuration(diff, {
     largest: 3,
     ...humanizeOptions
   })
+
+  if (relative) {
+    return i18n.t('date.timeBetween.relative', { value: formatted })
+  }
+
+  return formatted
 }
 
 const formatDuration = (duration, humanizeOptions = {}) => {
   return humanizeDuration(duration, {
     largest: 2,
-    conjunction: ' and ',
+    conjunction: i18n.t('date.formatDuration.conjuction'),
     serialComma: false,
     maxDecimalPoints: 2,
+    language: navigator.language,
+    fallbacks: navigator.languages,
     ...humanizeOptions
   })
 }

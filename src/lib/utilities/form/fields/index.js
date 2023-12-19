@@ -56,6 +56,7 @@ const buildFieldConfig = (
       dependencies: gatherDependencies(name, conditionalRules),
       initialValue: properties.default,
       normalize: !required ? normalizeEmptyToUndef : undefined,
+      tooltip: properties.hint,
       ...translations,
       ...(itemExtraConfig || {})
     },

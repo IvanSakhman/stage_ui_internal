@@ -1,11 +1,12 @@
 import { conditionalRulesValidator, customArrayValidator } from './validators'
 
 export default ({ type, ...schema }, conditionalRules) => {
-  const { pattern, items } = schema
+  const { pattern, minLength, items } = schema
 
   return [
     { type },
     type === 'array' ? customArrayValidator(items, conditionalRules) : conditionalRulesValidator(conditionalRules),
-    pattern ? { pattern } : null
+    pattern ? { pattern } : null,
+    type === 'string' && minLength ? { whitespace: true } : null
   ].filter((rule) => rule)
 }

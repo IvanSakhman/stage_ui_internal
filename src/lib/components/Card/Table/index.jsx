@@ -70,12 +70,13 @@ const CardStyledWithTable = styled(Card)`
   }
 `
 
-const CardTable = ({ title: titleProp, loading, headStyle, ...tableProps }) => {
+const CardTable = ({ title: titleProp, loading, headStyle, extraDataDisplay, ...tableProps }) => {
   const title = titleProp[0],
     extra = titleProp.slice(1)
 
   return (
     <CardStyledWithTable title={title} extra={React.Children.toArray(extra)} headStyle={headStyle} isLoaded={!loading}>
+      {extraDataDisplay}
       <Table {...tableProps} />
     </CardStyledWithTable>
   )
@@ -84,7 +85,8 @@ const CardTable = ({ title: titleProp, loading, headStyle, ...tableProps }) => {
 CardTable.propTypes = {
   title: PropTypes.array,
   loading: PropTypes.bool,
-  headStyle: PropTypes.object
+  headStyle: PropTypes.object,
+  extraDataDisplay: PropTypes.oneOfType([PropTypes.element, PropTypes.arrayOf(PropTypes.element)])
 }
 
 export default CardTable

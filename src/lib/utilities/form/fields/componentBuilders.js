@@ -33,7 +33,7 @@ const buildComponentForArrayType = ({ type, ...schema }) => {
 
 const buildComponentForString = ({ enum: enums, valueEnum, userInputAllowed }) => {
   if (enums || valueEnum) {
-    const props = userInputAllowed ? {} : { fixParentNode: true }
+    const props = userInputAllowed ? {} : { fixParentNode: true, showSearch: true }
 
     return {
       component: userInputAllowed ? AutoComplete : Select,

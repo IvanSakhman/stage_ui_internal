@@ -25,7 +25,7 @@ const Popover = ({ prompt, action, record, functionActionHandlers, children }) =
 
 Popover.propTypes = {
   prompt: PropTypes.shape({
-    title: PropTypes.string,
+    title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
     content: PropTypes.string
   }).isRequired,
   action: PropTypes.shape({

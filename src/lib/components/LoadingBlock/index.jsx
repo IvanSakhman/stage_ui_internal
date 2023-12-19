@@ -1,8 +1,8 @@
 import { Result, Spin } from 'antd'
 import PropTypes from 'prop-types'
 
-const LoadingBlock = ({ size, spinning, showTip, children }) => {
-  const tip = showTip ? 'Loading...' : null
+const LoadingBlock = ({ size, spinning, tip, showTip, children }) => {
+  tip ||= showTip ? 'Loading...' : null
 
   return children ? (
     <Spin tip={tip} size={size} spinning={spinning}>

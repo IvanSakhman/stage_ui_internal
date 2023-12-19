@@ -14,7 +14,7 @@ describe('Dynamic Fields building', () => {
     const extraConfigs = {}
     const namePrefix = null
 
-    const t = jest.fn().mockImplementation(() => { help: 'test' })
+    const t = jest.fn().mockImplementation((key) => { hint: `${key}_test` })
 
     it('builds fields using the schema', () => {
       expect(buildFields(schema, extraConfigs, namePrefix, t)).toEqual([
@@ -22,7 +22,7 @@ describe('Dynamic Fields building', () => {
           item: {
             name: 'field_one',
             label: 'Field one',
-            rules: [{ required: false }, { type: 'string' }, expect.any(Function)],
+            rules: [{ required: false }, { type: 'string' }, expect.any(Function), { whitespace: true }],
             dependencies: [],
             hasFeedback: true,
             valuePropName: 'value',
@@ -34,13 +34,13 @@ describe('Dynamic Fields building', () => {
           item: {
             name: 'field_two',
             label: 'Field two',
-            rules: [{ required: true }, { type: 'string' }, expect.any(Function)],
+            rules: [{ required: true }, { type: 'string' }, expect.any(Function), { whitespace: true }],
             dependencies: [],
             hasFeedback: true,
             valuePropName: 'value',
             initialValue: 'two'
           },
-          component: <Select enums={['one', 'two']} fixParentNode={true} />
+          component: <Select enums={['one', 'two']} fixParentNode={true} showSearch={true} />
         }
       ])
     })
@@ -64,7 +64,7 @@ describe('Dynamic Fields building', () => {
             item: {
               name: 'field_one',
               label: 'Field one',
-              rules: [{ required: false }, { type: 'string' }, expect.any(Function)],
+              rules: [{ required: false }, { type: 'string' }, expect.any(Function), { whitespace: true }],
               dependencies: [],
               hasFeedback: true,
               valuePropName: 'value',
@@ -77,7 +77,7 @@ describe('Dynamic Fields building', () => {
             item: {
               name: 'field_two',
               label: 'Field two',
-              rules: [{ required: true }, { type: 'string' }, expect.any(Function)],
+              rules: [{ required: true }, { type: 'string' }, expect.any(Function), { whitespace: true }],
               dependencies: [],
               hasFeedback: true,
               valuePropName: 'value',
@@ -99,7 +99,7 @@ describe('Dynamic Fields building', () => {
             item: {
               name: 'field_one',
               label: 'Field one',
-              rules: [{ required: false }, { type: 'string' }, expect.any(Function)],
+              rules: [{ required: false }, { type: 'string' }, expect.any(Function), { whitespace: true }],
               dependencies: [],
               hasFeedback: true,
               valuePropName: 'value',
@@ -135,7 +135,7 @@ describe('Dynamic Fields building', () => {
             item: {
               name: 'field_one',
               label: 'Field one',
-              rules: [{ required: false }, { type: 'string' }, expect.any(Function)],
+              rules: [{ required: false }, { type: 'string' }, expect.any(Function), { whitespace: true }],
               dependencies: [],
               hasFeedback: true,
               valuePropName: 'value',
@@ -147,12 +147,12 @@ describe('Dynamic Fields building', () => {
             item: {
               name: 'field_two',
               label: 'Field two',
-              rules: [{ required: true }, { type: 'string' }, expect.any(Function)],
+              rules: [{ required: true }, { type: 'string' }, expect.any(Function), { whitespace: true }],
               dependencies: [],
               hasFeedback: true,
               valuePropName: 'value'
             },
-            component: <Select enums={['one', 'two']} fixParentNode={true} />
+            component: <Select enums={['one', 'two']} fixParentNode={true} showSearch={true} />
           },
           {
             item: {
@@ -267,7 +267,7 @@ describe('Dynamic Fields building', () => {
               item: {
                 name: 'field_one',
                 label: 'Field one',
-                rules: [{ required: false }, { type: 'string' }, expect.any(Function)],
+                rules: [{ required: false }, { type: 'string' }, expect.any(Function), { whitespace: true }],
                 dependencies: [],
                 hasFeedback: true,
                 valuePropName: 'value',
@@ -279,12 +279,12 @@ describe('Dynamic Fields building', () => {
               item: {
                 name: 'field_two',
                 label: 'Field two',
-                rules: [{ required: true }, { type: 'string' }, expect.any(Function)],
+                rules: [{ required: true }, { type: 'string' }, expect.any(Function), { whitespace: true }],
                 dependencies: [],
                 hasFeedback: true,
                 valuePropName: 'value'
               },
-              component: <Select enums={['one', 'two']} fixParentNode={true} />
+              component: <Select enums={['one', 'two']} fixParentNode={true} showSearch={true} />
             },
             {
               item: {
@@ -354,7 +354,7 @@ describe('Dynamic Fields building', () => {
     const { buildFieldConfig } = testExports
 
     const name = 'field_one'
-    const properties = { type: 'string', minLength: 1 }
+    const properties = { type: 'string' }
     const required = true
     const conditionalRules = null
     const extraConfig = {}
