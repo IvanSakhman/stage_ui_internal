@@ -20,7 +20,7 @@ const Layout = ({
   themeOverrides = {},
   pathname,
   sideMenuChildren,
-  contentBackground = ''
+  contentContainerStyles
 }) => {
   const { token: themeToken } = useToken()
 
@@ -40,7 +40,7 @@ const Layout = ({
         )}
         <AntdLayout>
           <GlobalAlert />
-          <StyledContent $backgroundColor={contentBackground}>{children}</StyledContent>
+          <StyledContent $styleOptions={contentContainerStyles}>{children}</StyledContent>
         </AntdLayout>
       </AntdLayout>
     </StyledLayout>
@@ -55,7 +55,7 @@ Layout.propTypes = {
   themeOverrides: PropTypes.object,
   pathname: PropTypes.string,
   sideMenuChildren: PropTypes.node,
-  contentBackground: PropTypes.string
+  contentContainerStyles: PropTypes.object
 }
 
 export default withLoader(Layout)
