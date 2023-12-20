@@ -55,7 +55,7 @@ Layout.propTypes = {
   themeOverrides: PropTypes.object,
   pathname: PropTypes.string,
   sideMenuChildren: PropTypes.node,
-  contentContainerStyles: PropTypes.object
+  contentContainerStyles: PropTypes.string
 }
 
 export default withLoader(Layout)

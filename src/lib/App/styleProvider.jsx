@@ -88,7 +88,7 @@ StyleProvider.propTypes = {
   pathname: PropTypes.string,
   topNavLogo: PropTypes.object,
   sideMenuChildren: PropTypes.node,
-  contentContainerStyles: PropTypes.object
+  contentContainerStyles: PropTypes.string
 }
 
 export default StyleProvider
