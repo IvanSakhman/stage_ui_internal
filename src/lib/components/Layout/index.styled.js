@@ -1,9 +1,14 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Layout } from 'antd'
 const { Content } = Layout
 
 export const StyledContent = styled(Content)`
   padding: 0 16px;
+  ${({ $backgroundColor }) =>
+    $backgroundColor &&
+    css`
+      background: ${$backgroundColor};
+    `}
 `
 
 // colors should be rewritten in scope of https://assembly-tech.atlassian.net/browse/SC-2
