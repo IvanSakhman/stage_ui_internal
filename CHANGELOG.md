@@ -1,3 +1,8 @@
+v1.69.1
+[fix]
+1. Side menu item colors
+2. Client select color
+
 v1.69.0
 [feat] Components improvements and additions
 

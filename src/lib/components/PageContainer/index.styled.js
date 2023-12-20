@@ -8,6 +8,7 @@ import { COLORS } from '../../constants'
 export const Header = styled(Card)`
   border-radius: 0 0 6px 6px;
   margin-bottom: 8px;
+  background: ${COLORS.white} !important;
 
   .ant-card-body {
     padding: 12px 40px;
