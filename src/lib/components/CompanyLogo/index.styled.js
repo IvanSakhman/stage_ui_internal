@@ -1,20 +1,40 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { COLORS } from '~su/constants'
 
 export const BorderedContainer = styled.div`
-  border-bottom: 5px solid ${COLORS.primaryLight};
+  border-bottom: ${({ $variant }) => ($variant === 'card' ? 5 : 3)}px solid ${COLORS.primaryLight};
 `
 
 export const LogoContainer = styled.div`
   display: flex;
-  margin-bottom: 10px;
-  gap: 8px;
+
+  ${({ $variant }) =>
+    $variant === 'card'
+      ? css`
+          margin-bottom: 10px;
+          gap: 8px;
+        `
+      : css`
+          margin-bottom: 5px;
+          gap: 4px;
+        `};
 `
 
 export const CompanyName = styled.div`
-  font-size: 39px;
-  line-height: 29px;
-  color: ${({ theme }) => theme.colorText};
   font-weight: bold;
-  letter-spacing: 3px;
+
+  ${({ $variant, theme }) =>
+    $variant === 'card'
+      ? css`
+          font-size: 39px;
+          line-height: 29px;
+          color: ${theme.colorText};
+          letter-spacing: 3px;
+        `
+      : css`
+          font-size: 27px;
+          line-height: 24px;
+          color: ${({ theme }) => theme.topNavTextDefault};
+          letter-spacing: 2px;
+        `};
 `

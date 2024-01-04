@@ -7,10 +7,25 @@ import HomeButton from './HomeButton'
 import ClientsDropdown from './ClientsDropdown'
 import SystemsMenu from './SystemsMenu'
 import UserDropdown from './UserDropdown'
+import CompanyLogo from '../CompanyLogo'
 
-import { StyledLayoutHeader } from './index.styled'
+import iconLogo from './img/assembly_icon_print_4c.png'
+import logo from './img/assembly_stage_logo_digital_light_rgb.png'
 
-const StageTopNav = ({ clients, currentClient, systems, currentSystem, helpdeskUrl, themeOverrides }) => {
+import { StyledLayoutHeader, DynamicLeftSideContainer, DynamicLogo } from './index.styled'
+
+const StageTopNav = ({
+  clients,
+  currentClient,
+  systems,
+  currentSystem,
+  helpdeskUrl,
+  themeOverrides,
+  clientsDropdownTitle,
+  homeUrl,
+  clientLogoUrl,
+  variant = 'default'
+}) => {
   const [hostedZone, setHostedZone] = useState('')
 
   useEffect(() => {
@@ -47,19 +62,52 @@ const StageTopNav = ({ clients, currentClient, systems, currentSystem, helpdeskU
     )
   }
 
+  const renderDefaultTopNav = () => (
+    <Row align="middle">
+      <Col span={5}>{renderLeftSide()}</Col>
+
+      {hostedZone && (
+        <Col span={14}>
+          <SystemsMenu systems={systems} currentSystem={currentSystem} hostedZone={hostedZone} />
+        </Col>
+      )}
+
+      {hostedZone && <Col span={5}>{renderRightSide()}</Col>}
+    </Row>
+  )
+
+  const renderDynamicLogo = () => {
+    if (clientLogoUrl) {
+      return <DynamicLogo src={clientLogoUrl} />
+    } else if (currentClient?.display_name) {
+      return <CompanyLogo companyName={currentClient.display_name} variant="header" />
+    }
+
+    return <DynamicLogo src={iconLogo} />
+  }
+
+  const renderDynamicLogoTopNav = () => (
+    <Row align="middle" justify="space-between">
+      <DynamicLeftSideContainer align="middle" justify="start">
+        {homeUrl && <a href={homeUrl}>{renderDynamicLogo()}</a>}
+        <ClientsDropdown
+          clients={clients}
+          currentClient={currentClient}
+          title={clientsDropdownTitle}
+          disabledOverflow
+        />
+      </DynamicLeftSideContainer>
+      {homeUrl && (
+        <a href={homeUrl}>
+          <DynamicLogo src={logo} />
+        </a>
+      )}
+    </Row>
+  )
+
   return (
     <StyledLayoutHeader>
-      <Row align="middle">
-        <Col span={5}>{renderLeftSide()}</Col>
-
-        {hostedZone && (
-          <Col span={14}>
-            <SystemsMenu systems={systems} currentSystem={currentSystem} hostedZone={hostedZone} />
-          </Col>
-        )}
-
-        {hostedZone && <Col span={5}>{renderRightSide()}</Col>}
-      </Row>
+      {variant === 'with-dynamic-left-logo' ? renderDynamicLogoTopNav() : renderDefaultTopNav()}
     </StyledLayoutHeader>
   )
 }
@@ -80,7 +128,11 @@ StageTopNav.propTypes = {
   themeOverrides: PropTypes.shape({
     logoUrl: PropTypes.string
   }),
-  helpdeskUrl: PropTypes.string
+  helpdeskUrl: PropTypes.string,
+  clientsDropdownTitle: PropTypes.string,
+  homeUrl: PropTypes.string,
+  clientLogoUrl: PropTypes.string,
+  variant: PropTypes.oneOf(['default', 'with-dynamic-left-logo'])
 }
 
 export default StageTopNav
