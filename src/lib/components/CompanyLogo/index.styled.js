@@ -1,20 +1,25 @@
 import styled from 'styled-components'
 import { COLORS } from '~su/constants'
 
-export const BorderedContainer = styled.div`
-  border-bottom: 5px solid ${COLORS.primaryLight};
+const nameLengthBreakpoint = 15
+
+export const Container = styled.div`
+  border-bottom: 0.25em solid ${COLORS.primaryLight};
+  font-size: ${({ companyNameLength }) => (companyNameLength > nameLengthBreakpoint ? '1.5cqw' : '1.8cqw')};
 `
 
 export const LogoContainer = styled.div`
   display: flex;
-  margin-bottom: 10px;
-  gap: 8px;
-`
-
-export const CompanyName = styled.div`
-  font-size: 39px;
-  line-height: 29px;
+  align-items: center;
+  gap: 0.3em;
+  margin-bottom: 0.3em;
+  line-height: 0.8em;
   color: ${({ theme }) => theme.colorText};
   font-weight: bold;
-  letter-spacing: 3px;
+  text-transform: uppercase;
+`
+
+export const Logo = styled.img`
+  height: 0.8em;
+  width: auto;
 `
