@@ -80,7 +80,7 @@ const StageTopNav = ({
     if (clientLogoUrl) {
       return <DynamicLogo src={clientLogoUrl} />
     } else if (currentClient?.display_name) {
-      return <CompanyLogo companyName={currentClient.display_name} variant="header" />
+      return <CompanyLogo companyName={currentClient.display_name} inHeader />
     }
 
     return <DynamicLogo src={iconLogo} />

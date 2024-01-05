@@ -2,14 +2,14 @@ import PropTypes from 'prop-types'
 import logoImage from './img/assembly-cropped-logo.png'
 import { BorderedContainer, LogoContainer, CompanyName } from './index.styled'
 
-const CompanyLogo = ({ companyName, variant = 'card' }) => {
-  const imageHeight = variant === 'card' ? 29 : 24
-  const imageWidth = variant === 'card' ? 31 : 26
+const CompanyLogo = ({ companyName, inHeader = false }) => {
+  const imageHeight = inHeader ? 24 : 29
+  const imageWidth = inHeader ? 26 : 31
 
   return (
-    <BorderedContainer $variant={variant}>
-      <LogoContainer $variant={variant}>
-        <CompanyName $variant={variant}>{companyName.toUpperCase()}</CompanyName>
+    <BorderedContainer $inHeader={inHeader}>
+      <LogoContainer $inHeader={inHeader}>
+        <CompanyName $inHeader={inHeader}>{companyName.toUpperCase()}</CompanyName>
         <img src={logoImage} alt={`${companyName} logo`} height={imageHeight} width={imageWidth} />
       </LogoContainer>
     </BorderedContainer>
@@ -18,7 +18,7 @@ const CompanyLogo = ({ companyName, variant = 'card' }) => {
 
 CompanyLogo.propTypes = {
   companyName: PropTypes.string.isRequired,
-  variant: PropTypes.oneOf(['card', 'header'])
+  inHeader: PropTypes.bool
 }
 
 export default CompanyLogo
