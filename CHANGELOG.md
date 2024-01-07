@@ -1,3 +1,26 @@
+v1.69.6
+[feat] Export store.triggerGlobalAlert
+
+v1.69.5
+[fix] Dynamic Fields building - do not modify type value when is array.
+
+array.pop() modifies the array.
+
+v1.69.4
+[fix] Component Field label not displayed.
+
+This fixes a bug, where passed component label (ie <strong>{field-one}</strong>) was ignored.
+
+Additionally, fixed Popover prop types.
+
+v1.69.3
+[fix] Active icon color
+
+v1.69.2
+[fix] Decode uri component for link ActionButton
+
+Will support received action's href option including encoded uri (ie new?id=%3Aid)
+
 v1.69.1
 [fix]
 1. Side menu item colors

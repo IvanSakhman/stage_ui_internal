@@ -49,7 +49,7 @@ const Field = ({ field, index, disable = false, dynamic = false, extras = {}, cl
       key={index}
       name={fieldName}
       fieldKey={fieldKey}
-      label={label === false ? null : t(`${itemName}.label`, label || string.humanize(itemName, { capitalize: true }))}
+      label={label === false ? null : label || t(`${itemName}.label`, string.humanize(itemName, { capitalize: true }))}
       className={[className].join(' ')}
       dependencies={fieldDependencies}
       {...rest}
@@ -87,7 +87,7 @@ Field.propTypes = {
   field: PropTypes.shape({
     item: PropTypes.shape({
       name: fieldNamePropType,
-      label: PropTypes.oneOfType([PropTypes.string, PropTypes.bool]),
+      label: PropTypes.oneOfType([PropTypes.string, PropTypes.bool, PropTypes.node]),
       dependencies: PropTypes.arrayOf(fieldNamePropType),
       hideUnless: PropTypes.func,
       width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
