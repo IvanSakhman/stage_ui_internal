@@ -6,7 +6,7 @@ import { Input } from 'antd'
 
 import { StyledClientsMenu } from './index.styled'
 
-const ClientsDropdown = ({ clients, currentClient }) => {
+const ClientsDropdown = ({ clients, currentClient, title = 'Choose Client', disabledOverflow = false }) => {
   const [visibleClients, setVisibleClients] = useState([])
 
   const availableClients = () => clients?.available.filter((client) => client.name != currentClient?.name)
@@ -37,7 +37,7 @@ const ClientsDropdown = ({ clients, currentClient }) => {
   const items = [
     {
       key: 'trigger',
-      label: currentClient ? currentClient.display_name : 'Choose Client',
+      label: currentClient ? currentClient.display_name : title,
       disabled: availableClients().length === 0,
       children: [
         {
@@ -50,7 +50,14 @@ const ClientsDropdown = ({ clients, currentClient }) => {
     }
   ]
 
-  return <StyledClientsMenu mode="horizontal" items={items} triggerSubMenuAction="click" />
+  return (
+    <StyledClientsMenu
+      mode="horizontal"
+      items={items}
+      triggerSubMenuAction="click"
+      disabledOverflow={disabledOverflow}
+    />
+  )
 }
 
 const clientType = PropTypes.shape({
@@ -63,7 +70,9 @@ ClientsDropdown.propTypes = {
     available: PropTypes.arrayOf(clientType).isRequired,
     path: PropTypes.string.isRequired
   }),
-  currentClient: clientType
+  currentClient: clientType,
+  title: PropTypes.string,
+  disabledOverflow: PropTypes.bool
 }
 
 export default ClientsDropdown

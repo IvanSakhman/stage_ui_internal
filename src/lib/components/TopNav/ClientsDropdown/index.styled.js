@@ -28,4 +28,10 @@ export const StyledClientsMenu = styled(Menu)`
       display: none;
     }
   }
+
+  .ant-menu-submenu::after,
+  .ant-menu-submenu:hover::after {
+    border-bottom: none !important;
+    transition: none !important;
+  }
 `
