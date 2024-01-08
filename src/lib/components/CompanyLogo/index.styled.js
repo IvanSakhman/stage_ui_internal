@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { COLORS } from '~su/constants'
 
 const nameLengthBreakpoint = 15

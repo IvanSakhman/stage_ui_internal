@@ -76,6 +76,7 @@ import YesNoTag from './YesNoTag'
 import CompanyLogo from './CompanyLogo'
 import SmartDataDisplay from './SmartDataDisplay'
 import RadioGroup from './RadioGroup'
+import Breadcrumb from './Breadcrumb'
 
 export {
   AutoComplete,
@@ -156,5 +157,6 @@ export {
   YesNoTag,
   CompanyLogo,
   SmartDataDisplay,
-  RadioGroup
+  RadioGroup,
+  Breadcrumb
 }

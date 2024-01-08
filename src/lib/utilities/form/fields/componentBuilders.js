@@ -52,7 +52,7 @@ const buildComponentForInteger = ({ enum: enums, valueEnum }) =>
 // eslint-disable-next-line react/prop-types
 export default ({ type, readOnly, ...schema }, componentProps = {}) => {
   if (Array.isArray(type)) {
-    type = type.pop() // eslint-disable-line react/prop-types
+    type = type.slice(-1)[0] // eslint-disable-line react/prop-types
   }
 
   if (readOnly) {

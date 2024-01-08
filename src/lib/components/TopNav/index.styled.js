@@ -1,4 +1,5 @@
 import { Layout } from 'antd'
+import { Row } from '~su/components/Grid'
 import styled from 'styled-components'
 
 export const StyledLayoutHeader = styled(Layout.Header)`
@@ -34,4 +35,13 @@ export const StyledLayoutHeader = styled(Layout.Header)`
       }
     }
   }
+`
+
+export const DynamicLeftSideContainer = styled(Row)`
+  width: 50%;
+`
+
+export const DynamicLogo = styled.img`
+  width: auto;
+  height: 32px;
 `

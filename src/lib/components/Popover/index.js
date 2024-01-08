@@ -26,7 +26,7 @@ const Popover = ({ prompt, action, record, functionActionHandlers, children }) =
 Popover.propTypes = {
   prompt: PropTypes.shape({
     title: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
-    content: PropTypes.string
+    content: PropTypes.oneOfType([PropTypes.string, PropTypes.node, PropTypes.arrayOf(PropTypes.node)])
   }).isRequired,
   action: PropTypes.shape({
     name: PropTypes.string.isRequired,
@@ -36,7 +36,7 @@ Popover.propTypes = {
   }),
   record: PropTypes.object,
   functionActionHandlers: PropTypes.object,
-  children: PropTypes.PropTypes.oneOfType([PropTypes.element, PropTypes.arrayOf(PropTypes.element)]).isRequired
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.arrayOf(PropTypes.node)]).isRequired
 }
 
 export default Popover

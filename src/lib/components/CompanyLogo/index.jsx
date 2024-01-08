@@ -11,7 +11,8 @@ const CompanyLogo = ({ companyName }) => (
 )
 
 CompanyLogo.propTypes = {
-  companyName: PropTypes.string.isRequired
+  companyName: PropTypes.string.isRequired,
+  inHeader: PropTypes.bool
 }
 
 export default CompanyLogo
