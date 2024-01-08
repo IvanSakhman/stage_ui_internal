@@ -19,7 +19,8 @@ const Layout = ({
   onSideMenuSelect,
   themeOverrides = {},
   pathname,
-  sideMenuChildren
+  sideMenuChildren,
+  contentContainerStyles
 }) => {
   const { token: themeToken } = useToken()
 
@@ -27,17 +28,19 @@ const Layout = ({
     <StyledLayout>
       <TopNav themeOverrides={themeOverrides} {...menuProps} />
       <AntdLayout>
-        <SideMenu
-          sidebarItems={sidebarItems}
-          onSideMenuSelect={onSideMenuSelect}
-          themeToken={themeToken}
-          pathname={pathname}
-        >
-          {sideMenuChildren}
-        </SideMenu>
+        {!!sidebarItems.length && (
+          <SideMenu
+            sidebarItems={sidebarItems}
+            onSideMenuSelect={onSideMenuSelect}
+            themeToken={themeToken}
+            pathname={pathname}
+          >
+            {sideMenuChildren}
+          </SideMenu>
+        )}
         <AntdLayout>
           <GlobalAlert />
-          <StyledContent>{children}</StyledContent>
+          <StyledContent $styleOptions={contentContainerStyles}>{children}</StyledContent>
         </AntdLayout>
       </AntdLayout>
     </StyledLayout>
@@ -51,7 +54,8 @@ Layout.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
   themeOverrides: PropTypes.object,
   pathname: PropTypes.string,
-  sideMenuChildren: PropTypes.node
+  sideMenuChildren: PropTypes.node,
+  contentContainerStyles: PropTypes.string
 }
 
 export default withLoader(Layout)
