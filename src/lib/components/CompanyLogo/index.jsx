@@ -2,8 +2,8 @@ import PropTypes from 'prop-types'
 import logoImage from './img/assembly-cropped-logo.png'
 import { Container, LogoContainer, Logo } from './index.styled'
 
-const CompanyLogo = ({ companyName }) => (
-  <Container companyNameLength={companyName.length}>
+const CompanyLogo = ({ companyName, inHeader = false }) => (
+  <Container companyNameLength={companyName.length} $inHeader={inHeader}>
     <LogoContainer>
       {companyName} <Logo src={logoImage} alt={`${companyName} logo`} />
     </LogoContainer>
