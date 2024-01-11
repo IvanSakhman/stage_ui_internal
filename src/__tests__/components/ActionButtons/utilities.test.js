@@ -164,6 +164,22 @@ import { translateResponseAction, filterActionsByCondition } from '~su/component
                expect(translateResponseAction(action).properties).toEqual({ href:  '/templating/template_versions/undefined/outputs' })
              })
            })
+
+           describe('that is uri encoded', () => {
+             describe('with record', () => {
+               it('is able to decode the uri component and replace the id placeholder with id from a record', () => {
+                 const action = { type: 'link', name: 'ActionName', options: { href: '/subscribe/new?template_id=%3Aid' } }
+                 expect(translateResponseAction(action, { record: { id: 1 } }).properties).toEqual({ href:  '/subscribe/new?template_id=1' })
+               })
+             })
+
+             describe('without record', () => {
+               it('is is able to decode the uri component and creates invalid url but does not crash', () => {
+                 const action = { type: 'link', name: 'ActionName', options: { href: '/subscribe/new?template_id=%3Aid' } }
+                 expect(translateResponseAction(action).properties).toEqual({ href:  '/subscribe/new?template_id=:id' })
+               })
+             })
+           })
          })
 
          describe('that does not contain id placeholder', () => {

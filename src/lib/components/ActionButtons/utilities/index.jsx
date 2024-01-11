@@ -5,7 +5,7 @@ const translateLinkAction = (action, record) => {
   const options = Object.assign({}, action.options)
 
   if (options.href) {
-    options.href = string.replacePlaceholders(options.href, record)
+    options.href = string.replacePlaceholders(decodeURIComponent(options.href), record)
   }
 
   return options

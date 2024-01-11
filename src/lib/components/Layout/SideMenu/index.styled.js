@@ -20,6 +20,10 @@ export const SideMenuContainer = styled(Layout.Sider)`
   & .ant-menu-item:active {
     background: transparent !important;
   }
+
+  & .ant-menu-submenu-selected > .ant-menu-submenu-title {
+    color: ${({ theme }) => theme.sideMenuItemOpen};
+  }
 `
 
 export const StyledLink = styled(Typography.Link)`

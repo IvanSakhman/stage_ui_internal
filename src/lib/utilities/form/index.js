@@ -9,8 +9,6 @@ const getFormErrors = (errors) => {
   return getNestedErrors(errors)
 }
 
-const normalizeEmptyToUndef = (value, _prevValue, _prevValues) => (value === '' ? undefined : value)
-
 const valueFromValueEnum = (valueEnums, value) => {
   const VALUE_ENUM_HUMAN_INDEX = 1 // ie severity = { valueEnum: [['fatal', 11]] }
 
@@ -18,6 +16,6 @@ const valueFromValueEnum = (valueEnums, value) => {
   return valueEnum ? valueEnum[0] : value
 }
 
-import buildFields from './fields'
+import buildFields, { normalizeEmptyToUndef } from './fields'
 
 export default { getFormErrors, normalizeEmptyToUndef, valueFromValueEnum, buildFields }

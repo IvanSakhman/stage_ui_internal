@@ -33,4 +33,26 @@ describe('Dynamic Fields rulesBuilder', () => {
       expect(buildRules({ type: 'string', pattern: '.*' })).toEqual(expect.arrayContaining([{ pattern: '.*' }]))
     })
   })
+
+  describe('when type is string', () => {
+    describe('when schema includes minLength', () => {
+      it('adds whitespace: true rule', () => {
+        expect(buildRules({ type: 'string', minLength: 1 })).toEqual(expect.arrayContaining([{ whitespace: true }]))
+      })
+    })
+
+    describe('when schema does not include minLength', () => {
+      it('does not add whitespace: true rule', () => {
+        expect(buildRules({ type: 'string' })).toEqual([{ type: 'string' }, validators.conditionalRulesValidator({})])
+      })
+    })
+  })
+
+  describe('when type is not string', () => {
+    describe('when schema includes minLength', () => {
+      it('does not add whitespace: true rule', () => {
+        expect(buildRules({ type: 'integer', minLength: 1 })).toEqual([{ type: 'integer' }, validators.conditionalRulesValidator({})])
+      })
+    })
+  })
 })

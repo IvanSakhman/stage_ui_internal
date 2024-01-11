@@ -33,9 +33,11 @@ const buildComponentForArrayType = ({ type, ...schema }) => {
 
 const buildComponentForString = ({ enum: enums, valueEnum, userInputAllowed }) => {
   if (enums || valueEnum) {
+    const props = userInputAllowed ? {} : { fixParentNode: true, showSearch: true }
+
     return {
       component: userInputAllowed ? AutoComplete : Select,
-      props: { enums: enums, valueEnum: valueEnum, fixParentNode: true }
+      props: { enums: enums, valueEnum: valueEnum, ...props }
     }
   } else {
     return { component: Input }
@@ -50,7 +52,7 @@ const buildComponentForInteger = ({ enum: enums, valueEnum }) =>
 // eslint-disable-next-line react/prop-types
 export default ({ type, readOnly, ...schema }, componentProps = {}) => {
   if (Array.isArray(type)) {
-    type = type.pop() // eslint-disable-line react/prop-types
+    type = type.slice(-1)[0] // eslint-disable-line react/prop-types
   }
 
   if (readOnly) {

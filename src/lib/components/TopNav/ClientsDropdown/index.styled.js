@@ -1,8 +1,6 @@
 import styled from 'styled-components'
 import Menu from '~su/components/Menu'
 
-import { COLORS } from '~su/constants'
-
 export const StyledClientsMenu = styled(Menu)`
   .ant-menu-submenu-arrow {
     display: block;
@@ -17,7 +15,7 @@ export const StyledClientsMenu = styled(Menu)`
   .ant-menu-submenu-selected:not(.ant-menu-submenu-open) {
     &,
     & * {
-      color: ${COLORS.white};
+      color: ${({ theme }) => theme.sideMenuItemDefault};
     }
   }
 
@@ -29,5 +27,11 @@ export const StyledClientsMenu = styled(Menu)`
     .ant-menu-submenu-arrow {
       display: none;
     }
+  }
+
+  .ant-menu-submenu::after,
+  .ant-menu-submenu:hover::after {
+    border-bottom: none !important;
+    transition: none !important;
   }
 `

@@ -1,20 +1,18 @@
 import PropTypes from 'prop-types'
 import logoImage from './img/assembly-cropped-logo.png'
-import { BorderedContainer, LogoContainer, CompanyName } from './index.styled'
+import { Container, LogoContainer, Logo } from './index.styled'
 
-const CompanyLogo = ({ companyName }) => {
-  return (
-    <BorderedContainer>
-      <LogoContainer>
-        <CompanyName>{companyName.toUpperCase()}</CompanyName>
-        <img src={logoImage} alt={`${companyName} logo`} height={29} width={31} />
-      </LogoContainer>
-    </BorderedContainer>
-  )
-}
+const CompanyLogo = ({ companyName, inHeader = false }) => (
+  <Container companyNameLength={companyName.length} $inHeader={inHeader}>
+    <LogoContainer>
+      {companyName} <Logo src={logoImage} alt={`${companyName} logo`} />
+    </LogoContainer>
+  </Container>
+)
 
 CompanyLogo.propTypes = {
-  companyName: PropTypes.string.isRequired
+  companyName: PropTypes.string.isRequired,
+  inHeader: PropTypes.bool
 }
 
 export default CompanyLogo

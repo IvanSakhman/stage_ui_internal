@@ -9,11 +9,13 @@ export const extendRenderWithActions = (actions, column, functionActionHandlers)
   const columnActions = actions[column.key]
 
   if (columnActions) {
-    column.render = (value, record, _index) => (
+    const customRender = column.render
+    column.render = (value, record, index) => (
       <ActionButtons
         actions={columnActions}
         record={record}
         dynamicDisplayValueName={column.key}
+        valueRender={customRender ? () => customRender(value, record, index) : null}
         functionHandlers={functionActionHandlers}
         size="small"
       />

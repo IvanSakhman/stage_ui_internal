@@ -12,7 +12,7 @@ const ProDescriptions = ({ columnCount, record, columns, ...props }) => {
     label: t(`descriptions.${item.key}`, item.label)
   }))
 
-  return <Descriptions column={columnCount} items={items} />
+  return <Descriptions column={columnCount} items={items} {...props} />
 }
 
 ProDescriptions.propTypes = {

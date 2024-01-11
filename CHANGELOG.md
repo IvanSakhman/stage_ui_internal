@@ -1,3 +1,77 @@
+v1.69.6
+[feat] Export store.triggerGlobalAlert
+
+v1.69.5
+[fix] Dynamic Fields building - do not modify type value when is array.
+
+array.pop() modifies the array.
+
+v1.69.4
+[fix] Component Field label not displayed.
+
+This fixes a bug, where passed component label (ie <strong>{field-one}</strong>) was ignored.
+
+Additionally, fixed Popover prop types.
+
+v1.69.3
+[fix] Active icon color
+
+v1.69.2
+[fix] Decode uri component for link ActionButton
+
+Will support received action's href option including encoded uri (ie new?id=%3Aid)
+
+v1.69.1
+[fix]
+1. Side menu item colors
+2. Client select color
+
+v1.69.0
+[feat] Components improvements and additions
+
+1. Added Flex, Steps and Timeline from antd
+2. StageUI now exports LoadingBlock component
+3. LoadingBlock now accepts tip property.
+4. Fixes Popover's propTypes
+5. ProDescriptions now pass remaining props to antd's Description
+6. Tag now accepts size prop, which allows to display tags of different sizes (large and default supported atm)
+7. TagsList now accepts tagSize prop, which is passed to Tag
+
+v1.68.0
+[feat] Extended date utils functionality
+
+1. timeBetween now accepts relative param, which when true, uses i18n to appropriate wording
+2. formatDuration now uses i18n to find the conjuction param value
+3. formatDuration now passes language and fallback languages to humanizeDuration
+
+v1.67.0
+[feat] Extended dynamic fields functionality
+
+1. Set showSearch=true as default for Select when field type is string
+2. Pass the 'hint' property from json schema to field.item
+3. Added 'whitespace: true' rule when field type is 'string' and 'minLength' property exists
+
+v1.66.0
+[feat] SmartList and SmartTable now accept and display extraDataDisplay prop.
+
+v1.65.0
+1. Added RadioGroup component
+2. Added ability to pass extra children to SideMenu
+
+v1.64.0
+[feat] Preserve column.render for table columns using ActionButtons
+
+v1.63.1
+[fix] Fixed SmartTable ignoring pagination parameter and assigning default pagination value, which forced pagination to appear in every table
+
+v1.63.0
+[feat] Dynamic fields - normalize empty string value in field to undefined.
+
+APIs usually differently interpret missing key than an empty value. This has proven to be the case in Blueprints.
+
+Additionally:
+ - do not pass fixParentNode to Autocomplete component.
+
 v1.62.0
 [feat] Support displaying GlobalFilters in a modal.
 

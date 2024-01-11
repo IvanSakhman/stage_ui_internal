@@ -25,6 +25,14 @@ const resources = {
         failed: 'There is an error with WebSocket connection. Live updates might not work.',
         unavailable: 'There is an error with WebSocket connection. Live updates might not work.',
         disconnected: 'WebSockets disconnected.'
+      },
+      date: {
+        timeBetween: {
+          relative: '{{value}} ago'
+        },
+        formatDuration: {
+          conjuction: ' and '
+        }
       }
     }
   }

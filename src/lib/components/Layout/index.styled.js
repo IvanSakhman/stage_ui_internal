@@ -4,6 +4,8 @@ const { Content } = Layout
 
 export const StyledContent = styled(Content)`
   padding: 0 16px;
+
+  ${({ $styleOptions }) => $styleOptions};
 `
 
 // colors should be rewritten in scope of https://assembly-tech.atlassian.net/browse/SC-2

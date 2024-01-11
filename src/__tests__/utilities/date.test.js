@@ -54,6 +54,16 @@ describe('Date Utilities', () => {
         )
       })
     })
+
+    describe('with relateive = true', () => {
+      it('returns the difference with relative word', () => {
+        const clock = FakeTimers.install({ now: 1604582722000 }) //'2020-11-05T13:25:22.000Z'
+
+        expect(timeBetween({ startDate: '2020-11-03T10:19:55.000Z', humanizeOptions: { largest: 2 }, relative: true })).toEqual(
+          '2 days and 3 hours ago'
+        )
+      })
+    })
   })
 
   describe('formatDuration', () => {

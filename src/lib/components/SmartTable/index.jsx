@@ -5,6 +5,7 @@ import Card from '../Card'
 import TableSearchBox from './SearchBox'
 
 import string from '~su/utilities/string'
+import object from '~su/utilities/object'
 import { buildColumns } from './utilities'
 
 const SmartTable = ({
@@ -28,12 +29,14 @@ const SmartTable = ({
     return column
   })
 
-  const paginationProps = {
-    position: ['topRight'],
-    style: { position: 'absolute', right: 16, top: -60, zIndex: 1 },
-    showSizeChanger: false,
-    ...pagination
-  }
+  const paginationProps = object.isEmpty(pagination)
+    ? false
+    : {
+        position: ['topRight'],
+        style: { position: 'absolute', right: 16, top: -60, zIndex: 1 },
+        showSizeChanger: false,
+        ...pagination
+      }
 
   const handleChange = (pagination, filters, sorter, extra) => {
     switch (extra.action) {

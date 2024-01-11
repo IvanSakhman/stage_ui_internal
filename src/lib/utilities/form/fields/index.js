@@ -2,6 +2,8 @@ import string from '~su/utilities/string'
 import buildComponent from './componentBuilders'
 import buildRules from './rulesBuilder'
 
+export const normalizeEmptyToUndef = (value, _prevValue, _prevValues) => (value === '' ? undefined : value)
+
 const gatherDependencies = (name, conditionalRules) => {
   let dependencies = []
 
@@ -53,6 +55,8 @@ const buildFieldConfig = (
       valuePropName: properties.type === 'boolean' ? 'checked' : 'value',
       dependencies: gatherDependencies(name, conditionalRules),
       initialValue: properties.default,
+      normalize: !required ? normalizeEmptyToUndef : undefined,
+      tooltip: properties.hint,
       ...translations,
       ...(itemExtraConfig || {})
     },
