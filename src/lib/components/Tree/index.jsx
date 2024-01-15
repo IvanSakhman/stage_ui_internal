@@ -45,6 +45,8 @@ const Tree = (props) => {
     props.onDragDrop(reorderNodes(info, data))
   }
 
+  const allowDrop = ({ dropNode, dropPosition }) => (!dropNode.root && dropPosition > -1 ? true : false)
+
   const treeProps = object.compact({
     selectedKeys: props.selectedKeys || null
   })
@@ -80,7 +82,7 @@ const Tree = (props) => {
         draggable={draggable}
         blockNode
         treeData={data}
-        allowDrop={({ dropNode, dropPosition }) => (!dropNode.root && dropPosition > -1 ? true : false)}
+        allowDrop={props.allowDrop ? props.allowDrop : allowDrop}
         onDrop={onDragDrop}
         onSelect={onItemSelect}
         titleRender={titleRender}
