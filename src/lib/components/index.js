@@ -77,6 +77,7 @@ import CompanyLogo from './CompanyLogo'
 import SmartDataDisplay from './SmartDataDisplay'
 import RadioGroup from './RadioGroup'
 import Breadcrumb from './Breadcrumb'
+import TreeSelect from './TreeSelect'
 
 export {
   AutoComplete,
@@ -158,5 +159,6 @@ export {
   CompanyLogo,
   SmartDataDisplay,
   RadioGroup,
-  Breadcrumb
+  Breadcrumb,
+  TreeSelect
 }
