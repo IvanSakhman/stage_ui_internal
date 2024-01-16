@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import { useState, useEffect, useRef, cloneElement } from 'react'
 import { Input, Alert } from 'antd'
 
@@ -24,7 +25,11 @@ const Tree = (props) => {
     titleRender,
     searchPlaceholder = 'Search',
     noDataMessage = null,
-    defaultExpandAll = false
+    defaultExpandAll = false,
+    style = {
+      maxHeight: 450,
+      overflow: 'scroll'
+    }
   } = props
 
   const treeRef = useRef(null)
@@ -93,10 +98,7 @@ const Tree = (props) => {
         titleRender={titleRender}
         expandedKeys={expandedKeys}
         onExpand={setExpandedKeys}
-        style={{
-          maxHeight: 450,
-          overflow: 'scroll'
-        }}
+        style={style}
         {...treeProps}
       />
     )
@@ -116,3 +118,19 @@ const Tree = (props) => {
 }
 
 export default Tree
+
+Tree.propTypes = {
+  data: PropTypes.array.isRequired,
+  searchable: PropTypes.bool,
+  searchComponent: PropTypes.element,
+  draggable: PropTypes.bool,
+  onItemSelect: PropTypes.func,
+  titleRender: PropTypes.func,
+  searchPlaceholder: PropTypes.string,
+  noDataMessage: PropTypes.string,
+  defaultExpandAll: PropTypes.bool,
+  onDragDrop: PropTypes.func,
+  selectedKeys: PropTypes.array,
+  allowDrop: PropTypes.func,
+  style: PropTypes.object
+}
