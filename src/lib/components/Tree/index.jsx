@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types'
 import { useState, useEffect, useRef, cloneElement } from 'react'
 import { Input, Alert } from 'antd'
 
@@ -14,6 +15,7 @@ import { StyledTree } from './index.styled'
 
 const Tree = (props) => {
   const [data, setData] = useState([])
+  const [expandedKeys, setExpandedKeys] = useState([])
 
   const {
     searchable,
@@ -22,7 +24,12 @@ const Tree = (props) => {
     onItemSelect,
     titleRender,
     searchPlaceholder = 'Search',
-    noDataMessage = null
+    noDataMessage = null,
+    defaultExpandAll = false,
+    style = {
+      maxHeight: 450,
+      overflow: 'scroll'
+    }
   } = props
 
   const treeRef = useRef(null)
@@ -30,20 +37,25 @@ const Tree = (props) => {
   useEffect(() => {
     if (props.data) {
       setData(props.data)
-      const rootNodesKeys = props.data.filter((node) => node.expanded).map((node) => node.key)
-      treeRef.current.setExpandedKeys(rootNodesKeys)
+
+      if (defaultExpandAll) {
+        setExpandedKeys(props.data.map((node) => node.key))
+      }
     }
-  }, [props.data])
+  }, [props.data, defaultExpandAll])
 
   const onSearch = (searchValue) => {
     const matches = performSearch(searchValue, props.data.slice())
-    treeRef.current.setExpandedKeys(findMatchedKeys(matches))
+
     setData(matches)
+    setExpandedKeys(findMatchedKeys(matches))
   }
 
   const onDragDrop = (info) => {
     props.onDragDrop(reorderNodes(info, data))
   }
+
+  const allowDrop = ({ dropNode, dropPosition }) => (!dropNode.root && dropPosition > -1 ? true : false)
 
   const treeProps = object.compact({
     selectedKeys: props.selectedKeys || null
@@ -80,14 +92,13 @@ const Tree = (props) => {
         draggable={draggable}
         blockNode
         treeData={data}
-        allowDrop={({ dropNode, dropPosition }) => (!dropNode.root && dropPosition > -1 ? true : false)}
+        allowDrop={props.allowDrop ? props.allowDrop : allowDrop}
         onDrop={onDragDrop}
         onSelect={onItemSelect}
         titleRender={titleRender}
-        style={{
-          maxHeight: 450,
-          overflow: 'scroll'
-        }}
+        expandedKeys={expandedKeys}
+        onExpand={setExpandedKeys}
+        style={style}
         {...treeProps}
       />
     )
@@ -107,3 +118,19 @@ const Tree = (props) => {
 }
 
 export default Tree
+
+Tree.propTypes = {
+  data: PropTypes.array.isRequired,
+  searchable: PropTypes.bool,
+  searchComponent: PropTypes.element,
+  draggable: PropTypes.bool,
+  onItemSelect: PropTypes.func,
+  titleRender: PropTypes.func,
+  searchPlaceholder: PropTypes.string,
+  noDataMessage: PropTypes.string,
+  defaultExpandAll: PropTypes.bool,
+  onDragDrop: PropTypes.func,
+  selectedKeys: PropTypes.array,
+  allowDrop: PropTypes.func,
+  style: PropTypes.object
+}
