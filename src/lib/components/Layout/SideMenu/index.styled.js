@@ -24,6 +24,17 @@ export const SideMenuContainer = styled(Layout.Sider)`
   & .ant-menu-submenu-selected > .ant-menu-submenu-title {
     color: ${({ theme }) => theme.sideMenuItemOpen};
   }
+
+  // collapsed menu styles
+  & .ant-menu-inline-collapsed {
+    .ant-menu-submenu-selected .ant-menu-submenu-title > .anticon,
+    .ant-menu-item-selected .anticon {
+      color: ${({ theme }) => theme.sideMenuItemActive};
+    }
+  }
+  & .ant-layout-sider-trigger {
+    background: ${({ theme }) => theme.sideMenuBackground} !important;
+  }
 `
 
 export const StyledLink = styled(Typography.Link)`

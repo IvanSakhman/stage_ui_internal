@@ -14,6 +14,7 @@ import { useNavigate, initializeWebsocketHooks } from '~su/hooks'
 // constants
 import theme from '~su/constants/theme'
 import components from '~su/constants/componentsConfig'
+import breakpoints from '~su/constants/breakpointsConfig'
 
 // providers
 import { ConfigProvider, App, message } from 'antd'
@@ -50,7 +51,7 @@ const StageUiApp = ({ children, initialConfig, context, loadConfigParams = null,
     ).then(() => setIsInitialised(true))
   }, [initialConfig, context, loadConfigParams])
 
-  const themeToken = { ...theme.token, ...brandingToken, ...themeOverrides.token }
+  const themeToken = { ...theme.token, ...breakpoints, ...brandingToken, ...themeOverrides.token }
 
   return (
     <ConfigProvider theme={{ token: themeToken, components }}>

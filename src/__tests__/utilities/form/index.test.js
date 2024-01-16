@@ -15,6 +15,14 @@ describe('Form Utilities', () => {
 
       expect(getFormErrors(errors)).toEqual([{ name: ['nested', 'simple'], errors: ['Error message'] }])
     })
+
+    describe('when key includes numbers', () => {
+      const errors = { nested: { 0: { simple: ['Error message'] } } }
+
+      it('returns the numbers as ints', () => {
+        expect(getFormErrors(errors)).toEqual([{ name: ['nested', 0, 'simple'], errors: ['Error message'] }])
+      })
+    })
   })
 
   describe('normalizeEmptyToUndef', () => {

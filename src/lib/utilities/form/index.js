@@ -1,6 +1,8 @@
 const getFormErrors = (errors) => {
   const getNestedErrors = (o, keys = []) =>
     Object.entries(o).flatMap(([key, errors]) => {
+      key = Number.isNaN(parseInt(key)) ? key : parseInt(key)
+
       if (typeof errors === 'object' && !Array.isArray(errors)) return getNestedErrors(errors, [...keys, key])
 
       return { name: [...keys, key], errors }

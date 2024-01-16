@@ -1,3 +1,39 @@
+v1.73.0
+[feat] Draggable tree select
+
+v1.72.0
+[feat] Introduced custom, more tailored screen breakpoints.
+
+Default breakpoints provided by Antd do not suit our projects too well because they do not differentiate different desktop sizes too well. New breakpoints allow to differentiate between different desktop/laptop screens sizes allowing for more tailored rules.
+
+Previously: Screens with width between 1200 and 1600 were all treated as XL screen. And screens above 1600 were treated as XXL.
+Now:
+ - Screens with width 1280 and below are treated as MD
+ - Screens with width 1440 and below are treated as LG
+ - Screens with width 1800 and below are treated as XL
+ - Screens with width above 1800 are treated as XXL.
+
+
+v1.71.0
+[feat] Make sideMenu collapsible and auto-collapse on screens smaller than xxl.
+
+This provides more screen real estate for users using smaller screens.
+
+v1.70.0
+[feat&refactor&fix]
+- refactor TopNav component to add dynamic components
+- refactor CompanyLogo component for dynamic placement in header
+- export Breadcrumb component
+- restored cropped logo with transparent background
+- show SideBar if items are present
+- passed content container styles
+- fix TopNav propTypes
+
+v1.69.7
+[fix] getFormErrors - parse error key to int if possible.
+
+Otherwise antd's Form is not able to set the errors correctly using setFields.
+
 v1.69.6
 [feat] Export store.triggerGlobalAlert
 
