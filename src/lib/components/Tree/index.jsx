@@ -14,6 +14,7 @@ import { StyledTree } from './index.styled'
 
 const Tree = (props) => {
   const [data, setData] = useState([])
+  const [expandedKeys, setExpandedKeys] = useState([])
 
   const {
     searchable,
@@ -22,7 +23,8 @@ const Tree = (props) => {
     onItemSelect,
     titleRender,
     searchPlaceholder = 'Search',
-    noDataMessage = null
+    noDataMessage = null,
+    defaultExpandAll = false
   } = props
 
   const treeRef = useRef(null)
@@ -30,15 +32,18 @@ const Tree = (props) => {
   useEffect(() => {
     if (props.data) {
       setData(props.data)
-      const rootNodesKeys = props.data.filter((node) => node.expanded).map((node) => node.key)
-      treeRef.current.setExpandedKeys(rootNodesKeys)
+
+      if (defaultExpandAll) {
+        setExpandedKeys(props.data.map((node) => node.key))
+      }
     }
-  }, [props.data])
+  }, [props.data, defaultExpandAll])
 
   const onSearch = (searchValue) => {
     const matches = performSearch(searchValue, props.data.slice())
-    treeRef.current.setExpandedKeys(findMatchedKeys(matches))
+
     setData(matches)
+    setExpandedKeys(findMatchedKeys(matches))
   }
 
   const onDragDrop = (info) => {
@@ -86,6 +91,8 @@ const Tree = (props) => {
         onDrop={onDragDrop}
         onSelect={onItemSelect}
         titleRender={titleRender}
+        expandedKeys={expandedKeys}
+        onExpand={setExpandedKeys}
         style={{
           maxHeight: 450,
           overflow: 'scroll'
