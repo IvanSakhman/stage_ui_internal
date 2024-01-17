@@ -24,7 +24,8 @@ const StyleProvider = ({
   pathname,
   topNavLogo,
   sideMenuChildren,
-  contentContainerStyles
+  contentContainerStyles,
+  customTrigger
 }) => {
   const themeToken = { ...theme.token, ...brandingToken }
   const components = {
@@ -65,6 +66,7 @@ const StyleProvider = ({
               themeOverrides={topNavLogo}
               sideMenuChildren={sideMenuChildren}
               contentContainerStyles={contentContainerStyles}
+              customTrigger={customTrigger}
             >
               {main}
             </Layout>
@@ -88,7 +90,8 @@ StyleProvider.propTypes = {
   pathname: PropTypes.string,
   topNavLogo: PropTypes.object,
   sideMenuChildren: PropTypes.node,
-  contentContainerStyles: PropTypes.string
+  contentContainerStyles: PropTypes.string,
+  customTrigger: PropTypes.oneOfType([PropTypes.node, null])
 }
 
 export default StyleProvider
