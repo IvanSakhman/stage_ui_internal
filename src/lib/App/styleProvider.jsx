@@ -25,7 +25,7 @@ const StyleProvider = ({
   topNavLogo,
   sideMenuChildren,
   contentContainerStyles,
-  isSiderCollapsible
+  isSideMenuCollapsible
 }) => {
   const themeToken = { ...theme.token, ...brandingToken }
   const components = {
@@ -66,7 +66,7 @@ const StyleProvider = ({
               themeOverrides={topNavLogo}
               sideMenuChildren={sideMenuChildren}
               contentContainerStyles={contentContainerStyles}
-              isSiderCollapsible={isSiderCollapsible}
+              isSideMenuCollapsible={isSideMenuCollapsible}
             >
               {main}
             </Layout>
@@ -91,7 +91,7 @@ StyleProvider.propTypes = {
   topNavLogo: PropTypes.object,
   sideMenuChildren: PropTypes.node,
   contentContainerStyles: PropTypes.string,
-  isSiderCollapsible: PropTypes.bool
+  isSideMenuCollapsible: PropTypes.bool
 }
 
 export default StyleProvider
