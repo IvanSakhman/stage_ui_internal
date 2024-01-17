@@ -12,7 +12,7 @@ import DynamicIcon from '../../DynamicIcon'
 import { SideMenuContainer, StyledLink } from './index.styled'
 import getDefaultMenuKeys from './utilities/getDefaultMenuKeys'
 
-const SideMenu = ({ sidebarItems, onSideMenuSelect, pathname = '', customTrigger, children }) => {
+const SideMenu = ({ sidebarItems, onSideMenuSelect, pathname = '', isCollapsible = true, children }) => {
   const location = useLocation()
   const currentBreakpoints = useBreakpoint()
   const [isCollapsed, setIsCollapsed] = useState(false)
@@ -56,8 +56,7 @@ const SideMenu = ({ sidebarItems, onSideMenuSelect, pathname = '', customTrigger
     <SideMenuContainer
       collapsed={isCollapsed}
       onCollapse={(collapsed) => setIsCollapsed(collapsed)}
-      collapsible
-      {...(customTrigger || customTrigger === null ? { trigger: customTrigger } : {})}
+      collapsible={isCollapsible}
     >
       {children}
       <Menu
@@ -85,7 +84,7 @@ SideMenu.propTypes = {
   sidebarItems: recursiveSidebarItems,
   onSideMenuSelect: PropTypes.func.isRequired,
   pathname: PropTypes.string,
-  customTrigger: PropTypes.oneOfType([PropTypes.node, null]),
+  isCollapsible: PropTypes.bool,
   children: PropTypes.node
 }
 

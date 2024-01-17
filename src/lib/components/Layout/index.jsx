@@ -21,7 +21,7 @@ const Layout = ({
   pathname,
   sideMenuChildren,
   contentContainerStyles,
-  customTrigger
+  isSiderCollapsible
 }) => {
   const { token: themeToken } = useToken()
 
@@ -35,7 +35,7 @@ const Layout = ({
             onSideMenuSelect={onSideMenuSelect}
             themeToken={themeToken}
             pathname={pathname}
-            customTrigger={customTrigger}
+            isCollapsible={isSiderCollapsible}
           >
             {sideMenuChildren}
           </SideMenu>
@@ -58,7 +58,7 @@ Layout.propTypes = {
   pathname: PropTypes.string,
   sideMenuChildren: PropTypes.node,
   contentContainerStyles: PropTypes.string,
-  customTrigger: PropTypes.oneOfType([PropTypes.node, null])
+  isSiderCollapsible: PropTypes.bool
 }
 
 export default withLoader(Layout)
