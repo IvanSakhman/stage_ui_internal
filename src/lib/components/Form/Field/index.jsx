@@ -1,6 +1,9 @@
 import { cloneElement } from 'react'
 import PropTypes from 'prop-types'
-import { Form, Col } from 'antd'
+import { Form } from 'antd'
+
+import { Col } from '~su/components/Grid'
+
 import { StyledField } from './index.styled'
 import ProField from './Pro'
 
@@ -30,7 +33,7 @@ const Field = ({ field, index, disable = false, dynamic = false, extras = {}, cl
     )
   }
 
-  const { name: itemName, label, dependencies, hideUnless, width, pro, prefix: _prefix, ...rest } = item
+  const { name: itemName, label, dependencies, hideUnless, width, fieldCol = {}, pro, prefix: _prefix, ...rest } = item
 
   const fieldName = dynamic ? [extras.formField.name, itemName].flat() : itemName,
     fieldKey = dynamic ? [extras.formField.fieldKey, itemName].flat() : [itemName, index],
@@ -59,7 +62,7 @@ const Field = ({ field, index, disable = false, dynamic = false, extras = {}, cl
   )
 
   fieldComponent = (
-    <Col span={width || 24} key={index}>
+    <Col span={width || 24} key={index} {...fieldCol}>
       {fieldComponent}
     </Col>
   )
@@ -92,7 +95,8 @@ Field.propTypes = {
       hideUnless: PropTypes.func,
       width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       pro: PropTypes.bool,
-      prefix: PropTypes.string
+      prefix: PropTypes.string,
+      fieldCol: Col.types
     }),
     component: PropTypes.element
   }),

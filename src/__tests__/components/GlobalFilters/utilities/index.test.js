@@ -17,12 +17,12 @@ describe('GlobalFilters utilities', () => {
     by_array_filter_with_value_enum: {
       type: 'array',
       items: {
-        type: 'string',
+        type: 'integer',
         not: { type: 'null' },
         valueEnum: [
-          ['Value One', 'value_one'],
-          ['Value Two', 'value_two'],
-          ['Value Three', 'value_three']
+          ['Value One', 1],
+          ['Value Two', 2],
+          ['Value Three', 3]
         ]
       }
     },
@@ -357,6 +357,7 @@ describe('GlobalFilters utilities', () => {
       {
         by_integer_filter: '10',
         by_array_filter_with_enum: 'value_one,value_two',
+        by_array_filter_with_value_enum: '1,2',
         by_boolean_filter: 'false',
         by_string_filter: 'foo'
       }
@@ -366,6 +367,7 @@ describe('GlobalFilters utilities', () => {
       expect(readAppliedFilters(filtersProperties, urlParams)).toEqual({
         by_integer_filter: 10,
         by_array_filter_with_enum: ['value_one', 'value_two'],
+        by_array_filter_with_value_enum: [1, 2],
         by_boolean_filter: false,
         by_string_filter: 'foo'
       })
@@ -435,78 +437,180 @@ describe('GlobalFilters utilities', () => {
     it('returns extraFieldConfig for each fields item', () => {
       expect(buildFieldsConfig(filtersProperties)).toEqual({
         by_array_filter_with_enum: expect.objectContaining({
-          item: { width: 'auto', hasFeedback: false }
+          item: expect.objectContaining({ width: 'auto', hasFeedback: false })
         }),
         by_array_filter_with_value_enum: expect.objectContaining({
-          item: { width: 'auto', hasFeedback: false }
+          item: expect.objectContaining({ width: 'auto', hasFeedback: false })
         }),
         by_string_filter: expect.objectContaining({
-          item: { width: 'auto', hasFeedback: false }
+          item: expect.objectContaining({ width: 'auto', hasFeedback: false })
         }),
         by_string_filter_with_enum: expect.objectContaining({
-          item: { width: 'auto', hasFeedback: false }
+          item: expect.objectContaining({ width: 'auto', hasFeedback: false })
         }),
         by_boolean_filter: expect.objectContaining({
-          item: { width: 'auto', hasFeedback: false },
+          item: expect.objectContaining({ width: 'auto', hasFeedback: false }),
           componentProps: {}
         }),
         by_integer_filter: expect.objectContaining({
-          item: { width: 'auto', hasFeedback: false }
+          item: expect.objectContaining({ width: 'auto', hasFeedback: false })
         }),
         by_integer_filter_with_enums: expect.objectContaining({
-          item: { width: 'auto', hasFeedback: false }
+          item: expect.objectContaining({ width: 'auto', hasFeedback: false })
         })
       })
     })
 
-    describe('when field type is string', () => {
-      it('adds allowClear: true componentProp', () => {
-        expect(buildFieldsConfig(filtersProperties)).toEqual(expect.objectContaining({
+    describe('when inModal', () => {
+      it('does not hide the labels', () => {
+        expect(buildFieldsConfig(filtersProperties, {}, true)).toEqual({
+          by_array_filter_with_enum: expect.objectContaining({
+            item: expect.not.objectContaining({ label: false })
+          }),
+          by_array_filter_with_value_enum: expect.objectContaining({
+            item: expect.not.objectContaining({ label: false })
+          }),
           by_string_filter: expect.objectContaining({
-            componentProps: { allowClear: true }
+            item: expect.not.objectContaining({ label: false })
+          }),
+          by_string_filter_with_enum: expect.objectContaining({
+            item: expect.not.objectContaining({ label: false })
+          }),
+          by_boolean_filter: expect.objectContaining({
+            item: expect.not.objectContaining({ label: false }),
+            componentProps: {}
+          }),
+          by_integer_filter: expect.objectContaining({
+            item: expect.not.objectContaining({ label: false })
+          }),
+          by_integer_filter_with_enums: expect.objectContaining({
+            item: expect.not.objectContaining({ label: false })
+          })
+        })
+
+      })
+    })
+
+    describe('when not inModal', () => {
+      it('hides the labels', () => {
+        expect(buildFieldsConfig(filtersProperties, {}, false)).toEqual({
+          by_array_filter_with_enum: expect.objectContaining({
+            item: expect.objectContaining({ label: false })
+          }),
+          by_array_filter_with_value_enum: expect.objectContaining({
+            item: expect.objectContaining({ label: false })
+          }),
+          by_string_filter: expect.objectContaining({
+            item: expect.objectContaining({ label: false })
+          }),
+          by_string_filter_with_enum: expect.objectContaining({
+            item: expect.objectContaining({ label: false })
+          }),
+          by_boolean_filter: expect.objectContaining({
+            item: expect.objectContaining({ label: false }),
+            componentProps: {}
+          }),
+          by_integer_filter: expect.objectContaining({
+            item: expect.objectContaining({ label: false })
+          }),
+          by_integer_filter_with_enums: expect.objectContaining({
+            item: expect.objectContaining({ label: false })
+          })
+        })
+
+      })
+    })
+
+    describe('when globalFiltersOptions include fieldCol config', () => {
+      const globalFiltersOptions = {
+        integer_filter: {
+          fieldCol: { span: 2, offset: 20 }
+        }
+      }
+
+      it('sets it on the item', () => {
+        expect(buildFieldsConfig(filtersProperties, globalFiltersOptions)).toEqual(expect.objectContaining({
+          by_boolean_filter: expect.objectContaining({
+            item: { width: 'auto', hasFeedback: false, label: false }
+          }),
+          by_integer_filter: expect.objectContaining({
+            item: { width: 'auto', fieldCol: globalFiltersOptions.integer_filter.fieldCol, hasFeedback: false, label: false }
           })
         }))
       })
+    })
+
+    const itBehavesLikeSettingAllowClear = ({ filterName, expectedValue }) => {
+      it(`adds allowClear: ${expectedValue} componentProp`, () => {
+        expect(buildFieldsConfig(filtersProperties)).toEqual(expect.objectContaining({
+          [filterName]: expect.objectContaining({
+            componentProps: expect.objectContaining({ allowClear: expectedValue })
+          })
+        }))
+      })
+    }
+    const itBehavesLikeSettingFixParentNode = ({ filterName, expectedValue, inModal = false }) => {
+      it(`adds fixParentNode: ${expectedValue} componentProp`, () => {
+        expect(buildFieldsConfig(filtersProperties, {}, inModal)).toEqual(expect.objectContaining({
+          [filterName]: expect.objectContaining({
+            componentProps: expect.objectContaining({ fixParentNode: expectedValue })
+          })
+        }))
+      })
+    }
+    const itBehavesLikeSettingMaxTagCount = ({ filterName, expectedValue }) => {
+      it('adds maxTagCount componentProp', () => {
+        expect(buildFieldsConfig(filtersProperties)).toEqual(expect.objectContaining({
+          [filterName]: expect.objectContaining({
+            componentProps: expect.objectContaining({ maxTagCount: expectedValue })
+          })
+        }))
+      })
+    }
+
+    describe('when field type is string', () => {
+      itBehavesLikeSettingAllowClear({ filterName: 'by_string_filter', expectedValue: true })
 
       describe('when has enum', () => {
-        it('adds fixParentNode: false componentProp', () => {
-          expect(buildFieldsConfig(filtersProperties)).toEqual(expect.objectContaining({
-            by_string_filter_with_enum: expect.objectContaining({
-              componentProps: { allowClear: true, fixParentNode: false }
-            })
-          }))
+        itBehavesLikeSettingFixParentNode({ filterName: 'by_string_filter_with_enum', expectedValue: false })
+        itBehavesLikeSettingMaxTagCount({ filterName: 'by_string_filter_with_enum', expectedValue: 'responsive' })
+
+        describe('when inModal', () => {
+          itBehavesLikeSettingFixParentNode({ filterName: 'by_string_filter_with_enum', expectedValue: true, inModal: true })
         })
       })
     })
 
     describe('when field type is integer', () => {
-      it('adds allowClear: true componentProp', () => {
-        expect(buildFieldsConfig(filtersProperties)).toEqual(expect.objectContaining({
-          by_integer_filter: expect.objectContaining({
-            componentProps: { allowClear: true }
-          })
-        }))
-      })
+      itBehavesLikeSettingAllowClear({ filterName: 'by_integer_filter', expectedValue: true })
 
       describe('when has enum', () => {
-        it('adds fixParentNode: false componentProp', () => {
-          expect(buildFieldsConfig(filtersProperties)).toEqual(expect.objectContaining({
-            by_integer_filter_with_enums: expect.objectContaining({
-              componentProps: { allowClear: true, fixParentNode: false }
-            })
-          }))
+        itBehavesLikeSettingFixParentNode({ filterName: 'by_integer_filter_with_enums', expectedValue: false })
+        itBehavesLikeSettingMaxTagCount({ filterName: 'by_integer_filter_with_enums', expectedValue: 'responsive' })
+
+        describe('when inModal', () => {
+          itBehavesLikeSettingFixParentNode({ filterName: 'by_integer_filter_with_enums', expectedValue: true, inModal: true })
         })
       })
     })
 
     describe('when field type is array', () => {
-      it('adds fixParentNode: false componentProp', () => {
+      itBehavesLikeSettingAllowClear({ filterName: 'by_array_filter_with_enum', expectedValue: true })
+      itBehavesLikeSettingFixParentNode({ filterName: 'by_array_filter_with_enum', expectedValue: false })
+      itBehavesLikeSettingMaxTagCount({ filterName: 'by_array_filter_with_enum', expectedValue: 'responsive' })
+
+      itBehavesLikeSettingAllowClear({ filterName: 'by_array_filter_with_value_enum', expectedValue: true })
+      itBehavesLikeSettingFixParentNode({ filterName: 'by_array_filter_with_value_enum', expectedValue: false })
+      itBehavesLikeSettingMaxTagCount({ filterName: 'by_array_filter_with_value_enum', expectedValue: 'responsive' })
+
+
+      it("adds adds mode: 'multiple' componentProp", () => {
         expect(buildFieldsConfig(filtersProperties)).toEqual(expect.objectContaining({
           by_array_filter_with_enum: expect.objectContaining({
-            componentProps: { fixParentNode: false }
+            componentProps: expect.objectContaining({ mode: 'multiple' })
           }),
           by_array_filter_with_value_enum: expect.objectContaining({
-            componentProps: { fixParentNode: false }
+            componentProps: expect.objectContaining({ mode: 'multiple' })
           })
         }))
       })

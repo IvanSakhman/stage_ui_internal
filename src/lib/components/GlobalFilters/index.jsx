@@ -46,7 +46,7 @@ const GlobalFilters = ({ applyFilters, filtersSchema, urlParams, globalFiltersOp
         <StyledFieldsList
           fields={formUtils.buildFields(
             inlineFiltersSchema,
-            buildFieldsConfig(inlineFiltersSchema.properties),
+            buildFieldsConfig(inlineFiltersSchema.properties, globalFiltersOptions),
             null,
             t
           )}
@@ -70,6 +70,7 @@ const GlobalFilters = ({ applyFilters, filtersSchema, urlParams, globalFiltersOp
       initialValues={readAppliedFilters(filtersSchema.properties, urlParams)}
     >
       <FiltersInModal
+        globalFiltersOptions={globalFiltersOptions}
         modalFiltersSchema={modalFiltersSchema}
         filtersInForm={filtersInForm}
         onOk={onlyInModal ? form.submit : null}

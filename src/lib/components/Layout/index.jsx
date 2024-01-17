@@ -20,7 +20,8 @@ const Layout = ({
   themeOverrides = {},
   pathname,
   sideMenuChildren,
-  contentContainerStyles
+  contentContainerStyles,
+  isSideMenuCollapsible
 }) => {
   const { token: themeToken } = useToken()
 
@@ -34,6 +35,7 @@ const Layout = ({
             onSideMenuSelect={onSideMenuSelect}
             themeToken={themeToken}
             pathname={pathname}
+            isCollapsible={isSideMenuCollapsible}
           >
             {sideMenuChildren}
           </SideMenu>
@@ -55,7 +57,8 @@ Layout.propTypes = {
   themeOverrides: PropTypes.object,
   pathname: PropTypes.string,
   sideMenuChildren: PropTypes.node,
-  contentContainerStyles: PropTypes.string
+  contentContainerStyles: PropTypes.string,
+  isSideMenuCollapsible: PropTypes.bool
 }
 
 export default withLoader(Layout)

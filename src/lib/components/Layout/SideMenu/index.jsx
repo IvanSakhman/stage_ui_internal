@@ -12,7 +12,7 @@ import DynamicIcon from '../../DynamicIcon'
 import { SideMenuContainer, StyledLink } from './index.styled'
 import getDefaultMenuKeys from './utilities/getDefaultMenuKeys'
 
-const SideMenu = ({ sidebarItems, onSideMenuSelect, pathname = '', children }) => {
+const SideMenu = ({ sidebarItems, onSideMenuSelect, pathname = '', isCollapsible = true, children }) => {
   const location = useLocation()
   const currentBreakpoints = useBreakpoint()
   const [isCollapsed, setIsCollapsed] = useState(false)
@@ -20,7 +20,7 @@ const SideMenu = ({ sidebarItems, onSideMenuSelect, pathname = '', children }) =
   useEffect(() => {
     // needs to be done manually because we're overwriting the breakpoints, and Sider has them hardcoded:
     // https://github.com/ant-design/ant-design/blob/master/components/layout/Sider.tsx#L13
-    setIsCollapsed(currentBreakpoints.xl === false) // collapse on screens smaller than 1441px
+    isCollapsible && setIsCollapsed(currentBreakpoints.xl === false) // collapse on screens smaller than 1441px
   }, [currentBreakpoints])
 
   const defaultMenuKeys = getDefaultMenuKeys(location, sidebarItems, pathname)
@@ -53,7 +53,11 @@ const SideMenu = ({ sidebarItems, onSideMenuSelect, pathname = '', children }) =
   const sidebarMenuItems = transformItems(sidebarItems)
 
   return (
-    <SideMenuContainer collapsed={isCollapsed} onCollapse={(collapsed) => setIsCollapsed(collapsed)} collapsible>
+    <SideMenuContainer
+      collapsed={isCollapsed}
+      onCollapse={(collapsed) => setIsCollapsed(collapsed)}
+      collapsible={isCollapsible}
+    >
       {children}
       <Menu
         defaultOpenKeys={defaultMenuKeys?.defaultOpenKeys}
@@ -80,6 +84,7 @@ SideMenu.propTypes = {
   sidebarItems: recursiveSidebarItems,
   onSideMenuSelect: PropTypes.func.isRequired,
   pathname: PropTypes.string,
+  isCollapsible: PropTypes.bool,
   children: PropTypes.node
 }
 

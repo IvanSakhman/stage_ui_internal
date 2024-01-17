@@ -22,6 +22,7 @@ const buildComponentForReadOnly = (type, schema) => {
 const buildComponentForArrayType = ({ type, ...schema }) => {
   switch (type) {
     case 'string':
+    case 'integer':
       return {
         component: Select,
         props: { mode: 'tags', enums: schema.enum, valueEnum: schema.valueEnum, fixParentNode: true }

@@ -3,8 +3,13 @@ import styled from 'styled-components'
 import FieldsList from '~su/components/Form/FieldsList'
 
 export const StyledFieldsList = styled(FieldsList)`
-  .ant-form-item-control .ant-select {
+  .ant-col-auto .ant-form-item-control .ant-select {
     min-width: 180px;
+  }
+
+  // apply/submit button
+  & + .ant-form-item {
+    margin: 0;
   }
 `
 

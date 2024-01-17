@@ -72,9 +72,41 @@ describe('Dynamic Fields componentBuilders', () => {
       })
     })
 
+    describe('when type is integer', () => {
+      it('returns a tags Select', () => {
+        expect(buildComponentForArrayType({ type: 'integer' })).toEqual({
+          component: Select, props: { mode: 'tags', fixParentNode: true }
+        })
+      })
+
+      it('passes enum and valueEnum to Select', () => {
+        expect(
+          buildComponentForArrayType({
+            type: 'integer',
+            enum: ['1', '2'],
+            valueEnum: [
+              ['One', '1'],
+              ['Two', '2']
+            ]
+          })
+        ).toEqual({
+          component: Select,
+          props: {
+            mode: "tags",
+            enums: ['1', '2'],
+            valueEnum: [
+              ['One', '1'],
+              ['Two', '2']
+            ],
+            fixParentNode: true
+          }
+        })
+      })
+    })
+
     describe('by default', () => {
       it('returns an Input', () => {
-        expect(buildComponentForArrayType({ type: 'integer' })).toEqual({ component: Input })
+        expect(buildComponentForArrayType({ type: 'boolean' })).toEqual({ component: Input })
       })
     })
   })

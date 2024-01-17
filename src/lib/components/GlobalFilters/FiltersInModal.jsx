@@ -1,9 +1,7 @@
 import PropTypes from 'prop-types'
-import { Form } from 'antd'
 import { FilterOutlined, FilterFilled } from '@ant-design/icons'
 
 import Button from '~su/components/Button'
-import { Col } from '~su/components/Grid'
 import Modal from '~su/components/Modal'
 
 import formUtils from '~su/utilities/form'
@@ -13,7 +11,7 @@ import { useTranslation, withScopedTranslations } from '~su/utilities/i18n'
 import { StyledFieldsListInModal } from './index.styled'
 import { buildFieldsConfig } from './utilities'
 
-const FiltersInModal = ({ modalFiltersSchema, filtersInForm, onOk }) => {
+const FiltersInModal = ({ modalFiltersSchema, filtersInForm, globalFiltersOptions, onOk }) => {
   const { t } = useTranslation()
   const [modal, contextHolder] = Modal.useModal()
 
@@ -26,7 +24,7 @@ const FiltersInModal = ({ modalFiltersSchema, filtersInForm, onOk }) => {
 
     const fieldsList = formUtils.buildFields(
       modalFiltersSchema,
-      buildFieldsConfig(modalFiltersSchema.properties, true),
+      buildFieldsConfig(modalFiltersSchema.properties, globalFiltersOptions, true),
       null,
       t
     )
@@ -51,7 +49,13 @@ const FiltersInModal = ({ modalFiltersSchema, filtersInForm, onOk }) => {
     const icon = modalFiltersApplied ? <FilterFilled /> : <FilterOutlined />
 
     return (
-      <Button style={{ marginRight: 20 }} type="primary-dashed" icon={icon} onClick={openFiltersModal}>
+      <Button
+        style={{ marginRight: 20 }}
+        type="primary-dashed"
+        icon={icon}
+        onClick={openFiltersModal}
+        tooltip={t('button_tooltip', null)}
+      >
         {t('button', 'Filter')}
       </Button>
     )
