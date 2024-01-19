@@ -8,6 +8,11 @@ import { StyledTabs, Title } from './index.styled'
 
 import { useTranslation } from '~su/utilities/i18n'
 
+const cardStyle = {
+  borderRadius: '0 0 6px 6px',
+  marginBottom: '8px'
+}
+
 const PageContainer = ({ loading, children, header = {}, tabs = {}, buildBreadcrumbNames = null, pathname = '' }) => {
   const { t } = useTranslation()
 
@@ -20,11 +25,6 @@ const PageContainer = ({ loading, children, header = {}, tabs = {}, buildBreadcr
   }
 
   const title = header.title || t('header.title')
-
-  const cardStyle = {
-    borderRadius: '0 0 6px 6px',
-    marginBottom: '8px'
-  }
 
   return (
     <>
