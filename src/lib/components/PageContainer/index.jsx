@@ -8,11 +8,6 @@ import { StyledTabs, Title } from './index.styled'
 
 import { useTranslation } from '~su/utilities/i18n'
 
-const cardStyle = {
-  borderRadius: '0 0 6px 6px',
-  marginBottom: '8px'
-}
-
 const PageContainer = ({ loading, children, header = {}, tabs = {}, buildBreadcrumbNames = null, pathname = '' }) => {
   const { t } = useTranslation()
 
@@ -28,7 +23,7 @@ const PageContainer = ({ loading, children, header = {}, tabs = {}, buildBreadcr
 
   return (
     <>
-      <Card style={cardStyle} bodyStyle={{ padding: '12px 40px' }}>
+      <Card style={{ borderRadius: '0 0 6px 6px', marginBottom: '8px' }} bodyStyle={{ padding: '12px 40px' }}>
         <Breadcrumb items={buildCrumbs(title, buildBreadcrumbNames, pathname)} className="ant-page-header-breadcrumb" />
         <Row justify="space-between">
           {title ? <Title level={4}>{title}</Title> : null}
