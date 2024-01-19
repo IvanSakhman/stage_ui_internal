@@ -2,8 +2,9 @@ import PropTypes from 'prop-types'
 import Skeleton from '../Skeleton'
 import { Row } from '../Grid'
 import Breadcrumb from '../Breadcrumb'
+import Card from '../Card'
 import buildCrumbs from './buildCrumbs'
-import { StyledTabs, Header, Title } from './index.styled'
+import { StyledTabs, Title } from './index.styled'
 
 import { useTranslation } from '~su/utilities/i18n'
 
@@ -20,16 +21,21 @@ const PageContainer = ({ loading, children, header = {}, tabs = {}, buildBreadcr
 
   const title = header.title || t('header.title')
 
+  const cardStyle = {
+    borderRadius: '0 0 6px 6px',
+    marginBottom: '8px'
+  }
+
   return (
     <>
-      <Header>
+      <Card style={cardStyle} bodyStyle={{ padding: '12px 40px' }}>
         <Breadcrumb items={buildCrumbs(title, buildBreadcrumbNames, pathname)} className="ant-page-header-breadcrumb" />
         <Row justify="space-between">
           {title ? <Title level={4}>{title}</Title> : null}
           {header.extra}
         </Row>
         <Skeleton loading={loading}>{header.content}</Skeleton>
-      </Header>
+      </Card>
       {children}
     </>
   )
