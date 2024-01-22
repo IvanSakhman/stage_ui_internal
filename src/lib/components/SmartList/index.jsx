@@ -1,9 +1,20 @@
 import PropTypes from 'prop-types'
+import { styled } from 'styled-components'
 
 import object from '~su/utilities/object'
 
 import Card from '../Card'
 import List from '../List'
+
+const StyledCard = styled(Card)`
+  .ant-card-head {
+    #-global-filters-form {
+      > .ant-row {
+        flex-grow: 1;
+      }
+    }
+  }
+`
 
 const SmartList = ({ title, onChange, pagination, extraDataDisplay, ...listProps }) => {
   const applyPagination = (page) => {
@@ -18,10 +29,10 @@ const SmartList = ({ title, onChange, pagination, extraDataDisplay, ...listProps
       }
 
   return (
-    <Card title={title} headStyle={{ fontWeight: 'normal', border: 'none' }}>
+    <StyledCard title={title} headStyle={{ fontWeight: 'normal', border: 'none' }}>
       {extraDataDisplay}
       <List pagination={pagination} {...listProps} />
-    </Card>
+    </StyledCard>
   )
 }
 

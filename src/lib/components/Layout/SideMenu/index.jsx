@@ -20,9 +20,7 @@ const SideMenu = ({ sidebarItems, onSideMenuSelect, pathname = '', isCollapsible
   useEffect(() => {
     // needs to be done manually because we're overwriting the breakpoints, and Sider has them hardcoded:
     // https://github.com/ant-design/ant-design/blob/master/components/layout/Sider.tsx#L13
-    if (isCollapsible) {
-      setIsCollapsed(currentBreakpoints.xl === false) // collapse on screens smaller than 1441px
-    }
+    isCollapsible && setIsCollapsed(currentBreakpoints.xl === false) // collapse on screens smaller than 1441px
   }, [currentBreakpoints])
 
   const defaultMenuKeys = getDefaultMenuKeys(location, sidebarItems, pathname)

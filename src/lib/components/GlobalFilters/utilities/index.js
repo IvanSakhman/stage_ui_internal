@@ -39,7 +39,7 @@ export const readAppliedFilters = (filtersProperties, urlParams) => {
       .map((filterName) => {
         const filterValue = urlParams.get(filterName)
 
-        const normalizedFilterValue = normalizeReadFilterValue(filtersProperties[filterName].type, filterValue)
+        const normalizedFilterValue = normalizeReadFilterValue(filtersProperties[filterName], filterValue)
 
         return filterValue ? [filterName, normalizedFilterValue] : null
       })
@@ -61,34 +61,51 @@ export const normalizeValuesForSubmit = (values) => {
   return { normalizedValues, sorter }
 }
 
-export const buildFieldsConfig = (filtersProperties, inModal = false) => {
+export const buildFieldsConfig = (filtersProperties, globalFiltersOptions = {}, inModal = false) => {
   return Object.fromEntries(
     Object.keys(filtersProperties).map((filterName) => {
       const { enum: enums, type } = filtersProperties[filterName]
       let componentProps = {}
+      let itemConfig = {
+        width: 'auto',
+        fieldCol: globalFiltersOptions[filterName.replace('by_', '')]?.fieldCol,
+        hasFeedback: false
+      }
 
-      if (['string', 'integer'].includes(type)) {
+      if (['string', 'integer', 'array'].includes(type)) {
         componentProps = { allowClear: true, ...componentProps }
       }
 
-      if (enums || type === 'array') {
-        componentProps = { fixParentNode: inModal, ...componentProps }
+      if (type === 'array') {
+        componentProps.mode = 'multiple'
       }
 
-      return [filterName, { item: { width: 'auto', hasFeedback: false }, componentProps }]
+      if (enums || type === 'array') {
+        componentProps = { fixParentNode: inModal, maxTagCount: 'responsive', ...componentProps }
+      }
+
+      if (!inModal) {
+        itemConfig.label = false
+      }
+
+      return [filterName, { item: itemConfig, componentProps }]
     })
   )
 }
 
 // @private
 
-const normalizeReadFilterValue = (type, filterValue) => {
+const normalizeReadFilterValue = (properties, filterValue) => {
+  const { type } = properties
+
   switch (type) {
     case 'integer': {
       return parseInt(filterValue)
     }
     case 'array': {
-      return filterValue?.split(',')
+      const splitValue = filterValue?.split(',')
+
+      return splitValue?.map((v) => normalizeReadFilterValue(properties.items, v))
     }
     case 'boolean': {
       return filterValue === 'true'

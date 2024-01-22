@@ -1,3 +1,20 @@
+v1.74.1
+[feat] Added possibility to disable SideMenu collapse optionally
+
+v1.74.0
+[feat] GlobalFilters improvements
+
+1. GlobalFilters utils:
+  - allow to pass fieldCol globalFilter option that allows to specify the filters grid
+  - set allowClear on array type fields
+  - set maxTagCount: 'responsive' on fields with enum
+  - hide filters' fields labels when displayed inline
+  - fixed normalizing read filters when field type is array
+2. Dynamic Fields building:
+  - componentBuilders: support array types with integer items
+3. Form/Field/index:
+  - support item.fieldCol config
+
 v1.73.0
 [feat] Draggable tree select
 
