@@ -4,7 +4,7 @@ import { COLORS } from '~su/constants'
 const nameLengthBreakpoint = 15
 
 export const Container = styled.div`
-  ${({ $companyNameLength, $inHeader, theme }) =>
+  ${({ companyNameLength, $inHeader, theme }) =>
     $inHeader
       ? css`
           padding-bottom: 0.2em;
@@ -15,7 +15,7 @@ export const Container = styled.div`
       : css`
           padding-bottom: 0.3em;
           border-bottom: 0.25em solid ${COLORS.primaryLight};
-          font-size: ${$companyNameLength > nameLengthBreakpoint ? '1.5cqw' : '1.8cqw'};
+          font-size: ${companyNameLength > nameLengthBreakpoint ? '1.5cqw' : '1.8cqw'};
           color: ${theme.colorText};
         `}
 `
