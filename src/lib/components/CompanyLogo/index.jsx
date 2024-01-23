@@ -3,7 +3,7 @@ import logoImage from './img/assembly-cropped-logo.png'
 import { Container, LogoContainer, Logo } from './index.styled'
 
 const CompanyLogo = ({ companyName, inHeader = false }) => (
-  <Container companyNameLength={companyName.length} $inHeader={inHeader}>
+  <Container $companyNameLength={companyName.length} $inHeader={inHeader}>
     <LogoContainer>
       {companyName} <Logo src={logoImage} alt={`${companyName} logo`} />
     </LogoContainer>
