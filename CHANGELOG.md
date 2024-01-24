@@ -1,3 +1,6 @@
+v1.74.2
+[fix] Replaced styled component with antd component and inline styles to prevent CSS class conflict
+
 v1.74.1
 [feat] Added possibility to disable SideMenu collapse optionally
 
