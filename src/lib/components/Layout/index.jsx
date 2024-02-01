@@ -21,7 +21,8 @@ const Layout = ({
   pathname,
   sideMenuChildren,
   contentContainerStyles,
-  isSideMenuCollapsible
+  isSideMenuCollapsible,
+  showSideMenu = true
 }) => {
   const { token: themeToken } = useToken()
 
@@ -29,7 +30,7 @@ const Layout = ({
     <StyledLayout>
       <TopNav themeOverrides={themeOverrides} {...menuProps} />
       <AntdLayout>
-        {!!sidebarItems.length && (
+        {showSideMenu && (
           <SideMenu
             sidebarItems={sidebarItems}
             onSideMenuSelect={onSideMenuSelect}
@@ -58,7 +59,8 @@ Layout.propTypes = {
   pathname: PropTypes.string,
   sideMenuChildren: PropTypes.node,
   contentContainerStyles: PropTypes.string,
-  isSideMenuCollapsible: PropTypes.bool
+  isSideMenuCollapsible: PropTypes.bool,
+  showSideMenu: PropTypes.bool
 }
 
 export default withLoader(Layout)
