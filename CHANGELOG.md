@@ -1,3 +1,46 @@
+v1.76.1
+[feat] Exported removeGlobalAlert from store actions
+
+v1.76.0
+[fix] Fixed SideMenu visibility if there are no menu items
+[fix] Fixed error in terminal due to styled-components param naming for CompanyLogo
+
+v1.75.0
+Dependencies - 25/01/24
+
+1. 938b1d4 Bump @rollup/plugin-babel from 6.0.3 to 6.0.4 (#320)
+2. 7e6f812 Bump @babel/cli from 7.23.0 to 7.23.4 (#361)
+3. efbfcea Bump @babel/core from 7.23.0 to 7.23.6 (#406)
+4. d5c0dd7 Bump @babel/runtime from 7.23.1 to 7.23.6 (#403)
+5. 475e4f9 Bump @babel/preset-react from 7.22.15 to 7.23.3 (#352)
+6. acef33c Bump @babel/traverse from 7.23.0 to 7.23.2 (#331)
+7. 2f922f9 Bump @rollup/plugin-image from 3.0.2 to 3.0.3 (#314)
+8. 1d24f1e Bump @rollup/plugin-alias from 5.0.0 to 5.1.0 (#368)
+9. 5c74ad2 Bump @rollup/plugin-commonjs from 25.0.4 to 25.0.7 (#328)
+10. a6b37a2 Bump @rollup/plugin-node-resolve from 15.2.1 to 15.2.3 (#315)
+11. 99418a9 Bump eslint-plugin-prettier from 5.0.0 to 5.1.2 (#424)
+12. 4b37c0d Bump eslint-config-prettier from 9.0.0 to 9.1.0 (#382)
+13. 563781b Bump eslint-plugin-jsx-a11y from 6.7.1 to 6.8.0 (#346)
+14. 7316e19 Bump eslint from 8.50.0 to 8.56.0 (#416)
+15. 89fc13a Bump eslint-plugin-import from 2.28.1 to 2.29.1 (#415)
+16. 9620c9a Bump prettier from 3.0.3 to 3.1.1 (#401)
+17. 5f89e39 Bump zustand from 4.4.1 to 4.4.7 (#387)
+18. a6bf820 Bump whatwg-fetch from 3.6.19 to 3.6.20 (#418)
+19. 19c717d Bump i18next from 23.2.11 to 23.7.11 (#417)
+20. 5c45e33 Bump chart.js from 4.4.0 to 4.4.1 (#404)
+21. 57a6015 Bump json-server from 0.17.3 to 0.17.4 (#311)
+22. c6f4ac4 Bump @testing-library/jest-dom from 6.0.0 to 6.1.5 (#389)
+23. 256651f Bump @adobe/css-tools from 4.3.1 to 4.3.2 (#381)
+24. 9828f15 Bump styled-components from 6.0.8 to 6.1.8 (#439)
+25. 09e3bb1 Bump @monaco-editor/react from 4.5.2 to 4.6.0 (#319)
+26. 0feaef6 Bump humanize-duration from 3.30.0 to 3.31.0 (#355)
+27. bcabc6e Bump react-i18next from 13.2.2 to 14.0.1 (#440)
+28. 63a599 Bump antd from 5.9.4 to 5.13.2 (#438)
+29. de5af35 Bump sql-formatter from 13.0.0 to 15.0.2 (#407)
+
+v1.74.2
+[fix] Replaced styled component with antd component and inline styles to prevent CSS class conflict
+
 v1.74.1
 [feat] Added possibility to disable SideMenu collapse optionally
 
