@@ -122,9 +122,6 @@
       "^antd/es/(.*)$": "antd/lib/$1",
       "^~mocks(.*)$": "<rootDir>/src/__mocks__/$1"
     },
-    "transformIgnorePatterns": [
-      "node_modules/(?!(remark-gfm|))"
-    ],
     "resetMocks": false
   }
 }
