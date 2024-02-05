@@ -12,7 +12,14 @@ import DynamicIcon from '../../DynamicIcon'
 import { SideMenuContainer, StyledLink } from './index.styled'
 import getDefaultMenuKeys from './utilities/getDefaultMenuKeys'
 
-const SideMenu = ({ sidebarItems, onSideMenuSelect, pathname = '', isCollapsible = true, children }) => {
+const SideMenu = ({
+  sidebarItems,
+  onSideMenuSelect,
+  pathname = '',
+  isCollapsible = true,
+  children,
+  shouldTransformItems = true
+}) => {
   const location = useLocation()
   const currentBreakpoints = useBreakpoint()
   const [isCollapsed, setIsCollapsed] = useState(false)
@@ -50,7 +57,7 @@ const SideMenu = ({ sidebarItems, onSideMenuSelect, pathname = '', isCollapsible
       }
     })
 
-  const sidebarMenuItems = transformItems(sidebarItems)
+  const sidebarMenuItems = shouldTransformItems ? transformItems(sidebarItems) : sidebarItems
 
   return (
     <SideMenuContainer
@@ -85,7 +92,8 @@ SideMenu.propTypes = {
   onSideMenuSelect: PropTypes.func.isRequired,
   pathname: PropTypes.string,
   isCollapsible: PropTypes.bool,
-  children: PropTypes.node
+  children: PropTypes.node,
+  shouldTransformItems: PropTypes.bool
 }
 
 export default SideMenu

@@ -26,7 +26,8 @@ const StyleProvider = ({
   sideMenuChildren,
   contentContainerStyles,
   isSideMenuCollapsible,
-  showSideMenu
+  showSideMenu,
+  shouldTransformItems
 }) => {
   const themeToken = { ...theme.token, ...brandingToken }
   const components = {
@@ -69,6 +70,7 @@ const StyleProvider = ({
               contentContainerStyles={contentContainerStyles}
               isSideMenuCollapsible={isSideMenuCollapsible}
               showSideMenu={showSideMenu}
+              shouldTransformItems={shouldTransformItems}
             >
               {main}
             </Layout>
@@ -94,7 +96,8 @@ StyleProvider.propTypes = {
   sideMenuChildren: PropTypes.node,
   contentContainerStyles: PropTypes.string,
   isSideMenuCollapsible: PropTypes.bool,
-  showSideMenu: PropTypes.bool
+  showSideMenu: PropTypes.bool,
+  shouldTransformItems: PropTypes.bool
 }
 
 export default StyleProvider

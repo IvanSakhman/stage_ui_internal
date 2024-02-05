@@ -22,7 +22,8 @@ const Layout = ({
   sideMenuChildren,
   contentContainerStyles,
   isSideMenuCollapsible,
-  showSideMenu = true
+  showSideMenu = true,
+  shouldTransformItems
 }) => {
   const { token: themeToken } = useToken()
 
@@ -37,6 +38,7 @@ const Layout = ({
             themeToken={themeToken}
             pathname={pathname}
             isCollapsible={isSideMenuCollapsible}
+            shouldTransformItems={shouldTransformItems}
           >
             {sideMenuChildren}
           </SideMenu>
