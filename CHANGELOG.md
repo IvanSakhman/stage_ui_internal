@@ -1,3 +1,9 @@
+v1.76.3
+[fix] Menu Component item colours were incorrectly set using design tokens.
+
+v1.76.2
+[feat] Added optional prop should transform items to the side menu
+
 v1.76.1
 [feat] Exported removeGlobalAlert from store actions
 
