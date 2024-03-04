@@ -1,3 +1,21 @@
+v1.77.2
+[fix] Bumped react-markdown to 9.0.0 to make it work with remark-gfm v4
+
+These two dependencies work together and their major versions upgrades need to match.
+https://github.com/remarkjs/react-markdown/issues/771
+
+v1.77.1
+[fix] Fixed rollup config & removed transformIgnorePatterns
+
+v1.77.0
+[dependency] Bump remark-gfm from 3.0.1 to 4.0.0 & fixed tests
+
+v1.76.4
+[chore] Security Deps
+
+1. 02d8059 Bump @babel/traverse from 7.22.5 to 7.23.9 (#478)
+2. 58704f5 Bump follow-redirects from 1.15.2 to 1.15.5 (#442)
+
 v1.76.3
 [fix] Menu Component item colours were incorrectly set using design tokens.
 
