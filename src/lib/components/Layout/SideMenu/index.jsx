@@ -80,8 +80,9 @@ const SideMenu = ({
 
 function recursiveSidebarItems(...args) {
   const sidebarItemType = PropTypes.shape({
+    icon: PropTypes.node,
     key: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
+    label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
     children: recursiveSidebarItems
   })
   return PropTypes.oneOfType([PropTypes.arrayOf(sidebarItemType), sidebarItemType])(...args)

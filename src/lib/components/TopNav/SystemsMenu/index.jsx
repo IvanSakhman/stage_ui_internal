@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types'
-import { StyledSystemsMenu } from './index.styled'
+import Menu from '~su/components/Menu'
 
 const SystemsMenu = ({ systems = [], currentSystem, hostedZone }) => {
   if (!systems.length) {
@@ -22,7 +22,7 @@ const SystemsMenu = ({ systems = [], currentSystem, hostedZone }) => {
     }
   })
 
-  return <StyledSystemsMenu mode="horizontal" items={items} selectedKeys={[currentSystem]} />
+  return <Menu mode="horizontal" items={items} selectedKeys={[currentSystem]} style={{ justifyContent: 'center' }} />
 }
 
 SystemsMenu.propTypes = {
