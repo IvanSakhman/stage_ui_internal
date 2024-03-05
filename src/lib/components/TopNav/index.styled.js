@@ -38,7 +38,7 @@ export const StyledLayoutHeader = styled(Layout.Header)`
 `
 
 export const DynamicLeftSideContainer = styled(Row)`
-  ${({ $width }) => $width && `width: ${$width};`};
+  width: 50%;
 `
 
 export const DynamicLogo = styled.img`
