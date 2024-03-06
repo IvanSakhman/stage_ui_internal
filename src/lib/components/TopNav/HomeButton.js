@@ -15,17 +15,19 @@ const StyledButton = styled(Button)`
   background-position: center;
 `
 
-const HomeButton = ({ hostedZone, customLogoUrl, large } = { large: false }) => {
+const HomeButton = ({ hostedZone, customLogoUrl, large, homeUrl } = { large: false }) => {
   const defaultLogoUrl = large ? logo : iconLogo
   const logoUrl = customLogoUrl || defaultLogoUrl
+  const url = homeUrl || `https://authentication.${hostedZone}`
 
-  return <StyledButton type="link" href={`https://authentication.${hostedZone}`} $backgroundUrl={logoUrl} />
+  return <StyledButton type="link" href={url} $backgroundUrl={logoUrl} />
 }
 
 HomeButton.propTypes = {
   hostedZone: PropTypes.string.isRequired,
   large: PropTypes.bool,
-  customLogoUrl: PropTypes.string
+  customLogoUrl: PropTypes.string,
+  homeUrl: PropTypes.string
 }
 
 export default HomeButton
