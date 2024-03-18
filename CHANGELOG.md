@@ -1,3 +1,21 @@
+v1.78.2
+[fix] Configure custom fp_sql editor mode rules using addRules.
+
+This fixes an error when using multiline comments.
+
+v1.78.1
+[fix]
+1. Replaced system menu styled-component with antd component
+2. Updated side menu items propTypes
+
+v1.78.0
+[feat] Improve SQL syntax highlighting in the editor.
+
+- Theme has to be set via the API, because the 'theme' prop is swallowed by styled-components.
+- Added separated rule for single-quotes (string) and double-quotes (string.alias)
+- Bumped ace-builds to 1.32.6
+- Extended list of functions to be marked with 'support.function' identifier
+
 v1.77.2
 [fix] Bumped react-markdown to 9.0.0 to make it work with remark-gfm v4
 

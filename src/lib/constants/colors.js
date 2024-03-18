@@ -14,6 +14,7 @@ export const background = '#f3f3f2' // PMS Warm Gray 1 (30%)
 export const white = '#ffffff'
 export const grey = '#9D9D9D'
 export const green = '#00897b' // PMS 2403
+export const darkOrange = '#ff6a14' // PMS 1585
 
 export const primary = '#0099b2' // PMS 2396
 
