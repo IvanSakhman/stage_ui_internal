@@ -56,7 +56,7 @@ export default ({ triggerGlobalAlert, removeGlobalAlert, setUIStoreProperty, web
         })
 
         return () => {
-          pusherclient.unbind_all()
+          pusherclient.unbind_all?.()
         }
       }
     }, [pusherclient])
