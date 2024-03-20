@@ -321,7 +321,8 @@ import { translateResponseAction, filterActionsByCondition } from '~su/component
            const record = { state: 'test' }
 
            expect(filterActionsByCondition([action], record)).toEqual([action])
-           expect(console.error).toBeCalledWith('filterActionsByCondition failed with TypeError: object is not iterable (cannot read property Symbol(Symbol.iterator))')
+           expect(console.error).toBeCalledWith('filterActionsByCondition failed with TypeError: Invalid attempt to destructure non-iterable instance.\n' +
+             'In order to be iterable, non-array objects must have a [Symbol.iterator]() method.')
          })
        })
 

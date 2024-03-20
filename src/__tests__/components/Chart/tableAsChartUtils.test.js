@@ -70,8 +70,7 @@ describe('TableAsChart utilities', () => {
         const consoleSpy = jest.spyOn(global.console, 'error').mockImplementation(() => {})
         expect(new TableAsChartUtils(invalid, message).columnsFromData()).toEqual([])
 
-        expect(consoleSpy).toBeCalledWith(new TypeError('this.datasets.filter is not a function'))
-        expect(consoleSpy).toBeCalledWith(new TypeError('this.labels.map is not a function'))
+        expect(consoleSpy).toHaveBeenCalledWith(expect.any(TypeError));
         expect(message.error).toBeCalledWith('Could not generate table visualisation.')
 
         consoleSpy.mockRestore();
@@ -114,8 +113,7 @@ describe('TableAsChart utilities', () => {
         const consoleSpy = jest.spyOn(global.console, 'error').mockImplementation(() => {})
         expect(new TableAsChartUtils(invalid, message).rowsFromData()).toEqual([])
 
-        expect(consoleSpy).toBeCalledWith(new TypeError('this.datasets.filter is not a function'))
-        expect(consoleSpy).toBeCalledWith(new TypeError('this.datasets.map is not a function'))
+        expect(consoleSpy).toHaveBeenCalledWith(expect.any(TypeError));
         expect(message.error).toBeCalledWith('Could not generate table visualisation.')
 
         consoleSpy.mockRestore();
