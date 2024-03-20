@@ -42,7 +42,7 @@
   },
   "scripts": {
     "test": "TZ=utc NODE_ENV=test jest --env=jest-environment-jsdom --testPathIgnorePatterns=src/__tests__/support",
-    "test:debug": "TZ=utc NODE_ENV=test jest --inspect --runInBand --no-cache --env=jest-environment-jsdom --testPathIgnorePatterns=src/__tests__/support",
+    "test:debug": "TZ=utc NODE_ENV=test node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand --testPathIgnorePatterns=src/__tests__/support",
     "prepublishOnly": "yarn run build",
     "build": "rollup -c",
     "lint": "eslint ./src --max-warnings 0",
