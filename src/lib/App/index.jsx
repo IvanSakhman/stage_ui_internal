@@ -28,14 +28,7 @@ const { useWebsocketConnection } = initializeWebsocketHooks()
 
 let _stageUiAppConfig = {}
 
-const StageUiApp = ({
-  children,
-  initialConfig,
-  context,
-  loadConfigParams = null,
-  themeOverrides = {},
-  contentContainerStyles
-}) => {
+const StageUiApp = ({ children, initialConfig, context, loadConfigParams = null, themeOverrides = {} }) => {
   const [isInitialised, setIsInitialised] = useState(false)
   useWebsocketConnection()
   const [messageApi, contextHolder] = message.useMessage()
@@ -70,7 +63,6 @@ const StageUiApp = ({
             themeOverrides={branding}
             onSideMenuSelect={({ key }) => navigate(key)}
             isLoaded={isInitialised}
-            contentContainerStyles={contentContainerStyles}
           >
             <GlobalStyles />
             <RootModal />
@@ -92,20 +84,18 @@ StageUiApp.propTypes = {
   }).isRequired,
   context: PropTypes.string.isRequired,
   loadConfigParams: PropTypes.object,
-  themeOverrides: PropTypes.object,
-  contentContainerStyles: PropTypes.string
+  themeOverrides: PropTypes.object
 }
 
 const provider = (Component) => (props) => {
   // eslint-disable-next-line react/prop-types
-  const { config, context, loadConfigParams, themeOverrides, contentContainerStyles, ...componentProps } = props
+  const { config, context, loadConfigParams, themeOverrides, ...componentProps } = props
   return (
     <StageUiApp
       initialConfig={config}
       context={context}
       loadConfigParams={loadConfigParams}
       themeOverrides={themeOverrides}
-      contentContainerStyles={contentContainerStyles}
     >
       <Component {...componentProps} />
     </StageUiApp>
