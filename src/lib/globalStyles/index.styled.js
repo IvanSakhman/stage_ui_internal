@@ -6,7 +6,7 @@ import './fonts.css'
 // color should be rewritten in scope of https://assembly-tech.atlassian.net/browse/SC-2
 export const createGlobalStyles = (projectStyles) => createGlobalStyle`
   body {
-    background: ${COLORS.background};
+    background: ${COLORS.white};
   }
 
   ${projectStyles}

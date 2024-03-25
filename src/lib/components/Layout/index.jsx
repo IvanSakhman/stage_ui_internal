@@ -62,7 +62,8 @@ Layout.propTypes = {
   sideMenuChildren: PropTypes.node,
   contentContainerStyles: PropTypes.string,
   isSideMenuCollapsible: PropTypes.bool,
-  showSideMenu: PropTypes.bool
+  showSideMenu: PropTypes.bool,
+  shouldTransformItems: PropTypes.bool
 }
 
 export default withLoader(Layout)

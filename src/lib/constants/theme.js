@@ -8,7 +8,8 @@ const customMenuTokens = {
   sideMenuSubMenuBackground: COLORS.ternaryDark,
   sideMenuItemDefault: COLORS.sideMenuDefault,
   sideMenuItemOpen: COLORS.white,
-  sideMenuItemActive: COLORS.navLink
+  sideMenuItemActive: COLORS.navLink,
+  colorBgLayout: COLORS.white
 }
 
 export default {
