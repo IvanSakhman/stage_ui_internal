@@ -1,3 +1,8 @@
+v1.78.3
+[fix]
+- Update global background to white
+- Rename the background color to warmGray
+
 v1.78.2
 [fix] Configure custom fp_sql editor mode rules using addRules.
 
