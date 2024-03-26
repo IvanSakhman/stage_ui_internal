@@ -1,3 +1,10 @@
+v1.79.0
+[fix] Antd provider for Next.js projects
+
+v1.78.4
+[fix]
+- Side menu item color
+
 v1.78.3
 [fix]
 - Update global background to white
