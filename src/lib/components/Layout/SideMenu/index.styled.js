@@ -7,7 +7,6 @@ import Typography from '../../Typography'
 export const SideMenuContainer = styled(Layout.Sider)`
   &,
   .ant-menu {
-    color: ${({ theme }) => theme.sideMenuItemDefault};
     background: ${({ theme }) => theme.sideMenuBackground} !important;
   }
   & .ant-menu-item,
