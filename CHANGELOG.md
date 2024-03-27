@@ -1,3 +1,6 @@
+v1.79.1
+[fix] Side menu item color for all projects, including React projects
+
 v1.79.0
 [fix] Antd provider for Next.js projects
 

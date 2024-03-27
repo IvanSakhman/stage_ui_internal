@@ -16,7 +16,6 @@ const StyleProvider = ({ children, brandingToken }) => {
   const themeToken = { ...theme.token, ...brandingToken }
   const components = {
     Menu: {
-      itemColor: themeToken.sideMenuItemDefault,
       itemHoverColor: themeToken.sideMenuItemActive,
       darkItemHoverColor: themeToken.sideMenuItemActive,
       itemSelectedColor: themeToken.sideMenuItemActive,
