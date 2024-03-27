@@ -10,6 +10,10 @@ export const SideMenuContainer = styled(Layout.Sider)`
     color: ${({ theme }) => theme.sideMenuItemDefault};
     background: ${({ theme }) => theme.sideMenuBackground} !important;
   }
+  & .ant-menu-item,
+  & .ant-menu-submenu-title {
+    color: ${({ theme }) => theme.sideMenuItemDefault};
+  }
   // those styles should be !important here to override antd :where selector styles https://github.com/ant-design/ant-design/issues/38660#issuecomment-1325365203
   & .ant-menu-submenu-title:hover,
   & .ant-menu-submenu-open > .ant-menu-submenu-title {
