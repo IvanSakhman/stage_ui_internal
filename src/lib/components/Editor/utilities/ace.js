@@ -202,7 +202,7 @@ snippetCompleter.getCompletions = function (editor, session, pos, prefix, callba
 }
 snippetCompleter.getDocTooltipOrig = snippetCompleter.getDocTooltipOrig || snippetCompleter.getDocTooltip
 snippetCompleter.getDocTooltip = function (item) {
-  if (item.type == 'snippet' && !item.docHTML) {
+  if (item.completerId == 'snippetCompleter' && !item.docHTML) {
     const [snippet, docHTML] = item.snippet.split(CODE_AND_DOC_SEPARATOR)
 
     if (docHTML) {

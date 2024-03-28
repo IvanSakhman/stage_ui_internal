@@ -39,7 +39,7 @@ const StageTopNav = ({
       <Row align="middle" justify="start">
         {hostedZone && (
           <Col span={3}>
-            <HomeButton hostedZone={hostedZone} />
+            <HomeButton hostedZone={hostedZone} homeUrl={homeUrl} />
           </Col>
         )}
         <Col span={21}>
@@ -56,7 +56,7 @@ const StageTopNav = ({
           <UserDropdown hostedZone={hostedZone} helpdeskUrl={helpdeskUrl} />
         </Col>
         <Col span={8}>
-          <HomeButton hostedZone={hostedZone} large customLogoUrl={themeOverrides?.logoUrl} />
+          <HomeButton hostedZone={hostedZone} large customLogoUrl={themeOverrides?.logoUrl} homeUrl={homeUrl} />
         </Col>
       </Row>
     )

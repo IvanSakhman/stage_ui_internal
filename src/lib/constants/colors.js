@@ -10,10 +10,11 @@ export const ternaryDark = '#1e1a34' // PMS 5255
 export const dangerDark = '#f9423a' // PMS Warm Red
 export const danger = '#ff585d' // PMS 178
 export const black = '#000' // PMS Black
-export const background = '#f3f3f2' // PMS Warm Gray 1 (30%)
+export const warmGray = '#f3f3f2' // PMS Warm Gray 1 (30%)
 export const white = '#ffffff'
 export const grey = '#9D9D9D'
 export const green = '#00897b' // PMS 2403
+export const darkOrange = '#ff6a14' // PMS 1585
 
 export const primary = '#0099b2' // PMS 2396
 

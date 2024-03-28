@@ -22,10 +22,23 @@ export const StyledAce = styled(AceEditor)`
     ${(_props) => editorFont()}
   }
 
-  .ace_string.ace_macro {
-    color: ${COLORS.green};
-  }
   .ace_comment {
     color: ${COLORS.grey};
+  }
+
+  .ace_constant.ace_numeric {
+    color: ${COLORS.darkOrange};
+  }
+
+  .ace_string {
+    color: ${COLORS.success};
+
+    &.ace_alias {
+      color: ${COLORS.green};
+    }
+
+    &.ace_macro {
+      color: ${COLORS.secondary};
+    }
   }
 `

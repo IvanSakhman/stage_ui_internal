@@ -23,13 +23,14 @@ const SqlEditor = forwardRef(({ onChange, value, dimensions, onSelectionChange, 
 
   const editorOptions = useMemo(
     () => ({
+      theme: `ace/theme/${theme}`,
       behavioursEnabled: true,
       enableSnippets: snippetsEnabled,
       enableBasicAutocompletion: true,
       enableLiveAutocompletion: userEnabledAutoComplete,
       autoScrollEditorIntoView: true
     }),
-    [userEnabledAutoComplete]
+    [userEnabledAutoComplete, theme]
   )
 
   useEffect(() => {
@@ -105,7 +106,6 @@ const SqlEditor = forwardRef(({ onChange, value, dimensions, onSelectionChange, 
   return (
     <StyledAce
       ref={setEditorRef}
-      theme={theme}
       mode={mode}
       name={name}
       value={value}

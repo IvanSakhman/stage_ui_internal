@@ -8,25 +8,11 @@ import { ConfigProvider, App } from 'antd'
 import ThemeProvider from './ThemeProvider'
 
 // components
-import Layout from '~su/components/Layout'
 import RootModal from '~su/components/RootModal'
 
 import { GlobalStyles } from './index.styled'
 
-const StyleProvider = ({
-  children,
-  brandingToken,
-  sidebarItems,
-  menuProps,
-  onSideMenuSelect,
-  isLayoutPresent = true,
-  isLoaded = false,
-  pathname,
-  topNavLogo,
-  sideMenuChildren,
-  contentContainerStyles,
-  isSideMenuCollapsible
-}) => {
+const StyleProvider = ({ children, brandingToken }) => {
   const themeToken = { ...theme.token, ...brandingToken }
   const components = {
     Menu: {
@@ -55,25 +41,7 @@ const StyleProvider = ({
   return (
     <ConfigProvider theme={{ token: themeToken, components }}>
       <ThemeProvider>
-        <App>
-          {isLayoutPresent ? (
-            <Layout
-              sidebarItems={sidebarItems}
-              menuProps={menuProps}
-              isLoaded={isLoaded}
-              onSideMenuSelect={onSideMenuSelect}
-              pathname={pathname}
-              themeOverrides={topNavLogo}
-              sideMenuChildren={sideMenuChildren}
-              contentContainerStyles={contentContainerStyles}
-              isSideMenuCollapsible={isSideMenuCollapsible}
-            >
-              {main}
-            </Layout>
-          ) : (
-            main
-          )}
-        </App>
+        <App>{main}</App>
       </ThemeProvider>
     </ConfigProvider>
   )
@@ -81,17 +49,7 @@ const StyleProvider = ({
 
 StyleProvider.propTypes = {
   children: PropTypes.node.isRequired,
-  brandingToken: PropTypes.object,
-  sidebarItems: PropTypes.arrayOf(PropTypes.object),
-  menuProps: PropTypes.object,
-  onSideMenuSelect: PropTypes.func,
-  isLayoutPresent: PropTypes.bool,
-  isLoaded: PropTypes.bool,
-  pathname: PropTypes.string,
-  topNavLogo: PropTypes.object,
-  sideMenuChildren: PropTypes.node,
-  contentContainerStyles: PropTypes.string,
-  isSideMenuCollapsible: PropTypes.bool
+  brandingToken: PropTypes.object
 }
 
 export default StyleProvider

@@ -27,7 +27,8 @@ const config = {
     store: 'src/lib/store/index.js',
     utilities: 'src/lib/utilities/index.js',
     views: 'src/lib/views/index.js',
-    globalStyles: 'src/lib/globalStyles/index.styled.js'
+    globalStyles: 'src/lib/globalStyles/index.styled.js',
+    mocks: 'src/__mocks__/index.js'
   },
   output: { dir: 'es', format: 'es', exports: 'named' },
   context: 'this',

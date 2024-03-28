@@ -6,7 +6,7 @@ export const Container = styled.div`
   margin-top: 24px;
   padding: 24px 40px;
   color: ${COLORS.text};
-  background: ${COLORS.background};
+  background: ${COLORS.warmGray};
   border: ${(props) => (props.$bordered ? `1px solid ${COLORS.grey}` : 'none')};
   border-radius: 10px;
 `

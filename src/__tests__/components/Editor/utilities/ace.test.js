@@ -319,7 +319,7 @@ describe('Ace Utils', () => {
                 caption: dependentQuerySnippet.name,
                 meta: 'dependent query',
                 snippet: dependentQuerySnippet.code,
-                type: 'snippet',
+                completerId: 'snippetCompleter',
                 score: 1
               })
             }
@@ -358,7 +358,7 @@ describe('Ace Utils', () => {
       })
 
       describe('getDocTooltip', () => {
-        describe('when type is not snippet', () => {
+        describe('when completerId is not snippetCompleter', () => {
           it('does not add docHTML', () => {
             const item = { caption: 'test', code: 'function() { alert("test") }' }
 
@@ -367,11 +367,11 @@ describe('Ace Utils', () => {
           })
         })
 
-        describe('when type is snippet', () => {
+        describe('when completerId is not snippetCompleter', () => {
           describe('when has docHTML', () => {
             it('does not change it', () => {
               const item = {
-                type: 'snippet',
+                completerId: 'snippetCompleter',
                 caption: 'test',
                 snippet: 'function() { alert("test") }',
                 docHTML: 'Simple alert fn'
@@ -384,7 +384,7 @@ describe('Ace Utils', () => {
 
           describe('when does not have docHTML', () => {
             it('adds docHTML', () => {
-              const item = { type: 'snippet', caption: 'test', snippet: 'function() { alert("test") }' }
+              const item = { completerId: 'snippetCompleter', caption: 'test', snippet: 'function() { alert("test") }' }
 
               completer.getDocTooltip(item)
               expect(item.docHTML).toEqual('<b>test</b><hr></hr>function() { alert(&#34;test&#34;) }')
@@ -393,7 +393,7 @@ describe('Ace Utils', () => {
             describe('when has code_and_doc_separator in snippet property', () => {
               it('separates code and description and puts the description to the docHTML', () => {
                 const item = {
-                  type: 'snippet',
+                  completerId: 'snippetCompleter',
                   caption: 'test',
                   snippet: 'function() { alert("test") }docHTML:Simple alert fn'
                 }
@@ -407,7 +407,7 @@ describe('Ace Utils', () => {
               describe('when description includes !NEWLINE!', () => {
                 it('replaces it with \n', () => {
                   const item = {
-                    type: 'snippet',
+                    completerId: 'snippetCompleter',
                     caption: 'test',
                     snippet: 'function() { alert("test") }docHTML:Simple!NEWLINE!alert!NEWLINE!fn'
                   }
