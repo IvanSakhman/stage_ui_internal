@@ -1,4 +1,5 @@
-import path from 'path'
+import { createRequire } from 'node:module'
+import { fileURLToPath } from 'node:url'
 import peerDepsExternal from 'rollup-plugin-peer-deps-external'
 import includePaths from 'rollup-plugin-includepaths'
 import alias from '@rollup/plugin-alias'
@@ -7,11 +8,12 @@ import babel from '@rollup/plugin-babel'
 import nodeResolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import image from '@rollup/plugin-image'
-import { terser } from 'rollup-plugin-terser'
+import terser from '@rollup/plugin-terser'
 import filesize from 'rollup-plugin-filesize'
 import del from 'rollup-plugin-delete'
 
-import pkg from './package.json'
+const require = createRequire(import.meta.url)
+const pkg = require('./package.json')
 
 const config = {
   input: {
@@ -43,7 +45,7 @@ const config = {
       extensions: ['.js', '.jsx', '.json', '.html']
     }),
     alias({
-      entries: [{ find: '~su', replacement: path.resolve(__dirname, 'src/lib') }]
+      entries: [{ find: '~su', replacement: fileURLToPath(new URL('src/lib', import.meta.url)) }]
     }),
     styles(),
     babel({
@@ -76,10 +78,9 @@ const config = {
     filesize()
   ],
   onwarn(warning, warn) {
-    if (warning.code === 'MODULE_LEVEL_DIRECTIVE' && warning.message.includes(`'use client'`)) {
-      return
+    if (warning.code !== 'MODULE_LEVEL_DIRECTIVE') {
+      warn(warning)
     }
-    warn(warning)
   }
 }
 
