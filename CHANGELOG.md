@@ -1,3 +1,42 @@
+v1.80.0
+Dependencies - 01/04/24
+1. 5145e8b Bump whatwg-fetch from 3.6.2 to 3.6.20 (#445)
+2. 62d95dc Bump eslint-plugin-prettier from 5.1.2 to 5.1.3 (#454)
+3. a188c4d Bump @testing-library/user-event from 14.5.1 to 14.5.2 (#451)
+4. 8dff7e7 Bump humanize-duration from 3.28.0 to 3.31.0 (#457)
+5. eecea66 Bump @monaco-editor/react from 4.5.1 to 4.6.0 (#448)
+6. 0f55805 Bump rollup-plugin-copy from 3.4.0 to 3.5.0 (#452)
+7. fb62909 Bump jest-environment-jsdom from 29.5.0 to 29.7.0 (#453)
+8. 4d6fe03 Bump pusher-js from 8.2.0 to 8.3.0 (#455)
+9. c19763e Bump @testing-library/jest-dom from 6.1.5 to 6.4.2 (#470)
+10. 67175e9 chore(deps): bump express from 4.18.2 to 4.19.2 (#515)
+11. 283cff1 chore(deps-dev): bump @babel/cli from 7.23.4 to 7.24.1 (#513)
+12. 0d6320d Bump prettier from 3.1.1 to 3.2.5 (#471)
+13. 439b95f chore(deps): bump ip from 2.0.0 to 2.0.1 (#484)
+14. 5220203 chore(deps): bump zustand from 4.4.7 to 4.5.2 (#489)
+15. 0598ac2 chore(deps): bump chart.js from 4.3.0 to 4.4.2 (#492)
+16. c0525bb chore(deps): bump i18next from 23.7.11 to 23.10.1 (#498)
+17. eb319b5 chore(deps): bump react-i18next from 14.0.1 to 14.1.0 (#499)
+18. 92284d3 chore(deps-dev): bump eslint-plugin-react from 7.33.2 to 7.34.1 (#504)
+19. 6c67b9e chore(deps): bump follow-redirects from 1.15.5 to 1.15.6 (#501)
+20. 742fe91 chore(deps): bump webpack-dev-middleware from 5.3.3 to 5.3.4 (#505)
+21. f17c008 chore(deps-dev): bump @babel/core from 7.22.5 to 7.24.3 (#508)
+22. 84c81d9 chore(deps-dev): bump @testing-library/react from 14.0.0 to 14.2.2 (#510)
+23. 4616925 chore(deps): bump react-ace from 10.1.0 to 11.0.1 (#511)
+24. 64178a3 chore(deps): bump sql-formatter from 15.0.2 to 15.3.0 (#503)
+25. 68f7b3c chore(deps-dev): bump @babel/preset-react from 7.22.5 to 7.24.1 (#509)
+26. ce38216 chore(deps): bump antd from 5.13.2 to 5.15.4 (#507)
+27. 1718f6c chore(deps-dev): bump eslint from 8.43.0 to 8.57.0 (#488)
+28. 83bf8e9 Bump react-markdown from 8.0.7 to 9.0.1 (#447)
+29. 73d332c Bump remark-gfm from 3.0.1 to 4.0.0 (#443)
+30. Bump humanize-duration from 3.27.3 to 3.32.0
+31. Bump pusher-js from 8.0.1 to 8.3.0
+32. Bump @rollup/plugin-alias from 5.0.0 to 5.1.0
+33. Bump @rollup/plugin-image from 3.0.2 to 3.0.3
+34. Bump json-server from 0.17.0 to 0.17.4
+35. Bump rollup from 2.79.1 to 4.13.2
+36. Bump rollup-plugin-copy from 3.4.0 to 3.5.0
+
 v1.79.1
 [fix] Side menu item color for all projects, including React projects
 
