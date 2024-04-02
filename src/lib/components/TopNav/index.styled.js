@@ -6,8 +6,8 @@ export const StyledLayoutHeader = styled(Layout.Header)`
   padding-inline: 15px;
   background: ${({ theme }) => theme.topNavBackground};
 
-  .ant-menu,
-  .ant-menu-item {
+  .ant-menu-item,
+  .ant-menu-submenu-title {
     color: ${({ theme }) => theme.topNavTextDefault};
   }
 

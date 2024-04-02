@@ -9,10 +9,18 @@ import logo from './img/assembly_stage_logo_digital_light_rgb.png'
 const StyledButton = styled(Button)`
   float: left;
   width: 100%;
-  background: ${(props) => `url(${props.$backgroundUrl})`};
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-position: center;
+  position: relative;
+`
+
+const StyledImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 `
 
 const HomeButton = ({ hostedZone, customLogoUrl, large, homeUrl } = { large: false }) => {
@@ -20,7 +28,11 @@ const HomeButton = ({ hostedZone, customLogoUrl, large, homeUrl } = { large: fal
   const logoUrl = customLogoUrl || defaultLogoUrl
   const url = homeUrl || `https://authentication.${hostedZone}`
 
-  return <StyledButton type="link" href={url} $backgroundUrl={logoUrl} />
+  return (
+    <StyledButton type="link" href={url}>
+      <StyledImage src={logoUrl} alt="logo" />
+    </StyledButton>
+  )
 }
 
 HomeButton.propTypes = {
