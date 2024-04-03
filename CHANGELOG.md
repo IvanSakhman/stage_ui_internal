@@ -1,3 +1,6 @@
+v1.80.1
+[fix] TopNav home button & client select color
+
 v1.80.0
 Dependencies - 01/04/24
 1. 5145e8b Bump whatwg-fetch from 3.6.2 to 3.6.20 (#445)
