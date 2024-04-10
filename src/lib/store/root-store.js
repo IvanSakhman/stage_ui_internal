@@ -41,6 +41,14 @@ export const useUIStore = create((_set) => ({
   globalAlerts: []
 }))
 
+export const useUserStore = create((set) => ({
+  user: {},
+  setUser: (user) => set({ user }),
+  resetUser: () => set({ user: {} })
+}))
+
+export const useUser = () => useUserStore(({ user }) => user)
+
 export const useLayoutConfig = () => useConfigStore(({ layout }) => layout)
 export const useBranding = () => useConfigStore(({ branding }) => branding)
 export const useAppConfig = () => useConfigStore(({ app }) => app)
