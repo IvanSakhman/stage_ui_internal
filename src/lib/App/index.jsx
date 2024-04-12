@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
 // actions
-import { useLayoutConfig, useBranding } from '~su/store/root-store'
+import { useLayoutConfig, useBranding, useRedirectsStore } from '~su/store/root-store'
 import loadInitialData from './loadInitialData'
 
 // utilities
@@ -28,15 +28,23 @@ const { useWebsocketConnection } = initializeWebsocketHooks()
 
 let _stageUiAppConfig = {}
 
-const StageUiApp = ({ children, initialConfig, context, loadConfigParams = null, themeOverrides = {} }) => {
+const StageUiApp = ({ children, initialConfig, context, loadConfigParams = null, themeOverrides = {}, redirects }) => {
   const [isInitialised, setIsInitialised] = useState(false)
   useWebsocketConnection()
   const [messageApi, contextHolder] = message.useMessage()
+
+  const setRedirects = useRedirectsStore((state) => state.setRedirects)
 
   const navigate = useNavigate()
   const layoutConfig = useLayoutConfig()
   const branding = useBranding()
   const brandingToken = branding?.token || {}
+
+  useEffect(() => {
+    if (redirects) {
+      setRedirects(redirects)
+    }
+  }, [redirects, setRedirects])
 
   useEffect(() => {
     setBaseUrl(initialConfig.api.baseUrl)
@@ -84,18 +92,23 @@ StageUiApp.propTypes = {
   }).isRequired,
   context: PropTypes.string.isRequired,
   loadConfigParams: PropTypes.object,
-  themeOverrides: PropTypes.object
+  themeOverrides: PropTypes.object,
+  redirects: PropTypes.shape({
+    login: PropTypes.string.isRequired,
+    home: PropTypes.string.isRequired
+  }).isRequired
 }
 
 const provider = (Component) => (props) => {
   // eslint-disable-next-line react/prop-types
-  const { config, context, loadConfigParams, themeOverrides, ...componentProps } = props
+  const { config, context, loadConfigParams, themeOverrides, redirects, ...componentProps } = props
   return (
     <StageUiApp
       initialConfig={config}
       context={context}
       loadConfigParams={loadConfigParams}
       themeOverrides={themeOverrides}
+      redirects={redirects}
     >
       <Component {...componentProps} />
     </StageUiApp>

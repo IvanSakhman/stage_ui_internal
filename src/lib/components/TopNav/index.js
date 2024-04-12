@@ -1,7 +1,12 @@
 import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
+import ory from '~su/sdk'
+import { useRedirects } from '~su/store/root-store'
+import { useLogoutFlow } from '~su/sdk/hooks'
 import { Row, Col } from '~su/components/Grid'
+import Space from '~su/components/Space'
+import { useNavigate } from '~su/hooks'
 
 import HomeButton from './HomeButton'
 import ClientsDropdown from './ClientsDropdown'
@@ -27,6 +32,31 @@ const StageTopNav = ({
   variant = 'default'
 }) => {
   const [hostedZone, setHostedZone] = useState('')
+  const [session, setSession] = useState(null)
+
+  const redirects = useRedirects()
+  const navigate = useNavigate()
+  const handleLogout = useLogoutFlow(() => navigate(redirects.login))
+
+  useEffect(() => {
+    if (redirects.login) {
+      ory
+        .toSession()
+        .then(({ data }) => {
+          setSession(data)
+        })
+        .catch((err) => {
+          if (err.response?.status === 401) {
+            // User is not logged in, redirect to the login page
+            window.location.replace(redirects.login)
+            return
+          }
+
+          // Something else happened!
+          return Promise.reject(err)
+        })
+    }
+  }, [redirects])
 
   useEffect(() => {
     if (currentSystem) {
@@ -52,9 +82,11 @@ const StageTopNav = ({
   const renderRightSide = () => {
     return (
       <Row align="middle" justify="end" gutter={8}>
-        <Col span={3}>
-          <UserDropdown hostedZone={hostedZone} helpdeskUrl={helpdeskUrl} />
-        </Col>
+        {session && (
+          <Col span={3}>
+            <UserDropdown helpdeskUrl={helpdeskUrl} handleLogout={handleLogout} />
+          </Col>
+        )}
         <Col span={8}>
           <HomeButton hostedZone={hostedZone} large customLogoUrl={themeOverrides?.logoUrl} homeUrl={homeUrl} />
         </Col>
@@ -97,11 +129,14 @@ const StageTopNav = ({
           disabledOverflow
         />
       </DynamicLeftSideContainer>
-      {homeUrl && (
-        <a href={homeUrl}>
-          <DynamicLogo src={logo} />
-        </a>
-      )}
+      <Space size="middle">
+        {session && <UserDropdown helpdeskUrl={helpdeskUrl} handleLogout={handleLogout} />}
+        {homeUrl && (
+          <a href={homeUrl}>
+            <DynamicLogo src={logo} />
+          </a>
+        )}
+      </Space>
     </Row>
   )
 

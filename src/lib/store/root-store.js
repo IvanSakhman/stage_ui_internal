@@ -41,13 +41,19 @@ export const useUIStore = create((_set) => ({
   globalAlerts: []
 }))
 
-export const useUserStore = create((set) => ({
-  user: {},
-  setUser: (user) => set({ user }),
-  resetUser: () => set({ user: {} })
+export const useSessionStore = create((set) => ({
+  identity: {},
+  setIdentity: (user) => set({ user })
 }))
 
-export const useUser = () => useUserStore(({ user }) => user)
+export const useIdentity = () => useSessionStore(({ identity }) => identity)
+
+export const useRedirectsStore = create((set) => ({
+  redirects: {},
+  setRedirects: (redirects) => set({ redirects })
+}))
+
+export const useRedirects = () => useRedirectsStore(({ redirects }) => redirects)
 
 export const useLayoutConfig = () => useConfigStore(({ layout }) => layout)
 export const useBranding = () => useConfigStore(({ branding }) => branding)

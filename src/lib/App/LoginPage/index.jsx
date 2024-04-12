@@ -1,10 +1,9 @@
 import { useState, useRef, useEffect } from 'react'
-import PropTypes from 'prop-types'
 import store from '~su/store'
 import { useSearchParams, useNavigate } from '~su/hooks'
 import { Form, Row, Col, Button, Typography, Flex, Space, GlobalAlert } from '~su/components'
-import ory from './pkg/sdk'
-import { handleGetFlowError, handleFlowError } from './pkg/errors'
+import ory from '~su/sdk'
+import { handleGetFlowError, handleFlowError } from '~su/sdk/errors'
 import fields from './fields'
 import FeaturesList from './components/FeaturesList'
 import PillButton from './components/PillButton'
@@ -41,14 +40,15 @@ const featuresList = [
   'Promotes Business Growth'
 ]
 
-const LoginPage = ({ redirects }) => {
+const LoginPage = () => {
   const [flow, setFlow] = useState()
 
   const form = useRef(null)
   const searchParams = useSearchParams()
   const navigate = useNavigate()
 
-  const setUser = store.useUserStore((state) => state.setUser)
+  const redirects = store.useRedirects()
+  const setIdentity = store.useSessionStore((state) => state.setIdentity)
 
   const flowId = searchParams.get('flow')
   const returnTo = searchParams.get('return_to')
@@ -84,7 +84,7 @@ const LoginPage = ({ redirects }) => {
           }
         })
         .then(({ data }) => {
-          setUser(data.session.identity)
+          setIdentity(data.session.identity)
           if (flow?.return_to) {
             window.location.href = flow?.return_to
             return
@@ -118,7 +118,7 @@ const LoginPage = ({ redirects }) => {
   const handleOktaLogin = async () => {}
 
   useEffect(() => {
-    if (flow) {
+    if (flow || JSON.stringify(redirects) === '{}') {
       return
     }
 
@@ -216,13 +216,6 @@ const LoginPage = ({ redirects }) => {
       </Wrapper>
     </Container>
   )
-}
-
-LoginPage.propTypes = {
-  redirects: PropTypes.shape({
-    login: PropTypes.string,
-    home: PropTypes.string
-  })
 }
 
 export default LoginPage

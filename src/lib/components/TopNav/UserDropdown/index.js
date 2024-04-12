@@ -6,7 +6,7 @@ import { array } from '~su/utilities'
 
 import { StyledUserMenu } from './index.styled'
 
-const UserDropdown = ({ hostedZone, helpdeskUrl }) => {
+const UserDropdown = ({ helpdeskUrl, handleLogout }) => {
   const items = [
     {
       key: 'trigger',
@@ -20,7 +20,7 @@ const UserDropdown = ({ hostedZone, helpdeskUrl }) => {
           : null,
         {
           key: 'logout',
-          label: <a href={`https://authentication.${hostedZone}/logout`}>Logout</a>
+          label: <a onClick={handleLogout}>Logout</a>
         }
       ])
     }
@@ -30,8 +30,8 @@ const UserDropdown = ({ hostedZone, helpdeskUrl }) => {
 }
 
 UserDropdown.propTypes = {
-  hostedZone: PropTypes.string.isRequired,
-  helpdeskUrl: PropTypes.string
+  helpdeskUrl: PropTypes.string,
+  handleLogout: PropTypes.func.isRequired
 }
 
 export default UserDropdown
