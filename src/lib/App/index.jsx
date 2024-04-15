@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
+// sdk
+import { useSessionFlow } from '~su/sdk'
+
 // actions
 import { useLayoutConfig, useBranding, useRedirectsStore } from '~su/store/root-store'
 import loadInitialData from './loadInitialData'
@@ -39,6 +42,7 @@ const StageUiApp = ({ children, initialConfig, context, loadConfigParams = null,
   const layoutConfig = useLayoutConfig()
   const branding = useBranding()
   const brandingToken = branding?.token || {}
+  const isSessionChecked = useSessionFlow(() => window.location.replace(redirects.login), redirects)
 
   useEffect(() => {
     if (redirects) {
@@ -70,7 +74,7 @@ const StageUiApp = ({ children, initialConfig, context, loadConfigParams = null,
             {...layoutConfig}
             themeOverrides={branding}
             onSideMenuSelect={({ key }) => navigate(key)}
-            isLoaded={isInitialised}
+            isLoaded={isInitialised && isSessionChecked}
           >
             <GlobalStyles />
             <RootModal />

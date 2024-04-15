@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
-import ory from '~su/sdk'
-import { useRedirects } from '~su/store/root-store'
-import { useLogoutFlow } from '~su/sdk/hooks'
+import { useRedirects, useIdentity } from '~su/store/root-store'
+import { useLogoutFlow } from '~su/sdk'
 import { Row, Col } from '~su/components/Grid'
 import Space from '~su/components/Space'
 import { useNavigate } from '~su/hooks'
@@ -32,31 +31,11 @@ const StageTopNav = ({
   variant = 'default'
 }) => {
   const [hostedZone, setHostedZone] = useState('')
-  const [session, setSession] = useState(null)
 
   const redirects = useRedirects()
+  const identity = useIdentity()
   const navigate = useNavigate()
-  const handleLogout = useLogoutFlow(() => navigate(redirects.login))
-
-  useEffect(() => {
-    if (redirects.login) {
-      ory
-        .toSession()
-        .then(({ data }) => {
-          setSession(data)
-        })
-        .catch((err) => {
-          if (err.response?.status === 401) {
-            // User is not logged in, redirect to the login page
-            window.location.replace(redirects.login)
-            return
-          }
-
-          // Something else happened!
-          return Promise.reject(err)
-        })
-    }
-  }, [redirects])
+  const handleLogout = useLogoutFlow(() => navigate(redirects.login || '/'))
 
   useEffect(() => {
     if (currentSystem) {
@@ -82,7 +61,7 @@ const StageTopNav = ({
   const renderRightSide = () => {
     return (
       <Row align="middle" justify="end" gutter={8}>
-        {session && (
+        {identity && (
           <Col span={3}>
             <UserDropdown helpdeskUrl={helpdeskUrl} handleLogout={handleLogout} />
           </Col>
@@ -130,7 +109,7 @@ const StageTopNav = ({
         />
       </DynamicLeftSideContainer>
       <Space size="middle">
-        {session && <UserDropdown helpdeskUrl={helpdeskUrl} handleLogout={handleLogout} />}
+        {identity && <UserDropdown helpdeskUrl={helpdeskUrl} handleLogout={handleLogout} />}
         {homeUrl && (
           <a href={homeUrl}>
             <DynamicLogo src={logo} />

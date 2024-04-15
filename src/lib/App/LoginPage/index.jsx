@@ -2,8 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import store from '~su/store'
 import { useSearchParams, useNavigate } from '~su/hooks'
 import { Form, Row, Col, Button, Typography, Flex, Space, GlobalAlert } from '~su/components'
-import ory from '~su/sdk'
-import { handleGetFlowError, handleFlowError } from '~su/sdk/errors'
+import ory, { handleGetFlowError, handleFlowError } from '~su/sdk'
 import fields from './fields'
 import FeaturesList from './components/FeaturesList'
 import PillButton from './components/PillButton'
@@ -110,6 +109,8 @@ const LoginPage = () => {
 
           return Promise.reject(err)
         })
+    } else {
+      triggerGlobalAlert('Something went wrong')
     }
   }
 
@@ -118,7 +119,7 @@ const LoginPage = () => {
   const handleOktaLogin = async () => {}
 
   useEffect(() => {
-    if (flow || JSON.stringify(redirects) === '{}') {
+    if (flow || redirects) {
       return
     }
 
