@@ -42,7 +42,7 @@ const StageUiApp = ({ children, initialConfig, context, loadConfigParams = null,
   const layoutConfig = useLayoutConfig()
   const branding = useBranding()
   const brandingToken = branding?.token || {}
-  const isSessionChecked = useSessionFlow(() => window.location.replace(redirects.login), redirects)
+  const isSessionChecked = useSessionFlow(() => window.location.replace(redirects?.login), redirects)
 
   useEffect(() => {
     if (redirects) {
