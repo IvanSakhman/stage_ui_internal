@@ -119,7 +119,7 @@ const LoginPage = () => {
   const handleOktaLogin = async () => {}
 
   useEffect(() => {
-    if (flow || redirects) {
+    if (flow || !redirects) {
       return
     }
 
