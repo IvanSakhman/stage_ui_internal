@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import store from '~su/store'
 import { useSearchParams, useNavigate } from '~su/hooks'
 import { Form, Row, Col, Button, Typography, Flex, Space, GlobalAlert } from '~su/components'
@@ -39,7 +40,7 @@ const featuresList = [
   'Promotes Business Growth'
 ]
 
-const LoginPage = () => {
+const LoginPage = ({ loginCallback }) => {
   const [flow, setFlow] = useState()
 
   const form = useRef(null)
@@ -82,8 +83,13 @@ const LoginPage = () => {
             method: 'password'
           }
         })
-        .then(({ data }) => {
+        .then(async ({ data }) => {
           setIdentity(data.session.identity)
+
+          if (loginCallback) {
+            await loginCallback(data.session.identity.traits.email)
+          }
+
           if (flow?.return_to) {
             window.location.href = flow?.return_to
             return
@@ -217,6 +223,10 @@ const LoginPage = () => {
       </Wrapper>
     </Container>
   )
+}
+
+LoginPage.propTypes = {
+  loginCallback: PropTypes.func
 }
 
 export default LoginPage
