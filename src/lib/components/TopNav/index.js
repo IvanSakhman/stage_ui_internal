@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 // Commented code will be used later when the new ory kratos identity system replaces the current one
 
 // import { useRedirects, useIdentity } from '~su/store/root-store'
-// import { useLogoutFlow } from '~su/sdk'
+// import { useLogoutFlow } from '~su/authenticationSdk'
 import { Row, Col } from '~su/components/Grid'
 import Space from '~su/components/Space'
 // import { useNavigate } from '~su/hooks'

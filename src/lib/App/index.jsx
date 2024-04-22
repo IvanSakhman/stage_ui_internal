@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
-// sdk
-import { useSessionFlow } from '~su/sdk'
+// authentication sdk
+import { useSessionFlow } from '~su/authenticationSdk'
 
 // actions
 import { useLayoutConfig, useBranding, useRedirectsStore } from '~su/store/root-store'

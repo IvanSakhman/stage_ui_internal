@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import store from '~su/store'
 import { useSearchParams, useNavigate } from '~su/hooks'
 import { Form, Row, Col, Button, Typography, Flex, Space, GlobalAlert } from '~su/components'
-import ory, { handleGetFlowError, handleFlowError } from '~su/sdk'
+import ory, { handleGetFlowError, handleFlowError } from '~su/authenticationSdk'
 import fields from './fields'
 import FeaturesList from './components/FeaturesList'
 import PillButton from './components/PillButton'
@@ -106,9 +106,7 @@ const LoginPage = ({ loginCallback }) => {
           })
         )
         .catch((err) => {
-          // If the previous handler did not catch the error it's most likely a form validation error
           if (err.response?.status === 400) {
-            // Yup, it is!
             triggerGlobalAlert('Wrong email address or password')
             return
           }
