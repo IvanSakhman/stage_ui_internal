@@ -1,7 +1,13 @@
 import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
+// Commented code will be used later when the new ory kratos identity system replaces the current one
+
+// import { useRedirects, useIdentity } from '~su/store/root-store'
+// import { useLogoutFlow } from '~su/authenticationSdk'
 import { Row, Col } from '~su/components/Grid'
+import Space from '~su/components/Space'
+// import { useNavigate } from '~su/hooks'
 
 import HomeButton from './HomeButton'
 import ClientsDropdown from './ClientsDropdown'
@@ -27,6 +33,11 @@ const StageTopNav = ({
   variant = 'default'
 }) => {
   const [hostedZone, setHostedZone] = useState('')
+
+  // const redirects = useRedirects()
+  // const identity = useIdentity()
+  // const navigate = useNavigate()
+  // const handleLogout = useLogoutFlow(() => navigate(redirects?.login || '/'))
 
   useEffect(() => {
     if (currentSystem) {
@@ -55,6 +66,11 @@ const StageTopNav = ({
         <Col span={3}>
           <UserDropdown hostedZone={hostedZone} helpdeskUrl={helpdeskUrl} />
         </Col>
+        {/* {identity && (
+          <Col span={3}>
+            <UserDropdown helpdeskUrl={helpdeskUrl} handleLogout={handleLogout} />
+          </Col>
+        )} */}
         <Col span={8}>
           <HomeButton hostedZone={hostedZone} large customLogoUrl={themeOverrides?.logoUrl} homeUrl={homeUrl} />
         </Col>
@@ -97,11 +113,14 @@ const StageTopNav = ({
           disabledOverflow
         />
       </DynamicLeftSideContainer>
-      {homeUrl && (
-        <a href={homeUrl}>
-          <DynamicLogo src={logo} />
-        </a>
-      )}
+      <Space size="middle">
+        {/* {identity && <UserDropdown helpdeskUrl={helpdeskUrl} handleLogout={handleLogout} />} */}
+        {homeUrl && (
+          <a href={homeUrl}>
+            <DynamicLogo src={logo} />
+          </a>
+        )}
+      </Space>
     </Row>
   )
 

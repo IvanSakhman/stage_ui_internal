@@ -1,5 +1,9 @@
-import { useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
+import PropTypes from 'prop-types'
+import store from '~su/store'
+import { useSearchParams, useNavigate } from '~su/hooks'
 import { Form, Row, Col, Button, Typography, Flex, Space, GlobalAlert } from '~su/components'
+import ory, { handleGetFlowError, handleFlowError } from '~su/authenticationSdk'
 import fields from './fields'
 import FeaturesList from './components/FeaturesList'
 import PillButton from './components/PillButton'
@@ -36,14 +40,120 @@ const featuresList = [
   'Promotes Business Growth'
 ]
 
-const LoginPage = () => {
-  const form = useRef(null)
+const LoginPage = ({ loginCallback }) => {
+  const [flow, setFlow] = useState()
 
-  const handleLogin = async () => {}
+  const form = useRef(null)
+  const searchParams = useSearchParams()
+  const navigate = useNavigate()
+
+  const redirects = store.useRedirects()
+  const setIdentity = store.useSessionStore((state) => state.setIdentity)
+
+  const flowId = searchParams.get('flow')
+  const returnTo = searchParams.get('return_to')
+
+  const triggerGlobalAlert = (message) =>
+    store.triggerGlobalAlert(
+      {
+        id: 'login-error',
+        type: 'error',
+        message
+      },
+      true
+    )
+
+  const handleLogin = async ({ values: { identifier, password } }) => {
+    store.removeGlobalAlert({ id: 'login-error' })
+
+    if (flow) {
+      const csrf_token = flow.ui.nodes.find(
+        (node) => node.group === 'default' && node.attributes.type === 'hidden' && node.attributes.name === 'csrf_token'
+      ).attributes.value
+
+      window.history.pushState(null, '', `${redirects.login}?flow=${flow.id}`)
+
+      ory
+        .updateLoginFlow({
+          flow: String(flow.id),
+          updateLoginFlowBody: {
+            csrf_token,
+            identifier,
+            password,
+            method: 'password'
+          }
+        })
+        .then(async ({ data }) => {
+          setIdentity(data.session.identity)
+
+          if (loginCallback) {
+            await loginCallback(data.session.identity.traits.email)
+          }
+
+          if (flow?.return_to) {
+            window.location.href = flow?.return_to
+            return
+          }
+          navigate(redirects.home)
+        })
+        .catch(
+          handleFlowError({
+            router: navigate,
+            flowType: 'login',
+            resetFlow: setFlow,
+            redirects,
+            triggerError: triggerGlobalAlert
+          })
+        )
+        .catch((err) => {
+          if (err.response?.status === 400) {
+            triggerGlobalAlert('Wrong email address or password')
+            return
+          }
+
+          return Promise.reject(err)
+        })
+    } else {
+      triggerGlobalAlert('Something went wrong')
+    }
+  }
 
   const handleMicrosoftLogin = async () => {}
 
   const handleOktaLogin = async () => {}
+
+  useEffect(() => {
+    if (flow || !redirects) {
+      return
+    }
+
+    const handleFlowObject = {
+      router: navigate,
+      flowType: 'login',
+      resetFlow: setFlow,
+      redirects,
+      triggerError: triggerGlobalAlert
+    }
+
+    if (flowId) {
+      ory
+        .getLoginFlow({ id: String(flowId) })
+        .then(({ data }) => {
+          setFlow(data)
+        })
+        .catch(handleGetFlowError(handleFlowObject))
+      return
+    }
+
+    ory
+      .createBrowserLoginFlow({
+        returnTo: returnTo ? String(returnTo) : undefined
+      })
+      .then(({ data }) => {
+        setFlow(data)
+      })
+      .catch(handleFlowError(handleFlowObject))
+  }, [flow, flowId, returnTo, navigate, redirects])
 
   return (
     <Container justify="center">
@@ -111,6 +221,10 @@ const LoginPage = () => {
       </Wrapper>
     </Container>
   )
+}
+
+LoginPage.propTypes = {
+  loginCallback: PropTypes.func
 }
 
 export default LoginPage
