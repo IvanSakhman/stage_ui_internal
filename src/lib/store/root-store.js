@@ -54,13 +54,6 @@ export const useSessionStore = create(
 
 export const useIdentity = () => useSessionStore(({ identity }) => identity)
 
-export const useRedirectsStore = create((set) => ({
-  redirects: null,
-  setRedirects: (redirects) => set({ redirects })
-}))
-
-export const useRedirects = () => useRedirectsStore(({ redirects }) => redirects)
-
 export const useLayoutConfig = () => useConfigStore(({ layout }) => layout)
 export const useBranding = () => useConfigStore(({ branding }) => branding)
 export const useAppConfig = () => useConfigStore(({ app }) => app)

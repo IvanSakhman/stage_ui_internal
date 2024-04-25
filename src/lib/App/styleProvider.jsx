@@ -1,8 +1,4 @@
-import { useEffect } from 'react'
 import PropTypes from 'prop-types'
-
-// actions
-import { useRedirectsStore } from '~su/store/root-store'
 
 // constants
 import theme from '~su/constants/theme'
@@ -16,15 +12,7 @@ import RootModal from '~su/components/RootModal'
 
 import { GlobalStyles } from './index.styled'
 
-const StyleProvider = ({ children, brandingToken, redirects }) => {
-  const setRedirects = useRedirectsStore((state) => state.setRedirects)
-
-  useEffect(() => {
-    if (redirects) {
-      setRedirects(redirects)
-    }
-  }, [redirects, setRedirects])
-
+const StyleProvider = ({ children, brandingToken }) => {
   const themeToken = { ...theme.token, ...brandingToken }
   const components = {
     Menu: {
@@ -61,11 +49,7 @@ const StyleProvider = ({ children, brandingToken, redirects }) => {
 
 StyleProvider.propTypes = {
   children: PropTypes.node.isRequired,
-  brandingToken: PropTypes.object,
-  redirects: PropTypes.shape({
-    login: PropTypes.string.isRequired,
-    home: PropTypes.string.isRequired
-  }).isRequired
+  brandingToken: PropTypes.object
 }
 
 export default StyleProvider

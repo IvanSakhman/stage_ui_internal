@@ -26,31 +26,32 @@ export function useLogoutFlow(callback) {
     }
   }, [identity])
 
-  return () => {
-    if (logoutToken) {
-      ory.updateLogoutFlow({ token: logoutToken }).then(() => {
-        setIdentity(null)
-        callback()
-      })
-    }
-  }
+  return logoutToken
+    ? () => {
+        ory.updateLogoutFlow({ token: logoutToken }).then(() => {
+          setIdentity(null)
+          callback()
+        })
+      }
+    : null
 }
 
-export function useSessionFlow(callback, redirects) {
-  const [isLoaded, setIsLoaded] = useState(false)
+export function useSessionFlow(callback) {
+  const [isInitialized, setIsInitialized] = useState(false)
 
   const identity = store.useSessionStore((state) => state.identity)
   const setIdentity = store.useSessionStore((state) => state.setIdentity)
 
   useEffect(() => {
-    if (redirects && window.location.pathname !== redirects.login) {
+    // We will need to change the production login page url here
+    if (window.location.pathname !== 'http://localhost:3001/login') {
       ory
         .toSession()
         .then(({ data }) => {
           if (!identity) {
             setIdentity(data.identity)
           }
-          setIsLoaded(true)
+          setIsInitialized(true)
         })
         .catch((err) => {
           if (err.response?.status === 401) {
@@ -59,14 +60,14 @@ export function useSessionFlow(callback, redirects) {
           }
 
           setIdentity(null)
-          setIsLoaded(true)
+          setIsInitialized(true)
 
           return Promise.reject(err)
         })
     } else {
-      setIsLoaded(true)
+      setIsInitialized(true)
     }
-  }, [callback, redirects, identity, setIdentity])
+  }, [callback, identity, setIdentity])
 
-  return isLoaded
+  return isInitialized
 }

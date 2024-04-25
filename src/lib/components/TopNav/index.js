@@ -3,11 +3,10 @@ import PropTypes from 'prop-types'
 
 // Commented code will be used later when the new ory kratos identity system replaces the current one
 
-// import { useRedirects, useIdentity } from '~su/store/root-store'
-// import { useLogoutFlow } from '~su/authenticationSdk'
+import { useLogoutFlow } from '~su/authenticationSdk'
+import { useNavigate } from '~su/hooks'
 import { Row, Col } from '~su/components/Grid'
 import Space from '~su/components/Space'
-// import { useNavigate } from '~su/hooks'
 
 import HomeButton from './HomeButton'
 import ClientsDropdown from './ClientsDropdown'
@@ -34,10 +33,9 @@ const StageTopNav = ({
 }) => {
   const [hostedZone, setHostedZone] = useState('')
 
-  // const redirects = useRedirects()
-  // const identity = useIdentity()
-  // const navigate = useNavigate()
-  // const handleLogout = useLogoutFlow(() => navigate(redirects?.login || '/'))
+  const navigate = useNavigate()
+  // We will need to change the production login page url here
+  const handleLogout = useLogoutFlow(() => navigate(`http://localhost:3001/login?redirect_url=${window.location.href}`))
 
   useEffect(() => {
     if (currentSystem) {
@@ -64,13 +62,8 @@ const StageTopNav = ({
     return (
       <Row align="middle" justify="end" gutter={8}>
         <Col span={3}>
-          <UserDropdown hostedZone={hostedZone} helpdeskUrl={helpdeskUrl} />
+          <UserDropdown hostedZone={hostedZone} helpdeskUrl={helpdeskUrl} handleLogout={handleLogout} />
         </Col>
-        {/* {identity && (
-          <Col span={3}>
-            <UserDropdown helpdeskUrl={helpdeskUrl} handleLogout={handleLogout} />
-          </Col>
-        )} */}
         <Col span={8}>
           <HomeButton hostedZone={hostedZone} large customLogoUrl={themeOverrides?.logoUrl} homeUrl={homeUrl} />
         </Col>
@@ -114,7 +107,7 @@ const StageTopNav = ({
         />
       </DynamicLeftSideContainer>
       <Space size="middle">
-        {/* {identity && <UserDropdown helpdeskUrl={helpdeskUrl} handleLogout={handleLogout} />} */}
+        <UserDropdown hostedZone={hostedZone} helpdeskUrl={helpdeskUrl} handleLogout={handleLogout} />
         {homeUrl && (
           <a href={homeUrl}>
             <DynamicLogo src={logo} />
