@@ -43,8 +43,7 @@ export function useSessionFlow(callback) {
   const setIdentity = store.useSessionStore((state) => state.setIdentity)
 
   useEffect(() => {
-    // We will need to change the production login page url here
-    if (window.location.pathname !== 'http://localhost:3001/login') {
+    if (window.location.pathname !== '/auth') {
       ory
         .toSession()
         .then(({ data }) => {

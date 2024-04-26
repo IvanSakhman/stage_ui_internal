@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
-// Commented code will be used later when the new ory kratos identity system replaces the current one
-
 import { useLogoutFlow } from '~su/authenticationSdk'
 import { useNavigate } from '~su/hooks'
 import { Row, Col } from '~su/components/Grid'
@@ -34,8 +32,8 @@ const StageTopNav = ({
   const [hostedZone, setHostedZone] = useState('')
 
   const navigate = useNavigate()
-  // We will need to change the production login page url here
-  const handleLogout = useLogoutFlow(() => navigate(`http://localhost:3001/login?redirect_url=${window.location.href}`))
+
+  const handleLogout = useLogoutFlow(() => navigate('/'))
 
   useEffect(() => {
     if (currentSystem) {
