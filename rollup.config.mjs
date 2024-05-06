@@ -18,6 +18,7 @@ const pkg = require('./package.json')
 const config = {
   input: {
     app: 'src/lib/App/index.jsx',
+    authenticationSdk: 'src/lib/authenticationSdk/index.js',
     styleProvider: 'src/lib/App/styleProvider.jsx',
     actions: 'src/lib/actions/index.js',
     clients: 'src/lib/clients/index.js',

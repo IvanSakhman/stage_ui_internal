@@ -1,3 +1,12 @@
+v1.81.2
+[feat] Hard-code Kratos URL temporarily
+
+v1.81.1
+[feat] Hard-code Kratos URL temporarily
+
+v1.81.0
+[feat] New authentication flow
+
 v1.80.1
 [fix] TopNav home button & client select color
 

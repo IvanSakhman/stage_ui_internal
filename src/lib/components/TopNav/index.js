@@ -1,7 +1,10 @@
 import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
+import { useLogoutFlow } from '~su/authenticationSdk'
+import { useNavigate } from '~su/hooks'
 import { Row, Col } from '~su/components/Grid'
+import Space from '~su/components/Space'
 
 import HomeButton from './HomeButton'
 import ClientsDropdown from './ClientsDropdown'
@@ -28,6 +31,10 @@ const StageTopNav = ({
 }) => {
   const [hostedZone, setHostedZone] = useState('')
 
+  const navigate = useNavigate()
+
+  const handleLogout = useLogoutFlow(() => navigate('/'))
+
   useEffect(() => {
     if (currentSystem) {
       setHostedZone(new URL(window.location).hostname.replace(`${currentSystem}.`, ''))
@@ -53,7 +60,7 @@ const StageTopNav = ({
     return (
       <Row align="middle" justify="end" gutter={8}>
         <Col span={3}>
-          <UserDropdown hostedZone={hostedZone} helpdeskUrl={helpdeskUrl} />
+          <UserDropdown hostedZone={hostedZone} helpdeskUrl={helpdeskUrl} handleLogout={handleLogout} />
         </Col>
         <Col span={8}>
           <HomeButton hostedZone={hostedZone} large customLogoUrl={themeOverrides?.logoUrl} homeUrl={homeUrl} />
@@ -97,11 +104,14 @@ const StageTopNav = ({
           disabledOverflow
         />
       </DynamicLeftSideContainer>
-      {homeUrl && (
-        <a href={homeUrl}>
-          <DynamicLogo src={logo} />
-        </a>
-      )}
+      <Space size="middle">
+        <UserDropdown hostedZone={hostedZone} helpdeskUrl={helpdeskUrl} handleLogout={handleLogout} />
+        {homeUrl && (
+          <a href={homeUrl}>
+            <DynamicLogo src={logo} />
+          </a>
+        )}
+      </Space>
     </Row>
   )
 
