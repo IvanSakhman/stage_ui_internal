@@ -40,7 +40,7 @@ export function useSessionFlow(callback) {
   const setIdentity = store.useSessionStore((state) => state.setIdentity)
 
   useEffect(() => {
-    if (window.location.pathname !== '/auth') {
+    if (window.location.href !== 'https://accounts.staging.stage.lv-426.tech/auth') {
       ory
         .toSession()
         .then(({ data }) => {
