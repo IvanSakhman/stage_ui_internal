@@ -1,3 +1,6 @@
+v1.81.3
+[fix] Logout flow
+
 v1.81.2
 [feat] Hard-code Kratos URL temporarily
 

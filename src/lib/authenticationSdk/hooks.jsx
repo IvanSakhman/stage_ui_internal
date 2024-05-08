@@ -5,26 +5,23 @@ import ory from './index'
 export function useLogoutFlow(callback) {
   const [logoutToken, setLogoutToken] = useState(null)
 
-  const identity = store.useSessionStore((state) => state.identity)
   const setIdentity = store.useSessionStore((state) => state.setIdentity)
 
   useEffect(() => {
-    if (identity) {
-      ory
-        .createBrowserLogoutFlow()
-        .then(({ data }) => {
-          setLogoutToken(data.logout_token)
-        })
-        .catch((err) => {
-          switch (err.response?.status) {
-            case 401:
-              return
-          }
+    ory
+      .createBrowserLogoutFlow()
+      .then(({ data }) => {
+        setLogoutToken(data.logout_token)
+      })
+      .catch((err) => {
+        switch (err.response?.status) {
+          case 401:
+            return
+        }
 
-          return Promise.reject(err)
-        })
-    }
-  }, [identity])
+        return Promise.reject(err)
+      })
+  }, [])
 
   return logoutToken
     ? () => {
