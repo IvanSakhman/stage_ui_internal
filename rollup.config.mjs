@@ -29,6 +29,7 @@ const config = {
     hooks: 'src/lib/hooks/index.js',
     store: 'src/lib/store/index.js',
     utilities: 'src/lib/utilities/index.js',
+    serverUtilities: 'src/lib/utilities/server/index.js',
     views: 'src/lib/views/index.js',
     globalStyles: 'src/lib/globalStyles/index.styled.js',
     mocks: 'src/__mocks__/index.js'
