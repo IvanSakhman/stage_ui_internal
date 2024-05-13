@@ -1,3 +1,12 @@
+v1.82.0
+[feat] Moved utilities, available for SSR to separate bundle, so they can be used without leading to build errors
+
+v1.81.5
+[feat] Hard-code Kratos URL temporarily
+
+v1.81.4
+Changed authentication redirect url condition
+
 v1.81.3
 [fix] Logout flow
 
