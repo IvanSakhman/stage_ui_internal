@@ -40,7 +40,7 @@ export function useSessionFlow(callback) {
   const setIdentity = store.useSessionStore((state) => state.setIdentity)
 
   useEffect(() => {
-    if (window.location.href !== 'https://accounts.assemblyglobal.dev/auth') {
+    if (window.location.href !== 'https://assemblyglobal.dev/auth') {
       ory
         .toSession()
         .then(({ data }) => {
