@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
-import { useLogoutFlow } from '~su/authenticationSdk'
+import { authHooks } from '~su/authenticationSdk'
 import { useNavigate } from '~su/hooks'
 import { Row, Col } from '~su/components/Grid'
 import Space from '~su/components/Space'
@@ -27,9 +27,11 @@ const StageTopNav = ({
   clientsDropdownTitle,
   homeUrl,
   clientLogoUrl,
-  variant = 'default'
+  variant = 'default',
+  kratosPublicUrl
 }) => {
   const [hostedZone, setHostedZone] = useState('')
+  const { useLogoutFlow } = authHooks({ basePath: kratosPublicUrl })
 
   const navigate = useNavigate()
 
@@ -142,7 +144,8 @@ StageTopNav.propTypes = {
   clientsDropdownTitle: PropTypes.string,
   homeUrl: PropTypes.string,
   clientLogoUrl: PropTypes.string,
-  variant: PropTypes.oneOf(['default', 'with-dynamic-left-logo'])
+  variant: PropTypes.oneOf(['default', 'with-dynamic-left-logo']),
+  kratosPublicUrl: PropTypes.string
 }
 
 export default StageTopNav

@@ -1,3 +1,9 @@
+v1.83.0
+[feat] Removed hardcoded kratos public url.
+
+**BREAKING** for apps that use authenticationSdk (ory)
+this PR changes how the ory is initialised and how the authenticationHooks are initialised.
+
 v1.82.0
 [feat] Moved utilities, available for SSR to separate bundle, so they can be used without leading to build errors
 
