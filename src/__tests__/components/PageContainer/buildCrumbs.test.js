@@ -17,7 +17,9 @@ describe('buildCrumbs', () => {
   })
 
   it('adds home crumb', () => {
-    expect(buildCrumbs(currentPageTitle)[0]).toEqual({
+    const buildBreadcrumbNames = () => {}
+
+    expect(buildCrumbs(currentPageTitle, buildBreadcrumbNames, '', '/')[0]).toEqual({
       href: '/',
       title: <HomeOutlined />
     })

@@ -1,3 +1,6 @@
+v1.84.1
+[fix] Added breadcrumb homePath
+
 v1.84.0
 Dependencies - 17/05/24
 1. 841bfce Bump ejs from 3.1.9 to 3.1.10 (#522)2Bump pusher-js from 8.0.1 to 8.3.0
