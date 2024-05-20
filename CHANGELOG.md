@@ -1,3 +1,36 @@
+v1.84.0
+Dependencies - 17/05/24
+1. 841bfce Bump ejs from 3.1.9 to 3.1.10 (#522)2Bump pusher-js from 8.0.1 to 8.3.0
+2. Bump @monaco-editor/react from 4.5.1 to 4.6.0
+3. Bump antd from 5.9.4 to 5.17.2
+4. Bump chart.js from 4.3.0 to 4.4.3
+5. Bump dayjs from 1.11.7 to 1.11.11
+6. Bump i18next from 23.2.11 to 23.11.4
+7. Bump js-cookie from 3.0.1 to 3.0.5
+8. Bump lodash from 4.17.20 to 4.17.21
+9. Bump pusher-js from 8.3.0 to 8.4.0-rc2
+10. Bump react from 18.2.0 to 18.3.1
+11. Bump react-i18next from 14.0.1 to 14.1.1
+12. Bump react-markdown from 9.0.0 to 9.0.1
+13. Bump sql-formatter from 15.0.2 to 15.3.1
+14. Bump styled-components from 6.0.7 to 6.1.11
+15. Bump whatwg-fetch from 3.6.2 to 3.6.20
+16. Bump @babel/cli from 7.24.1 to 7.24.5
+17. Bump @babel/core from 7.19.3 to 7.24.5
+18. Bump @babel/preset-react from 7.18.6 to 7.24.1
+19. Bump @babel/runtime from 7.19.0 to 7.24.5
+20. Bump @craco/craco from 7.0.0 to 7.1.0
+21. Bump @testing-library/jest-dom from 6.4.2 to 6.4.5
+22. Bump @testing-library/react from 14.0.0 to 15.0.7
+23. Bump babel-plugin-prismjs from 2.0.1 to 2.1.0
+24. Bump eslint from 8.24.0 to 8.57.0
+25. Bump eslint-plugin-react-hooks from 4.6.0 to 4.6.2
+26. Bump jest-environment-jsdom from 29.1.2 to 29.7.0
+27. Bump json-server from 0.17.4 to 1.0.0-beta.0
+28. Bump react-dom from 18.2.0 to 18.3.1
+29. Bump react-test-renderer from 18.2.0 to 18.3.1
+30. Bump rollup from 4.13.2 to 4.17.2
+
 v1.83.0
 [feat] Removed hardcoded kratos public url.
 
