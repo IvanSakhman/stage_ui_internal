@@ -1,6 +1,5 @@
 import { create } from 'zustand'
 import { shallow } from 'zustand/shallow'
-import { persist } from 'zustand/middleware'
 
 import createClass from '~su/utilities/createClass'
 
@@ -42,15 +41,10 @@ export const useUIStore = create((_set) => ({
   globalAlerts: []
 }))
 
-export const useSessionStore = create(
-  persist(
-    (set) => ({
-      identity: null,
-      setIdentity: (identity) => set({ identity })
-    }),
-    { name: 'session-storage' }
-  )
-)
+export const useSessionStore = create((set) => ({
+  identity: null,
+  setIdentity: (identity) => set({ identity })
+}))
 
 export const useIdentity = () => useSessionStore(({ identity }) => identity)
 
