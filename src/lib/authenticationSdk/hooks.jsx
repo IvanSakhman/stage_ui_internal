@@ -5,6 +5,10 @@ import authSdk from './index'
 export default (oryConfig) => {
   const ory = authSdk(oryConfig)
 
+  if (!ory) {
+    return { useLogoutFlow: () => null, useSessionFlow: () => null }
+  }
+
   const useLogoutFlow = (callback) => {
     const [logoutToken, setLogoutToken] = useState(null)
 
