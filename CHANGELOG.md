@@ -1,3 +1,6 @@
+v1.84.2
+[fix] Fixed useSessionStore for the old projects
+
 v1.84.1
 [fix] Added breadcrumb homePath
 
