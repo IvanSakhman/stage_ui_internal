@@ -2,7 +2,7 @@ import { HomeOutlined } from '@ant-design/icons'
 import { useLocation } from '~su/hooks'
 import { string } from '~su/utilities'
 
-export default (headerTitle, buildBreadcrumbNames, pathname, homePath) => {
+export default (headerTitle, buildBreadcrumbNames, pathname, homePath = '/') => {
   const location = useLocation()
   const homeCrumb = { href: homePath, title: <HomeOutlined /> }
 
