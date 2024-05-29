@@ -11,6 +11,7 @@ export default (oryConfig) => {
 
   const useLogoutFlow = (callback) => {
     const [logoutToken, setLogoutToken] = useState(null)
+    const [isLoading, setIsLoading] = useState(false)
 
     const setIdentity = store.useSessionStore((state) => state.setIdentity)
 
@@ -30,14 +31,21 @@ export default (oryConfig) => {
         })
     }, [])
 
-    return logoutToken
-      ? () => {
-          ory.updateLogoutFlow({ token: logoutToken }).then(() => {
-            setIdentity(null)
-            callback()
-          })
-        }
-      : null
+    const handleLogout = async () => {
+      setIsLoading(true)
+      await ory
+        .updateLogoutFlow({ token: logoutToken })
+        .then(() => {
+          setIdentity(null)
+          setIsLoading(false)
+          callback()
+        })
+        .catch(() => {
+          setIsLoading(false)
+        })
+    }
+
+    return { isLoading, ...(logoutToken ? { handleLogout } : {}) }
   }
 
   const useSessionFlow = (callback, authUrl) => {
