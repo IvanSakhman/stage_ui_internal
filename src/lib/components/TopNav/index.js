@@ -28,14 +28,15 @@ const StageTopNav = ({
   homeUrl,
   clientLogoUrl,
   variant = 'default',
-  kratosPublicUrl
+  kratosPublicUrl,
+  authUrl = '/auth'
 }) => {
   const [hostedZone, setHostedZone] = useState('')
   const { useLogoutFlow } = authHooks({ basePath: kratosPublicUrl })
 
   const navigate = useNavigate()
 
-  const handleLogout = useLogoutFlow(() => navigate('/'))
+  const handleLogout = useLogoutFlow(() => navigate(authUrl))
 
   useEffect(() => {
     if (currentSystem) {
@@ -145,7 +146,8 @@ StageTopNav.propTypes = {
   homeUrl: PropTypes.string,
   clientLogoUrl: PropTypes.string,
   variant: PropTypes.oneOf(['default', 'with-dynamic-left-logo']),
-  kratosPublicUrl: PropTypes.string
+  kratosPublicUrl: PropTypes.string,
+  authUrl: PropTypes.string
 }
 
 export default StageTopNav
