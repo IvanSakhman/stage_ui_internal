@@ -1,3 +1,6 @@
+v1.84.3
+[fix] Fixed breadcrumbs
+
 v1.84.2
 [fix] Fixed useSessionStore for the old projects
 
