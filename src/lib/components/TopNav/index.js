@@ -5,7 +5,7 @@ import { authHooks } from '~su/authenticationSdk'
 import { useNavigate } from '~su/hooks'
 import { Row, Col } from '~su/components/Grid'
 import Space from '~su/components/Space'
-import Spin from '~su/components/Spin'
+import LoadingBlock from '~su/components/LoadingBlock'
 
 import HomeButton from './HomeButton'
 import ClientsDropdown from './ClientsDropdown'
@@ -121,7 +121,7 @@ const StageTopNav = ({
   return (
     <StyledLayoutHeader>
       {variant === 'with-dynamic-left-logo' ? renderDynamicLogoTopNav() : renderDefaultTopNav()}
-      <Spin spinning={isLoading} fullscreen size="large" />
+      <LoadingBlock spinning={isLoading} showTip={false} size="large" fullscreen />
     </StyledLayoutHeader>
   )
 }

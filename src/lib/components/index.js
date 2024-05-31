@@ -56,7 +56,6 @@ import ResultsTable from './ResultsTable'
 import Score from './Score'
 import Space from './Space'
 import Spacer from './Spacer'
-import Spin from './Spin'
 import StateBadge from './StateBadge'
 import StatesHistory from './StatesHistory'
 import StateTag from './StateTag'
@@ -140,7 +139,6 @@ export {
   Skeleton,
   Space,
   Spacer,
-  Spin,
   StateBadge,
   StatesHistory,
   StateTag,

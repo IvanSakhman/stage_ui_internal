@@ -1,11 +1,11 @@
 import { Result, Spin } from 'antd'
 import PropTypes from 'prop-types'
 
-const LoadingBlock = ({ size, spinning, tip, showTip, children }) => {
+const LoadingBlock = ({ size, spinning, tip, showTip, children, fullscreen = false }) => {
   tip ||= showTip ? 'Loading...' : null
 
-  return children ? (
-    <Spin tip={tip} size={size} spinning={spinning}>
+  return children || fullscreen ? (
+    <Spin tip={tip} size={size} spinning={spinning} fullscreen={fullscreen}>
       {children}
     </Spin>
   ) : (
@@ -17,7 +17,9 @@ LoadingBlock.propTypes = {
   spinning: PropTypes.bool,
   size: PropTypes.oneOf(['small', 'default', 'large']),
   showTip: PropTypes.bool,
-  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node])
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
+  fullscreen: PropTypes.bool,
+  tip: PropTypes.node
 }
 
 export default LoadingBlock
