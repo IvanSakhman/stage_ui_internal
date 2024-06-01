@@ -1,3 +1,6 @@
+v1.84.4
+[fix] Fixed logout redirection and added loader when it is processing
+
 v1.84.3
 [fix] Fixed breadcrumbs
 

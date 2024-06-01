@@ -5,6 +5,7 @@ import { authHooks } from '~su/authenticationSdk'
 import { useNavigate } from '~su/hooks'
 import { Row, Col } from '~su/components/Grid'
 import Space from '~su/components/Space'
+import LoadingBlock from '~su/components/LoadingBlock'
 
 import HomeButton from './HomeButton'
 import ClientsDropdown from './ClientsDropdown'
@@ -28,14 +29,15 @@ const StageTopNav = ({
   homeUrl,
   clientLogoUrl,
   variant = 'default',
-  kratosPublicUrl
+  kratosPublicUrl,
+  authUrl = '/auth'
 }) => {
   const [hostedZone, setHostedZone] = useState('')
   const { useLogoutFlow } = authHooks({ basePath: kratosPublicUrl })
 
   const navigate = useNavigate()
 
-  const handleLogout = useLogoutFlow(() => navigate('/'))
+  const { isLoading, handleLogout } = useLogoutFlow(() => navigate(authUrl))
 
   useEffect(() => {
     if (currentSystem) {
@@ -120,6 +122,7 @@ const StageTopNav = ({
   return (
     <StyledLayoutHeader>
       {variant === 'with-dynamic-left-logo' ? renderDynamicLogoTopNav() : renderDefaultTopNav()}
+      <LoadingBlock spinning={isLoading} showTip={false} size="large" fullscreen />
     </StyledLayoutHeader>
   )
 }
@@ -145,7 +148,8 @@ StageTopNav.propTypes = {
   homeUrl: PropTypes.string,
   clientLogoUrl: PropTypes.string,
   variant: PropTypes.oneOf(['default', 'with-dynamic-left-logo']),
-  kratosPublicUrl: PropTypes.string
+  kratosPublicUrl: PropTypes.string,
+  authUrl: PropTypes.string
 }
 
 export default StageTopNav
