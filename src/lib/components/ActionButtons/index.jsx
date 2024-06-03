@@ -3,11 +3,11 @@ import Button from '../Button'
 
 import { translateResponseAction, filterActionsByCondition } from './utilities'
 
-const ActionButtons = ({ actions = [], valueRender = null, ...translateOptions }) => {
+const ActionButtons = ({ actions = [], valueRender = null, loadingState = {}, ...translateOptions }) => {
   const filteredActions = filterActionsByCondition(actions, translateOptions.record)
 
   const renderActionButton = (action, index) => {
-    const { display, properties } = translateResponseAction(action, translateOptions)
+    const { display, properties, record } = translateResponseAction(action, translateOptions)
     let Component = Button
 
     if (properties?.type == 'reload') {
@@ -16,7 +16,7 @@ const ActionButtons = ({ actions = [], valueRender = null, ...translateOptions }
     }
 
     return (
-      <Component key={index} {...properties}>
+      <Component key={index} loading={loadingState?.items?.includes(record[loadingState?.identifier])} {...properties}>
         {valueRender ? valueRender() : display}
       </Component>
     )
