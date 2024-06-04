@@ -52,6 +52,7 @@ export const translateResponseAction = (action, translateOptions = {}) => {
   }
 
   return {
+    record,
     display: translatedDisplay,
     properties: {
       ...properties,
