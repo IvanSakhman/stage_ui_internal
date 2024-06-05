@@ -16,7 +16,6 @@ const Table = ({
   pagination = false,
   actions = {},
   functionActionHandlers,
-  loadingState = {},
   ...rest
 }) => {
   const { t } = useTranslation()
@@ -50,7 +49,7 @@ const Table = ({
         column.title ||= t(`columns.${key}`, column.title || buildColumnTitle(columnsConfig?.[key], key))
 
         if (actions.table_row) {
-          column = extendRenderWithActions(actions.table_row, column, functionActionHandlers, loadingState)
+          column = extendRenderWithActions(actions.table_row, column, functionActionHandlers)
         }
 
         return { key, dataIndex: key, ...column }
@@ -74,8 +73,7 @@ Table.propTypes = {
     })
   ]),
   actions: PropTypes.shape({ table_row: PropTypes.object }),
-  functionActionHandlers: PropTypes.object,
-  loadingState: PropTypes.object
+  functionActionHandlers: PropTypes.object
 }
 
 export default memo(withScopedTranslations(Table, 'table'))

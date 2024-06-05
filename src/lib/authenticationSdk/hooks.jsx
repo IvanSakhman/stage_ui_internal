@@ -6,7 +6,7 @@ export default (oryConfig) => {
   const ory = authSdk(oryConfig)
 
   if (!ory) {
-    return { useLogoutFlow: () => null, useSessionFlow: () => null }
+    return { useLogoutFlow: () => ({ isLoading: false, handleLogout: null }), useSessionFlow: () => null }
   }
 
   const useLogoutFlow = (callback) => {

@@ -1,3 +1,12 @@
+v1.85.1
+[fix] Fixed issue with null being returned instead of object from useLogoutFlow when ory not ready
+
+v1.85.0
+[feat] Better loader feedback in From and ActionButtons
+
+1. Added 'isSubmitting' state to Form component which is used to display submit button as loading and disable cancel button on form finish.
+2. Added support for 'showLoader' function action property which sets the 'loading' prop of the action button to true when clicked.
+
 v1.84.4
 [fix] Fixed logout redirection and added loader when it is processing
 

@@ -46,6 +46,7 @@ const Form = forwardRef(
   ) => {
     const [form] = AntdForm.useForm()
     const [submitDisabled, setSubmitDisabled] = useState(submitDisabledProp)
+    const [isSubmitting, setIsSubmitting] = useState(false)
 
     useImperativeHandle(
       ref,
@@ -83,7 +84,7 @@ const Form = forwardRef(
     }
 
     const handleFinish = (values) => {
-      setSubmitDisabled(true)
+      setIsSubmitting(true)
       onFinish({ values, form })
     }
 
@@ -101,6 +102,7 @@ const Form = forwardRef(
         danger: true,
         popconfirm: { title: 'Are you sure to cancel?', placement: 'bottomRight', cancelText: 'No' },
         display: 'Cancel',
+        disabled: isSubmitting,
         ...cancelButtonProps
       }
 
@@ -108,6 +110,7 @@ const Form = forwardRef(
         type: 'primary',
         htmlType: 'submit',
         disabled: submitDisabled,
+        loading: isSubmitting,
         display: 'Save',
         ...submitButtonProps
       }

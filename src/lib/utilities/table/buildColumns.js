@@ -5,7 +5,7 @@ export const buildColumnTitle = (properties, key) => {
   return properties?.title || string.humanize(key, { capitalize: true })
 }
 
-export const extendRenderWithActions = (actions, column, functionActionHandlers, loadingState = {}) => {
+export const extendRenderWithActions = (actions, column, functionActionHandlers) => {
   const columnActions = actions[column.key]
 
   if (columnActions) {
@@ -18,7 +18,6 @@ export const extendRenderWithActions = (actions, column, functionActionHandlers,
         valueRender={customRender ? () => customRender(value, record, index) : null}
         functionHandlers={functionActionHandlers}
         size="small"
-        loadingState={loadingState}
       />
     )
   }
