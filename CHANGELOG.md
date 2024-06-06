@@ -1,3 +1,6 @@
+v1.85.2
+[fix] Reset Form's 'isSubmitting' state after onSubmit has finished or when there are any errors.
+
 v1.85.1
 [fix] Fixed issue with null being returned instead of object from useLogoutFlow when ory not ready
 
