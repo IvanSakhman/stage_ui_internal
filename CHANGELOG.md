@@ -1,3 +1,6 @@
+v1.85.3
+[fix] Added branded fullscreen spinner
+
 v1.85.2
 [fix] Reset Form's 'isSubmitting' state after onSubmit has finished or when there are any errors.
 
