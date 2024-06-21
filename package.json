@@ -5,7 +5,7 @@
     "registry": "https://npm.pkg.github.com/"
   },
   "author": "ForwardPMX Developers",
-  "version": "1.85.3",
+  "version": "1.86.0",
   "description": "Stage UI React components",
   "license": "MIT",
   "files": [
@@ -14,14 +14,14 @@
   "dependencies": {
     "@monaco-editor/react": "^4.6.0",
     "@ory/client": "^1.9.0",
-    "antd": "^5.17.2",
+    "antd": "^5.18.0",
     "async-validator": "^4.2.5",
     "chart.js": "^4.4.3",
     "dayjs": "^1.11.11",
     "file-saver": "^2.0.5",
     "html2canvas": "^1.4.1",
-    "humanize-duration": "^3.32.0",
-    "i18next": "^23.11.4",
+    "humanize-duration": "^3.32.1",
+    "i18next": "^23.11.5",
     "js-cookie": "^3.0.5",
     "localforage": "^1.10.0",
     "lodash": "^4.17.21",
@@ -32,7 +32,7 @@
     "pusher-js": "^8.4.0-rc2",
     "react": "^18.3.1",
     "react-ace": "^11.0.1",
-    "react-i18next": "^14.1.1",
+    "react-i18next": "^14.1.2",
     "react-markdown": "^9.0.1",
     "react-measure": "^2.5.2",
     "react-split-pane": "^0.1.92",
@@ -64,19 +64,20 @@
     ]
   },
   "devDependencies": {
-    "@babel/cli": "^7.24.5",
-    "@babel/core": "^7.24.5",
-    "@babel/preset-react": "^7.24.1",
-    "@babel/runtime": "^7.24.5",
+    "@babel/cli": "^7.24.7",
+    "@babel/core": "^7.24.7",
+    "@babel/preset-react": "^7.24.7",
+    "@babel/runtime": "^7.24.7",
     "@craco/craco": "^7.1.0",
     "@rollup/plugin-alias": "^5.1.0",
     "@rollup/plugin-babel": "^6.0.4",
-    "@rollup/plugin-commonjs": "^25.0.7",
+    "@rollup/plugin-commonjs": "^26.0.1",
     "@rollup/plugin-image": "^3.0.3",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-terser": "^0.4.4",
-    "@testing-library/jest-dom": "^6.4.5",
-    "@testing-library/react": "^15.0.7",
+    "@testing-library/dom": "^10.1.0",
+    "@testing-library/jest-dom": "^6.4.6",
+    "@testing-library/react": "^16.0.0",
     "@testing-library/react-hooks": "8.0.1",
     "@testing-library/user-event": "14.5.2",
     "babel-eslint": "^10.1.0",
@@ -89,17 +90,17 @@
     "eslint-plugin-import": "2.29.1",
     "eslint-plugin-jsx-a11y": "6.8.0",
     "eslint-plugin-prettier": "5.1.3",
-    "eslint-plugin-react": "7.34.1",
+    "eslint-plugin-react": "^7.34.2",
     "eslint-plugin-react-hooks": "^4.6.2",
     "jest-environment-jsdom": "^29.7.0",
-    "json-server": "^1.0.0-beta.0",
+    "json-server": "^1.0.0-beta.1",
     "postcss-normalize": "^10.0.1",
-    "prettier": "3.2.5",
+    "prettier": "^3.3.1",
     "pusher-js-mock": "^0.3.8",
     "react-dom": "^18.3.1",
     "react-scripts": "5.0.1",
     "react-test-renderer": "^18.3.1",
-    "rollup": "^4.17.2",
+    "rollup": "^4.18.0",
     "rollup-plugin-copy": "^3.5.0",
     "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-filesize": "10.0.0",
@@ -112,7 +113,7 @@
     "react": ">=17.0.2"
   },
   "engines": {
-    "node": ">=19"
+    "node": ">=22"
   },
   "keywords": [
     "react-component"
@@ -128,5 +129,9 @@
       "node_modules/(?!axios)"
     ],
     "resetMocks": false
+  },
+  "resolutions": {
+    "string-width": "4.1.0",
+    "wrap-ansi": "7.0.0"
   }
 }
