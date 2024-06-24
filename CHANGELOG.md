@@ -1,3 +1,13 @@
+v1.86.1
+Dependencies - 24/06/24
+
+1. Bump @ory/client from 1.9.0 to 1.11.11
+2. Bump antd from 5.18.0 to 5.18.3 
+3. Bump sql-formatter from 15.3.1 to 15.3.2 
+4. Bump @testing-library/dom from 10.1.0 to 10.2.0 
+5. Bump eslint-plugin-jsx-a11y from 6.8.0 to 6.9.0 
+6. Bump eslint-plugin-react from 7.34.2 to 7.34.3
+
 v1.86.0
 Dependencies - 17/06/24
 1. 43e42ad chore(deps-dev): bump eslint-plugin-react from 7.34.1 to 7.34.2 (#540)
