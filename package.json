@@ -40,7 +40,7 @@
     "sql-formatter": "^15.4.3",
     "styled-components": "^6.1.13",
     "whatwg-fetch": "^3.6.20",
-    "zustand": "5.0.0-rc.2"
+    "zustand": "4.5.5"
   },
   "scripts": {
     "test": "TZ=utc NODE_ENV=test react-scripts test --env=jest-environment-jsdom --testPathIgnorePatterns=src/__tests__/support",
