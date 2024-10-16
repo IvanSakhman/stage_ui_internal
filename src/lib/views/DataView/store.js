@@ -1,4 +1,4 @@
-import { create } from 'zustand'
+import { createWithEqualityFn as create } from 'zustand/traditional'
 import { shallow } from 'zustand/shallow'
 import { buildCollectionState } from '~su/actions'
 
