@@ -70,7 +70,7 @@ const detailedFormat = (value, timeZone = null) => {
     return null
   }
 
-  return Intl.DateTimeFormat(
+  return new Intl.DateTimeFormat(
     navigator.language,
     object.compact({
       month: 'short',
@@ -83,7 +83,7 @@ const detailedFormat = (value, timeZone = null) => {
       timeZone: timeZone,
       timeZoneName: 'short'
     })
-  ).format(Date.parse(value))
+  ).format(new Date(value))
 }
 
 // https://stackoverflow.com/questions/58216504/dayjs-isvalid-behaves-differently-to-moment/58216985#58216985
