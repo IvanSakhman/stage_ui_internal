@@ -1,3 +1,36 @@
+v1.87.0
+Dependencies - 21/10/24
+
+1. Bump @ory/client from 1.11.11 to 1.15.7
+2. Bump antd from 5.18.3 to 5.21.5
+3. Bump chart.js from 4.4.3 to 4.4.5
+4. Bump dayjs from 1.11.11 to 1.11.13
+5. Bump i18next from 23.11.5 to 23.16.2
+6. Bump react-ace from 11.0.1 to 12.0.0
+7. Bump react-i18next from 14.1.2 to 15.0.3
+8. Bump sql-formatter from 15.3.2 to 15.4.4
+9. Bump styled-components from 6.1.11 to 6.1.13
+10. Bump zustand from 4.5.2 to 5.0.0
+11. Bump @babel/cli from 7.24.7 to 7.25.7
+12. Bump @babel/core from 7.24.7 to 7.25.8
+13. Bump @babel/preset-react from 7.24.7 to 7.25.7
+14. Bump @babel/runtime from 7.24.7 to 7.25.7
+15. Bump @rollup/plugin-alias from 5.1.0 to 5.1.1
+16. Bump @rollup/plugin-commonjs from 26.0.1 to 28.0.1
+17. Bump @rollup/plugin-node-resolve from 15.2.3 to 15.3.0
+18. Bump @testing-library/dom from 10.2.0 to 10.4.0
+19. Bump @testing-library/jest-dom from 6.4.6 to 6.6.2
+20. Bump @testing-library/react from 16.0.0 to 16.0.1
+21. Bump eslint-plugin-import from 2.29.1 to 2.31.0
+22. Bump eslint-plugin-jsx-a11y from 6.9.0 to 6.10.1
+23. Bump eslint-plugin-prettier from 5.1.3 to 5.2.1
+24. Bump eslint-plugin-react from 7.34.3 to 7.37.1
+25. Bump postcss-normalize from 10.0.1 to 13.0.1
+26. Bump prettier from 3.3.1 to 3.3.3
+27. Bump rollup from 4.18.0 to 4.24.0
+28. Bump rollup-plugin-delete from 2.0.0 to 2.1.0
+29. Bump string-width from 4.1.0 to 4.2.3
+
 v1.86.1
 Dependencies - 24/06/24
 

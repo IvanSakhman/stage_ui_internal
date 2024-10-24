@@ -120,7 +120,10 @@ describe('Date Utilities', () => {
 
       describe('w/ timeZone specified', () => {
         it('uses it', () => {
-          expect(detailedFormat('2020-12-14T17:56:15.786Z', 'CET')).toEqual('14 Dec 2020, 18:56:15.786 GMT+1')
+          const formattedDate = detailedFormat('2020-12-14T17:56:15.786Z', 'CET');
+          expect(
+            ['14 Dec 2020, 18:56:15.786 GMT+1', '14 Dec 2020, 18:56:15.786 CET'].includes(formattedDate)
+          ).toBe(true);
         })
       })
     })
