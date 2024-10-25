@@ -1,0 +1,70 @@
+name: Package publish
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    name: Tag & Release
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.project_info.outputs.version }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Current NPM Package Version
+        uses: gregoranders/nodejs-project-info@v0.0.11
+        id: project_info
+      - name: Create Tag
+        uses: negz/create-tag@v1
+        with:
+          version: v${{ steps.project_info.outputs.version }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Read latest Changelog entry
+        id: changelog
+        run: |
+          changelog=$(sed -E -n '2,/^v[0-9]+\.[0-9]+\.[0-9]+/ p' CHANGELOG.md | sed '$d')
+          changelog="${changelog//'::'/'@'}"
+          changelog="${changelog//'%'/'%25'}"
+          changelog="${changelog//$'\n'/'%0A'}"
+          changelog="${changelog//$'\r'/'%0D'}"
+          echo "::set-output name=changelog::$changelog"
+      - name: Create release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ steps.project_info.outputs.version }}
+          release_name: Release v${{ steps.project_info.outputs.version }}
+          body: ${{ steps.changelog.outputs.changelog }}
+          draft: false
+          prerelease: ${{ github.ref != 'main' }}
+  publish:
+    name: Build & Publish
+    runs-on: ubuntu-latest
+    needs: [release]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '22'
+          registry-url: 'https://npm.pkg.github.com'
+          # These following two lines are the key:
+          always-auth: true
+          scope: '@forward3d'
+      - uses: actions/cache@v2
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+      - run: yarn install --frozen-lockfile
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GH_PACKAGES_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Publish package to GPR
+        run: yarn publish --no-git-tag-version --new-version ${{ needs.release.outputs.version }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
