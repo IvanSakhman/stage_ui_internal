@@ -1,5 +1,5 @@
-import { createWithEqualityFn as create } from 'zustand/traditional'
-import { shallow } from 'zustand/shallow'
+import { create } from 'zustand'
+import { useShallow } from 'zustand/shallow'
 import { buildCollectionState } from '~su/actions'
 
 const setupStore = ({ itemName, itemPluralName, isPaginated, isFilterable, additionalFields }) => {
@@ -13,28 +13,21 @@ const setupStore = ({ itemName, itemPluralName, isPaginated, isFilterable, addit
   )
 
   const useData = () => {
-    return useDataStore((state) => state[itemPluralName])
+    return useDataStore(useShallow((state) => state[itemPluralName]))
   }
 
-  const useDataStates = () => {
-    return useDataStore((state) => {
-      return {
-        isLoading: state.isLoading,
-        isLoaded: state.isLoaded
-      }
-    }, shallow)
-  }
+  const useDataStates = () => useDataStore(useShallow(({ isLoading, isLoaded }) => ({ isLoading, isLoaded })))
 
   const usePagination = () => {
-    return useDataStore((state) => state.pagination)
+    return useDataStore(useShallow((state) => state.pagination))
   }
 
   const useFiltersSchema = () => {
-    return useDataStore((state) => state.filtersSchema)
+    return useDataStore(useShallow((state) => state.filtersSchema))
   }
 
   const useViewActions = () => {
-    return useDataStore((state) => state.actions)
+    return useDataStore(useShallow((state) => state.actions))
   }
 
   return {

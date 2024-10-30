@@ -1,5 +1,5 @@
-import { createWithEqualityFn as create } from 'zustand/traditional'
-import { shallow } from 'zustand/shallow'
+import { create } from 'zustand'
+import { useShallow } from 'zustand/shallow'
 
 // type State = {
 //   isLoading: boolean
@@ -41,39 +41,27 @@ export const useEditorStore = create((_set, _get) => ({
   snippets: []
 }))
 
-export const useResource = () => {
-  return useEditorStore((s) => {
-    return s.resource
-  }, shallow)
-}
-
-export const useEditorConfig = () => {
-  return useEditorStore((s) => {
-    return s.config.editor
-  }, shallow)
-}
-
-export const useSnippets = () => {
-  return useEditorStore((s) => s.snippets)
-}
-
-export const useSelectedText = () => {
-  return useEditorStore((s) => s.selectedText)
-}
-
-export const useAutoComplete = () => {
-  return useEditorStore((s) => s.showAutocomplete)
-}
-
-export const useEditorStates = () => {
-  return useEditorStore(
-    (s) => ({
-      isLoadingSnippets: s.isLoadingSnippets,
-      isSnippetsLoaded: s.isSnippetsLoaded,
-      isRunning: s.isRunning,
-      isSaving: s.isSaving,
-      hasUnsavedChanges: s.hasUnsavedChanges
-    }),
-    shallow
+export const useResource = () =>
+  useEditorStore(
+    useShallow(({ resource }) => ({
+      resource
+    }))
   )
-}
+export const useEditorConfig = () => useEditorStore(useShallow(({ config: { editor } }) => editor))
+
+export const useSnippets = () => useEditorStore(useShallow(({ snippets }) => snippets))
+
+export const useSelectedText = () => useEditorStore(useShallow(({ selectedText }) => selectedText))
+
+export const useAutoComplete = () => useEditorStore(useShallow(({ showAutocomplete }) => showAutocomplete))
+
+export const useEditorStates = () =>
+  useEditorStore(
+    useShallow(({ isLoadingSnippets, isSnippetsLoaded, isRunning, isSaving, hasUnsavedChanges }) => ({
+      isLoadingSnippets,
+      isSnippetsLoaded,
+      isRunning,
+      isSaving,
+      hasUnsavedChanges
+    }))
+  )

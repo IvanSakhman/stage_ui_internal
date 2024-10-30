@@ -1,5 +1,5 @@
-import { createWithEqualityFn as create } from 'zustand/traditional'
-import { shallow } from 'zustand/shallow'
+import { create } from 'zustand'
+import { useShallow } from 'zustand/shallow'
 
 import createClass from '~su/utilities/createClass'
 
@@ -46,27 +46,20 @@ export const useSessionStore = create((set) => ({
   setIdentity: (identity) => set({ identity })
 }))
 
-export const useIdentity = () => useSessionStore(({ identity }) => identity)
+export const useIdentity = () => useSessionStore(useShallow(({ identity }) => identity))
 
-export const useLayoutConfig = () => useConfigStore(({ layout }) => layout)
-export const useBranding = () => useConfigStore(({ branding }) => branding)
-export const useAppConfig = () => useConfigStore(({ app }) => app)
-export const usePro = () => {
-  return useConfigStore(({ app }) => {
-    const { pro } = app
+export const useLayoutConfig = () => useConfigStore(useShallow(({ layout }) => layout))
+export const useBranding = () => useConfigStore(useShallow(({ branding }) => branding))
+export const useAppConfig = () => useConfigStore(useShallow(({ app }) => app))
+export const usePro = () =>
+  useConfigStore(
+    useShallow(({ app: { pro } }) => (typeof pro === 'boolean' ? { enabled: pro, copy: 'pro', color: '#36cfc9' } : pro))
+  )
 
-    return typeof pro === 'boolean' ? { enabled: pro, copy: 'pro', color: '#36cfc9' } : pro
-  })
-}
+export const useRootModal = () => useUIStore(useShallow(({ modal }) => modal))
 
-export const useRootModal = () => useUIStore(({ modal }) => modal)
+export const useIsWebsocketAvailable = () => useUIStore(useShallow(({ isWebsocketAvailable }) => isWebsocketAvailable))
 
-export const useIsWebsocketAvailable = () => useUIStore(({ isWebsocketAvailable }) => isWebsocketAvailable)
-
-export const useGlobalAlerts = () => {
-  return useUIStore(({ globalAlerts }) => {
-    return globalAlerts
-  }, shallow)
-}
+export const useGlobalAlerts = () => useUIStore(useShallow(({ globalAlerts }) => globalAlerts))
 
 export const getApiConfig = () => useConfigStore.getState().api
