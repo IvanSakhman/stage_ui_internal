@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useShallow } from 'zustand/shallow'
 import store from '~su/store'
 import authSdk from './index'
 
@@ -13,7 +14,7 @@ export default (oryConfig) => {
     const [logoutToken, setLogoutToken] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
 
-    const setIdentity = store.useSessionStore((state) => state.setIdentity)
+    const setIdentity = store.useSessionStore(useShallow(({ setIdentity }) => setIdentity))
 
     useEffect(() => {
       ory
@@ -51,8 +52,8 @@ export default (oryConfig) => {
   const useSessionFlow = (callback, authUrl) => {
     const [isInitialized, setIsInitialized] = useState(false)
 
-    const identity = store.useSessionStore((state) => state.identity)
-    const setIdentity = store.useSessionStore((state) => state.setIdentity)
+    const identity = store.useSessionStore(useShallow(({ identity }) => identity))
+    const setIdentity = store.useSessionStore(useShallow(({ setIdentity }) => setIdentity))
 
     useEffect(() => {
       if (window.location.href !== authUrl) {

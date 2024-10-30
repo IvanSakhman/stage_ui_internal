@@ -1,3 +1,6 @@
+v1.87.1
+[fix] Zustand migration
+
 v1.87.0
 Dependencies - 21/10/24
 
