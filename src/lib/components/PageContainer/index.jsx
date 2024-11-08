@@ -15,7 +15,8 @@ const PageContainer = ({
   tabs = {},
   buildBreadcrumbNames = null,
   pathname = '',
-  homePath = '/'
+  homePath = '/',
+  isButtonRole = true
 }) => {
   const { t } = useTranslation()
 
@@ -33,7 +34,7 @@ const PageContainer = ({
     <>
       <Card style={{ borderRadius: '0 0 6px 6px', marginBottom: '8px' }} bodyStyle={{ padding: '12px 40px' }}>
         <Breadcrumb
-          items={buildCrumbs(title, buildBreadcrumbNames, pathname, homePath)}
+          items={buildCrumbs(title, buildBreadcrumbNames, pathname, homePath, isButtonRole)}
           className="ant-page-header-breadcrumb"
         />
         <Row justify="space-between">
@@ -60,7 +61,8 @@ PageContainer.propTypes = {
   }),
   buildBreadcrumbNames: PropTypes.func,
   pathname: PropTypes.string,
-  homePath: PropTypes.string
+  homePath: PropTypes.string,
+  isButtonRole: PropTypes.bool
 }
 
 export default PageContainer

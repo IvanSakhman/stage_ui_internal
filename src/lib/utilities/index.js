@@ -1,5 +1,6 @@
 import array from './array'
 import baseUrl from './baseUrl'
+import baseRoute from './baseRoute'
 import clipboard from './clipboard'
 import cookie from './cookie'
 import createClass from './createClass'
@@ -22,6 +23,7 @@ import renderBasedOnType from './renderBasedOnType'
 export {
   array,
   baseUrl,
+  baseRoute,
   clipboard,
   cookie,
   createClass,

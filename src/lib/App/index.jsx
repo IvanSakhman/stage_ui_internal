@@ -7,6 +7,7 @@ import loadInitialData from './loadInitialData'
 
 // utilities
 import { baseUrl as setBaseUrl } from '~su/utilities'
+import { baseRoute as setBaseRoute } from '~su/utilities'
 
 // hooks
 import { useNavigate, initializeWebsocketHooks } from '~su/hooks'
@@ -23,12 +24,20 @@ import ThemeProvider from './ThemeProvider'
 // components
 import { Layout, RootModal } from '~su/components'
 import { GlobalStyles } from './index.styled'
+import RouteProvider from './routeProvider'
 
 const { useWebsocketConnection } = initializeWebsocketHooks()
 
 let _stageUiAppConfig = {}
 
-const StageUiApp = ({ children, initialConfig, context, loadConfigParams = null, themeOverrides = {} }) => {
+const StageUiApp = ({
+  children,
+  initialConfig,
+  routeConfig,
+  context,
+  loadConfigParams = null,
+  themeOverrides = {}
+}) => {
   const [isInitialised, setIsInitialised] = useState(false)
   useWebsocketConnection()
   const [messageApi, contextHolder] = message.useMessage()
@@ -40,6 +49,7 @@ const StageUiApp = ({ children, initialConfig, context, loadConfigParams = null,
 
   useEffect(() => {
     setBaseUrl(initialConfig.api.baseUrl)
+    setBaseRoute(routeConfig.api.baseRoute)
     loadInitialData(
       {
         initialConfig,
@@ -49,7 +59,7 @@ const StageUiApp = ({ children, initialConfig, context, loadConfigParams = null,
       },
       messageApi
     ).then(() => setIsInitialised(true))
-  }, [initialConfig, context, loadConfigParams])
+  }, [initialConfig, routeConfig, context, loadConfigParams])
 
   const themeToken = { ...theme.token, ...breakpoints, ...brandingToken, ...themeOverrides.token }
 
@@ -64,9 +74,11 @@ const StageUiApp = ({ children, initialConfig, context, loadConfigParams = null,
             onSideMenuSelect={({ key }) => navigate(key)}
             isLoaded={isInitialised}
           >
-            <GlobalStyles />
-            <RootModal />
-            {children}
+            <RouteProvider initialConfig={routeConfig}>
+              <GlobalStyles />
+              <RootModal />
+              {children}
+            </RouteProvider>
           </Layout>
         </App>
       </ThemeProvider>
@@ -82,6 +94,11 @@ StageUiApp.propTypes = {
       config_path: PropTypes.string.isRequired
     }).isRequired
   }).isRequired,
+  routeConfig: PropTypes.shape({
+    api: PropTypes.shape({
+      baseRoute: PropTypes.func.isRequired
+    }).isRequired
+  }).isRequired,
   context: PropTypes.string.isRequired,
   loadConfigParams: PropTypes.object,
   themeOverrides: PropTypes.object
@@ -89,10 +106,11 @@ StageUiApp.propTypes = {
 
 const provider = (Component) => (props) => {
   // eslint-disable-next-line react/prop-types
-  const { config, context, loadConfigParams, themeOverrides, ...componentProps } = props
+  const { config, routeConfig, context, loadConfigParams, themeOverrides, ...componentProps } = props
   return (
     <StageUiApp
       initialConfig={config}
+      routeConfig={routeConfig}
       context={context}
       loadConfigParams={loadConfigParams}
       themeOverrides={themeOverrides}
