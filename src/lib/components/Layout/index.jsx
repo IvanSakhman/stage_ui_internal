@@ -20,7 +20,6 @@ const Layout = ({
   themeOverrides = {},
   pathname,
   sideMenuChildren,
-  layoutStyles,
   contentContainerStyles,
   isSideMenuCollapsible,
   showSideMenu = true,
@@ -29,7 +28,7 @@ const Layout = ({
   const { token: themeToken } = useToken()
 
   return (
-    <StyledLayout $styleOptions={layoutStyles}>
+    <StyledLayout>
       <TopNav themeOverrides={themeOverrides} {...menuProps} />
       <AntdLayout>
         {showSideMenu && (
@@ -60,7 +59,6 @@ Layout.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
   themeOverrides: PropTypes.object,
   pathname: PropTypes.string,
-  layoutStyles: PropTypes.string,
   sideMenuChildren: PropTypes.node,
   contentContainerStyles: PropTypes.string,
   isSideMenuCollapsible: PropTypes.bool,
