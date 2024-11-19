@@ -8,7 +8,8 @@ import GlobalAlert from '../GlobalAlert'
 import TopNav from '../TopNav'
 import SideMenu from './SideMenu'
 
-import { StyledContent, StyledLayout } from './index.styled'
+import { StyledContent } from './index.styled'
+import LayoutWrapper from './LayoutWrapper'
 
 const { useToken } = theme
 
@@ -20,7 +21,6 @@ const Layout = ({
   themeOverrides = {},
   pathname,
   sideMenuChildren,
-  layoutStyles,
   contentContainerStyles,
   isSideMenuCollapsible,
   showSideMenu = true,
@@ -29,7 +29,7 @@ const Layout = ({
   const { token: themeToken } = useToken()
 
   return (
-    <StyledLayout $styleOptions={layoutStyles}>
+    <LayoutWrapper>
       <TopNav themeOverrides={themeOverrides} {...menuProps} />
       <AntdLayout>
         {showSideMenu && (
@@ -49,7 +49,7 @@ const Layout = ({
           <StyledContent $styleOptions={contentContainerStyles}>{children}</StyledContent>
         </AntdLayout>
       </AntdLayout>
-    </StyledLayout>
+    </LayoutWrapper>
   )
 }
 
@@ -60,7 +60,6 @@ Layout.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
   themeOverrides: PropTypes.object,
   pathname: PropTypes.string,
-  layoutStyles: PropTypes.string,
   sideMenuChildren: PropTypes.node,
   contentContainerStyles: PropTypes.string,
   isSideMenuCollapsible: PropTypes.bool,

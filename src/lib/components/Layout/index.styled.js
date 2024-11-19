@@ -12,5 +12,4 @@ export const StyledContent = styled(Content)`
 export const StyledLayout = styled(Layout)`
   min-height: 100vh;
   min-width: 81.25rem;
-  ${({ $styleOptions }) => $styleOptions}
 `
