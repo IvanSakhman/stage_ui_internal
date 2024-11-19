@@ -11,4 +11,6 @@ export const StyledContent = styled(Content)`
 // colors should be rewritten in scope of https://assembly-tech.atlassian.net/browse/SC-2
 export const StyledLayout = styled(Layout)`
   min-height: 100vh;
+  min-width: 81.25rem;
+  ${({ $styleOptions }) => $styleOptions}
 `
