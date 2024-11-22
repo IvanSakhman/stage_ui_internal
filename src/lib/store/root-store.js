@@ -10,6 +10,13 @@ const Modal = createClass({
   width: null
 })
 
+export const useTranslationsStore = create((set) => ({
+  translations: {},
+  setTranslations: (translations) => set({ translations })
+}))
+
+export const useTranslations = () => useTranslationsStore(useShallow(({ translations }) => translations))
+
 export const useConfigStore = create((set) => ({
   layout: {},
   api: {
