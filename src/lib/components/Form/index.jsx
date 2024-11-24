@@ -155,5 +155,7 @@ const Form = forwardRef(
 
 Form.useFormInstance = AntdForm.useFormInstance
 Form.useWatch = AntdForm.useWatch
+Form.List = AntdForm.List
+Form.Item = AntdForm.Item
 
 export default Form
