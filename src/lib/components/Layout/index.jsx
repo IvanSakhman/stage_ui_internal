@@ -8,7 +8,8 @@ import GlobalAlert from '../GlobalAlert'
 import TopNav from '../TopNav'
 import SideMenu from './SideMenu'
 
-import { StyledContent, StyledLayout } from './index.styled'
+import { StyledContent } from './index.styled'
+import LayoutWrapper from './LayoutWrapper'
 
 const { useToken } = theme
 
@@ -28,7 +29,7 @@ const Layout = ({
   const { token: themeToken } = useToken()
 
   return (
-    <StyledLayout>
+    <LayoutWrapper>
       <TopNav themeOverrides={themeOverrides} {...menuProps} />
       <AntdLayout>
         {showSideMenu && (
@@ -48,7 +49,7 @@ const Layout = ({
           <StyledContent $styleOptions={contentContainerStyles}>{children}</StyledContent>
         </AntdLayout>
       </AntdLayout>
-    </StyledLayout>
+    </LayoutWrapper>
   )
 }
 

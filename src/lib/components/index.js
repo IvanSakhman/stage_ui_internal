@@ -41,6 +41,7 @@ import Empty from './Empty'
 import IconButton from './IconButton'
 import Input from './Input'
 import Layout from './Layout'
+import LayoutWrapper from './Layout/LayoutWrapper'
 import List from './List'
 import LoadingBlock from './LoadingBlock'
 import MarkdownEditor from './MarkdownEditor'
@@ -124,6 +125,7 @@ export {
   IconButton,
   Input,
   Layout,
+  LayoutWrapper,
   List,
   LoadingBlock,
   MarkdownEditor,

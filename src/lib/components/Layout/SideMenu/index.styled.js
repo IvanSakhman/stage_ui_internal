@@ -37,6 +37,7 @@ export const SideMenuContainer = styled(Layout.Sider)`
   }
   & .ant-layout-sider-trigger {
     background: ${({ theme }) => theme.sideMenuBackground} !important;
+    position: sticky !important;
   }
 `
 
