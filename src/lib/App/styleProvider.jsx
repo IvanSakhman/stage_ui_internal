@@ -6,13 +6,14 @@ import theme from '~su/constants/theme'
 // providers
 import { ConfigProvider, App } from 'antd'
 import ThemeProvider from './ThemeProvider'
+import TranslationsProvider from './TranslationsProvider'
 
 // components
 import RootModal from '~su/components/RootModal'
 
 import { GlobalStyles } from './index.styled'
 
-const StyleProvider = ({ children, brandingToken }) => {
+const StyleProvider = ({ children, brandingToken, translations }) => {
   const themeToken = { ...theme.token, ...brandingToken }
   const components = {
     Menu: {
@@ -39,17 +40,20 @@ const StyleProvider = ({ children, brandingToken }) => {
   )
 
   return (
-    <ConfigProvider theme={{ token: themeToken, components }}>
-      <ThemeProvider>
-        <App>{main}</App>
-      </ThemeProvider>
-    </ConfigProvider>
+    <TranslationsProvider translations={translations}>
+      <ConfigProvider theme={{ token: themeToken, components }}>
+        <ThemeProvider>
+          <App>{main}</App>
+        </ThemeProvider>
+      </ConfigProvider>
+    </TranslationsProvider>
   )
 }
 
 StyleProvider.propTypes = {
   children: PropTypes.node.isRequired,
-  brandingToken: PropTypes.object
+  brandingToken: PropTypes.object,
+  translations: PropTypes.object
 }
 
 export default StyleProvider

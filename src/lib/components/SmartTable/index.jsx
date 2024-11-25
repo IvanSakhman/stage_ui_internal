@@ -15,6 +15,7 @@ const SmartTable = ({
   filtersSchema,
   urlParams,
   dataKey = '',
+  keyPrefix,
   onChange,
   ...rest
 }) => {
@@ -58,6 +59,7 @@ const SmartTable = ({
 
   return (
     <Card.Table
+      keyPrefix={keyPrefix}
       headStyle={{ fontWeight: 'normal' }}
       columnsConfig={columnsConfig}
       columns={columns}
@@ -77,6 +79,7 @@ SmartTable.propTypes = {
   filtersSchema: PropTypes.object,
   pagination: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   dataKey: PropTypes.string,
+  keyPrefix: PropTypes.string,
   onChange: PropTypes.func,
   urlParams: PropTypes.instanceOf(URLSearchParams)
 }
