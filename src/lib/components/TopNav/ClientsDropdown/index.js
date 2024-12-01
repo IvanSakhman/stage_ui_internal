@@ -4,9 +4,17 @@ import PropTypes from 'prop-types'
 
 import { Input } from 'antd'
 
+import ButtonRoleLink from '~su/components/ButtonRoleLink'
+
 import { StyledClientsMenu } from './index.styled'
 
-const ClientsDropdown = ({ clients, currentClient, title = 'Choose Client', disabledOverflow = false }) => {
+const ClientsDropdown = ({
+  clients,
+  currentClient,
+  title = 'Choose Client',
+  isButtonRole,
+  disabledOverflow = false
+}) => {
   const [visibleClients, setVisibleClients] = useState([])
 
   const availableClients = () => clients?.available.filter((client) => client.name != currentClient?.name)
@@ -30,7 +38,11 @@ const ClientsDropdown = ({ clients, currentClient, title = 'Choose Client', disa
   const clientsItems = visibleClients.map((client, index) => {
     return {
       key: index,
-      label: <a href={`${clients.path.replace(':id', client.name)}`}>{client.display_name}</a>
+      label: (
+        <ButtonRoleLink isButtonRole={isButtonRole} url={`${clients.path.replace(':id', client.name)}`}>
+          {client.display_name}
+        </ButtonRoleLink>
+      )
     }
   })
 
@@ -71,6 +83,7 @@ ClientsDropdown.propTypes = {
     path: PropTypes.string.isRequired
   }),
   currentClient: clientType,
+  isButtonRole: PropTypes.bool,
   title: PropTypes.string,
   disabledOverflow: PropTypes.bool
 }

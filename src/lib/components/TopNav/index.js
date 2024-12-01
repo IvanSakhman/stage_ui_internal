@@ -6,6 +6,7 @@ import { useNavigate } from '~su/hooks'
 import { Row, Col } from '~su/components/Grid'
 import Space from '~su/components/Space'
 import LoadingBlock from '~su/components/LoadingBlock'
+import ButtonRoleLink from '~su/components/ButtonRoleLink'
 
 import HomeButton from './HomeButton'
 import ClientsDropdown from './ClientsDropdown'
@@ -26,6 +27,7 @@ const StageTopNav = ({
   helpdeskUrl,
   themeOverrides,
   clientsDropdownTitle,
+  isButtonRole,
   homeUrl,
   clientLogoUrl,
   variant = 'default',
@@ -54,7 +56,7 @@ const StageTopNav = ({
           </Col>
         )}
         <Col span={21}>
-          <ClientsDropdown clients={clients} currentClient={currentClient} />
+          <ClientsDropdown clients={clients} currentClient={currentClient} isButtonRole={isButtonRole} />
         </Col>
       </Row>
     )
@@ -100,20 +102,25 @@ const StageTopNav = ({
   const renderDynamicLogoTopNav = () => (
     <Row align="middle" justify="space-between">
       <DynamicLeftSideContainer align="middle" justify="start">
-        {homeUrl && <a href={homeUrl}>{renderDynamicLogo()}</a>}
+        {homeUrl && (
+          <ButtonRoleLink url={homeUrl} isButtonRole={isButtonRole}>
+            {renderDynamicLogo()}
+          </ButtonRoleLink>
+        )}
         <ClientsDropdown
           clients={clients}
           currentClient={currentClient}
           title={clientsDropdownTitle}
+          isButtonRole={isButtonRole}
           disabledOverflow
         />
       </DynamicLeftSideContainer>
       <Space size="middle">
         <UserDropdown hostedZone={hostedZone} helpdeskUrl={helpdeskUrl} handleLogout={handleLogout} />
         {homeUrl && (
-          <a href={homeUrl}>
+          <ButtonRoleLink url={homeUrl} isButtonRole={isButtonRole}>
             <DynamicLogo src={logo} />
-          </a>
+          </ButtonRoleLink>
         )}
       </Space>
     </Row>
@@ -145,6 +152,7 @@ StageTopNav.propTypes = {
   }),
   helpdeskUrl: PropTypes.string,
   clientsDropdownTitle: PropTypes.string,
+  isButtonRole: PropTypes.bool,
   homeUrl: PropTypes.string,
   clientLogoUrl: PropTypes.string,
   variant: PropTypes.oneOf(['default', 'with-dynamic-left-logo']),

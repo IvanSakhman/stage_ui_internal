@@ -2,6 +2,7 @@ import { forwardRef, isValidElement, cloneElement } from 'react'
 import { Popconfirm } from 'antd'
 import Tooltip from '../Tooltip'
 import keyboardShortcuts from '~su/utilities/keyboardShortcuts'
+import baseRoute from '~su/utilities/baseRoute'
 
 import { StyledButton } from './base.styled'
 
@@ -35,13 +36,17 @@ const Button = forwardRef(
       onClick,
       popconfirm,
       type,
+      href,
       warn = false,
       light = false,
       iconOnly = false,
+      isButtonRole = true,
       ...rest
     },
     ref
   ) => {
+    const { navigate } = baseRoute()
+
     if (icon && isValidElement(icon)) {
       const iconFontSize = iconSize || ICON_SIZE
 
@@ -52,10 +57,16 @@ const Button = forwardRef(
       )
     }
 
+    const handleClick = (e) => {
+      navigate(href, e)
+    }
+
     const buttonProps = {
       ref,
       disabled,
-      onClick,
+      href: isButtonRole ? undefined : href,
+      role: isButtonRole ? 'button' : undefined,
+      onClick: href ? handleClick : onClick,
       type: type == 'primary-dashed' ? 'primary' : type,
       $primaryDashed: type == 'primary-dashed',
       $light: light,
