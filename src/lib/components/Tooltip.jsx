@@ -4,16 +4,10 @@ import { Tooltip as AntdTooltip } from 'antd'
 //   title: string
 // }
 
-interface TooltipProps {
-  children: React.ReactNode
-  size?: 'small' | 'default'
-  overlayStyle?: React.CSSProperties
-}
-
-const Tooltip = ({ children, size, overlayStyle: overlayStyleProp, ...otherProps }: TooltipProps) => {
+const Tooltip = ({ children, size, overlayStyle: overlayStyleProp, ...otherProps }) => {
   const overlayStyle = {
     ...overlayStyleProp,
-    fontSize: size === 'small' ? 12 : undefined
+    fontSize: size === 'small' ? 12 : null
   }
 
   return (
