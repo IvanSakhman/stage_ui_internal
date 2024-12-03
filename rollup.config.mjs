@@ -1,10 +1,12 @@
 import { createRequire } from 'node:module'
 import { fileURLToPath } from 'node:url'
 import peerDepsExternal from 'rollup-plugin-peer-deps-external'
+import { typescriptPaths } from 'rollup-plugin-typescript-paths'
 import includePaths from 'rollup-plugin-includepaths'
 import alias from '@rollup/plugin-alias'
 import styles from 'rollup-plugin-styles'
 import babel from '@rollup/plugin-babel'
+import typescript from '@rollup/plugin-typescript'
 import nodeResolve from '@rollup/plugin-node-resolve'
 import commonjs from '@rollup/plugin-commonjs'
 import image from '@rollup/plugin-image'
@@ -38,13 +40,17 @@ const config = {
   context: 'this',
   external: Object.keys(pkg.peerDependencies),
   plugins: [
+    typescript({
+      tsconfig: './tsconfig.json'
+    }),
+    typescriptPaths(),
     del({ targets: 'es/*' }),
     peerDepsExternal(),
     includePaths({
       include: {},
       paths: ['src'],
       external: Object.keys(pkg.dependencies),
-      extensions: ['.js', '.jsx', '.json', '.html']
+      extensions: ['.js', '.jsx', '.ts', '.tsx', '.json', '.html']
     }),
     alias({
       entries: [{ find: '~su', replacement: fileURLToPath(new URL('src/lib', import.meta.url)) }]

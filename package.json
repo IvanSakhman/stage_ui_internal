@@ -77,11 +77,16 @@
     "@rollup/plugin-image": "^3.0.3",
     "@rollup/plugin-node-resolve": "^15.3.0",
     "@rollup/plugin-terser": "^0.4.4",
+    "@rollup/plugin-typescript": "^12.1.1",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.2",
     "@testing-library/react": "^16.0.1",
     "@testing-library/react-hooks": "8.0.1",
     "@testing-library/user-event": "14.5.2",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^22.10.1",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
     "babel-eslint": "^10.1.0",
     "babel-plugin-prismjs": "^2.1.0",
     "craco-antd": "^2.0.0",
@@ -108,7 +113,9 @@
     "rollup-plugin-filesize": "10.0.0",
     "rollup-plugin-includepaths": "^0.2.4",
     "rollup-plugin-peer-deps-external": "^2.2.4",
-    "rollup-plugin-styles": "^4.0.0"
+    "rollup-plugin-styles": "^4.0.0",
+    "rollup-plugin-typescript-paths": "^1.5.0",
+    "typescript": "^5.7.2"
   },
   "peerDependencies": {
     "antd": ">=5.0.2",
