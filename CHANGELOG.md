@@ -1,3 +1,13 @@
+v1.89.0
+[feat] Exported Form.List & Form.Item components
+
+v1.88.0
+[feat] Added support for translations that are stored on the FE side instead of fetched from BE
+
+1. Added TranslationsProvider.
+2. Added withTranslations HOC.
+3. Tables translations support improved.
+
 v1.87.1
 [fix] Zustand migration
 

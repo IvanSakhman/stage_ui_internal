@@ -16,10 +16,11 @@ const Table = ({
   pagination = false,
   actions = {},
   isDropdown = false,
+  keyPrefix,
   functionActionHandlers,
   ...rest
 }) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation(keyPrefix && { keyPrefix })
 
   if (title) {
     if (Array.isArray(title)) {
@@ -35,6 +36,9 @@ const Table = ({
     columns = buildColumns(columnsConfig.columns, columns).map((column) => {
       if (column.renderComponent) {
         column.render = (value, record) => <RenderColumn columnKey={column.key} value={value} record={record} />
+      }
+      if (keyPrefix) {
+        column.title = t(column.title)
       }
 
       return column
@@ -75,6 +79,7 @@ Table.propTypes = {
   ]),
   actions: PropTypes.shape({ table_row: PropTypes.object }),
   isDropdown: PropTypes.bool,
+  keyPrefix: PropTypes.string,
   functionActionHandlers: PropTypes.object
 }
 

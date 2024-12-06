@@ -63,3 +63,9 @@ export const useIsWebsocketAvailable = () => useUIStore(useShallow(({ isWebsocke
 export const useGlobalAlerts = () => useUIStore(useShallow(({ globalAlerts }) => globalAlerts))
 
 export const getApiConfig = () => useConfigStore.getState().api
+
+export const useTranslationsStore = create((set) => ({
+  translations: {},
+  setTranslations: (translations) => set({ translations })
+}))
+export const useTranslations = () => useTranslationsStore(useShallow(({ translations }) => translations))
