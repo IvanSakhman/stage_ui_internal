@@ -15,6 +15,7 @@ const Table = ({
   title,
   pagination = false,
   actions = {},
+  isDropdown = false,
   functionActionHandlers,
   ...rest
 }) => {
@@ -49,7 +50,7 @@ const Table = ({
         column.title ||= t(`columns.${key}`, column.title || buildColumnTitle(columnsConfig?.[key], key))
 
         if (actions.table_row) {
-          column = extendRenderWithActions(actions.table_row, column, functionActionHandlers)
+          column = extendRenderWithActions(actions.table_row, column, functionActionHandlers, isDropdown)
         }
 
         return { key, dataIndex: key, ...column }
@@ -73,6 +74,7 @@ Table.propTypes = {
     })
   ]),
   actions: PropTypes.shape({ table_row: PropTypes.object }),
+  isDropdown: PropTypes.bool,
   functionActionHandlers: PropTypes.object
 }
 

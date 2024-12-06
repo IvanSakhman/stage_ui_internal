@@ -1,11 +1,14 @@
 import PropTypes from 'prop-types'
-import ButtonGroup from '../ButtonGroup'
+import { MoreOutlined } from '@ant-design/icons'
+import ButtonGroup from '~su/components/ButtonGroup'
+import { COLORS } from '~su/constants'
+import Dropdown from '../Dropdown'
 import Button from '../Button'
 
 import { translateResponseAction, filterActionsByCondition } from './utilities'
 import { useState } from 'react'
 
-const ActionButton = ({ action, valueRender, translateOptions }) => {
+const ActionButton = ({ action, valueRender, translateOptions, isDropdown = false }) => {
   const { display, properties } = translateResponseAction(action, translateOptions)
   const [displayLoader, setDisplayLoader] = useState(false)
 
@@ -24,8 +27,18 @@ const ActionButton = ({ action, valueRender, translateOptions }) => {
     }
   }
 
+  const dropdownProperties = {
+    type: 'text',
+    block: true,
+    iconSize: 12,
+    style: {
+      justifyContent: 'start',
+      gap: '4px'
+    }
+  }
+
   return (
-    <Component {...properties} loading={displayLoader}>
+    <Component {...properties} {...(isDropdown ? dropdownProperties : {})} loading={displayLoader}>
       {valueRender ? valueRender() : display}
     </Component>
   )
@@ -37,14 +50,42 @@ ActionButton.propTypes = {
     showLoader: PropTypes.bool
   }),
   valueRender: PropTypes.func,
+  isDropdown: PropTypes.bool,
   translateOptions: PropTypes.object
 }
 
-const ActionButtons = ({ actions = [], valueRender = null, ...translateOptions }) => {
+const ActionButtons = ({ actions = [], valueRender = null, isDropdown = false, ...translateOptions }) => {
   const filteredActions = filterActionsByCondition(actions, translateOptions.record)
 
   const renderActionButton = (action, index) => {
-    return <ActionButton key={index} action={action} valueRender={valueRender} translateOptions={translateOptions} />
+    return (
+      <ActionButton
+        key={index}
+        action={action}
+        valueRender={valueRender}
+        translateOptions={translateOptions}
+        isDropdown={isDropdown}
+      />
+    )
+  }
+
+  if (isDropdown) {
+    return (
+      <Dropdown
+        icon={<MoreOutlined style={{ color: COLORS.primary }} />}
+        autohide={false}
+        trigger={['click']}
+        buttonProps={{
+          type: 'text',
+          style: {
+            color: COLORS.primary
+          }
+        }}
+        isActionButtons
+      >
+        {filteredActions.map(renderActionButton)}
+      </Dropdown>
+    )
   }
 
   if (filteredActions.length === 1) {
@@ -56,7 +97,8 @@ const ActionButtons = ({ actions = [], valueRender = null, ...translateOptions }
 
 ActionButtons.propTypes = {
   actions: PropTypes.arrayOf(PropTypes.object),
-  valueRender: ActionButton.propTypes.valueRender
+  valueRender: ActionButton.propTypes.valueRender,
+  isDropdown: PropTypes.bool
 }
 
 export default ActionButtons

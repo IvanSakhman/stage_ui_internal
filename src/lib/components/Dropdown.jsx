@@ -11,7 +11,7 @@ import IconButton from './IconButton'
 //   autohide?: boolean
 // }
 
-const Dropdown = ({ display, icon, children, buttonProps, autohide = true, ...rest }) => {
+const Dropdown = ({ display, icon, children, buttonProps, autohide = true, isActionButtons = false, ...rest }) => {
   const [open, setOpen] = useState(false)
 
   const handleMenuClick = (_e) => {
@@ -24,7 +24,11 @@ const Dropdown = ({ display, icon, children, buttonProps, autohide = true, ...re
     <Menu onClick={handleMenuClick}>
       {Children.map(children, (child, index) => {
         if (isValidElement(child)) {
-          return <Menu.Item key={index}>{child}</Menu.Item>
+          return (
+            <Menu.Item key={index} style={isActionButtons ? { padding: 0 } : {}}>
+              {child}
+            </Menu.Item>
+          )
         }
       })}
     </Menu>
