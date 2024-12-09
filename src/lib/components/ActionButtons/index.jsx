@@ -8,6 +8,16 @@ import Button from '../Button'
 import { translateResponseAction, filterActionsByCondition } from './utilities'
 import { useState } from 'react'
 
+const dropdownProperties = {
+  type: 'text',
+  block: true,
+  iconSize: 12,
+  style: {
+    justifyContent: 'start',
+    gap: '4px'
+  }
+}
+
 const ActionButton = ({ action, valueRender, translateOptions, isDropdown = false }) => {
   const { display, properties } = translateResponseAction(action, translateOptions)
   const [displayLoader, setDisplayLoader] = useState(false)
@@ -24,16 +34,6 @@ const ActionButton = ({ action, valueRender, translateOptions, isDropdown = fals
     properties.onClick = (record) => {
       setDisplayLoader(true)
       originalOnClick(record).then(() => setDisplayLoader(false))
-    }
-  }
-
-  const dropdownProperties = {
-    type: 'text',
-    block: true,
-    iconSize: 12,
-    style: {
-      justifyContent: 'start',
-      gap: '4px'
     }
   }
 
