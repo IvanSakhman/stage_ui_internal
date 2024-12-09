@@ -9,7 +9,7 @@ import { Grid } from '~su/components/Grid'
 const { useBreakpoint } = Grid
 import DynamicIcon from '../../DynamicIcon'
 
-import { SideMenuContainer, StyledLink } from './index.styled'
+import { SideMenuContainer, StickyContainer, StyledLink } from './index.styled'
 import getDefaultMenuKeys from './utilities/getDefaultMenuKeys'
 
 const SideMenu = ({
@@ -17,6 +17,7 @@ const SideMenu = ({
   onSideMenuSelect,
   pathname = '',
   isCollapsible = true,
+  isScrollable = false,
   children,
   shouldTransformItems = true
 }) => {
@@ -24,13 +25,21 @@ const SideMenu = ({
   const currentBreakpoints = useBreakpoint()
   const [isCollapsed, setIsCollapsed] = useState(false)
 
+  const defaultMenuKeysInitial = getDefaultMenuKeys(location, sidebarItems, pathname)
+  const [defaultMenuKeys, setDefaultMenuKeys] = useState(defaultMenuKeysInitial)
+
   useEffect(() => {
     // needs to be done manually because we're overwriting the breakpoints, and Sider has them hardcoded:
     // https://github.com/ant-design/ant-design/blob/master/components/layout/Sider.tsx#L13
     isCollapsible && setIsCollapsed(currentBreakpoints.xl === false) // collapse on screens smaller than 1441px
   }, [currentBreakpoints])
 
-  const defaultMenuKeys = getDefaultMenuKeys(location, sidebarItems, pathname)
+  useEffect(() => {
+    if (pathname) {
+      setDefaultMenuKeys(getDefaultMenuKeys(location, sidebarItems, pathname))
+    }
+  }, [pathname])
+
   const handleMenuItemClick = (e, key) => {
     e.preventDefault()
     e.stopPropagation()
@@ -48,6 +57,7 @@ const SideMenu = ({
           <StyledLink
             $isSelected={key === defaultMenuKeys?.defaultSelectedKey}
             onClick={(e) => handleMenuItemClick(e, item.key)}
+            ellipsis={{ tooltip: { title: item.label, placement: 'right' }, onEllipsis: () => {} }} // We need this empty function for ellipsis to work
           >
             {item.label}
           </StyledLink>
@@ -65,15 +75,24 @@ const SideMenu = ({
       onCollapse={(collapsed) => setIsCollapsed(collapsed)}
       collapsible={isCollapsible}
     >
-      {children}
-      <Menu
-        defaultOpenKeys={defaultMenuKeys?.defaultOpenKeys}
-        defaultSelectedKeys={[defaultMenuKeys?.defaultSelectedKey]}
-        selectedKeys={[defaultMenuKeys?.defaultSelectedKey]}
-        mode="inline"
-        items={sidebarMenuItems}
-        onSelect={onSideMenuSelect}
-      />
+      <StickyContainer $isScrollable={isScrollable}>
+        {children}
+        <Menu
+          defaultOpenKeys={defaultMenuKeys?.defaultOpenKeys}
+          defaultSelectedKeys={[defaultMenuKeys?.defaultSelectedKey]}
+          selectedKeys={[defaultMenuKeys?.defaultSelectedKey]}
+          openKeys={defaultMenuKeys?.defaultOpenKeys}
+          onOpenChange={(openKeys) => {
+            setDefaultMenuKeys(({ defaultSelectedKey }) => ({
+              defaultOpenKeys: openKeys,
+              defaultSelectedKey
+            }))
+          }}
+          mode="inline"
+          items={sidebarMenuItems}
+          {...(!shouldTransformItems && { onSelect: onSideMenuSelect })}
+        />
+      </StickyContainer>
     </SideMenuContainer>
   )
 }
@@ -93,6 +112,7 @@ SideMenu.propTypes = {
   onSideMenuSelect: PropTypes.func.isRequired,
   pathname: PropTypes.string,
   isCollapsible: PropTypes.bool,
+  isScrollable: PropTypes.bool,
   children: PropTypes.node,
   shouldTransformItems: PropTypes.bool
 }

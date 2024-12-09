@@ -1,8 +1,7 @@
 import { Configuration, FrontendApi } from '@ory/client'
+import sessionStore from './store'
 
-import authHooks from './hooks'
-
-export { authHooks }
+export { sessionStore }
 
 export default ({ basePath } = {}) => {
   if (!basePath) {

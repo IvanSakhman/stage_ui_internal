@@ -122,3 +122,26 @@ export const buildColumns = (columnsConfig, urlParams = new URLSearchParams(), f
 
   return columns
 }
+
+export const getPaginationStyle = (positions) => {
+  const position = positions?.[0] || 'topRight'
+
+  const bottomStyle = { marginTop: 0, paddingTop: 16, borderTop: '1px solid #F0F0F0' }
+  const leftStyle = { paddingLeft: 16 }
+  const rightStyle = { paddingRight: 16 }
+
+  switch (position) {
+    case 'topLeft':
+      return leftStyle
+    case 'topRight':
+      return rightStyle
+    case 'bottomLeft':
+      return { ...leftStyle, ...bottomStyle }
+    case 'bottomCenter':
+      return bottomStyle
+    case 'bottomRight':
+      return { ...rightStyle, ...bottomStyle }
+    default:
+      return {}
+  }
+}

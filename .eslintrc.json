@@ -7,7 +7,8 @@
         "eslint:recommended",
         "plugin:react/recommended",
         "plugin:prettier/recommended",
-        "plugin:react-hooks/recommended"
+        "plugin:react-hooks/recommended",
+        "plugin:storybook/recommended"
     ],
     "parserOptions": {
         "ecmaFeatures": {
@@ -20,15 +21,23 @@
         "react"
     ],
     "rules": {
-      "no-unused-vars": ["error", { "vars": "local", "argsIgnorePattern": "^_", "varsIgnorePattern": "^_", "args": "after-used" }],
-      "no-useless-escape": 0,
-      "react/react-in-jsx-scope": "off",
-      "react/prop-types": 1,
-      "react/display-name": 0
+        "no-unused-vars": [
+            "error",
+            {
+                "vars": "local",
+                "argsIgnorePattern": "^_",
+                "varsIgnorePattern": "^_",
+                "args": "after-used"
+            }
+        ],
+        "no-useless-escape": 0,
+        "react/react-in-jsx-scope": "off",
+        "react/prop-types": 1,
+        "react/display-name": 0
     },
     "settings": {
-      "react": {
-        "version": "detect"
-      }
+        "react": {
+            "version": "detect"
+        }
     }
 }

@@ -19,6 +19,8 @@ export const darkOrange = '#ff6a14' // PMS 1585
 export const primary = '#0099b2' // PMS 2396
 
 export const text = '#1e1a34'
+export const border = '#f0f0f0'
+export const emptyBackground = '#fafafa'
 
 // state colours
 export const success = '#00b176' // PMS 2416

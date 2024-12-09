@@ -6,7 +6,7 @@ import TableSearchBox from './SearchBox'
 
 import string from '~su/utilities/string'
 import object from '~su/utilities/object'
-import { buildColumns } from './utilities'
+import { buildColumns, getPaginationStyle } from './utilities'
 
 const SmartTable = ({
   title,
@@ -33,8 +33,8 @@ const SmartTable = ({
   const paginationProps = object.isEmpty(pagination)
     ? false
     : {
-        position: ['topRight'],
-        style: { position: 'absolute', right: 16, top: -60, zIndex: 1 },
+        position: pagination.position || ['topRight'],
+        style: getPaginationStyle(pagination.position),
         showSizeChanger: false,
         ...pagination
       }
@@ -63,9 +63,11 @@ const SmartTable = ({
       headStyle={{ fontWeight: 'normal' }}
       columnsConfig={columnsConfig}
       columns={columns}
-      title={[title || <span style={{ lineHeight: '32px' }}>{string.humanize(dataKey, { titleize: true })}</span>]}
       pagination={paginationProps}
       onChange={onChange ? handleChange : null}
+      {...((title || dataKey) && {
+        title: [title || <span style={{ lineHeight: '32px' }}>{string.humanize(dataKey, { titleize: true })}</span>]
+      })}
       {...rest}
     />
   )

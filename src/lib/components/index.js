@@ -38,9 +38,11 @@ import DynamicIcon from './DynamicIcon'
 import DynamicSteps from './DynamicSteps'
 import Editor from './Editor'
 import Empty from './Empty'
+import EmptyState from './EmptyState'
 import IconButton from './IconButton'
 import Input from './Input'
 import Layout from './Layout'
+import LayoutWrapper from './Layout/LayoutWrapper'
 import List from './List'
 import LoadingBlock from './LoadingBlock'
 import MarkdownEditor from './MarkdownEditor'
@@ -78,6 +80,7 @@ import SmartDataDisplay from './SmartDataDisplay'
 import RadioGroup from './RadioGroup'
 import Breadcrumb from './Breadcrumb'
 import TreeSelect from './TreeSelect'
+import NotFound from './NotFound'
 
 export {
   AutoComplete,
@@ -119,11 +122,13 @@ export {
   DynamicSteps,
   Editor,
   Empty,
+  EmptyState,
   ResponseResult,
   RootModal,
   IconButton,
   Input,
   Layout,
+  LayoutWrapper,
   List,
   LoadingBlock,
   MarkdownEditor,
@@ -160,5 +165,6 @@ export {
   SmartDataDisplay,
   RadioGroup,
   Breadcrumb,
-  TreeSelect
+  TreeSelect,
+  NotFound
 }

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { AutoComplete as AntdAutoComplete } from 'antd'
 import { object } from '~su/utilities'
 
-import { enumsToValueEnum, buildOptions } from './Select/utilities'
+import { enumsToValueEnum, buildOptions } from '../Select/utilities'
 
 const AutoComplete = ({ options, enums = [], valueEnum = null, allLabel = null, ...rest }) => {
   const defaultOptions = buildOptions(enumsToValueEnum(enums, allLabel, valueEnum), options).map((option) => {

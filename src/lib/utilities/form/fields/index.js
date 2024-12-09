@@ -85,14 +85,14 @@ const buildFields = (schema, extraFieldConfigs = {}, namePrefix = null, t, typeF
       const { type } = entrySchema
 
       if (type === 'object') {
-        extraFieldConfigs = extraFieldConfigs[name] || {}
+        let nestedFieldConfig = extraFieldConfigs[name] || {}
 
         if (entrySchema.anyOf) {
           entrySchema = entrySchema.anyOf.find(({ of_type }) => of_type === typeFieldValue) // type cannot be used as it is a reserved keyword in JSONSchema
-          extraFieldConfigs = extraFieldConfigs[typeFieldValue] || {}
+          nestedFieldConfig = nestedFieldConfig[typeFieldValue] || {}
         }
 
-        return buildFields(entrySchema, extraFieldConfigs, name, t, typeFieldValue)
+        return buildFields(entrySchema, nestedFieldConfig, name, t, typeFieldValue)
       }
 
       return buildFieldConfig(

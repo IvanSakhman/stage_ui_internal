@@ -19,5 +19,6 @@ const valueFromValueEnum = (valueEnums, value) => {
 }
 
 import buildFields, { normalizeEmptyToUndef } from './fields'
+import showModalForm from './modal/showModalForm'
 
-export default { getFormErrors, normalizeEmptyToUndef, valueFromValueEnum, buildFields }
+export default { getFormErrors, normalizeEmptyToUndef, valueFromValueEnum, buildFields, showModalForm }

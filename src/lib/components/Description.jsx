@@ -13,7 +13,7 @@ import YesNoTag from './YesNoTag'
 //   className?: boolean
 // }
 
-const Description = ({ record, items, _bordered = false, _layout, column, _outlined = true }) => {
+const Description = ({ record, items, _bordered = false, layout = 'horizontal', column, _outlined = true }) => {
   const descriptionItem = (item, _index) => {
     let { label, value, options = {} } = item
     const { type = 'secondary', ...restOfOptions } = options
@@ -51,7 +51,11 @@ const Description = ({ record, items, _bordered = false, _layout, column, _outli
     })
   }
 
-  return <AntdDescriptions column={column}>{descriptivePairs.map(descriptionItem)}</AntdDescriptions>
+  return (
+    <AntdDescriptions layout={layout} column={column}>
+      {descriptivePairs.map(descriptionItem)}
+    </AntdDescriptions>
+  )
 }
 
 export default Description

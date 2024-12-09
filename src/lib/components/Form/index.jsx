@@ -1,25 +1,11 @@
+import PropTypes from 'prop-types'
 import { useState, useEffect, forwardRef, useImperativeHandle } from 'react'
-import { Form as AntdForm, Row, Col } from 'antd'
+import { Form as AntdForm, Col } from 'antd'
+import formUtils from '~su/utilities/form'
+import { StyledForm, StyledRow } from './index.styled'
+import FieldsList from './FieldsList'
 import Button from '../Button'
 import ButtonGroup from '../ButtonGroup'
-import formUtils from '~su/utilities/form'
-
-import FieldsList from './FieldsList'
-
-// type Props = {
-//   name: string
-//   className: string
-//   object: any
-//   fields: any
-//   globalFields?: object[]
-//   onFinish: Function
-//   onCancel: Function
-//   deleteItem?: Function
-//   fieldsListName?: string
-//   disable?: boolean
-//   submitDisabledProp?: boolean
-//   isNew?: boolean
-// }
 
 const Form = forwardRef(
   (
@@ -31,15 +17,17 @@ const Form = forwardRef(
       onFinish,
       globalFields = null,
       onCancel,
-      _deleteItem,
       fieldsListName = null,
       fieldsListDynamic = false,
+      dynamicFieldsInitialValues,
+      showFieldsListTitle = false,
       disable = false,
       submitDisabledProp = true,
       children = null,
       onValuesChange = null,
       remoteControls = false,
       controlsProps = {},
+      isModalForm = false,
       ...formProps
     },
     ref
@@ -117,7 +105,7 @@ const Form = forwardRef(
       }
 
       return (
-        <ButtonGroup>
+        <ButtonGroup style={{ flexDirection: isModalForm ? 'row-reverse' : 'row' }}>
           <Button {...submitButtonProps}>{submitButtonProps.display}</Button>
           {onCancel && <Button {...cancelButtonProps}>{cancelButtonProps.display}</Button>}
         </ButtonGroup>
@@ -125,7 +113,7 @@ const Form = forwardRef(
     }
 
     return (
-      <AntdForm
+      <StyledForm
         name={name}
         className={className}
         layout="vertical"
@@ -134,24 +122,61 @@ const Form = forwardRef(
         form={form}
         onFieldsChange={onChange}
         onValuesChange={onValuesChange}
+        $isModalForm={isModalForm}
         {...formProps}
       >
-        {globalFields ? <FieldsList fields={globalFields} /> : null}
-        {fields.length > 0 ? (
-          <FieldsList dynamic={fieldsListDynamic} fields={fields} name={fieldsListName} disable={disable} />
-        ) : null}
+        {globalFields && <FieldsList fields={globalFields} />}
+
+        {!!fields.length && (
+          <FieldsList
+            dynamic={fieldsListDynamic}
+            fields={fields}
+            fieldsInitialValues={dynamicFieldsInitialValues}
+            name={fieldsListName}
+            disable={disable}
+            showTitle={showFieldsListTitle}
+          />
+        )}
 
         {children}
 
-        {!remoteControls ? (
-          <Row justify="center">
+        {!remoteControls && (
+          <StyledRow justify="center" $isModalForm={isModalForm}>
             <Col>{renderControls()}</Col>
-          </Row>
-        ) : null}
-      </AntdForm>
+          </StyledRow>
+        )}
+      </StyledForm>
     )
   }
 )
+
+Form.propTypes = {
+  name: PropTypes.string,
+  className: PropTypes.string,
+  object: PropTypes.object,
+  fields: PropTypes.array,
+  onFinish: PropTypes.func.isRequired,
+  globalFields: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.arrayOf(
+      PropTypes.shape({
+        item: PropTypes.shape({ disable: PropTypes.bool })
+      })
+    )
+  ]),
+  onCancel: PropTypes.func,
+  fieldsListName: PropTypes.string,
+  fieldsListDynamic: PropTypes.bool,
+  dynamicFieldsInitialValues: PropTypes.object,
+  showFieldsListTitle: PropTypes.bool,
+  disable: PropTypes.bool,
+  submitDisabledProp: PropTypes.bool,
+  children: PropTypes.node,
+  onValuesChange: PropTypes.func,
+  remoteControls: PropTypes.bool,
+  controlsProps: PropTypes.object,
+  isModalForm: PropTypes.bool
+}
 
 Form.useFormInstance = AntdForm.useFormInstance
 Form.useWatch = AntdForm.useWatch

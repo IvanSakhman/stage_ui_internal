@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { Form } from 'antd'
 
 import { Col } from '~su/components/Grid'
+import Checkbox from '~su/components/Checkbox'
 
 import { StyledField } from './index.styled'
 import ProField from './Pro'
@@ -19,6 +20,13 @@ const Field = ({ field, index, disable = false, dynamic = false, extras = {}, cl
 
   if (disable) {
     component = cloneElement(component, { disabled: disable }, null)
+  }
+
+  if (component?.type === Checkbox) {
+    component = cloneElement(component, {
+      ...component.props,
+      checked: undefined
+    })
   }
 
   if (component?.type?.name == 'FieldsList') {
@@ -54,6 +62,7 @@ const Field = ({ field, index, disable = false, dynamic = false, extras = {}, cl
       fieldKey={fieldKey}
       label={label === false ? null : label || t(`${itemName}.label`, string.humanize(itemName, { capitalize: true }))}
       className={[className].join(' ')}
+      valuePropName={component?.type === Checkbox ? 'checked' : 'value'}
       dependencies={fieldDependencies}
       {...rest}
     >

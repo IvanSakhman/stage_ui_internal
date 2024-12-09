@@ -5,7 +5,7 @@
     "registry": "https://npm.pkg.github.com/"
   },
   "author": "ForwardPMX Developers",
-  "version": "1.89.0",
+  "version": "1.93.3",
   "description": "Stage UI React components",
   "license": "MIT",
   "files": [
@@ -22,7 +22,7 @@
     "file-saver": "^2.0.5",
     "html2canvas": "^1.4.1",
     "humanize-duration": "^3.32.1",
-    "i18next": "^23.16.2",
+    "i18next": "^23.16.3",
     "js-cookie": "^3.0.5",
     "localforage": "^1.10.0",
     "lodash": "^4.17.21",
@@ -40,9 +40,8 @@
     "remark-gfm": "^4.0.0",
     "sql-formatter": "^15.4.5",
     "styled-components": "^6.1.13",
-    "use-sync-external-store": "^1.2.2",
     "whatwg-fetch": "^3.6.20",
-    "zustand": "5.0.0"
+    "zustand": "^5.0.0"
   },
   "scripts": {
     "test": "cross-env TZ=utc NODE_ENV=test react-scripts test --env=jest-environment-jsdom --testPathIgnorePatterns=src/__tests__/support",
@@ -51,7 +50,8 @@
     "build": "rollup -c",
     "lint": "eslint ./src --max-warnings 0",
     "beauty_check": "prettier --check ./src",
-    "prettify": "prettier --write 'src/**/*.{js,jsx,json,css,scss,md}'"
+    "prettify": "prettier --write 'src/**/*.{js,jsx,json,css,scss,md}'",
+    "storybook": "storybook dev -p 6006"
   },
   "browserslist": {
     "production": [
@@ -68,8 +68,10 @@
   "devDependencies": {
     "@babel/cli": "^7.25.9",
     "@babel/core": "^7.25.9",
+    "@babel/eslint-parser": "^7.11.0",
     "@babel/preset-react": "^7.25.9",
     "@babel/runtime": "^7.25.9",
+    "@chromatic-com/storybook": "^3.1.0",
     "@craco/craco": "^7.1.0",
     "@rollup/plugin-alias": "^5.1.1",
     "@rollup/plugin-babel": "^6.0.4",
@@ -77,12 +79,20 @@
     "@rollup/plugin-image": "^3.0.3",
     "@rollup/plugin-node-resolve": "^15.3.0",
     "@rollup/plugin-terser": "^0.4.4",
+    "@storybook/addon-essentials": "^8.2.9",
+    "@storybook/addon-interactions": "^8.2.9",
+    "@storybook/addon-links": "^8.2.9",
+    "@storybook/addon-onboarding": "^8.2.9",
+    "@storybook/blocks": "^8.2.9",
+    "@storybook/react": "^8.2.9",
+    "@storybook/react-vite": "^8.2.9",
+    "@storybook/test": "^8.2.9",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.2",
     "@testing-library/react": "^16.0.1",
     "@testing-library/react-hooks": "8.0.1",
     "@testing-library/user-event": "14.5.2",
-    "babel-eslint": "^10.1.0",
+    "@vitejs/plugin-react": "^4.3.1",
     "babel-plugin-prismjs": "^2.1.0",
     "craco-antd": "^2.0.0",
     "eslint": "^8.57.0",
@@ -92,8 +102,9 @@
     "eslint-plugin-import": "2.31.0",
     "eslint-plugin-jsx-a11y": "^6.10.1",
     "eslint-plugin-prettier": "5.2.1",
-    "eslint-plugin-react": "^7.37.1",
-    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-react": "^7.37.2",
+    "eslint-plugin-react-hooks": "^5.0.0",
+    "eslint-plugin-storybook": "^0.10.1",
     "jest-environment-jsdom": "^29.7.0",
     "json-server": "^1.0.0-beta.1",
     "postcss-normalize": "^13.0.1",
@@ -108,7 +119,9 @@
     "rollup-plugin-filesize": "10.0.0",
     "rollup-plugin-includepaths": "^0.2.4",
     "rollup-plugin-peer-deps-external": "^2.2.4",
-    "rollup-plugin-styles": "^4.0.0"
+    "rollup-plugin-styles": "^4.0.0",
+    "storybook": "^8.2.9",
+    "vite": "^5.4.2"
   },
   "peerDependencies": {
     "antd": ">=5.0.2",
@@ -136,6 +149,7 @@
     "string-width": "4.2.3",
     "wrap-ansi": "7.0.0",
     "nth-check": "2.1.1",
-    "postcss": "8.4.47"
+    "postcss": "8.4.47",
+    "cookie": "0.7.0"
   }
 }

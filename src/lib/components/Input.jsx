@@ -1,6 +1,8 @@
 import { useRef, useEffect } from 'react'
 import { Input as AntdInput, InputNumber } from 'antd'
 
+const { Search } = AntdInput
+
 // export interface Props extends HTMLProps<HTMLInputElement> {
 //   error?: boolean
 //   className?: string
@@ -44,5 +46,6 @@ const TextArea = (props) => <Input component={AntdInput.TextArea} {...props} />
 
 Input.TextArea = TextArea
 Input.Number = InputNumber
+Input.Search = Search
 
 export default Input

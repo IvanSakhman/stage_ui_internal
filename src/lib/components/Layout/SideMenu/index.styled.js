@@ -1,7 +1,6 @@
-import styled from 'styled-components'
-
+import styled, { css } from 'styled-components'
 import { Layout } from 'antd'
-
+import { headerHeight } from '~su/App/styleProvider'
 import Typography from '../../Typography'
 
 export const SideMenuContainer = styled(Layout.Sider)`
@@ -37,10 +36,23 @@ export const SideMenuContainer = styled(Layout.Sider)`
   }
   & .ant-layout-sider-trigger {
     background: ${({ theme }) => theme.sideMenuBackground} !important;
+    position: sticky !important;
   }
 `
 
-export const StyledLink = styled(Typography.Link)`
+export const StickyContainer = styled.div`
+  ${({ $isScrollable }) =>
+    $isScrollable &&
+    css`
+      position: sticky;
+      top: 0;
+      max-height: calc(100vh - ${headerHeight}px);
+      overflow-y: auto;
+    `}
+`
+
+const { Text } = Typography
+export const StyledLink = styled(Text)`
   // those styles should be !important here to override antd :where selector styles https://github.com/ant-design/ant-design/issues/38660#issuecomment-1325365203
   color: ${({ $isSelected, theme }) => ($isSelected ? theme.sideMenuItemActive : 'inherit')} !important;
   :hover {

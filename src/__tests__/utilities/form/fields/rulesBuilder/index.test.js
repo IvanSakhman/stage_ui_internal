@@ -32,6 +32,20 @@ describe('Dynamic Fields rulesBuilder', () => {
     it('returns pattern rule', () => {
       expect(buildRules({ type: 'string', pattern: '.*' })).toEqual(expect.arrayContaining([{ pattern: '.*' }]))
     })
+
+    describe('when pattern includes \\A', () => {
+      // \A in JS matches letter 'A'
+      it('replaces it with ^', () => {
+        expect(buildRules({ type: 'string', pattern: '\\A[a-z]' })).toEqual(expect.arrayContaining([{ pattern: '^[a-z]' }]))
+      })
+    })
+
+    describe('when pattern includes \\z', () => {
+      // \z in JS matches letter 'z'
+      it('replaces it with $', () => {
+        expect(buildRules({ type: 'string', pattern: '[a-z]\\z' })).toEqual(expect.arrayContaining([{ pattern: '[a-z]$' }]))
+      })
+    })
   })
 
   describe('when type is string', () => {
