@@ -83,8 +83,8 @@ SmartTable.propTypes = {
   filtersSchema: PropTypes.object,
   pagination: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   dataKey: PropTypes.string,
-  hasDropdownActions: PropTypes.bool,
   keyPrefix: PropTypes.string,
+  hasDropdownActions: PropTypes.bool,
   onChange: PropTypes.func,
   urlParams: PropTypes.instanceOf(URLSearchParams)
 }
