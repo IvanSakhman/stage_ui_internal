@@ -41,13 +41,6 @@ export const useUIStore = create((_set) => ({
   globalAlerts: []
 }))
 
-export const useSessionStore = create((set) => ({
-  identity: null,
-  setIdentity: (identity) => set({ identity })
-}))
-
-export const useIdentity = () => useSessionStore(useShallow(({ identity }) => identity))
-
 export const useLayoutConfig = () => useConfigStore(useShallow(({ layout }) => layout))
 export const useBranding = () => useConfigStore(useShallow(({ branding }) => branding))
 export const useAppConfig = () => useConfigStore(useShallow(({ app }) => app))

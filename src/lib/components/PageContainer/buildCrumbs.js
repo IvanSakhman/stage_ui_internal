@@ -2,9 +2,12 @@ import { HomeOutlined } from '@ant-design/icons'
 import { useLocation } from '~su/hooks'
 import { string } from '~su/utilities'
 
-export default (headerTitle, buildBreadcrumbNames, pathname, homePath = '/') => {
+export default (headerTitle, buildBreadcrumbNames, pathname, homePath = '/', homeCrumbStyle) => {
   const location = useLocation()
-  const homeCrumb = { href: homePath, title: <HomeOutlined /> }
+  const homeCrumb = {
+    href: homePath,
+    title: <HomeOutlined style={homeCrumbStyle} />
+  }
 
   const currentPathname = pathname || location.pathname
 

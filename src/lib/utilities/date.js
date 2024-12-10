@@ -89,4 +89,9 @@ const detailedFormat = (value, timeZone = null) => {
 // https://stackoverflow.com/questions/58216504/dayjs-isvalid-behaves-differently-to-moment/58216985#58216985
 const isValidDateWithFormat = (value, format) => dayjs(value, format).format(format) === value
 
-export default { timeBetween, formatDuration, format, detailedFormat, isValidDateWithFormat }
+// sort = (a: string, b: string)
+const sort = (a, b) => new Date(a).getTime() - new Date(b).getTime()
+
+const getTimezone = () => Intl.DateTimeFormat().resolvedOptions().timeZone
+
+export default { timeBetween, formatDuration, format, detailedFormat, isValidDateWithFormat, sort, getTimezone }

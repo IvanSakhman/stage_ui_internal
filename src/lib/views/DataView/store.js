@@ -12,23 +12,15 @@ const setupStore = ({ itemName, itemPluralName, isPaginated, isFilterable, addit
     })
   )
 
-  const useData = () => {
-    return useDataStore(useShallow((state) => state[itemPluralName]))
-  }
+  const useData = () => useDataStore(useShallow((state) => state[itemPluralName]))
 
   const useDataStates = () => useDataStore(useShallow(({ isLoading, isLoaded }) => ({ isLoading, isLoaded })))
 
-  const usePagination = () => {
-    return useDataStore(useShallow((state) => state.pagination))
-  }
+  const usePagination = () => useDataStore(useShallow(({ pagination }) => pagination))
 
-  const useFiltersSchema = () => {
-    return useDataStore(useShallow((state) => state.filtersSchema))
-  }
+  const useFiltersSchema = () => useDataStore(useShallow(({ filtersSchema }) => filtersSchema))
 
-  const useViewActions = () => {
-    return useDataStore(useShallow((state) => state.actions))
-  }
+  const useViewActions = () => useDataStore(useShallow(({ actions }) => actions))
 
   return {
     useDataStore,

@@ -41,12 +41,8 @@ export const useEditorStore = create((_set, _get) => ({
   snippets: []
 }))
 
-export const useResource = () =>
-  useEditorStore(
-    useShallow(({ resource }) => ({
-      resource
-    }))
-  )
+export const useResource = () => useEditorStore(useShallow(({ resource }) => resource))
+
 export const useEditorConfig = () => useEditorStore(useShallow(({ config: { editor } }) => editor))
 
 export const useSnippets = () => useEditorStore(useShallow(({ snippets }) => snippets))

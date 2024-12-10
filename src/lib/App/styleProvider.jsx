@@ -1,5 +1,8 @@
 import PropTypes from 'prop-types'
 
+// hoc
+import { withAppInit } from '~su/hoc'
+
 // constants
 import theme from '~su/constants/theme'
 
@@ -12,6 +15,8 @@ import TranslationsProvider from './TranslationsProvider'
 import RootModal from '~su/components/RootModal'
 
 import { GlobalStyles } from './index.styled'
+
+export const headerHeight = 64
 
 const StyleProvider = ({ children, brandingToken, translations }) => {
   const themeToken = { ...theme.token, ...brandingToken }
@@ -28,6 +33,12 @@ const StyleProvider = ({ children, brandingToken, translations }) => {
       buttonBg: themeToken.sideMenuBackground,
       buttonSolidCheckedBg: themeToken.sideMenuItemActive,
       buttonSolidCheckedHoverBg: themeToken.sideMenuItemActive
+    },
+    Layout: {
+      headerHeight
+    },
+    Breadcrumb: {
+      iconFontSize: 16
     }
   }
 
@@ -56,4 +67,4 @@ StyleProvider.propTypes = {
   translations: PropTypes.object
 }
 
-export default StyleProvider
+export default withAppInit(StyleProvider)

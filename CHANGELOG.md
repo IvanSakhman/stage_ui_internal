@@ -1,12 +1,37 @@
+v1.93.3
+[fix] Fixed security issues
+
+v1.93.2
+[fix] Fixed sidebar flickering
+
+v1.93.1
+[fix] Update yarn.lock
+
+v1.93.0
+[feat] Added dynamic fields initial values support for the Form component
+
+v1.92.0
+[feat] stage_ui sync with https://github.com/assemblyglobal/ag-stage-npm-stage-ui
+
+v1.91.0
+[feat] Extend Description with layout prop
+
+v1.90.0
+[feat] Added modal support for the Form component
+
+1. Added date utilities: sort and getTimezone
+2. Added checkbox support for the Form/Field component
+3. Added border and emptyBackground color constants
+
 v1.89.0
 [feat] Exported Form.List & Form.Item components
 
 v1.88.0
 [feat] Added support for translations that are stored on the FE side instead of fetched from BE
 
-1. Added TranslationsProvider.
-2. Added withTranslations HOC.
-3. Tables translations support improved.
+1. Added TranslationsProvider
+2. Added withTranslations HOC
+3. Tables translations support improved
 
 v1.87.1
 [fix] Zustand migration
@@ -48,14 +73,15 @@ v1.86.1
 Dependencies - 24/06/24
 
 1. Bump @ory/client from 1.9.0 to 1.11.11
-2. Bump antd from 5.18.0 to 5.18.3 
-3. Bump sql-formatter from 15.3.1 to 15.3.2 
-4. Bump @testing-library/dom from 10.1.0 to 10.2.0 
-5. Bump eslint-plugin-jsx-a11y from 6.8.0 to 6.9.0 
+2. Bump antd from 5.18.0 to 5.18.3
+3. Bump sql-formatter from 15.3.1 to 15.3.2
+4. Bump @testing-library/dom from 10.1.0 to 10.2.0
+5. Bump eslint-plugin-jsx-a11y from 6.8.0 to 6.9.0
 6. Bump eslint-plugin-react from 7.34.2 to 7.34.3
 
 v1.86.0
 Dependencies - 17/06/24
+
 1. 43e42ad chore(deps-dev): bump eslint-plugin-react from 7.34.1 to 7.34.2 (#540)
 2. 7715311 chore(deps): bump antd from 5.17.2 to 5.18.0 (#541)
 3. b12efbb chore(deps-dev): bump @rollup/plugin-commonjs from 25.0.7 to 26.0.1 (#542)
@@ -63,9 +89,9 @@ Dependencies - 17/06/24
 5. a0c0ce3 chore(deps): bump react-i18next from 14.1.1 to 14.1.2 (#544)
 6. 3f70a49 chore(deps): bump humanize-duration from 3.32.0 to 3.32.1 (#545)
 7. fbefd4e chore(deps-dev): bump @babel/cli from 7.24.5 to 7.24.7 (#546)
-8. 1cdb79b chore(deps-dev): bump @babel/runtime from 7.24.5 to 7.24.7 (#548) 
+8. 1cdb79b chore(deps-dev): bump @babel/runtime from 7.24.5 to 7.24.7 (#548)
 9. a72b3ab chore(deps-dev): bump rollup from 4.17.2 to 4.18.0 (#549)
-10. 39703fa chore(deps): bump i18next from 23.11.4 to 23.11.5 (#550) 
+10. 39703fa chore(deps): bump i18next from 23.11.4 to 23.11.5 (#550)
 11. 9a1f588 chore(deps-dev): bump @babel/core from 7.24.5 to 7.24.7 (#551)
 12. ab1d398 chore(deps-dev): bump json-server from 1.0.0-beta.0 to 1.0.0-beta.1 (#552)
 13. d79e150 chore(deps-dev): bump prettier from 3.2.5 to 3.3.2 (#554)
@@ -102,6 +128,7 @@ v1.84.1
 
 v1.84.0
 Dependencies - 17/05/24
+
 1. 841bfce Bump ejs from 3.1.9 to 3.1.10 (#522)
 2. Bump pusher-js from 8.0.1 to 8.3.0
 3. Bump @monaco-editor/react from 4.5.1 to 4.6.0
@@ -166,6 +193,7 @@ v1.80.1
 
 v1.80.0
 Dependencies - 01/04/24
+
 1. 5145e8b Bump whatwg-fetch from 3.6.2 to 3.6.20 (#445)
 2. 62d95dc Bump eslint-plugin-prettier from 5.1.2 to 5.1.3 (#454)
 3. a188c4d Bump @testing-library/user-event from 14.5.1 to 14.5.2 (#451)
@@ -211,10 +239,12 @@ v1.79.0
 
 v1.78.4
 [fix]
+
 - Side menu item color
 
 v1.78.3
 [fix]
+
 - Update global background to white
 - Rename the background color to warmGray
 
@@ -225,6 +255,7 @@ This fixes an error when using multiline comments.
 
 v1.78.1
 [fix]
+
 1. Replaced system menu styled-component with antd component
 2. Updated side menu items propTypes
 
@@ -310,15 +341,20 @@ v1.74.0
 [feat] GlobalFilters improvements
 
 1. GlobalFilters utils:
-  - allow to pass fieldCol globalFilter option that allows to specify the filters grid
-  - set allowClear on array type fields
-  - set maxTagCount: 'responsive' on fields with enum
-  - hide filters' fields labels when displayed inline
-  - fixed normalizing read filters when field type is array
+
+- allow to pass fieldCol globalFilter option that allows to specify the filters grid
+- set allowClear on array type fields
+- set maxTagCount: 'responsive' on fields with enum
+- hide filters' fields labels when displayed inline
+- fixed normalizing read filters when field type is array
+
 2. Dynamic Fields building:
-  - componentBuilders: support array types with integer items
+
+- componentBuilders: support array types with integer items
+
 3. Form/Field/index:
-  - support item.fieldCol config
+
+- support item.fieldCol config
 
 v1.73.0
 [feat] Draggable tree select
@@ -330,11 +366,11 @@ Default breakpoints provided by Antd do not suit our projects too well because t
 
 Previously: Screens with width between 1200 and 1600 were all treated as XL screen. And screens above 1600 were treated as XXL.
 Now:
- - Screens with width 1280 and below are treated as MD
- - Screens with width 1440 and below are treated as LG
- - Screens with width 1800 and below are treated as XL
- - Screens with width above 1800 are treated as XXL.
 
+- Screens with width 1280 and below are treated as MD
+- Screens with width 1440 and below are treated as LG
+- Screens with width 1800 and below are treated as XL
+- Screens with width above 1800 are treated as XXL.
 
 v1.71.0
 [feat] Make sideMenu collapsible and auto-collapse on screens smaller than xxl.
@@ -343,6 +379,7 @@ This provides more screen real estate for users using smaller screens.
 
 v1.70.0
 [feat&refactor&fix]
+
 - refactor TopNav component to add dynamic components
 - refactor CompanyLogo component for dynamic placement in header
 - export Breadcrumb component
@@ -381,6 +418,7 @@ Will support received action's href option including encoded uri (ie new?id=%3Ai
 
 v1.69.1
 [fix]
+
 1. Side menu item colors
 2. Client select color
 
@@ -413,6 +451,7 @@ v1.66.0
 [feat] SmartList and SmartTable now accept and display extraDataDisplay prop.
 
 v1.65.0
+
 1. Added RadioGroup component
 2. Added ability to pass extra children to SideMenu
 
@@ -428,7 +467,8 @@ v1.63.0
 APIs usually differently interpret missing key than an empty value. This has proven to be the case in Blueprints.
 
 Additionally:
- - do not pass fixParentNode to Autocomplete component.
+
+- do not pass fixParentNode to Autocomplete component.
 
 v1.62.0
 [feat] Support displaying GlobalFilters in a modal.
@@ -459,13 +499,13 @@ v1.61.0
 Adds support for Order/Sorting in dynamically built GlobalFilters.
 
 Fixes & Improvements:
-  - Do not mount GlobalFilters until filters schema properties are available
-  - Do not set default placeholder for GlobalFilter fields, but be able to read it from translations
-  - Reworked applySorter util - it now expects a string with sortable column and direction
-  - Adjusted how filters, pagination and sorter are applied in SmartTable
-  - Do not apply filters nor sorter when paginating
-  - Reset pagination to page 1 when filtering and/or sorting
 
+- Do not mount GlobalFilters until filters schema properties are available
+- Do not set default placeholder for GlobalFilter fields, but be able to read it from translations
+- Reworked applySorter util - it now expects a string with sortable column and direction
+- Adjusted how filters, pagination and sorter are applied in SmartTable
+- Do not apply filters nor sorter when paginating
+- Reset pagination to page 1 when filtering and/or sorting
 
 v1.60.1
 [fix] Allowed to add a different color for ClientsDropdown in TopNav
@@ -480,6 +520,7 @@ v1.59.1
 - isHorizontal prop is now deprecated, the flag is calculated based on tabPosition prop ('top' being default)
 
 Additionally:
+
 - PageContainer will not mount h4 when title is not present
 
 v1.59.0
@@ -488,7 +529,8 @@ v1.59.0
 This decouples the GlobalFilters' filtering set up from SmartTable and allows to build the filters using json_schema.
 
 Additionally:
-  - Moved filtering utils needed only for SmartTable to SmartTable utils.
+
+- Moved filtering utils needed only for SmartTable to SmartTable utils.
 
 v1.58.0
 [refactor] DataView - Store json_schema.filters.properties as filtersSchema instead of filters.
@@ -496,15 +538,18 @@ v1.58.0
 1. This is a preparation for GlobalFilters refactor into building them using json_schema.
 2. The pre-existing buildFilters is preserved, but moved to filtering utilities. It is still in use for GlobalFilters and SmartTable.
 3. These changes improve json_schema handling in buildFilters utility:
-  - it is now able to read valueEnum and/or enum from definition where type is array and it contains items
-  - it now adds true and false where type is boolean
+
+- it is now able to read valueEnum and/or enum from definition where type is array and it contains items
+- it now adds true and false where type is boolean
+
 4. Improvements described in 3. might be BREAKING if json_schema provided was previously changed in order to support array and boolean types.
 
 v1.57.1
 [feat] Dynamic form building - allow to extend item's component with custom props.
 
 Additionally:
- - fix import issue in Form component, which could cause circular dependency
+
+- fix import issue in Form component, which could cause circular dependency
 
 v1.57.0
 [feat] Introduced dynamic form fields building utilities.
@@ -533,8 +578,8 @@ v1.55.5
 [feat] Moved GlobalFilters out of SmartTable
 
 Additionally:
-- added default Input component to GlobalFilters
 
+- added default Input component to GlobalFilters
 
 v1.55.4
 [chore] Moved pagination normalisation to the components that actually need it.
@@ -581,6 +626,7 @@ v1.52.2
 They were skipped in https://github.com/forward3d/stage_ui/pull/179
 
 v1.52.1
+
 - fix style provider for nextjs
 
 v1.52.0
@@ -588,15 +634,18 @@ v1.52.0
 
 1. Cascader - https://ant.design/components/cascader
 2. object utils
-  - pick
-  - omit
+
+- pick
+- omit
 
 v1.51.1
 [Table] - Do not force translate column.title
 
 v1.51.0
+
 - add styleProvider
-Dependencies - 28/09/23
+  Dependencies - 28/09/23
+
 1. antd from 5.8.3 to 5.9.4
 2. react from 17.0.2 to 18.2.0
 3. react-i18next from 13.0.2 to 13.2.2
@@ -654,6 +703,7 @@ Such things should never be in the component function, it can get updated and it
 
 v1.49.0
 fix [antd: message]
+
 - Updated message component
 - Used App component
 - added useTableViewSetup hoc
@@ -665,14 +715,19 @@ v1.47.0
 feat: Added array and object utilities + make all Card(s) use withLoader HOC.
 
 1. array utilities
-  - groupItemsBy => takes the array of objects and key by which it should group the data as arguments,
-    returns an object of grouped items
-  - insert => takes the array, item to insert and position at which the item should be inserted,
-    returns modified array
+
+- groupItemsBy => takes the array of objects and key by which it should group the data as arguments,
+  returns an object of grouped items
+- insert => takes the array, item to insert and position at which the item should be inserted,
+  returns modified array
+
 2. object utilities
-  - isObject => checks if value is an object with properties (ie { test: true })
+
+- isObject => checks if value is an object with properties (ie { test: true })
+
 3. Card component
-  - extended it with withLoader hook => this way the Card.Table does not require it and all Cards have the same loader
+
+- extended it with withLoader hook => this way the Card.Table does not require it and all Cards have the same loader
 
 v1.46.0
 fix [antd: message] Static function can not consume context like dynamic theme. Used 'App' component instead.
@@ -786,17 +841,23 @@ v1.38.0
 [feature] Added MarkdownEditor and PanedCard components and modified TableView
 
 1. MarkdownEditor
-  - based on monaco editor (as replacement candidate for ace)
-  - customised with a basic toolbar that triggers defined snippets
-  - added continuity handling for bullet list, numbered list and check list
+
+- based on monaco editor (as replacement candidate for ace)
+- customised with a basic toolbar that triggers defined snippets
+- added continuity handling for bullet list, numbered list and check list
+
 2. PanedCard
-  - upgraded Card component which allows to toggle panes
+
+- upgraded Card component which allows to toggle panes
+
 3. TableView
-  - can now accept tableProps object which is passed to SmartTable
-  - is non breaking change, with backwards compatiblity
+
+- can now accept tableProps object which is passed to SmartTable
+- is non breaking change, with backwards compatiblity
 
 v1.37.0
 [feature] Allowed to provide white label configuration:
+
 1. Pass custom font
 2. Pass custom logo for top navigation HomeButton on the right corner
 3. Pass color scheme for all the components, including TopBar and SideMenu
@@ -847,6 +908,7 @@ v1.33.1
 
 v1.33.0
 [feature] Added new features and improved SideMenu functionality:
+
 1. Added support for routes, which children have same key as their parent to proper handle expanded and highlighted item
 2. Now each item in SideMenu is a Link, so it could be opened in a separate tab and so on
 3. Added support for tree-like menu items shape with proper handling of opened and selected items
@@ -884,8 +946,9 @@ Form already set 'initialValues' with path 'schedules.0.day_of_month'. Field can
 ```
 
 Example:
+
 ```javascript
-<FieldsList dynamic fields={[{ item: { name: 'test' }}]} fieldsInitialValues={{ test: 'initialValue'}} />
+<FieldsList dynamic fields={[{ item: { name: 'test' } }]} fieldsInitialValues={{ test: 'initialValue' }} />
 ```
 
 v1.31.2
@@ -901,11 +964,11 @@ v1.31.0
 [feat] StepForm - allow to have multiple submit buttons.
 
 A submitButtons prop is required for the StepForm to render multiple buttons.
+
 - The submitButtons prop should be an array of objects containing 'display' property.
 - It can have all props that Button component accepts
 - In order for the buttons to act differently (ie save as draft or save as published), a submitWith prop can be passed.
   This should include a path (antd's Form fieldPath) and value properties - used when called form.setFieldValue before form.submit.
-
 
 It defaults to a singular, default submit button when this submitButtons prop is not passed.
 
@@ -913,13 +976,15 @@ v1.30.0
 [feat] Understand optional action.condition property in ActionButtons.
 
 From now on, the action can have a condition property, which should be a 3 element array:
- - condition[0] must be a name of tested object property (ie `state` for a `template = { state: 'published' }`)
- - condition[1] must be a name of an operator (ie `eql`)
- - condition[2] must be a value to which tested object property is compared (`ie published`)
+
+- condition[0] must be a name of tested object property (ie `state` for a `template = { state: 'published' }`)
+- condition[1] must be a name of an operator (ie `eql`)
+- condition[2] must be a value to which tested object property is compared (`ie published`)
 
 The condition is evaluated and the ActionButton is displayed only when the result is a truthy value.
 
 Example:
+
 ```javascript
 const actions = [
   { name: 'deprecate', condition: ['state', 'notEql', 'deprecated'] },
@@ -939,16 +1004,21 @@ v1.29.0
 StageTopNav lives here from now on.
 
 The new TopNav requires following properties to be provided:
- 1. `systems` => a list of systems that user has access to, it does not fetch this list anymore (ie `['datasets', 'blueprints']`)
- 2. `currentSystem` => name of currently used system (ie `datasets`)
 
- If the TopNav should display a client select, following additional properties need to be provided:
- 1. `clients` => an object with:
-   - `available` key, which is a list of client_slugs user has access to
-   - `path` key, which is a string including `/:id` parameter, needed
- 2. `currentClient` => an object with:
-   - `name` key, which is a client_slug
-   - `display_name` key, which is client's display name (they differ sometimes)
+1.  `systems` => a list of systems that user has access to, it does not fetch this list anymore (ie `['datasets', 'blueprints']`)
+2.  `currentSystem` => name of currently used system (ie `datasets`)
+
+If the TopNav should display a client select, following additional properties need to be provided:
+
+1.  `clients` => an object with:
+
+- `available` key, which is a list of client_slugs user has access to
+- `path` key, which is a string including `/:id` parameter, needed
+
+2.  `currentClient` => an object with:
+
+- `name` key, which is a client_slug
+- `display_name` key, which is client's display name (they differ sometimes)
 
 Also, the ClientsDropdown now has a search input which should prove helpful when user has access to many clients.
 
@@ -972,6 +1042,7 @@ v1.27.3
 [feature] Added tests for TableView store
 
 1.26.0
+
 1. Added TableView view
 2. Added replacePlaceholder string utility
 3. Reused replacePlaceholder utility for ActionButtons with "link" type
@@ -1009,10 +1080,14 @@ which is used for both Table filters and GlobalFilters
 Components Improvements
 
 1. ActionButtons
-  - support displaying button with icon and iconOnly button
-  - support passing component wide size property and apply to any buttons that are not displayed as links
+
+- support displaying button with icon and iconOnly button
+- support passing component wide size property and apply to any buttons that are not displayed as links
+
 2. Table - allow ant-btn-link to wrap
-  - enforce size "small" for ActionButtons buttons that used in rows
+
+- enforce size "small" for ActionButtons buttons that used in rows
+
 3. TagsList - fix key prop and allow to pass Space component props (ie wrap)
 4. GlobalFilters - support segmented component
 
@@ -1068,6 +1143,7 @@ v1.19.0
 Added AutoComplete component
 
 v1.18.1
+
 1. Added TagsList component
 2. Added ability to render list of Tags for ProDescriptions component
 3. Improved smart table buildColumns utility to pass additional properties to the column if such are passed
@@ -1080,6 +1156,7 @@ Improved layout rendering flow
 
 v1.17.0
 Dependencies - 01/03/23
+
 1. ef83dd0 Bump @babel/cli from 7.19.3 to 7.21.0 (#46)
 2. 7ccea9c Bump @babel/runtime from 7.20.6 to 7.21.0 (#45)
 3. dda54cc Bump @babel/core from 7.20.5 to 7.21.0 (#43)
@@ -1105,6 +1182,7 @@ Dependencies - 01/03/23
 23. f9bb689 Bump antd from 5.0.7 to 5.2.3 (#55)
 
 v1.16.0
+
 1. Passed functionActionHandler to Table component to handle actions with "function" type
 2. Returned response status from fetchJson utility
 3. Added flattenObject utility
@@ -1130,7 +1208,7 @@ Replaced ant-design/pro-components ProDescriptions with a custom built.
 
 This allows for more control over the descriptions and allows easier definition of custom valueTypes.
 
-* removed @ant-design/pro-components as is not used anywhere
+- removed @ant-design/pro-components as is not used anywhere
 
 v1.11.0
 [TEM-106] Replaced PageContainer with custom component
@@ -1138,20 +1216,22 @@ v1.11.0
 v1.10.0
 [TEM-25] Allow to pass onSuccess to loadCollection and fix filters valueEnum
 
-* also, fix ActionButtons crashing when empty actions array received
+- also, fix ActionButtons crashing when empty actions array received
 
 v1.9.0
 Tables Improvements & New Components
 
 1. Utilise received response actions in tables
-  - set actions in collection state
-  - display just Button if only one action is present (but use ButtonGroup
+
+- set actions in collection state
+- display just Button if only one action is present (but use ButtonGroup
   if more than one)
-  - fix translatingLink action mutating the action options
-  - pass actions to Table and extend columns' render with them if there
+- fix translatingLink action mutating the action options
+- pass actions to Table and extend columns' render with them if there
   are actions for a table_row
-  - make table generate a column title based on the key when not using ColumnsConfig
-  - refactored table/buildColumns util
+- make table generate a column title based on the key when not using ColumnsConfig
+- refactored table/buildColumns util
+
 2. Added StatesHistory, StateTag and StageBadge
 
 v1.8.1
@@ -1163,6 +1243,7 @@ v1.8.0
 Also added findNested to object utility which is usefull for finding deeply nested keys in big objects.
 
 v1.7.0
+
 1. Added displayMessage utility
 2. Added Collapse component
 3. Added Row and Col components
@@ -1171,6 +1252,7 @@ v1.7.0
 6. Added Tag component
 
 v1.6.0
+
 1. Added editor component
 2. Fixed SideForm preFinish button conditional render if parameter is not passed
 3. Added RootModal component and related store actions and state
@@ -1187,14 +1269,17 @@ v1.4.0
 [TEM-105] Added RequestTable and replaced ProCard with Card
 
 Breaking:
+
 1. Removed ProCard, added Card instead
 
 New:
+
 1. RequestTable, that is able to fetch the data, refetch it and display it in passed in TableCompoent
 2. Card.Table which allows for more unified look when using Cards and Tables next to each other (differences in how title is displayed and handled)
 3. Added Toolbar to Table which allows to render more than just a title copy
 
 Fixes:
+
 1. Fixed PageContainer's locale
 
 v1.3.0
@@ -1210,7 +1295,7 @@ v1.2.1
 [fix] Navigation improvements
 
 1. Use window.location.replace instead of history.replaceState - the
-latter only replaces the pathname and does not trigger the redirect
+   latter only replaces the pathname and does not trigger the redirect
 2. Currently find open/selected keys in the navigation
 3. Pass set window.externalClientsSelect basing on clientsMultiselect value
 
@@ -1231,6 +1316,7 @@ v1.1.8
 Fixed import and dependency for Layout component
 
 v1.1.7
+
 1. Moved onSideMenuSelect to the parameters of Layout component
 2. Added logic to set default clients select value from url params
 3. Disabled all clients deselect. So at least one should always be selected
@@ -1242,6 +1328,7 @@ v1.1.5
 Fixed globalStyle import
 
 v1.1.4
+
 1. Added colors constants from stage_style
 2. Added "All clients" label for Layout clients select
 
@@ -1255,6 +1342,7 @@ v1.1.1
 Changed the way stage_styles integrated to the Layout component
 
 v1.1.0
+
 1. Added globalStyles that exports general styles
 2. Added Layout component, which includes stage_styles menu, sidebar from antd and clients multiselect
 3. Added DynamicIcon component to be able to render icon, which is not known at the moment of the build (i.e. comes from BE)
@@ -1267,12 +1355,14 @@ v0.5.6
 [fix] Fixed buildNewRecord function rename
 
 v0.5.5
+
 1. Removed EditableList component
 2. Removed ListWithForm component
 3. Renamed newRecord checkIfRecordIsNew utility with checkIsNew
 4. Removed hasUnsaved changes flag change on store removeItem call
 
 v0.5.4
+
 1. Removed DependencyChart and oneDrive
 2. Renamed date and newRecord utilities
 
@@ -1295,6 +1385,7 @@ v0.4.1
 Added pusher utility and used it for usePusher hook
 
 v0.4.0
+
 1. Added root store to save pro config
 2. Used store property for proWrapped HOCs
 3. Replaced imports for components that uses proWrapped HOCs
@@ -1316,12 +1407,14 @@ Integrated utilities
 
 v0.1.0
 Integrated:
+
 1. hooks
 2. HOCs
 3. constants
 
 v0.0.1
 Initial setup:
+
 1. Set Up files structure and moved /common files
 2. rollup config
 3. /actions/api integration related changes

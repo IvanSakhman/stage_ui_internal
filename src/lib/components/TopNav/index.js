@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
-import { authHooks } from '~su/authenticationSdk'
+import { sessionStore } from '~su/authenticationSdk'
 import { useNavigate } from '~su/hooks'
 import { Row, Col } from '~su/components/Grid'
 import Space from '~su/components/Space'
@@ -26,18 +26,21 @@ const StageTopNav = ({
   helpdeskUrl,
   themeOverrides,
   clientsDropdownTitle,
+  currentClientDropdownTitle,
   homeUrl,
   clientLogoUrl,
   variant = 'default',
-  kratosPublicUrl,
   authUrl = '/auth'
 }) => {
   const [hostedZone, setHostedZone] = useState('')
-  const { useLogoutFlow } = authHooks({ basePath: kratosPublicUrl })
+  const [isLoading, setIsLoading] = useState(false)
 
   const navigate = useNavigate()
 
-  const { isLoading, handleLogout } = useLogoutFlow(() => navigate(authUrl))
+  const { useSessionStatus, useSessionActions } = sessionStore
+  const { isInitialized } = useSessionStatus()
+  const { handleLogout: handleSessionLogout } = useSessionActions()
+  const handleLogout = isInitialized ? () => handleSessionLogout(() => navigate(authUrl), setIsLoading) : null
 
   useEffect(() => {
     if (currentSystem) {
@@ -54,7 +57,7 @@ const StageTopNav = ({
           </Col>
         )}
         <Col span={21}>
-          <ClientsDropdown clients={clients} currentClient={currentClient} />
+          <ClientsDropdown clients={clients} currentClient={currentClient} customTitle={currentClientDropdownTitle} />
         </Col>
       </Row>
     )
@@ -105,6 +108,7 @@ const StageTopNav = ({
           clients={clients}
           currentClient={currentClient}
           title={clientsDropdownTitle}
+          customTitle={currentClientDropdownTitle}
           disabledOverflow
         />
       </DynamicLeftSideContainer>
@@ -145,10 +149,10 @@ StageTopNav.propTypes = {
   }),
   helpdeskUrl: PropTypes.string,
   clientsDropdownTitle: PropTypes.string,
+  currentClientDropdownTitle: PropTypes.string,
   homeUrl: PropTypes.string,
   clientLogoUrl: PropTypes.string,
   variant: PropTypes.oneOf(['default', 'with-dynamic-left-logo']),
-  kratosPublicUrl: PropTypes.string,
   authUrl: PropTypes.string
 }
 
