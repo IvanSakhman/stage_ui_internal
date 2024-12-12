@@ -2,6 +2,14 @@ import customArrayValidator from '~su/utilities/form/fields/rulesBuilder/validat
 
 
 describe('customArrayValidator', () => {
+  beforeAll(() => {
+    jest.spyOn(console, 'warn').mockImplementation(() => {})
+  })
+
+  afterAll(() => {
+    console.warn.mockRestore()
+  })
+  
   it('returns a function a validator', () => {
     const validator = customArrayValidator()
     expect(validator).toEqual(expect.any(Function))

@@ -1,5 +1,5 @@
 import setupStore from '~su/views/DataView/store'
-import { renderHook } from '@testing-library/react-hooks'
+import { renderHook } from '@testing-library/react'
 
 describe('DataView store', () => {
   it('returns a function', () => {

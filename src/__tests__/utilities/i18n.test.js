@@ -1,8 +1,7 @@
 import { useContext } from 'react'
 import i18n, { t, addResources, useTranslation, withScopedTranslations, testExports } from '~su/utilities/i18n'
 
-import { render, screen } from '@testing-library/react'
-import { renderHook } from '@testing-library/react-hooks'
+import { render, screen, renderHook } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
 describe('i18n', () => {
@@ -55,31 +54,33 @@ describe('i18n', () => {
     describe('with TranslationsScope', () => {
       it('is able to use it', () => {
         const Component = () => {
-          const { t } = useTranslation()
-          return t('help.title')
-        }
+          const { t } = useTranslation();
+          return <div>{t('help.title')}</div>;
+        };
+    
+        const ComponentWithScopedTranslations = withScopedTranslations(Component, 'pages')
 
-        renderHook(() => {
-          render(withScopedTranslations(Component, 'pages')())
-        })
-
+        render(<ComponentWithScopedTranslations />)
+    
+        // Assert the text "Help" appears
         expect(screen.getByText('Help')).toBeInTheDocument()
-      })
-
+      });
+    
       describe('with keyPrefix passed and scope available', () => {
         it('uses the keyPrefix', () => {
           const Component = () => {
             const { t } = useTranslation({ keyPrefix: 'pages.help' })
-            return t('title')
-          }
+            return <div>{t('title')}</div>;
+          };
+    
+          const ComponentWithScopedTranslations = withScopedTranslations(Component, 'pages')
 
-          renderHook(() => {
-            render(withScopedTranslations(Component, 'pages')())
-          })
-
+          render(<ComponentWithScopedTranslations />)
+    
+          // Assert the text "Help" appears
           expect(screen.getByText('Help')).toBeInTheDocument()
-        })
-      })
+        });
+      });
     })
   })
 
@@ -107,35 +108,29 @@ describe('i18n', () => {
     it('memoizes passed scope for the component', () => {
       const Component = buildComponent('testScope')
 
-      const { result } = renderHook(() => {
-        return render(<Component />)
-      })
+      const { container } = render(<Component />)
 
-      expect(result.current.getByTestId('scopeValue-testScope').textContent).toEqual('testScope')
+      expect(container.querySelector('[data-testid="scopeValue-testScope"]').textContent).toEqual('testScope');
     })
 
     it('allows for nested scopes', () => {
       const ParentComponent = buildComponent('parentScope')
       const ChildComponent = buildComponent('childScope')
 
-      const { result } = renderHook(() => {
-        return render(<ParentComponent><ChildComponent /></ParentComponent>)
-      })
+      const { container } = render(<ParentComponent><ChildComponent /></ParentComponent>)
 
-      expect(result.current.getByTestId('scopeValue-parentScope').textContent).toEqual('parentScope')
-      expect(result.current.getByTestId('scopeValue-childScope').textContent).toEqual('parentScope.childScope')
+      expect(container.querySelector('[data-testid="scopeValue-parentScope"]').textContent).toEqual('parentScope');
+      expect(container.querySelector('[data-testid="scopeValue-childScope"]').textContent).toEqual('parentScope.childScope');
     })
 
     it('handles repeating scopes', () => {
       const ParentComponent = buildComponent('parentScope')
       const ChildComponent = buildComponent('parentScope.childScope')
 
-      const { result } = renderHook(() => {
-        return render(<ParentComponent><ChildComponent /></ParentComponent>)
-      })
+      const { container } = render(<ParentComponent><ChildComponent /></ParentComponent>)
 
-      expect(result.current.getByTestId('scopeValue-parentScope').textContent).toEqual('parentScope')
-      expect(result.current.getByTestId('scopeValue-parentScope.childScope').textContent).toEqual('parentScope.childScope')
+      expect(container.querySelector('[data-testid="scopeValue-parentScope"]').textContent).toEqual('parentScope');
+      expect(container.querySelector('[data-testid="scopeValue-parentScope.childScope"]').textContent).toEqual('parentScope.childScope');
     })
 
     it('handles abusively repeating scopes', () => {
@@ -146,22 +141,20 @@ describe('i18n', () => {
       const SecondChildComponent = buildComponent('secondChildScope')
       const ThirdChildComponent = buildComponent('parentScope.firstChildScope.thirdChildScope')
 
-      const { result } = renderHook(() => {
-        return render(
-          <ParentComponent>
-            <FirstChildComponent>
-              <SecondChildComponent>
-                <ThirdChildComponent />
-              </SecondChildComponent>
-            </FirstChildComponent>
-          </ParentComponent>
-        )
-      })
-
-      expect(result.current.getByTestId('scopeValue-parentScope').textContent).toEqual('parentScope')
-      expect(result.current.getByTestId('scopeValue-firstChildScope').textContent).toEqual('parentScope.firstChildScope')
-      expect(result.current.getByTestId('scopeValue-secondChildScope').textContent).toEqual('parentScope.firstChildScope.secondChildScope')
-      expect(result.current.getByTestId('scopeValue-parentScope.firstChildScope.thirdChildScope').textContent).toEqual('parentScope.firstChildScope.secondChildScope.thirdChildScope')
+      const { container } = render(
+        <ParentComponent>
+          <FirstChildComponent>
+            <SecondChildComponent>
+              <ThirdChildComponent />
+            </SecondChildComponent>
+          </FirstChildComponent>
+        </ParentComponent>
+      );
+    
+      expect(container.querySelector('[data-testid="scopeValue-parentScope"]').textContent).toEqual('parentScope');
+      expect(container.querySelector('[data-testid="scopeValue-firstChildScope"]').textContent).toEqual('parentScope.firstChildScope');
+      expect(container.querySelector('[data-testid="scopeValue-secondChildScope"]').textContent).toEqual('parentScope.firstChildScope.secondChildScope');
+      expect(container.querySelector('[data-testid="scopeValue-parentScope.firstChildScope.thirdChildScope"]').textContent).toEqual('parentScope.firstChildScope.secondChildScope.thirdChildScope');
     })
   })
 })

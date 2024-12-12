@@ -5,7 +5,7 @@ describe('conditionalRulesValidator', () => {
     const validator = conditionalRulesValidator()
     expect(validator).toEqual(expect.any(Function))
 
-    expect(validator).toThrow("Cannot destructure property 'getFieldValue' of 'undefined' as it is undefined.")
+    expect(validator).toThrow("Cannot read properties of undefined (reading 'getFieldValue')")
 
     expect(validator({ getFieldValue: jest.fn() })).toEqual({ validator: expect.any(Function) })
   })

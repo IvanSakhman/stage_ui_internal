@@ -32,7 +32,7 @@ ace.define(
 
     oop.inherits(Mode, XmlMode) // ACE's way of doing inheritance
 
-    exports.Mode = Mode // eslint-disable-line no-param-reassign
+    exports.Mode = Mode
   }
 )
 

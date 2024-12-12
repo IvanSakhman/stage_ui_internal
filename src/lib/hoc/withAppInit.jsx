@@ -26,7 +26,8 @@ const withAppInit = (Component) => {
       config: PropTypes.object.isRequired,
       authUrl: PropTypes.string.isRequired,
       failureCallback: PropTypes.func,
-      skipSessionCheck: PropTypes.bool
+      skipSessionCheck: PropTypes.bool,
+      translations: PropTypes.object
     })
   }
 

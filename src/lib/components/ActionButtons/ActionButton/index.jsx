@@ -4,7 +4,17 @@ import Button from '../../Button'
 import { translateResponseAction } from '../utilities'
 import { useState } from 'react'
 
-const ActionButton = ({ action, valueRender, translateOptions }) => {
+const dropdownProperties = {
+  type: 'text',
+  block: true,
+  iconSize: 12,
+  style: {
+    justifyContent: 'start',
+    gap: '4px'
+  }
+}
+
+const ActionButton = ({ action, valueRender, translateOptions, isDropdown = false }) => {
   const { display, properties } = translateResponseAction(action, translateOptions)
   const [displayLoader, setDisplayLoader] = useState(false)
 
@@ -24,7 +34,7 @@ const ActionButton = ({ action, valueRender, translateOptions }) => {
   }
 
   return (
-    <Component {...properties} loading={displayLoader}>
+    <Component {...properties} {...(isDropdown ? dropdownProperties : {})} loading={displayLoader}>
       {valueRender ? valueRender() : display}
     </Component>
   )
@@ -36,6 +46,7 @@ ActionButton.propTypes = {
     showLoader: PropTypes.bool
   }),
   valueRender: PropTypes.func,
+  isDropdown: PropTypes.bool,
   translateOptions: PropTypes.object
 }
 

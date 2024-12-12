@@ -1,3 +1,15 @@
+v1.94.0
+[feat] Removed react-scripts
+
+1. Updated packages
+2. Removed react-scripts and replaced with Jest for testing
+3. Tests fixes
+4. Translations moved from provider to the initializeApp function
+5. Eslint config file updated to the current version
+
+v1.93.4
+[feat] Add pause, resume action buttons
+
 v1.93.3
 [fix] Fixed security issues
 

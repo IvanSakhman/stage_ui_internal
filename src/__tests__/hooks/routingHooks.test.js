@@ -1,6 +1,5 @@
-import React from 'react'
 import { useLocation, useNavigate } from '~su/hooks/routingHooks'
-import { renderHook, act } from '@testing-library/react-hooks'
+import { renderHook, act } from '@testing-library/react'
 
 describe('Routing Hooks', () => {
   describe('useLocation', () => {

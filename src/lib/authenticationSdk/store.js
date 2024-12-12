@@ -5,13 +5,18 @@ import authenticationSdk from './index'
 const useSessionStore = create((set, get) => ({
   identity: null,
   ory: null,
+  translations: {},
   isLoading: true,
   isInitialized: false,
 
-  initializeApp: async ({ config, failureCallback, authUrl, skipSessionCheck }) => {
+  initializeApp: async ({ config, failureCallback, authUrl, skipSessionCheck, translations }) => {
     try {
       const ory = authenticationSdk(config)
       set({ ory })
+
+      if (translations) {
+        set({ translations })
+      }
 
       if (!skipSessionCheck && window.location.href !== authUrl) {
         const { data: sessionData } = await ory.toSession()
@@ -56,9 +61,10 @@ const useSessionStore = create((set, get) => ({
 
 export const useSessionIdentity = () => useSessionStore(useShallow(({ identity }) => identity))
 export const useSessionSdk = () => useSessionStore(useShallow(({ ory }) => ory))
+export const useTranslations = () => useSessionStore(useShallow(({ translations }) => translations))
 export const useSessionStatus = () =>
   useSessionStore(useShallow(({ isLoading, isInitialized }) => ({ isLoading, isInitialized })))
 export const useSessionActions = () =>
   useSessionStore(useShallow(({ initializeApp, handleLogout }) => ({ initializeApp, handleLogout })))
 
-export default { useSessionIdentity, useSessionSdk, useSessionStatus, useSessionActions }
+export default { useSessionIdentity, useSessionSdk, useTranslations, useSessionStatus, useSessionActions }

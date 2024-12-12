@@ -17,6 +17,7 @@ const SmartTable = ({
   dataKey = '',
   keyPrefix,
   onChange,
+  hasDropdownActions,
   ...rest
 }) => {
   const columns = buildColumns(columnsConfig.columns, urlParams, filtersSchema).map((column) => {
@@ -64,6 +65,7 @@ const SmartTable = ({
       columnsConfig={columnsConfig}
       columns={columns}
       pagination={paginationProps}
+      hasDropdownActions={hasDropdownActions}
       onChange={onChange ? handleChange : null}
       {...((title || dataKey) && {
         title: [title || <span style={{ lineHeight: '32px' }}>{string.humanize(dataKey, { titleize: true })}</span>]
@@ -82,6 +84,7 @@ SmartTable.propTypes = {
   pagination: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
   dataKey: PropTypes.string,
   keyPrefix: PropTypes.string,
+  hasDropdownActions: PropTypes.bool,
   onChange: PropTypes.func,
   urlParams: PropTypes.instanceOf(URLSearchParams)
 }

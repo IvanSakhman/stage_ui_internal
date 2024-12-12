@@ -5,7 +5,7 @@
     "registry": "https://npm.pkg.github.com/"
   },
   "author": "ForwardPMX Developers",
-  "version": "1.93.3",
+  "version": "1.94.0",
   "description": "Stage UI React components",
   "license": "MIT",
   "files": [
@@ -13,8 +13,8 @@
   ],
   "dependencies": {
     "@monaco-editor/react": "^4.6.0",
-    "@ory/client": "^1.15.7",
-    "antd": "^5.21.5",
+    "@ory/client": "^1.15.15",
+    "antd": "^5.22.4",
     "async-validator": "^4.2.5",
     "chart.js": "^4.4.5",
     "cross-env": "^7.0.3",
@@ -22,7 +22,7 @@
     "file-saver": "^2.0.5",
     "html2canvas": "^1.4.1",
     "humanize-duration": "^3.32.1",
-    "i18next": "^23.16.3",
+    "i18next": "^24.1.0",
     "js-cookie": "^3.0.5",
     "localforage": "^1.10.0",
     "lodash": "^4.17.21",
@@ -31,9 +31,9 @@
     "prismjs": "^1.29.0",
     "prop-types": "^15.8.1",
     "pusher-js": "^8.4.0-rc2",
-    "react": "^18.3.1",
-    "react-ace": "^12.0.0",
-    "react-i18next": "^15.1.0",
+    "react": "^19.0.0",
+    "react-ace": "^13.0.0",
+    "react-i18next": "^15.1.4",
     "react-markdown": "^9.0.1",
     "react-measure": "^2.5.2",
     "react-split-pane": "^0.1.92",
@@ -44,8 +44,8 @@
     "zustand": "^5.0.0"
   },
   "scripts": {
-    "test": "cross-env TZ=utc NODE_ENV=test react-scripts test --env=jest-environment-jsdom --testPathIgnorePatterns=src/__tests__/support",
-    "test:debug": "cross-env TZ=utc NODE_ENV=test react-scripts --inspect test --runInBand --no-cache --env=jest-environment-jsdom --testPathIgnorePatterns=src/__tests__/support",
+    "test": "cross-env TZ=utc NODE_ENV=test jest --testPathIgnorePatterns=src/__tests__/support",
+    "test:debug": "cross-env TZ=utc NODE_ENV=test jest --inspect --runInBand --no-cache --testPathIgnorePatterns=src/__tests__/support",
     "prepublishOnly": "yarn run build",
     "build": "rollup -c",
     "lint": "eslint ./src --max-warnings 0",
@@ -69,10 +69,14 @@
     "@babel/cli": "^7.25.9",
     "@babel/core": "^7.25.9",
     "@babel/eslint-parser": "^7.11.0",
+    "@babel/preset-env": "^7.26.0",
     "@babel/preset-react": "^7.25.9",
     "@babel/runtime": "^7.25.9",
     "@chromatic-com/storybook": "^3.1.0",
     "@craco/craco": "^7.1.0",
+    "@eslint/compat": "^1.2.4",
+    "@eslint/eslintrc": "^3.2.0",
+    "@eslint/js": "^9.16.0",
     "@rollup/plugin-alias": "^5.1.1",
     "@rollup/plugin-babel": "^6.0.4",
     "@rollup/plugin-commonjs": "^28.0.1",
@@ -90,12 +94,12 @@
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.2",
     "@testing-library/react": "^16.0.1",
-    "@testing-library/react-hooks": "8.0.1",
     "@testing-library/user-event": "14.5.2",
     "@vitejs/plugin-react": "^4.3.1",
+    "babel-jest": "^29.7.0",
     "babel-plugin-prismjs": "^2.1.0",
     "craco-antd": "^2.0.0",
-    "eslint": "^8.57.0",
+    "eslint": "^9.16.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-fp": "2.3.0",
@@ -104,16 +108,17 @@
     "eslint-plugin-prettier": "5.2.1",
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-react-hooks": "^5.0.0",
-    "eslint-plugin-storybook": "^0.10.1",
+    "eslint-plugin-storybook": "^0.11.1",
+    "globals": "^15.13.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
     "json-server": "^1.0.0-beta.1",
     "postcss-normalize": "^13.0.1",
     "prettier": "^3.3.3",
     "pusher-js-mock": "^0.3.8",
-    "react-dom": "^18.3.1",
-    "react-scripts": "5.0.1",
-    "react-test-renderer": "^18.3.1",
-    "rollup": "^4.24.0",
+    "react-dom": "^19.0.0",
+    "rollup": "^4.28.1",
     "rollup-plugin-copy": "^3.5.0",
     "rollup-plugin-delete": "^2.1.0",
     "rollup-plugin-filesize": "10.0.0",
@@ -121,7 +126,7 @@
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-styles": "^4.0.0",
     "storybook": "^8.2.9",
-    "vite": "^5.4.2"
+    "vite": "^6.0.3"
   },
   "peerDependencies": {
     "antd": ">=5.0.2",
@@ -134,22 +139,23 @@
     "react-component"
   ],
   "jest": {
+    "testEnvironment": "jsdom",
+    "setupFilesAfterEnv": [
+      "<rootDir>/jest.setup.js"
+    ],
+    "transform": {
+      "^.+\\.(js|jsx|ts|tsx)$": "babel-jest"
+    },
     "moduleNameMapper": {
       "^~su(.*)$": "<rootDir>/src/lib$1",
       "\\.(s)?css": "identity-obj-proxy",
       "^antd/es/(.*)$": "antd/lib/$1",
-      "^~mocks(.*)$": "<rootDir>/src/__mocks__/$1"
+      "^~mocks(.*)$": "<rootDir>/src/__mocks__/$1",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/src/__mocks__/fileMock.js"
     },
     "transformIgnorePatterns": [
       "node_modules/(?!axios)"
     ],
     "resetMocks": false
-  },
-  "resolutions": {
-    "string-width": "4.2.3",
-    "wrap-ansi": "7.0.0",
-    "nth-check": "2.1.1",
-    "postcss": "8.4.47",
-    "cookie": "0.7.0"
   }
 }

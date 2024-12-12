@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/react-hooks'
+import { renderHook } from '@testing-library/react'
 import { useMessage, useModal, useNotification } from '~su/hooks/appHooks'
 
 jest.mock('antd', () => {

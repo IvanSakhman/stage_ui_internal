@@ -77,7 +77,7 @@ async function fetchJson(method, url, body = null, headers = {}) {
   try {
     const responseBody = response.status === 204 ? {} : await response.json()
     return { success: response.ok, status: response.status, ...responseBody }
-  } catch (error) {
+  } catch {
     // An error parsing JSON. This is unexepected, log to console
     // Send a more generic message in response
     console.error(response)

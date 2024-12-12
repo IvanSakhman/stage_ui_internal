@@ -9,7 +9,6 @@ import theme from '~su/constants/theme'
 // providers
 import { ConfigProvider, App } from 'antd'
 import ThemeProvider from './ThemeProvider'
-import TranslationsProvider from './TranslationsProvider'
 
 // components
 import RootModal from '~su/components/RootModal'
@@ -51,20 +50,17 @@ const StyleProvider = ({ children, brandingToken, translations }) => {
   )
 
   return (
-    <TranslationsProvider translations={translations}>
-      <ConfigProvider theme={{ token: themeToken, components }}>
-        <ThemeProvider>
-          <App>{main}</App>
-        </ThemeProvider>
-      </ConfigProvider>
-    </TranslationsProvider>
+    <ConfigProvider theme={{ token: themeToken, components }}>
+      <ThemeProvider>
+        <App>{main}</App>
+      </ThemeProvider>
+    </ConfigProvider>
   )
 }
 
 StyleProvider.propTypes = {
   children: PropTypes.node.isRequired,
-  brandingToken: PropTypes.object,
-  translations: PropTypes.object
+  brandingToken: PropTypes.object
 }
 
 export default withAppInit(StyleProvider)

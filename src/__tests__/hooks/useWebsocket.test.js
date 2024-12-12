@@ -1,4 +1,3 @@
-import React from 'react'
 import initializeWebsocketHooks from '~su/hooks/useWebsocket'
 
 jest.mock('~su/hooks/usePusher', () => {

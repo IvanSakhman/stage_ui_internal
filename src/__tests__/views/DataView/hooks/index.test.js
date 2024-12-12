@@ -1,4 +1,4 @@
-import { renderHook } from '@testing-library/react-hooks'
+import { renderHook } from '@testing-library/react'
 import useDataViewSetup from '~su/views/DataView/hooks'
 import { message } from '~mocks/appHooks'
 

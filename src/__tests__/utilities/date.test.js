@@ -4,6 +4,16 @@ import FakeTimers from '@sinonjs/fake-timers'
 const { timeBetween, formatDuration, format, detailedFormat, isValidDateWithFormat } = dateUtilities
 
 describe('Date Utilities', () => {
+  let clock
+
+  beforeEach(() => {
+    clock = FakeTimers.install({ now: 1604582722000 })
+  })
+
+  afterEach(() => {
+    clock.uninstall()
+  })
+
   describe('isValidDate', () => {
     it('returns true for valid date', () => {
       expect(isValidDateWithFormat('2021-07-12', 'YYYY-MM-DD')).toEqual(true)
@@ -39,16 +49,12 @@ describe('Date Utilities', () => {
 
     describe('with only startDate', () => {
       it('returns humanized duration between startDate and now', () => {
-        const clock = FakeTimers.install({ now: 1604582722000 }) //'2020-11-05T13:25:22.000Z'
-
         expect(timeBetween({ startDate: '2020-11-03T10:19:55.000Z' })).toEqual('2 days, 3 hours and 5 minutes')
       })
     })
 
     describe('with humanizeOptions', () => {
       it('it takes them into account', () => {
-        const clock = FakeTimers.install({ now: 1604582722000 }) //'2020-11-05T13:25:22.000Z'
-
         expect(timeBetween({ startDate: '2020-11-03T10:19:55.000Z', humanizeOptions: { largest: 2 } })).toEqual(
           '2 days and 3 hours'
         )
@@ -57,8 +63,6 @@ describe('Date Utilities', () => {
 
     describe('with relateive = true', () => {
       it('returns the difference with relative word', () => {
-        const clock = FakeTimers.install({ now: 1604582722000 }) //'2020-11-05T13:25:22.000Z'
-
         expect(timeBetween({ startDate: '2020-11-03T10:19:55.000Z', humanizeOptions: { largest: 2 }, relative: true })).toEqual(
           '2 days and 3 hours ago'
         )

@@ -1,6 +1,6 @@
 import * as store from '~su/store/root-store'
 
-import { renderHook, act } from '@testing-library/react-hooks'
+import { renderHook, act } from '@testing-library/react'
 
 describe('Root Store', () => {
   describe('useConfigStore', () => {

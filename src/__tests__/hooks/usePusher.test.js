@@ -1,6 +1,5 @@
-import React from 'react'
 import initializePusherHooks from '~su/hooks/usePusher'
-import { renderHook, act } from '@testing-library/react-hooks'
+import { renderHook, act } from '@testing-library/react'
 
 import { PusherMock } from 'pusher-js-mock'
 

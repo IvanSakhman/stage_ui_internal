@@ -77,7 +77,7 @@ ace.define(
 
     oop.inherits(Mode, SqlMode) // ACE's way of doing inheritance
 
-    exports.Mode = Mode // eslint-disable-line no-param-reassign
+    exports.Mode = Mode
   }
 )
 
