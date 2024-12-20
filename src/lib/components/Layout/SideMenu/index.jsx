@@ -9,7 +9,7 @@ import { Grid } from '~su/components/Grid'
 const { useBreakpoint } = Grid
 import DynamicIcon from '../../DynamicIcon'
 
-import { SideMenuContainer, StickyContainer, StyledLink } from './index.styled'
+import { SideMenuContainer, StickyContainer, Label } from './index.styled'
 import getDefaultMenuKeys from './utilities/getDefaultMenuKeys'
 
 const SideMenu = ({
@@ -54,13 +54,15 @@ const SideMenu = ({
         ...item,
         key,
         label: (
-          <StyledLink
+          <Label
             $isSelected={key === defaultMenuKeys?.defaultSelectedKey}
             onClick={(e) => handleMenuItemClick(e, item.key)}
-            ellipsis={{ tooltip: { title: item.label, placement: 'right' }, onEllipsis: () => {} }} // We need this empty function for ellipsis to work
+            {...(!isCollapsed && {
+              ellipsis: { tooltip: { title: item.label, placement: 'right' }, onEllipsis: () => {} } // We need this empty function for ellipsis to work
+            })}
           >
             {item.label}
-          </StyledLink>
+          </Label>
         ),
         icon: <DynamicIcon name={item.icon} />,
         ...(item.children ? { children: transformItems(item.children, key) } : {})

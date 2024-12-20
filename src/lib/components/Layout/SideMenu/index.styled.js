@@ -51,9 +51,10 @@ export const StickyContainer = styled.div`
     `}
 `
 
-const { Text } = Typography
-export const StyledLink = styled(Text)`
+const { Paragraph } = Typography
+export const Label = styled(Paragraph)`
   // those styles should be !important here to override antd :where selector styles https://github.com/ant-design/ant-design/issues/38660#issuecomment-1325365203
+  margin-bottom: 0 !important;
   color: ${({ $isSelected, theme }) => ($isSelected ? theme.sideMenuItemActive : 'inherit')} !important;
   :hover {
     color: ${({ theme }) => theme.sideMenuItemActive} !important;

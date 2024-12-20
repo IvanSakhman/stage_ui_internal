@@ -81,8 +81,6 @@ async function fetchJson(method, url, body = null, headers = {}) {
     // An error parsing JSON. This is unexepected, log to console
     // Send a more generic message in response
     console.error(response)
-    return {
-      error: 'Server responded not ok'
-    }
+    return { success: response.ok, status: response.status, error: 'Server responded not ok' }
   }
 }

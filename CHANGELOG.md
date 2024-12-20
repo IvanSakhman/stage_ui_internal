@@ -1,3 +1,9 @@
+v1.94.2
+[fix] Fixed side menu ellipsis
+
+v1.94.1
+[fix] Fixed fetchJson function parsing error return
+
 v1.94.0
 [feat] Removed react-scripts
 
