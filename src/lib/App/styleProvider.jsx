@@ -17,7 +17,7 @@ import { GlobalStyles } from './index.styled'
 
 export const headerHeight = 64
 
-const StyleProvider = ({ children, brandingToken, translations }) => {
+const StyleProvider = ({ children, brandingToken }) => {
   const themeToken = { ...theme.token, ...brandingToken }
   const components = {
     Menu: {

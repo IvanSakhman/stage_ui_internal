@@ -1,3 +1,6 @@
+v1.95.0
+[feat] Added translation content
+
 v1.94.2
 [fix] Fixed side menu ellipsis
 

@@ -6,7 +6,7 @@ import Dropdown from '~su/components/Dropdown'
 import { filterActionsByCondition } from './utilities'
 import ActionButton from './ActionButton'
 
-const ActionButtons = ({ actions = [], valueRender = null, isDropdown = false, ...translateOptions }) => {
+const ActionButtons = ({ actions = [], valueRender = null, isDropdown = false, keyPrefix, ...translateOptions }) => {
   const filteredActions = filterActionsByCondition(actions, translateOptions.record)
 
   const renderActionButton = (action, index) => {
@@ -16,6 +16,7 @@ const ActionButtons = ({ actions = [], valueRender = null, isDropdown = false, .
         action={action}
         valueRender={valueRender}
         translateOptions={translateOptions}
+        keyPrefix={keyPrefix}
         isDropdown={isDropdown}
       />
     )
@@ -50,7 +51,8 @@ const ActionButtons = ({ actions = [], valueRender = null, isDropdown = false, .
 ActionButtons.propTypes = {
   actions: PropTypes.arrayOf(PropTypes.object),
   valueRender: PropTypes.func,
-  isDropdown: PropTypes.bool
+  isDropdown: PropTypes.bool,
+  keyPrefix: PropTypes.string
 }
 
 export default ActionButtons

@@ -5,7 +5,13 @@ export const buildColumnTitle = (properties, key) => {
   return properties?.title || string.humanize(key, { capitalize: true })
 }
 
-export const extendRenderWithActions = (actions, column, functionActionHandlers, isDropdown = false) => {
+export const extendRenderWithActions = (
+  actions,
+  column,
+  functionActionHandlers,
+  keyPrefix = '',
+  isDropdown = false
+) => {
   const columnActions = actions[column.key]
 
   if (columnActions) {
@@ -17,6 +23,7 @@ export const extendRenderWithActions = (actions, column, functionActionHandlers,
         dynamicDisplayValueName={column.key}
         valueRender={customRender ? () => customRender(value, record, index) : null}
         functionHandlers={functionActionHandlers}
+        keyPrefix={keyPrefix}
         isDropdown={isDropdown}
         size="small"
       />

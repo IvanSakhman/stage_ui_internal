@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types'
+import { useTranslation } from '~su/utilities/i18n'
 import Button from '../../Button'
 
 import { translateResponseAction } from '../utilities'
@@ -14,9 +15,12 @@ const dropdownProperties = {
   }
 }
 
-const ActionButton = ({ action, valueRender, translateOptions, isDropdown = false }) => {
+const ActionButton = ({ action, valueRender, translateOptions, keyPrefix, isDropdown = false }) => {
   const { display, properties } = translateResponseAction(action, translateOptions)
   const [displayLoader, setDisplayLoader] = useState(false)
+  const { t } = useTranslation(keyPrefix && { keyPrefix })
+
+  const translatedDisplay = keyPrefix ? t(display) : display
 
   let Component = Button
 
@@ -35,7 +39,7 @@ const ActionButton = ({ action, valueRender, translateOptions, isDropdown = fals
 
   return (
     <Component {...properties} {...(isDropdown ? dropdownProperties : {})} loading={displayLoader}>
-      {valueRender ? valueRender() : display}
+      {valueRender ? valueRender() : translatedDisplay}
     </Component>
   )
 }
@@ -47,7 +51,8 @@ ActionButton.propTypes = {
   }),
   valueRender: PropTypes.func,
   isDropdown: PropTypes.bool,
-  translateOptions: PropTypes.object
+  translateOptions: PropTypes.object,
+  keyPrefix: PropTypes.string
 }
 
 export default ActionButton

@@ -54,7 +54,13 @@ const Table = ({
         column.title ||= t(`columns.${key}`, column.title || buildColumnTitle(columnsConfig?.[key], key))
 
         if (actions.table_row) {
-          column = extendRenderWithActions(actions.table_row, column, functionActionHandlers, hasDropdownActions)
+          column = extendRenderWithActions(
+            actions.table_row,
+            column,
+            functionActionHandlers,
+            keyPrefix,
+            hasDropdownActions
+          )
         }
 
         return { key, dataIndex: key, ...column }
