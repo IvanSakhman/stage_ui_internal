@@ -4,15 +4,16 @@ import { Form } from 'antd'
 
 import { Col } from '~su/components/Grid'
 import Checkbox from '~su/components/Checkbox'
+import Switch from '~su/components/Switch'
 
-import { StyledField } from './index.styled'
+import { StyledField, Label } from './index.styled'
 import ProField from './Pro'
 
 import string from '~su/utilities/string'
 
 import { useTranslation, withScopedTranslations } from '~su/utilities/i18n'
 
-const Field = ({ field, index, disable = false, dynamic = false, extras = {}, className = '' }) => {
+const Field = ({ field, index, disable = false, dynamic = false, extras = {}, className = '', boldLabel = false }) => {
   const { t } = useTranslation()
 
   const { item } = field
@@ -22,7 +23,10 @@ const Field = ({ field, index, disable = false, dynamic = false, extras = {}, cl
     component = cloneElement(component, { disabled: disable }, null)
   }
 
-  if (component?.type === Checkbox) {
+  if (dynamic) {
+    component = cloneElement(component, { fieldKey: extras.formField.fieldKey })
+  }
+  if ([Checkbox, Switch].includes(component?.type)) {
     component = cloneElement(component, {
       ...component.props,
       checked: undefined
@@ -60,9 +64,15 @@ const Field = ({ field, index, disable = false, dynamic = false, extras = {}, cl
       key={index}
       name={fieldName}
       fieldKey={fieldKey}
-      label={label === false ? null : label || t(`${itemName}.label`, string.humanize(itemName, { capitalize: true }))}
+      label={
+        label !== false && (
+          <Label $isBold={boldLabel}>
+            {label || t(`${itemName}.label`, string.humanize(itemName, { capitalize: true }))}
+          </Label>
+        )
+      }
       className={[className].join(' ')}
-      valuePropName={component?.type === Checkbox ? 'checked' : 'value'}
+      valuePropName={[Checkbox].includes(component?.type) ? 'checked' : 'value'}
       dependencies={fieldDependencies}
       {...rest}
     >
@@ -113,7 +123,8 @@ Field.propTypes = {
   extras: PropTypes.shape({}),
   disable: PropTypes.bool,
   dynamic: PropTypes.bool,
-  className: PropTypes.string
+  className: PropTypes.string,
+  boldLabel: PropTypes.bool
 }
 
 export default withScopedTranslations(Field, 'field')

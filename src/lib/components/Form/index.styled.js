@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components'
 import { Form, Row } from 'antd'
+import { DeleteOutlined } from '@ant-design/icons'
 import { COLORS } from '~su/constants'
 
 export const StyledForm = styled(Form)`
@@ -24,4 +25,11 @@ export const StyledRow = styled(Row)`
       border-top: 1px solid ${COLORS.border};
       justify-content: flex-end;
     `}
+`
+
+export const DeleteIcon = styled(DeleteOutlined)`
+  position: absolute;
+  top: 9px;
+  right: 7px;
+  color: ${COLORS.error};
 `

@@ -28,6 +28,11 @@ const Form = forwardRef(
       remoteControls = false,
       controlsProps = {},
       isModalForm = false,
+      fieldsContainer,
+      layout = 'vertical',
+      boldLabels,
+      horizontalGlobalFields,
+      horizontalFields,
       ...formProps
     },
     ref
@@ -40,9 +45,11 @@ const Form = forwardRef(
       ref,
       () => ({
         setFieldsValue: (fieldsValue) => form.setFieldsValue(fieldsValue),
+        setFieldValue: (field, fieldValue) => form.setFieldValue(field, fieldValue),
         getFieldsValue: (fields) => form.getFieldsValue(fields),
         getFieldValue: (field) => form.getFieldValue(field),
-        validate: () => form.validateFields()
+        validate: () => form.validateFields(),
+        resetFields: () => form.resetFields()
       }),
       []
     )
@@ -116,7 +123,7 @@ const Form = forwardRef(
       <StyledForm
         name={name}
         className={className}
-        layout="vertical"
+        layout={layout}
         initialValues={object}
         onFinish={handleFinish}
         form={form}
@@ -125,7 +132,14 @@ const Form = forwardRef(
         $isModalForm={isModalForm}
         {...formProps}
       >
-        {globalFields && <FieldsList fields={globalFields} />}
+        {globalFields && (
+          <FieldsList
+            fields={globalFields}
+            container={fieldsContainer}
+            boldLabels={boldLabels}
+            horizontal={horizontalGlobalFields}
+          />
+        )}
 
         {!!fields.length && (
           <FieldsList
@@ -135,6 +149,9 @@ const Form = forwardRef(
             name={fieldsListName}
             disable={disable}
             showTitle={showFieldsListTitle}
+            container={fieldsContainer}
+            boldLabels={boldLabels}
+            horizontal={horizontalFields}
           />
         )}
 
@@ -175,7 +192,15 @@ Form.propTypes = {
   onValuesChange: PropTypes.func,
   remoteControls: PropTypes.bool,
   controlsProps: PropTypes.object,
-  isModalForm: PropTypes.bool
+  isModalForm: PropTypes.bool,
+  fieldsContainer: PropTypes.shape({
+    type: PropTypes.oneOf(['Card']),
+    props: PropTypes.object
+  }),
+  layout: PropTypes.oneOf(['vertical', 'horizontal', 'inline']),
+  boldLabels: PropTypes.bool,
+  horizontalGlobalFields: PropTypes.bool,
+  horizontalFields: PropTypes.bool
 }
 
 Form.useFormInstance = AntdForm.useFormInstance

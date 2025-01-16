@@ -1,3 +1,13 @@
+v1.96.0
+[feat] Added Form component new functionality
+
+1. Added support for horizontal form layout
+2. Added Switch component
+3. Added Radio component
+4. Added TimePicker component
+5. Added DatePicker component
+6. Added SearchBar component
+
 v1.95.0
 [feat] Added translation content
 

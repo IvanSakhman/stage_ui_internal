@@ -5,7 +5,7 @@
     "registry": "https://npm.pkg.github.com/"
   },
   "author": "ForwardPMX Developers",
-  "version": "1.95.0",
+  "version": "1.96.0",
   "description": "Stage UI React components",
   "license": "MIT",
   "files": [
@@ -20,6 +20,7 @@
     "cross-env": "^7.0.3",
     "dayjs": "^1.11.13",
     "file-saver": "^2.0.5",
+    "fuse.js": "^7.0.0",
     "html2canvas": "^1.4.1",
     "humanize-duration": "^3.32.1",
     "i18next": "^24.1.0",
