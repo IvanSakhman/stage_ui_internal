@@ -20,6 +20,7 @@ const Form = forwardRef(
       fieldsListName = null,
       fieldsListDynamic = false,
       dynamicFieldsInitialValues,
+      dynamicFieldsActions,
       showFieldsListTitle = false,
       disable = false,
       submitDisabledProp = true,
@@ -152,6 +153,7 @@ const Form = forwardRef(
             container={fieldsContainer}
             boldLabels={boldLabels}
             horizontal={horizontalFields}
+            actions={dynamicFieldsActions}
           />
         )}
 
@@ -185,6 +187,7 @@ Form.propTypes = {
   fieldsListName: PropTypes.string,
   fieldsListDynamic: PropTypes.bool,
   dynamicFieldsInitialValues: PropTypes.object,
+  dynamicFieldsActions: PropTypes.object,
   showFieldsListTitle: PropTypes.bool,
   disable: PropTypes.bool,
   submitDisabledProp: PropTypes.bool,
@@ -205,6 +208,7 @@ Form.propTypes = {
 
 Form.useFormInstance = AntdForm.useFormInstance
 Form.useWatch = AntdForm.useWatch
+Form.useForm = AntdForm.useForm
 Form.List = AntdForm.List
 Form.Item = AntdForm.Item
 

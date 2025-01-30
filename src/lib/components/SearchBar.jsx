@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { Select } from 'antd'
 import Fuse from 'fuse.js'
 import debounce from 'lodash/debounce'
@@ -10,17 +10,26 @@ const SearchBar = ({
   options,
   fuseOptions,
   fieldKey = null,
+  optionsByFieldKey = false,
   valueField = 'value',
   labelField = 'label',
   placeholder = 'Search...',
   onSelect,
   onDropdownVisibleChange,
+  loadingFieldKeys = [],
+  loadingByFieldKey = false,
   ...rest
 }) => {
-  const [searchTerm, setSearchTerm] = useState(value || '')
-  const [filteredOptions, setFilteredOptions] = useState(options)
+  const getFilteredOptions = () => (optionsByFieldKey && fieldKey !== null ? options[fieldKey] || [] : options)
 
-  const fuse = useMemo(() => new Fuse(options, fuseOptions), [options, fuseOptions])
+  const [searchTerm, setSearchTerm] = useState(value || '')
+  const [filteredOptions, setFilteredOptions] = useState(getFilteredOptions())
+
+  const fuse = useMemo(() => new Fuse(getFilteredOptions(), fuseOptions), [options, fuseOptions, fieldKey])
+
+  const isFieldKeyLoading = useMemo(() => {
+    return loadingByFieldKey && loadingFieldKeys?.some(({ id }) => id === fieldKey)
+  }, [loadingByFieldKey, loadingFieldKeys, fieldKey])
 
   const handleSearch = useMemo(
     () =>
@@ -30,10 +39,10 @@ const SearchBar = ({
           const results = fuse.search(value).map((result) => result.item)
           setFilteredOptions(results)
         } else {
-          setFilteredOptions(options)
+          setFilteredOptions(getFilteredOptions())
         }
       }, 300),
-    [fuse, options]
+    [fuse]
   )
 
   const handleSearchChange = (value) => {
@@ -42,7 +51,7 @@ const SearchBar = ({
 
   const handleSelect = (selectedValue, option) => {
     setSearchTerm(option[labelField])
-    setFilteredOptions(options)
+    setFilteredOptions(getFilteredOptions())
 
     if (onSelect) {
       onSelect(selectedValue, option, fieldKey)
@@ -62,8 +71,8 @@ const SearchBar = ({
   }, [value, searchTerm])
 
   useEffect(() => {
-    setFilteredOptions(options)
-  }, [options])
+    setFilteredOptions(getFilteredOptions())
+  }, [options, fieldKey])
 
   useEffect(() => {
     return () => handleSearch.cancel()
@@ -80,13 +89,20 @@ const SearchBar = ({
       style={{ width: '100%' }}
       onSelect={handleSelect}
       {...(onDropdownVisibleChange && { onDropdownVisibleChange: handleDropdownVisibleChange })}
+      {...(isFieldKeyLoading && {
+        loading: true,
+        disabled: true
+      })}
       {...rest}
     >
-      {filteredOptions.map((option) => (
-        <Option key={option[valueField]} value={option[valueField]}>
-          {option[labelField]}
-        </Option>
-      ))}
+      {filteredOptions.map((option) => {
+        const value = option[valueField].toString()
+        return (
+          <Option key={value} value={value}>
+            {option[labelField]}
+          </Option>
+        )
+      })}
     </Select>
   )
 }

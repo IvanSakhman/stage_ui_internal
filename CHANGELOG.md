@@ -1,3 +1,57 @@
+v1.100.0
+[feat] Extend Form with useForm hook
+
+v1.99.1
+[fix] SearchBar loading state by fieldKey added
+
+v1.99.0
+Dependencies - 24/01/25
+
+1. Bump @ory/client from 1.15.15 to 1.16.2
+2. Bump antd from 5.22.4 to 5.23.2
+3. Bump i18next from 23.11.5 to 23.16.2
+4. Bump react-i18next from 15.1.4 to 15.4.0
+5. Bump react-markdown from 9.0.1 to 9.0.3
+6. Bump sql-formatter from 15.4.5 to 15.4.9
+7. Bump styled-components from 6.1.13 to 6.1.14
+8. Bump zustand from 5.0.0 to 5.0.3
+9. Bump @babel/eslint-parser from 7.11.0 to 7.26.5
+10. Bump @chromatic-com/storybook from 3.1.0 to 3.2.4
+11. Bump @eslint/compat from 1.2.4 to 1.2.5
+12. Bump @eslint/js from 9.16.0 to 9.18.0
+13. Bump @rollup/plugin-commonjs from 28.0.1 to 28.0.2
+14. Bump @rollup/plugin-node-resolve from 15.3.0 to 16.0.0
+15. Bump @storybook/addon-essentials from 8.2.9 to 8.5.1
+16. Bump @storybook/addon-interactions from 8.2.9 to 8.5.1
+17. Bump @storybook/addon-links from 8.2.9 to 8.5.1
+18. Bump @storybook/addon-onboarding from 8.2.9 to 8.5.1
+19. Bump @storybook/blocks from 8.2.9 to 8.5.1
+20. Bump @storybook/react from 8.2.9 to 8.5.1
+21. Bump @storybook/react-vite from 8.2.9 to 8.5.1
+22. Bump @storybook/test from 8.2.9 to 8.5.1
+23. Bump @testing-library/react from 16.0.1 to 16.2.0
+24. Bump @testing-library/user-event from 14.5.2 to 14.6.1
+25. Bump eslint from 9.18.0 to 9.16.0
+26. Bump eslint-config-prettier from 9.1.0 to 10.0.1
+27. Bump eslint-plugin-prettier from 5.2.1 to 5.2.3
+28. Bump eslint-plugin-react from 7.37.2 to 7.37.4
+29. Bump eslint-plugin-storybook from 0.11.1 to 0.11.2
+30. Bump globals from 15.13.0 to 15.14.0
+31. Bump rollup from 4.28.1 to 4.31.0
+32. Bump storybook from 8.2.9 to 8.5.1
+33. Bump vite from 6.0.3 to 6.0.11
+
+v1.98.0
+[feat] Added custom TimePicker component
+
+1. Added preventLastItemRemoval functionality for the Form component dynamic fields
+
+v1.97.0
+[feat] Added ExpandedRowTable component
+
+v1.96.1
+[fix] SearchBar options by fieldKey functionality added
+
 v1.96.0
 [feat] Added Form component new functionality
 

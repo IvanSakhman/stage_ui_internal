@@ -9,6 +9,7 @@ import Collapse from './Collapse'
 import { Row, Col } from './Grid'
 import EditableTable from './EditableTable'
 import ExpandableEditableTable from './EditableTable/Expandable'
+import ExpandedRowTable from './ExpandedRowTable'
 import ErrorsList from './ErrorsList'
 import InlineEditableTable from './EditableTable/Inline'
 import Form from './Form'
@@ -99,6 +100,7 @@ export {
   Col,
   EditableTable,
   ExpandableEditableTable,
+  ExpandedRowTable,
   ErrorsList,
   InlineEditableTable,
   Form,

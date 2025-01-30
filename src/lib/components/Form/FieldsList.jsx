@@ -23,7 +23,7 @@ const FieldsList = ({
   disable = false,
   name = null,
   dynamic = false,
-  actions = { isAddAllowed: true, isRemoveAllowed: true },
+  actions = { isAddAllowed: true, isRemoveAllowed: true, preventLastItemRemoval: false },
   showTitle = false,
   separateItems = false,
   rules = [],
@@ -57,10 +57,15 @@ const FieldsList = ({
 
   const renderDynamicFields = (formFields, { add, remove }, { errors }) => {
     let f = formFields.map((formField, index) => {
+      const { isRemoveAllowed, preventLastItemRemoval } = actions
+      const isLastItem = formFields.length === 1
+
       return (
         <Row gutter={[10, 5]} key={index} style={{ position: 'relative', paddingRight: 28 }}>
           {renderFields(formFields, { add, remove }, { formField })}
-          {actions.isRemoveAllowed && <DeleteIcon onClick={() => remove(formField.name)} />}
+          {isRemoveAllowed && !(isLastItem && preventLastItemRemoval) && (
+            <DeleteIcon onClick={() => remove(formField.name)} />
+          )}
           {separateItems ? <Divider /> : null}
         </Row>
       )
@@ -127,7 +132,8 @@ FieldsList.propTypes = {
   dynamic: PropTypes.bool,
   actions: PropTypes.shape({
     isAddAllowed: PropTypes.bool,
-    isRemoveAllowed: PropTypes.bool
+    isRemoveAllowed: PropTypes.bool,
+    preventLastItemRemoval: PropTypes.bool
   }),
   showTitle: PropTypes.bool,
   separateItems: PropTypes.bool,
