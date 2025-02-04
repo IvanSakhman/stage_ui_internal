@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types'
 import { Modal as AntdModal, Grid } from 'antd'
+import ConfirmModalContent from './ConfirmModalContent'
 
 const { useBreakpoint } = Grid
 
@@ -12,6 +13,7 @@ const Modal = (props) => {
 }
 
 Modal.useModal = AntdModal.useModal
+Modal.ConfirmModalContent = ConfirmModalContent
 
 Modal.propTypes = {
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number])

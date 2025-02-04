@@ -3,6 +3,7 @@ import { Typography } from 'antd'
 
 import { Row } from '../Grid'
 import Input from '../Input'
+import Select from '../Select'
 import Tabs from '../Tabs'
 import { COLORS } from '../../constants'
 
@@ -34,5 +35,9 @@ export const StyledTabs = styled(Tabs)`
 `
 
 export const Search = styled(AntdSearch)`
+  width: ${({ $width }) => $width || 350}px;
+`
+
+export const StyledSelect = styled(Select)`
   width: ${({ $width }) => $width || 350}px;
 `
