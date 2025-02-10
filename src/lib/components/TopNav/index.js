@@ -13,7 +13,6 @@ import SystemsMenu from './SystemsMenu'
 import UserDropdown from './UserDropdown'
 import CompanyLogo from '../CompanyLogo'
 
-import iconLogo from './img/assembly_icon_print_4c.png'
 import logo from './img/assembly_stage_logo_digital_light_rgb.png'
 
 import { StyledLayoutHeader, DynamicLeftSideContainer, DynamicLogo } from './index.styled'
@@ -97,7 +96,7 @@ const StageTopNav = ({
       return <CompanyLogo companyName={currentClient.display_name} inHeader />
     }
 
-    return <DynamicLogo src={iconLogo} />
+    return <DynamicLogo src={logo} />
   }
 
   const renderDynamicLogoTopNav = () => (
@@ -114,11 +113,6 @@ const StageTopNav = ({
       </DynamicLeftSideContainer>
       <Space size="middle">
         <UserDropdown hostedZone={hostedZone} helpdeskUrl={helpdeskUrl} handleLogout={handleLogout} />
-        {homeUrl && (
-          <a href={homeUrl}>
-            <DynamicLogo src={logo} />
-          </a>
-        )}
       </Space>
     </Row>
   )

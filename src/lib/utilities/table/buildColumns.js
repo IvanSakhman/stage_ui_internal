@@ -16,6 +16,10 @@ export const extendRenderWithActions = (
 
   if (columnActions) {
     const customRender = column.render
+    if (isDropdown) {
+      column.width = '1%'
+    }
+
     column.render = (value, record, index) => (
       <ActionButtons
         actions={columnActions}
