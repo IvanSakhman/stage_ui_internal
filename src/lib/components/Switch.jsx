@@ -6,7 +6,7 @@ const { Text, Paragraph } = Typography
 
 const Switch = ({ title, description, ...rest }) => {
   return (
-    <Space align="center" size="middle">
+    <Space align="center" size="large">
       <AntdSwitch {...rest} />
       {(title || description) && (
         <div>

@@ -1,6 +1,6 @@
 import { Fragment, useMemo } from 'react'
 import PropTypes from 'prop-types'
-import { Form as AntdForm, Button, Row, Divider } from 'antd'
+import { Form as AntdForm, Button, Row, Col, Divider } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 import string from '~su/utilities/string'
 
@@ -17,13 +17,21 @@ import Space from '../Space'
 //   showTitle?: boolean
 // }
 
+const defaultActions = {
+  isAddAllowed: true,
+  isRemoveAllowed: true,
+  preventLastItemRemoval: false,
+  isDeleteButtonInGrid: false
+}
+
 const FieldsList = ({
   fields: fieldsConfig,
   fieldsInitialValues,
   disable = false,
   name = null,
   dynamic = false,
-  actions = { isAddAllowed: true, isRemoveAllowed: true, preventLastItemRemoval: false },
+  actions: { isAddAllowed, isRemoveAllowed, preventLastItemRemoval, isDeleteButtonInGrid } = defaultActions,
+  title,
   showTitle = false,
   separateItems = false,
   rules = [],
@@ -31,15 +39,13 @@ const FieldsList = ({
   onAdd,
   container,
   boldLabels,
-  horizontal = false
+  gutter = [10, 5]
 }) => {
-  const renderFields = (_formFields, _controlActions, extras = {}) => {
+  const renderFields = (_formFields, { remove }, extras = {}) => {
     const fields = dynamic && typeof fieldsConfig === 'function' ? fieldsConfig(extras) : fieldsConfig
 
-    const Layout = horizontal ? Space : Fragment
-
     return (
-      <Layout>
+      <Fragment>
         {fields.map((field, index) => (
           <Field
             key={index}
@@ -51,21 +57,32 @@ const FieldsList = ({
             boldLabel={boldLabels}
           />
         ))}
-      </Layout>
+        {extras?.isDynamic && extras?.isDeleteButtonVisible && isDeleteButtonInGrid && (
+          <Col>
+            <DeleteIcon onClick={() => remove(extras.formField.name)} $isDeleteButtonInGrid />
+          </Col>
+        )}
+      </Fragment>
     )
   }
 
   const renderDynamicFields = (formFields, { add, remove }, { errors }) => {
     let f = formFields.map((formField, index) => {
-      const { isRemoveAllowed, preventLastItemRemoval } = actions
-      const isLastItem = formFields.length === 1
+      const isDeleteButtonVisible = isRemoveAllowed && !(formFields.length === 1 && preventLastItemRemoval)
+      const isDeleteButtonAlignedRight = isDeleteButtonVisible && !isDeleteButtonInGrid
 
       return (
-        <Row gutter={[10, 5]} key={index} style={{ position: 'relative', paddingRight: 28 }}>
-          {renderFields(formFields, { add, remove }, { formField })}
-          {isRemoveAllowed && !(isLastItem && preventLastItemRemoval) && (
-            <DeleteIcon onClick={() => remove(formField.name)} />
+        <Row
+          gutter={gutter}
+          key={index}
+          style={{ position: 'relative', ...(isDeleteButtonAlignedRight ? { paddingRight: 28 } : {}) }}
+        >
+          {renderFields(
+            formFields,
+            { add, remove },
+            { formField, rowKey: index, isDynamic: true, isDeleteButtonVisible }
           )}
+          {isDeleteButtonAlignedRight && <DeleteIcon onClick={() => remove(formField.name)} />}
           {separateItems ? <Divider /> : null}
         </Row>
       )
@@ -75,7 +92,7 @@ const FieldsList = ({
       <>
         <AntdForm.ErrorList errors={errors} />
         {f}
-        {actions.isAddAllowed && (
+        {isAddAllowed && (
           <AntdForm.Item>
             <Button
               type="dashed"
@@ -94,13 +111,13 @@ const FieldsList = ({
 
   const Container = useMemo(() => getContainer(container?.type), [container])
   const Wrapper = dynamic ? Fragment : Row
-  const wrapperProps = dynamic ? {} : { className, gutter: [10, 5] }
+  const wrapperProps = dynamic ? {} : { className, gutter }
 
   return (
     <Container {...container?.props}>
       {showTitle && (
         <>
-          <h3>{string.humanize(name, { capitalize: true })}</h3>
+          <h3>{title || string.humanize(name, { capitalize: true })}</h3>
           {container?.type === 'Card' && <Divider style={{ marginTop: '12px' }} />}
         </>
       )}
@@ -133,8 +150,10 @@ FieldsList.propTypes = {
   actions: PropTypes.shape({
     isAddAllowed: PropTypes.bool,
     isRemoveAllowed: PropTypes.bool,
-    preventLastItemRemoval: PropTypes.bool
+    preventLastItemRemoval: PropTypes.bool,
+    isDeleteButtonInGrid: PropTypes.bool
   }),
+  title: PropTypes.string,
   showTitle: PropTypes.bool,
   separateItems: PropTypes.bool,
   rules: PropTypes.array,
@@ -145,7 +164,7 @@ FieldsList.propTypes = {
     props: PropTypes.object
   }),
   boldLabels: PropTypes.bool,
-  horizontal: PropTypes.bool
+  gutter: PropTypes.oneOfType([PropTypes.number, PropTypes.arrayOf(PropTypes.number), PropTypes.object])
 }
 
 export default FieldsList

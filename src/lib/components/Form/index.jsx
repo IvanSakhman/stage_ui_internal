@@ -32,8 +32,7 @@ const Form = forwardRef(
       fieldsContainer,
       layout = 'vertical',
       boldLabels,
-      horizontalGlobalFields,
-      horizontalFields,
+      fieldsListGutter,
       ...formProps
     },
     ref
@@ -138,7 +137,7 @@ const Form = forwardRef(
             fields={globalFields}
             container={fieldsContainer}
             boldLabels={boldLabels}
-            horizontal={horizontalGlobalFields}
+            gutter={fieldsListGutter}
           />
         )}
 
@@ -152,8 +151,8 @@ const Form = forwardRef(
             showTitle={showFieldsListTitle}
             container={fieldsContainer}
             boldLabels={boldLabels}
-            horizontal={horizontalFields}
             actions={dynamicFieldsActions}
+            gutter={fieldsListGutter}
           />
         )}
 
@@ -202,8 +201,7 @@ Form.propTypes = {
   }),
   layout: PropTypes.oneOf(['vertical', 'horizontal', 'inline']),
   boldLabels: PropTypes.bool,
-  horizontalGlobalFields: PropTypes.bool,
-  horizontalFields: PropTypes.bool
+  fieldsListGutter: PropTypes.oneOfType([PropTypes.number, PropTypes.arrayOf(PropTypes.number), PropTypes.object])
 }
 
 Form.useFormInstance = AntdForm.useFormInstance

@@ -28,8 +28,16 @@ export const StyledRow = styled(Row)`
 `
 
 export const DeleteIcon = styled(DeleteOutlined)`
-  position: absolute;
-  top: 9px;
-  right: 7px;
+  ${({ $isDeleteButtonInGrid }) =>
+    $isDeleteButtonInGrid
+      ? css`
+          position: relative;
+          top: 5px;
+        `
+      : css`
+          position: absolute;
+          right: 7px;
+          top: 9px;
+        `}
   color: ${COLORS.error};
 `

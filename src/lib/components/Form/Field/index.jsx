@@ -24,7 +24,7 @@ const Field = ({ field, index, disable = false, dynamic = false, extras = {}, cl
   }
 
   if (dynamic) {
-    component = cloneElement(component, { fieldKey: extras.formField.fieldKey })
+    component = cloneElement(component, { fieldKey: extras.formField.fieldKey, rowKey: extras.formField.name })
   }
   if ([Checkbox, Switch].includes(component?.type)) {
     component = cloneElement(component, {

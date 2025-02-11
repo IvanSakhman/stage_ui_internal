@@ -1,3 +1,11 @@
+v1.102.2
+[fix]
+
+1. Form component horizontal layout
+2. Form component dynamic fields delete button position
+3. SearchBar component rowKey prop
+4. Switch component gap
+
 v1.102.1
 [fix] PageContainer subtitle
 

@@ -10,6 +10,7 @@ const SearchBar = ({
   options,
   fuseOptions,
   fieldKey = null,
+  rowKey = null,
   optionsByFieldKey = false,
   valueField = 'value',
   labelField = 'label',
@@ -54,7 +55,7 @@ const SearchBar = ({
     setFilteredOptions(getFilteredOptions())
 
     if (onSelect) {
-      onSelect(selectedValue, option, fieldKey)
+      onSelect(selectedValue, option, fieldKey, rowKey)
     }
   }
 
