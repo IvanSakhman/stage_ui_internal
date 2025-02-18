@@ -21,6 +21,7 @@ export const primary = '#0099b2' // PMS 2396
 export const text = '#1e1a34'
 export const border = '#f0f0f0'
 export const emptyBackground = '#fafafa'
+export const highlight = 'rgba(251, 209, 102, 0.4)'
 
 // state colours
 export const success = '#00b176' // PMS 2416

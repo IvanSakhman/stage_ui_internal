@@ -23,7 +23,7 @@ const CardStyledWithTable = styled(Card)`
             > thead,
             > tbody {
               > tr > :first-child {
-                padding-left: 24px;
+                padding-left: ${(props) => (props.title ? '24px' : '8px')};
               }
             }
 
@@ -38,7 +38,7 @@ const CardStyledWithTable = styled(Card)`
 
               > tr.ant-table-row:not(:last-child) {
                 > td:first-child {
-                  padding-left: 24px;
+                  padding-left: ${(props) => (props.title ? '24px' : '8px')};
                   border-top-left-radius: 0;
                   border-bottom-left-radius: 0;
                 }

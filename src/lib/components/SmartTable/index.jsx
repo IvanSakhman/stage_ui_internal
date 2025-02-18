@@ -18,6 +18,8 @@ const SmartTable = ({
   keyPrefix,
   onChange,
   hasDropdownActions,
+  allowMultipleSorting = false,
+  resetSorting = true,
   ...rest
 }) => {
   const columns = buildColumns(columnsConfig.columns, urlParams, filtersSchema).map((column) => {
@@ -43,15 +45,21 @@ const SmartTable = ({
   const handleChange = (pagination, filters, sorter, extra) => {
     switch (extra.action) {
       case 'paginate':
-        sorter = undefined
+        if (resetSorting) {
+          sorter = undefined
+        }
         break
       case 'filter':
         pagination = { current: 1, ...pagination }
-        sorter = undefined
+        if (resetSorting) {
+          sorter = undefined
+        }
         break
       case 'sort':
         pagination = { current: 1, ...pagination }
-        sorter = [sorter.columnKey, sorter.order].join(':')
+        if (!allowMultipleSorting) {
+          sorter = [sorter.columnKey, sorter.order].join(':')
+        }
         break
     }
 
@@ -86,6 +94,8 @@ SmartTable.propTypes = {
   keyPrefix: PropTypes.string,
   hasDropdownActions: PropTypes.bool,
   onChange: PropTypes.func,
+  allowMultipleSorting: PropTypes.bool,
+  resetSorting: PropTypes.bool,
   urlParams: PropTypes.instanceOf(URLSearchParams)
 }
 

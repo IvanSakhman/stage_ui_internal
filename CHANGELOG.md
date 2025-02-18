@@ -1,3 +1,31 @@
+v1.104.0
+Dependencies - 18/02/25
+
+1. Bump @monaco-editor/react from 4.6.0 to 4.7.0
+2. Bump antd from 5.23.2 to 5.24.1
+3. Bump chart.js from 4.4.5 to 4.4.7
+4. Bump react-ace from 13.0.0 to 14.0.1
+5. Bump @babel/cli from 7.25.9 to 7.26.4
+6. Bump @babel/core from 7.25.9 to 7.26.0
+7. Bump @babel/preset-react from 7.25.9 to 7.26.3
+8. Bump @babel/runtime from 7.25.9 to 7.26.0
+9. Bump @testing-library/jest-dom from 6.6.2 to 6.6.3
+10. Bump @vitejs/plugin-react from 4.3.1 to 4.3.4
+11. Bump eslint-plugin-jsx-a11y from 6.10.1 to 6.10.2
+12. Bump eslint-plugin-react-hooks from 5.0.0 to 5.1.0
+13. Bump eslint-plugin-storybook from 0.11.2 to 0.11.3
+14. Bump globals from 15.14.0 to 15.15.0
+15. Bump prettier from 3.3.3 to 3.5.1
+16. Bump rollup from 4.31.0 to 4.34.8
+
+v1.103.0
+[feat]
+
+1. Highlighter component
+2. ConfirmModalContent component loading
+3. SmartTable sorting fix
+4. getColumnSearchProps disable/enable filtering
+
 v1.102.2
 [fix]
 
@@ -7,7 +35,7 @@ v1.102.2
 4. Switch component gap
 
 v1.102.1
-[fix] PageContainer subtitle
+[fix] Replace logo shrink action
 
 v1.102.0
 [feat] PageContainer subtitle

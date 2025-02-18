@@ -40,6 +40,7 @@ import DynamicIcon from './DynamicIcon'
 import DynamicSteps from './DynamicSteps'
 import Editor from './Editor'
 import Empty from './Empty'
+import Highlighter from './Highlighter'
 import EmptyState from './EmptyState'
 import IconButton from './IconButton'
 import Input from './Input'
@@ -130,6 +131,7 @@ export {
   Editor,
   Empty,
   EmptyState,
+  Highlighter,
   ResponseResult,
   RootModal,
   IconButton,

@@ -17,7 +17,12 @@ const ConfirmModalContent = ({ title, description, closeButton, actionButton }) 
             <Button onClick={closeButton.onClick}>{closeButton.label}</Button>
           </Col>
           <Col>
-            <Button onClick={actionButton.onClick} type="primary" danger={actionButton.danger}>
+            <Button
+              onClick={actionButton.onClick}
+              type="primary"
+              danger={actionButton.danger}
+              loading={actionButton.loading}
+            >
               {actionButton.label}
             </Button>
           </Col>
@@ -30,7 +35,8 @@ const ConfirmModalContent = ({ title, description, closeButton, actionButton }) 
 const buttonProp = PropTypes.shape({
   onClick: PropTypes.func.isRequired,
   label: PropTypes.string.isRequired,
-  danger: PropTypes.bool
+  danger: PropTypes.bool,
+  loading: PropTypes.bool
 }).isRequired
 
 ConfirmModalContent.propTypes = {

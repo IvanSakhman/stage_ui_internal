@@ -4,13 +4,14 @@ import Space from '~su/components/Space'
 import Button from '~su/components/Button'
 import { COLORS } from '~su/constants'
 
-const getColumnSearchProps = (dataIndex) => {
-  const confirmOptions = { closeDropdown: false }
+const confirmOptions = { closeDropdown: false }
 
+const getColumnSearchProps = (dataIndex, preventDefaultFiltering = false) => {
   const handleReset = (clearFilters, confirm) => {
     clearFilters()
     confirm(confirmOptions)
   }
+  const handleFilter = (value, record) => record[dataIndex].toString().toLowerCase().includes(value.toLowerCase())
 
   return {
     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
@@ -39,7 +40,7 @@ const getColumnSearchProps = (dataIndex) => {
       </div>
     ),
     filterIcon: (filtered) => <SearchOutlined style={{ color: filtered ? COLORS.primary : undefined }} />,
-    onFilter: (value, record) => record[dataIndex].toString().toLowerCase().includes(value.toLowerCase())
+    ...(preventDefaultFiltering ? {} : { onFilter: handleFilter })
   }
 }
 
